@@ -1,0 +1,307 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38913F352A60002491F /* UIKit.framework */; };
+		C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38B13F352A60002491F /* Foundation.framework */; };
+		C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38D13F352A60002491F /* CoreGraphics.framework */; };
+		C3A7E39413F352A60002491F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3A7E39213F352A60002491F /* InfoPlist.strings */; };
+		C3A7E39713F352A60002491F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E39613F352A60002491F /* main.m */; };
+		C3A7E39A13F352A60002491F /* DSPToolsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E39913F352A60002491F /* DSPToolsAppDelegate.m */; };
+		C3A7E39E13F352A60002491F /* DSPToolsAppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E39D13F352A60002491F /* DSPToolsAppDelegate_iPhone.m */; };
+		C3A7E3A113F352A60002491F /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A7E39F13F352A60002491F /* MainWindow_iPhone.xib */; };
+		C3A7E3A513F352A60002491F /* DSPToolsAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E3A413F352A60002491F /* DSPToolsAppDelegate_iPad.m */; };
+		C3A7E3A813F352A60002491F /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A7E3A613F352A60002491F /* MainWindow_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C3A7E38B13F352A60002491F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C3A7E38D13F352A60002491F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C3A7E39113F352A60002491F /* DSPTools-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DSPTools-Info.plist"; sourceTree = "<group>"; };
+		C3A7E39313F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3A7E39513F352A60002491F /* DSPTools-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DSPTools-Prefix.pch"; sourceTree = "<group>"; };
+		C3A7E39613F352A60002491F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C3A7E39813F352A60002491F /* DSPToolsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSPToolsAppDelegate.h; sourceTree = "<group>"; };
+		C3A7E39913F352A60002491F /* DSPToolsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSPToolsAppDelegate.m; sourceTree = "<group>"; };
+		C3A7E39C13F352A60002491F /* DSPToolsAppDelegate_iPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DSPToolsAppDelegate_iPhone.h; path = iPhone/DSPToolsAppDelegate_iPhone.h; sourceTree = "<group>"; };
+		C3A7E39D13F352A60002491F /* DSPToolsAppDelegate_iPhone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DSPToolsAppDelegate_iPhone.m; path = iPhone/DSPToolsAppDelegate_iPhone.m; sourceTree = "<group>"; };
+		C3A7E3A013F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPhone/en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		C3A7E3A313F352A60002491F /* DSPToolsAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DSPToolsAppDelegate_iPad.h; path = iPad/DSPToolsAppDelegate_iPad.h; sourceTree = "<group>"; };
+		C3A7E3A413F352A60002491F /* DSPToolsAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DSPToolsAppDelegate_iPad.m; path = iPad/DSPToolsAppDelegate_iPad.m; sourceTree = "<group>"; };
+		C3A7E3A713F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C3A7E38213F352A60002491F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */,
+				C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */,
+				C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C3A7E37A13F352A50002491F = {
+			isa = PBXGroup;
+			children = (
+				C3A7E38F13F352A60002491F /* DSPTools */,
+				C3A7E38813F352A60002491F /* Frameworks */,
+				C3A7E38613F352A60002491F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C3A7E38613F352A60002491F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E38513F352A60002491F /* DSPTools.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3A7E38813F352A60002491F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E38913F352A60002491F /* UIKit.framework */,
+				C3A7E38B13F352A60002491F /* Foundation.framework */,
+				C3A7E38D13F352A60002491F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C3A7E38F13F352A60002491F /* DSPTools */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E39813F352A60002491F /* DSPToolsAppDelegate.h */,
+				C3A7E39913F352A60002491F /* DSPToolsAppDelegate.m */,
+				C3A7E39B13F352A60002491F /* iPhone */,
+				C3A7E3A213F352A60002491F /* iPad */,
+				C3A7E39013F352A60002491F /* Supporting Files */,
+			);
+			path = DSPTools;
+			sourceTree = "<group>";
+		};
+		C3A7E39013F352A60002491F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E39113F352A60002491F /* DSPTools-Info.plist */,
+				C3A7E39213F352A60002491F /* InfoPlist.strings */,
+				C3A7E39513F352A60002491F /* DSPTools-Prefix.pch */,
+				C3A7E39613F352A60002491F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C3A7E39B13F352A60002491F /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E39C13F352A60002491F /* DSPToolsAppDelegate_iPhone.h */,
+				C3A7E39D13F352A60002491F /* DSPToolsAppDelegate_iPhone.m */,
+				C3A7E39F13F352A60002491F /* MainWindow_iPhone.xib */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		C3A7E3A213F352A60002491F /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				C3A7E3A313F352A60002491F /* DSPToolsAppDelegate_iPad.h */,
+				C3A7E3A413F352A60002491F /* DSPToolsAppDelegate_iPad.m */,
+				C3A7E3A613F352A60002491F /* MainWindow_iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C3A7E38413F352A60002491F /* DSPTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3A7E3AB13F352A60002491F /* Build configuration list for PBXNativeTarget "DSPTools" */;
+			buildPhases = (
+				C3A7E38113F352A60002491F /* Sources */,
+				C3A7E38213F352A60002491F /* Frameworks */,
+				C3A7E38313F352A60002491F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DSPTools;
+			productName = DSPTools;
+			productReference = C3A7E38513F352A60002491F /* DSPTools.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C3A7E37C13F352A50002491F /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C3A7E37F13F352A50002491F /* Build configuration list for PBXProject "DSPTools" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C3A7E37A13F352A50002491F;
+			productRefGroup = C3A7E38613F352A60002491F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C3A7E38413F352A60002491F /* DSPTools */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C3A7E38313F352A60002491F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3A7E39413F352A60002491F /* InfoPlist.strings in Resources */,
+				C3A7E3A113F352A60002491F /* MainWindow_iPhone.xib in Resources */,
+				C3A7E3A813F352A60002491F /* MainWindow_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C3A7E38113F352A60002491F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3A7E39713F352A60002491F /* main.m in Sources */,
+				C3A7E39A13F352A60002491F /* DSPToolsAppDelegate.m in Sources */,
+				C3A7E39E13F352A60002491F /* DSPToolsAppDelegate_iPhone.m in Sources */,
+				C3A7E3A513F352A60002491F /* DSPToolsAppDelegate_iPad.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C3A7E39213F352A60002491F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3A7E39313F352A60002491F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C3A7E39F13F352A60002491F /* MainWindow_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3A7E3A013F352A60002491F /* en */,
+			);
+			name = MainWindow_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		C3A7E3A613F352A60002491F /* MainWindow_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3A7E3A713F352A60002491F /* en */,
+			);
+			name = MainWindow_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C3A7E3A913F352A60002491F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C3A7E3AA13F352A60002491F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C3A7E3AC13F352A60002491F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DSPTools/DSPTools-Prefix.pch";
+				INFOPLIST_FILE = "DSPTools/DSPTools-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C3A7E3AD13F352A60002491F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DSPTools/DSPTools-Prefix.pch";
+				INFOPLIST_FILE = "DSPTools/DSPTools-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C3A7E37F13F352A50002491F /* Build configuration list for PBXProject "DSPTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3A7E3A913F352A60002491F /* Debug */,
+				C3A7E3AA13F352A60002491F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3A7E3AB13F352A60002491F /* Build configuration list for PBXNativeTarget "DSPTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3A7E3AC13F352A60002491F /* Debug */,
+				C3A7E3AD13F352A60002491F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C3A7E37C13F352A50002491F /* Project object */;
+}
