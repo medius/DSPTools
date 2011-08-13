@@ -16,6 +16,16 @@
 		320CC833B8AF0ACFD35E6225 /* libThree20Style.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320CC833B8AF0ACFD35E6224 /* libThree20Style.a */; };
 		320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320D7DCCE32703ACAB9A45E4 /* libThree20.a */; };
 		320F2C48872C2E2C4DF86205 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F2C48872C2E2C4DF86204 /* libThree20UI.a */; };
+		C32144F413F486B900DE738E /* DSPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32144F313F486B900DE738E /* DSPGridViewController.m */; };
+		C321450213F4A7F200DE738E /* DSPComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C321450113F4A7F200DE738E /* DSPComponentView.m */; };
+		C321450613F4ACB200DE738E /* DSPComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C321450513F4ACB200DE738E /* DSPComponentViewController.m */; };
+		C321450913F4ACF400DE738E /* DSPComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = C321450813F4ACF400DE738E /* DSPComponent.m */; };
+		C321450C13F4AE0400DE738E /* DSPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = C321450B13F4AE0300DE738E /* DSPIntegrator.m */; };
+		C321451013F4AE9100DE738E /* DSPIntegratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C321450F13F4AE9100DE738E /* DSPIntegratorViewController.m */; };
+		C321451313F4AEC700DE738E /* DSPIntegratorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451213F4AEC700DE738E /* DSPIntegratorView.m */; };
+		C321451613F4B0F800DE738E /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451513F4B0F600DE738E /* NSObject+Additions.m */; };
+		C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */; };
+		C321451E13F5C28800DE738E /* DSPGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451D13F5C28800DE738E /* DSPGrid.m */; };
 		C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38913F352A60002491F /* UIKit.framework */; };
 		C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38B13F352A60002491F /* Foundation.framework */; };
 		C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38D13F352A60002491F /* CoreGraphics.framework */; };
@@ -26,6 +36,7 @@
 		C3A7E3A113F352A60002491F /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A7E39F13F352A60002491F /* MainWindow_iPhone.xib */; };
 		C3A7E3A513F352A60002491F /* DSPToolsAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E3A413F352A60002491F /* DSPToolsAppDelegate_iPad.m */; };
 		C3A7E3A813F352A60002491F /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A7E3A613F352A60002491F /* MainWindow_iPad.xib */; };
+		C3A7E4B213F482D00002491F /* DSPGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A7E4B113F482D00002491F /* DSPGridView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,6 +213,27 @@
 		320CC833B8AF0ACFD35E6220 /* Three20Style.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Style.xcodeproj; path = ../shared/three20/src/Three20Style/Three20Style.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320D7DCCE32703ACAB9A45E0 /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../shared/three20/src/Three20/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320F2C48872C2E2C4DF86200 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = ../shared/three20/src/Three20UI/Three20UI.xcodeproj; sourceTree = SOURCE_ROOT; };
+		C32144F213F486B900DE738E /* DSPGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGridViewController.h; sourceTree = "<group>"; };
+		C32144F313F486B900DE738E /* DSPGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGridViewController.m; sourceTree = "<group>"; };
+		C321450013F4A7F200DE738E /* DSPComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentView.h; sourceTree = "<group>"; };
+		C321450113F4A7F200DE738E /* DSPComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponentView.m; sourceTree = "<group>"; };
+		C321450413F4ACB200DE738E /* DSPComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentViewController.h; sourceTree = "<group>"; };
+		C321450513F4ACB200DE738E /* DSPComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponentViewController.m; sourceTree = "<group>"; };
+		C321450713F4ACF400DE738E /* DSPComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponent.h; sourceTree = "<group>"; };
+		C321450813F4ACF400DE738E /* DSPComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponent.m; sourceTree = "<group>"; };
+		C321450A13F4AE0300DE738E /* DSPIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPIntegrator.h; sourceTree = "<group>"; };
+		C321450B13F4AE0300DE738E /* DSPIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPIntegrator.m; sourceTree = "<group>"; };
+		C321450E13F4AE9100DE738E /* DSPIntegratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPIntegratorViewController.h; sourceTree = "<group>"; };
+		C321450F13F4AE9100DE738E /* DSPIntegratorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPIntegratorViewController.m; sourceTree = "<group>"; };
+		C321451113F4AEC700DE738E /* DSPIntegratorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPIntegratorView.h; sourceTree = "<group>"; };
+		C321451213F4AEC700DE738E /* DSPIntegratorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPIntegratorView.m; sourceTree = "<group>"; };
+		C321451413F4B0F600DE738E /* NSObject+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Additions.h"; sourceTree = "<group>"; };
+		C321451513F4B0F600DE738E /* NSObject+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Additions.m"; sourceTree = "<group>"; };
+		C321451813F4B8F500DE738E /* DSPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPHeader.h; sourceTree = "<group>"; };
+		C321451913F5BF1200DE738E /* DSPGlobalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGlobalSettings.h; sourceTree = "<group>"; };
+		C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGlobalSettings.m; sourceTree = "<group>"; };
+		C321451C13F5C28700DE738E /* DSPGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGrid.h; sourceTree = "<group>"; };
+		C321451D13F5C28800DE738E /* DSPGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGrid.m; sourceTree = "<group>"; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3A7E38B13F352A60002491F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,6 +250,8 @@
 		C3A7E3A313F352A60002491F /* DSPToolsAppDelegate_iPad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DSPToolsAppDelegate_iPad.h; path = iPad/DSPToolsAppDelegate_iPad.h; sourceTree = "<group>"; };
 		C3A7E3A413F352A60002491F /* DSPToolsAppDelegate_iPad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DSPToolsAppDelegate_iPad.m; path = iPad/DSPToolsAppDelegate_iPad.m; sourceTree = "<group>"; };
 		C3A7E3A713F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
+		C3A7E4B013F482D00002491F /* DSPGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGridView.h; sourceTree = "<group>"; };
+		C3A7E4B113F482D00002491F /* DSPGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +341,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C321450313F4A7F700DE738E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C321450713F4ACF400DE738E /* DSPComponent.h */,
+				C321450813F4ACF400DE738E /* DSPComponent.m */,
+				C321450013F4A7F200DE738E /* DSPComponentView.h */,
+				C321450113F4A7F200DE738E /* DSPComponentView.m */,
+				C321450413F4ACB200DE738E /* DSPComponentViewController.h */,
+				C321450513F4ACB200DE738E /* DSPComponentViewController.m */,
+				C321450D13F4AE0800DE738E /* Integrator */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		C321450D13F4AE0800DE738E /* Integrator */ = {
+			isa = PBXGroup;
+			children = (
+				C321450A13F4AE0300DE738E /* DSPIntegrator.h */,
+				C321450B13F4AE0300DE738E /* DSPIntegrator.m */,
+				C321451113F4AEC700DE738E /* DSPIntegratorView.h */,
+				C321451213F4AEC700DE738E /* DSPIntegratorView.m */,
+				C321450E13F4AE9100DE738E /* DSPIntegratorViewController.h */,
+				C321450F13F4AE9100DE738E /* DSPIntegratorViewController.m */,
+			);
+			name = Integrator;
+			sourceTree = "<group>";
+		};
+		C321451713F4B10400DE738E /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				C321451413F4B0F600DE738E /* NSObject+Additions.h */,
+				C321451513F4B0F600DE738E /* NSObject+Additions.m */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
 		C3A7E37A13F352A50002491F = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +417,12 @@
 			children = (
 				C3A7E39813F352A60002491F /* DSPToolsAppDelegate.h */,
 				C3A7E39913F352A60002491F /* DSPToolsAppDelegate.m */,
+				C321451913F5BF1200DE738E /* DSPGlobalSettings.h */,
+				C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */,
+				C321451813F4B8F500DE738E /* DSPHeader.h */,
+				C321450313F4A7F700DE738E /* Components */,
+				C3A7E4B313F482F70002491F /* Grid */,
+				C321451713F4B10400DE738E /* Additions */,
 				C3A7E39B13F352A60002491F /* iPhone */,
 				C3A7E3A213F352A60002491F /* iPad */,
 				C3A7E39013F352A60002491F /* Supporting Files */,
@@ -386,6 +462,19 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		C3A7E4B313F482F70002491F /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				C321451C13F5C28700DE738E /* DSPGrid.h */,
+				C321451D13F5C28800DE738E /* DSPGrid.m */,
+				C3A7E4B013F482D00002491F /* DSPGridView.h */,
+				C3A7E4B113F482D00002491F /* DSPGridView.m */,
+				C32144F213F486B900DE738E /* DSPGridViewController.h */,
+				C32144F313F486B900DE738E /* DSPGridViewController.m */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -418,6 +507,9 @@
 /* Begin PBXProject section */
 		C3A7E37C13F352A50002491F /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Puru Choudhary";
+			};
 			buildConfigurationList = C3A7E37F13F352A50002491F /* Build configuration list for PBXProject "DSPTools" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -603,6 +695,17 @@
 				C3A7E39A13F352A60002491F /* DSPToolsAppDelegate.m in Sources */,
 				C3A7E39E13F352A60002491F /* DSPToolsAppDelegate_iPhone.m in Sources */,
 				C3A7E3A513F352A60002491F /* DSPToolsAppDelegate_iPad.m in Sources */,
+				C3A7E4B213F482D00002491F /* DSPGridView.m in Sources */,
+				C32144F413F486B900DE738E /* DSPGridViewController.m in Sources */,
+				C321450213F4A7F200DE738E /* DSPComponentView.m in Sources */,
+				C321450613F4ACB200DE738E /* DSPComponentViewController.m in Sources */,
+				C321450913F4ACF400DE738E /* DSPComponent.m in Sources */,
+				C321450C13F4AE0400DE738E /* DSPIntegrator.m in Sources */,
+				C321451013F4AE9100DE738E /* DSPIntegratorViewController.m in Sources */,
+				C321451313F4AEC700DE738E /* DSPIntegratorView.m in Sources */,
+				C321451613F4B0F800DE738E /* NSObject+Additions.m in Sources */,
+				C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */,
+				C321451E13F5C28800DE738E /* DSPGrid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

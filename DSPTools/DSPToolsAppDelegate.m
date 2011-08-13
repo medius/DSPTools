@@ -7,15 +7,24 @@
 //
 
 #import "DSPToolsAppDelegate.h"
+#import "DSPGridViewController.h"
 
 @implementation DSPToolsAppDelegate
-
 
 @synthesize window=_window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    UINavigationController *navcon = [[UINavigationController alloc] init];
+    navcon.navigationBarHidden = NO;
+    DSPGridViewController *gvc = [[DSPGridViewController alloc] init];
+    [navcon pushViewController:gvc  animated:NO];
+    [gvc release];
+    
+    [self.window addSubview:navcon.view];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
