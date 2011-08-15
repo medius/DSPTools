@@ -9,6 +9,8 @@
 #import "DSPGridView.h"
 #import "DSPHeader.h"
 #import "DSPGlobalSettings.h"
+#import "DSPGrid.h"
+#import "DSPComponentView.h"
 
 @implementation DSPGridView
 
@@ -25,6 +27,7 @@
 
 - (void)setup
 {
+    self.contentMode = UIViewContentModeRedraw;
     self.backgroundColor = [UIColor whiteColor];
     self.gridPointColor = [UIColor grayColor];
 }
@@ -44,9 +47,42 @@
     [self setup];
 }
 
+// Update the subviews based on their properties.
+- (void)updateSubViews
+{
+    for (DSPComponentView *componentView in self.subviews)
+    {
+        DSPGridPoint origin = componentView.origin;
+        DSPGridSize size = componentView.size;
+        
+        CGPoint realOrigin = [DSPGrid getRealPointFromGridPoint:origin];
+        CGSize realSize = [DSPGrid getRealSizeFromGridSize:size];
+        
+        // Use block animations if it is supported (iOS 4.0 and later)
+        if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
+        {
+            [UIView animateWithDuration:0.0 animations:^{
+                componentView.frame = CGRectMake(realOrigin.x, realOrigin.y, 
+                                                 realSize.width, realSize.height);
+            }];
+        }
+        // If block animations are not supported, use the old way of animations
+        else
+        {
+            [UIView beginAnimations:@"Scaling A ComponentView" context:nil];
+            componentView.frame = CGRectMake(realOrigin.x, realOrigin.y, 
+                                             realSize.width, realSize.height);
+            [UIView commitAnimations];
+        }
+        
+    }
+    
+}
+
 - (void)updateUI
 {
     [self setNeedsDisplay];
+    [self updateSubViews];
 }
 
 #define GRID_POINT_RADIUS 0.5     // Radius of a grid point
@@ -91,6 +127,22 @@
         }
     }
     
+}
+
+// Control scaling with pinch gesture
+- (void)pinch:(UIPinchGestureRecognizer *)gesture 
+{
+	if (gesture.state == UIGestureRecognizerStateChanged ||
+		gesture.state == UIGestureRecognizerStateEnded) 
+    {
+        // Get the gridScale
+        CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
+        
+		gridScale *= gesture.scale;
+		gesture.scale = 1;
+        [DSPGlobalSettings sharedGlobalSettings].gridScale = gridScale;
+        [self updateUI];
+	}
 }
 
 

@@ -234,6 +234,7 @@
 		C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGlobalSettings.m; sourceTree = "<group>"; };
 		C321451C13F5C28700DE738E /* DSPGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGrid.h; sourceTree = "<group>"; };
 		C321451D13F5C28800DE738E /* DSPGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGrid.m; sourceTree = "<group>"; };
+		C3A231D613F9B4CB009A843C /* DSPComponentMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentMacros.h; sourceTree = "<group>"; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3A7E38B13F352A60002491F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -344,6 +345,7 @@
 		C321450313F4A7F700DE738E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C3A231D613F9B4CB009A843C /* DSPComponentMacros.h */,
 				C321450713F4ACF400DE738E /* DSPComponent.h */,
 				C321450813F4ACF400DE738E /* DSPComponent.m */,
 				C321450013F4A7F200DE738E /* DSPComponentView.h */,

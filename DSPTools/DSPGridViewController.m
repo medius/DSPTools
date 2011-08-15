@@ -61,6 +61,11 @@
 {
     self.view = self.mainGridView;
     
+    // Create the ability to scale the view
+    UIPinchGestureRecognizer *pinchgr = [[UIPinchGestureRecognizer alloc] initWithTarget:self.view action:@selector(pinch:)];
+	[self.view addGestureRecognizer:pinchgr];
+	[pinchgr release];
+    
     // Initialize a sample Integrator
     DSPIntegratorViewController *dspIVC = [[DSPIntegratorViewController alloc] init];
     
@@ -81,7 +86,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self updateUI];
+
 }
 
 
@@ -95,7 +100,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    // return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 @end

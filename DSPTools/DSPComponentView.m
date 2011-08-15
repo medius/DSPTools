@@ -26,6 +26,8 @@
 - (void)setup
 {
     [self setupShape];
+    //self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight; 
+    self.contentMode = UIViewContentModeRedraw;    
     self.backgroundColor = [UIColor clearColor];
     self.lineColor = [UIColor blueColor];
     self.lineWidth = 2.0;
@@ -66,30 +68,73 @@
     [super dealloc];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *aTouch = [touches anyObject];
-    // Save the location inside the view a touch begins
     self.inViewTouchLocation = [aTouch locationInView:self];
+    self.lineWidth = 4.0;
+    [self updateUI];
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *aTouch = [touches anyObject];
     CGPoint location = [aTouch locationInView:self.superview];
     
     // Get the effective location so that the frame origin in not set to
-    // touch location. 
+    // the touch location. 
     CGPoint effectiveLocation;
     effectiveLocation.x = location.x - self.inViewTouchLocation.x;
     effectiveLocation.y = location.y - self.inViewTouchLocation.y;
     
-    DSPGridPoint newGridOrigin = [DSPGrid getGridPointFromRealPoint:effectiveLocation];
+    // Keep the view confined to the screen
+    if (effectiveLocation.x < self.superview.bounds.origin.x) 
+    {
+        effectiveLocation.x = self.superview.bounds.origin.x;
+    }
+    
+    if (effectiveLocation.y < self.superview.bounds.origin.y) 
+    {
+        effectiveLocation.y = self.superview.bounds.origin.y;
+    }
+    
+    if (effectiveLocation.x + self.frame.size.width > self.superview.bounds.origin.x + self.superview.bounds.size.width) 
+    {
+        effectiveLocation.x = self.superview.bounds.origin.x + self.superview.bounds.size.width - self.frame.size.width;
+    }
+    
+    if (effectiveLocation.y + self.frame.size.height > self.superview.bounds.origin.y + self.superview.bounds.size.height) 
+    {
+        effectiveLocation.y = self.superview.bounds.origin.y + self.superview.bounds.size.height - self.frame.size.width;
+    }
+    
+    DSPGridPoint newGridOrigin = [DSPGrid getGridPointFromRealPoint:effectiveLocation];    
     CGPoint newRealOrigin = [DSPGrid getRealPointFromGridPoint:newGridOrigin];
     
-    [UIView beginAnimations:@"Dragging A DraggableView" context:nil];
-    self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
-                            self.frame.size.width, self.frame.size.height);
-    [UIView commitAnimations];
+    // Use block animations if it is supported (iOS 4.0 and later)
+    if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
+    {
+        [UIView animateWithDuration:0.0 animations:^{
+            self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
+                                    self.frame.size.width, self.frame.size.height);
+        }];
+    }
+    // If block animations are not supported, use the old way of animations
+    else
+    {
+        [UIView beginAnimations:@"Dragging A ComponentView" context:nil];
+        self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
+                                self.frame.size.width, self.frame.size.height);
+        [UIView commitAnimations];
+    }
+    
+    // Save the updated location
+    self.origin = newGridOrigin;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    self.lineWidth = 2.0;
+    [self updateUI];
 }
 
 /* Class methods */

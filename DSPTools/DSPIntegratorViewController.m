@@ -7,6 +7,7 @@
 //
 
 #import "DSPIntegratorViewController.h"
+#import "DSPComponentMacros.h"
 #import "DSPGrid.h"
 
 @implementation DSPIntegratorViewController
@@ -49,14 +50,8 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    [super loadView];
     self.view = self.componentView;
-    
-    // Define the frame for this view
-    DSPGridRect componentFrame;
-    componentFrame.origin = self.componentView.origin;
-    componentFrame.size = self.componentView.size;
-    
-    self.view.frame = [DSPGrid getRealRectFromGridRect:componentFrame];
 }
 
 
@@ -64,6 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    LOADVIEW_STEPS_01
 }
 
 
@@ -75,10 +71,5 @@
     self.componentView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
 
 @end

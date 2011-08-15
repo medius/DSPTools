@@ -18,7 +18,9 @@
     // Override point for customization after application launch.
     
     UINavigationController *navcon = [[UINavigationController alloc] init];
-    navcon.navigationBarHidden = NO;
+    navcon.navigationBarHidden = YES;
+    navcon.toolbarHidden = NO;
+    navcon.toolbar.barStyle = UIBarStyleBlackOpaque;
     DSPGridViewController *gvc = [[DSPGridViewController alloc] init];
     [navcon pushViewController:gvc  animated:NO];
     [gvc release];
