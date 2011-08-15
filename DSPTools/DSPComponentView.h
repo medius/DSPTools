@@ -20,6 +20,9 @@
     
     UIColor *lineColor;
     CGFloat lineWidth;
+
+@private
+    CGPoint inViewTouchLocation;
 }
 
 @property DSPGridPoint origin;
@@ -27,6 +30,8 @@
 
 @property (nonatomic, retain) UIColor *lineColor;
 @property CGFloat lineWidth;
+
+@property CGPoint inViewTouchLocation;
 
 // Draw a box for a given rectangle on a grid
 + (void)drawBoxForGridRect:(DSPGridRect)gridRect 

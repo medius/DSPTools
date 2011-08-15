@@ -11,8 +11,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DSPGridView : UIView {
-
+    UIColor *gridPointColor;
 }
 
+@property (nonatomic, retain) UIColor *gridPointColor;
 
 @end

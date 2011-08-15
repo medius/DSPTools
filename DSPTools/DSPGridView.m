@@ -12,9 +12,21 @@
 
 @implementation DSPGridView
 
+@synthesize gridPointColor;
+
+- (UIColor *)gridPointColor
+{
+    if (!gridPointColor)
+    {
+        gridPointColor = [[UIColor alloc] init];
+    }
+    return gridPointColor;
+}
+
 - (void)setup
 {
-    self.backgroundColor = [UIColor whiteColor];  
+    self.backgroundColor = [UIColor whiteColor];
+    self.gridPointColor = [UIColor grayColor];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -43,6 +55,7 @@
 {
     UIGraphicsPushContext(context);
 	CGContextBeginPath(context);
+    CGContextSetStrokeColorWithColor(context, [self.gridPointColor CGColor]);
 	CGContextAddArc(context, point.x, point.y, GRID_POINT_RADIUS, 0, 2*M_PI, YES);
 	CGContextStrokePath(context);
 	UIGraphicsPopContext();
@@ -65,6 +78,7 @@
     
     // End point of the grid 
     // Note: This may not be the actual end point, but establishes the limits on the screen
+    // for the grid points
     CGPoint endPoint;
     endPoint.x = self.bounds.origin.x + self.bounds.size.width;
     endPoint.y = self.bounds.origin.y + self.bounds.size.height;
@@ -82,6 +96,7 @@
 
 - (void)dealloc
 {
+    [gridPointColor release];
     [super dealloc];
 }
 

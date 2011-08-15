@@ -54,14 +54,26 @@
 - (void)updateUI
 {
     [self.view setNeedsDisplay];
-    //[self.sampleIntegratorView setNeedsDisplay];
-    //[self.mainGridView bringSubviewToFront:self.sampleIntegratorView];
 }
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
     self.view = self.mainGridView;
+    
+    // Initialize a sample Integrator
+    DSPIntegratorViewController *dspIVC = [[DSPIntegratorViewController alloc] init];
+    
+    DSPGridSize componentSize;
+    componentSize = dspIVC.componentView.size;
+    
+    DSPGridPoint componentLocation;
+    componentLocation.x = 5;
+    componentLocation.y = 7;
+    dspIVC.componentView.origin = componentLocation;
+    
+    [self.view addSubview:dspIVC.view];
+    [dspIVC release];
 }
 
 
@@ -69,39 +81,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-//    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
-//    
-//    DSPGridSize componentSize;
-//    componentSize = dspIV.size;
-//    
-//    DSPGridPoint componentLocation;
-//    componentLocation.x = 5;
-//    componentLocation.y = 7;
-//    dspIV.origin = componentLocation;
-//    
-//    DSPGridRect componentFrame;
-//    componentFrame.origin = dspIV.origin;
-//    componentFrame.size = dspIV.size;
-//    
-//    dspIV.frame = [DSPGrid getRealRectFromGridRect:componentFrame];
-//    [self.view addSubview:dspIV];
-//    [dspIV release];
-
-    DSPIntegratorViewController *dspIVC = [[DSPIntegratorViewController alloc] init];
-    
-    DSPGridSize componentSize;
-    componentSize = dspIVC.integratorView.size;
-    
-    DSPGridPoint componentLocation;
-    componentLocation.x = 5;
-    componentLocation.y = 7;
-    dspIVC.integratorView.origin = componentLocation;
-    
-    [self.view addSubview:dspIVC.view];
-    [dspIVC release];
-    
-    [self updateUI];
+    //[self updateUI];
 }
 
 

@@ -16,6 +16,7 @@
 // Setters/getters
 @synthesize origin, size;
 @synthesize lineColor, lineWidth;
+@synthesize inViewTouchLocation;
 
 - (void)setupShape
 {
@@ -27,7 +28,7 @@
     [self setupShape];
     self.backgroundColor = [UIColor clearColor];
     self.lineColor = [UIColor blueColor];
-    self.lineWidth = 1.0;
+    self.lineWidth = 2.0;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -40,6 +41,16 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [self setup];
+}
+
+- (void)updateUI
+{
+    [self setNeedsDisplay];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -49,16 +60,39 @@
 }
 */
 
-- (void)prepareDealloc
-{
-    // Release objects here in subclasses 
-}
-
 - (void)dealloc
 {
-    [self prepareDealloc];
+    [lineColor release];
     [super dealloc];
 }
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *aTouch = [touches anyObject];
+    // Save the location inside the view a touch begins
+    self.inViewTouchLocation = [aTouch locationInView:self];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *aTouch = [touches anyObject];
+    CGPoint location = [aTouch locationInView:self.superview];
+    
+    // Get the effective location so that the frame origin in not set to
+    // touch location. 
+    CGPoint effectiveLocation;
+    effectiveLocation.x = location.x - self.inViewTouchLocation.x;
+    effectiveLocation.y = location.y - self.inViewTouchLocation.y;
+    
+    DSPGridPoint newGridOrigin = [DSPGrid getGridPointFromRealPoint:effectiveLocation];
+    CGPoint newRealOrigin = [DSPGrid getRealPointFromGridPoint:newGridOrigin];
+    
+    [UIView beginAnimations:@"Dragging A DraggableView" context:nil];
+    self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
+                            self.frame.size.width, self.frame.size.height);
+    [UIView commitAnimations];
+}
+
+/* Class methods */
 
 // Draw a box for a given rectangle on a grid
 + (void)drawBoxForGridRect:(DSPGridRect)gridRect 

@@ -48,5 +48,18 @@
     return realRect;
 }
 
+// Get the grid point from a real point
++ (DSPGridPoint)getGridPointFromRealPoint:(CGPoint)realPoint
+{
+    DSPGridPoint gridPoint;
+    
+    // Get the gridScale
+    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
+    
+    gridPoint.x = roundf(realPoint.x/gridScale);
+    gridPoint.y = roundf(realPoint.y/gridScale);
+    
+    return gridPoint;
+}
 
 @end

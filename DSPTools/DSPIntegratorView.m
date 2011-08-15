@@ -32,6 +32,7 @@
     
     [DSPComponentView drawBoxForGridRect:box withLineWidth:self.lineWidth withLineColor:self.lineColor];
     
+    // Draw the pins
     DSPGridPoint startPoint, endPoint;
 
     // Draw the input pin
@@ -44,12 +45,10 @@
     endPoint.x = 5; endPoint.y = 2;
     [DSPComponentView drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:lineWidth withLineColor:lineColor];
     
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
 }
 
-- (void)prepareDealloc
-{
-    
-}
+
+
 
 @end

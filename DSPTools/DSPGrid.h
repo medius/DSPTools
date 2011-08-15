@@ -22,5 +22,7 @@
 // Get the real rect from grid rect
 + (CGRect)getRealRectFromGridRect:(DSPGridRect)gridRect;
 
+// Get the grid point from a real point
++ (DSPGridPoint)getGridPointFromRealPoint:(CGPoint)realPoint;
 
 @end

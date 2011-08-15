@@ -11,9 +11,9 @@
 #import "DSPIntegratorView.h"
 
 @interface DSPIntegratorViewController : DSPComponentViewController {
-    DSPIntegratorView *integratorView;
+    DSPIntegratorView *componentView;
 }
 
-@property (nonatomic, retain) DSPIntegratorView *integratorView;
+@property (nonatomic, retain) DSPIntegratorView *componentView;
 
 @end

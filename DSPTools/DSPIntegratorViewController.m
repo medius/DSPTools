@@ -11,13 +11,13 @@
 
 @implementation DSPIntegratorViewController
 
-@synthesize integratorView;
+@synthesize componentView;
 
-- (DSPIntegratorView *)integratorView {
-	if (!integratorView) {
-		integratorView = [[DSPIntegratorView alloc] init];
+- (DSPIntegratorView *)componentView {
+	if (!componentView) {
+		componentView = [[DSPIntegratorView alloc] init];
 	}
-	return integratorView;
+	return componentView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,7 +31,7 @@
 
 - (void)dealloc
 {
-    [integratorView release];
+    [componentView release];
     [super dealloc];
 }
 
@@ -49,30 +49,30 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    self.view = self.integratorView;
+    self.view = self.componentView;
     
     // Define the frame for this view
     DSPGridRect componentFrame;
-    componentFrame.origin = self.integratorView.origin;
-    componentFrame.size = self.integratorView.size;
+    componentFrame.origin = self.componentView.origin;
+    componentFrame.size = self.componentView.size;
     
     self.view.frame = [DSPGrid getRealRectFromGridRect:componentFrame];
 }
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-*/
+
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.integratorView = nil;
+    self.componentView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
