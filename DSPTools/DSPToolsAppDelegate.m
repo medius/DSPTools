@@ -18,9 +18,6 @@
     // Override point for customization after application launch.
     
     UINavigationController *navcon = [[UINavigationController alloc] init];
-    navcon.navigationBarHidden = NO;
-    //navcon.toolbarHidden = NO;
-    //navcon.toolbar.barStyle = UIBarStyleBlackOpaque;
     DSPLauncherViewController *launcherViewController = [[DSPLauncherViewController alloc] init];
     [navcon pushViewController:launcherViewController  animated:NO];
     [launcherViewController release];

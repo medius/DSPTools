@@ -107,9 +107,11 @@
         effectiveLocation.y = self.superview.bounds.origin.y + self.superview.bounds.size.height - self.frame.size.width;
     }
     
+    // Align the new location to the grid
     DSPGridPoint newGridOrigin = [DSPGrid getGridPointFromRealPoint:effectiveLocation];    
     CGPoint newRealOrigin = [DSPGrid getRealPointFromGridPoint:newGridOrigin];
     
+    // Change the frame according to the new origin
     // Use block animations if it is supported (iOS 4.0 and later)
     if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
     {
@@ -132,6 +134,12 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    self.lineWidth = 2.0;
+    [self updateUI];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.lineWidth = 2.0;
     [self updateUI];

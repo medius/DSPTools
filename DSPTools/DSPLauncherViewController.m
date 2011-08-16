@@ -7,6 +7,9 @@
 //
 
 #import "DSPLauncherViewController.h"
+#import "DSPSystemViewController.h"
+
+// Temporary
 #import "DSPGridViewController.h"
 
 @implementation DSPLauncherViewController
@@ -93,9 +96,13 @@
 {
     if (item.title == @"New Schematic")
     {
-        DSPGridViewController *gridViewController = [[DSPGridViewController alloc] init];
-        [self.navigationController pushViewController:gridViewController animated:YES];
-        [gridViewController release];
+        DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];
+        [self.navigationController pushViewController:systemViewController animated:YES];
+        [systemViewController release];
+        
+//        DSPGridViewController *gridViewController = [[DSPGridViewController alloc] init];
+//        [self.navigationController pushViewController:gridViewController animated:YES];
+//        [gridViewController release];
     }
 }
 @end

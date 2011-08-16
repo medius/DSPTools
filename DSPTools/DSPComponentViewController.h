@@ -7,7 +7,9 @@
 //
 
 // This will handle the properties of components like scale, frequency, etc.
-// when editing for a give circuit
+// when editing for a give circuit.
+// Is this the right place for it. Handling setting is not handling the component view,
+// it's handling setting view.
 
 #import <UIKit/UIKit.h>
 

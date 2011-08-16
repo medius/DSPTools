@@ -29,6 +29,19 @@
 		C33DA01A13F9E15600FF0414 /* DSPLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01913F9E15600FF0414 /* DSPLauncherView.m */; };
 		C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */; };
 		C33DA02413F9E78700FF0414 /* schematic.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA02313F9E78700FF0414 /* schematic.png */; };
+		C33DA09D13FAEC1500FF0414 /* DSPSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */; };
+		C33DA0A013FAF18800FF0414 /* DSPSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA09F13FAF18700FF0414 /* DSPSystemView.m */; };
+		C33DA0A513FB2A3500FF0414 /* chart_line_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0A213FB2A3500FF0414 /* chart_line_24.png */; };
+		C33DA0A613FB2A3500FF0414 /* delete_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0A313FB2A3500FF0414 /* delete_24.png */; };
+		C33DA0A713FB2A3500FF0414 /* folder_64.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0A413FB2A3500FF0414 /* folder_64.png */; };
+		C33DA0B013FB2A6300FF0414 /* gear_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0A813FB2A6200FF0414 /* gear_24.png */; };
+		C33DA0B113FB2A6300FF0414 /* home_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0A913FB2A6200FF0414 /* home_24.png */; };
+		C33DA0B213FB2A6300FF0414 /* pencil_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AA13FB2A6200FF0414 /* pencil_24.png */; };
+		C33DA0B313FB2A6300FF0414 /* plus_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AB13FB2A6200FF0414 /* plus_24.png */; };
+		C33DA0B413FB2A6300FF0414 /* save_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AC13FB2A6200FF0414 /* save_24.png */; };
+		C33DA0B513FB2A6300FF0414 /* stop_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AD13FB2A6300FF0414 /* stop_24.png */; };
+		C33DA0B613FB2A6300FF0414 /* storage_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AE13FB2A6300FF0414 /* storage_24.png */; };
+		C33DA0B713FB2A6300FF0414 /* trash_24.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA0AF13FB2A6300FF0414 /* trash_24.png */; };
 		C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38913F352A60002491F /* UIKit.framework */; };
 		C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38B13F352A60002491F /* Foundation.framework */; };
 		C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38D13F352A60002491F /* CoreGraphics.framework */; };
@@ -242,6 +255,21 @@
 		C33DA01B13F9E18800FF0414 /* DSPLauncherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPLauncherViewController.h; sourceTree = "<group>"; };
 		C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPLauncherViewController.m; sourceTree = "<group>"; };
 		C33DA02313F9E78700FF0414 /* schematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = schematic.png; path = images/schematic.png; sourceTree = "<group>"; };
+		C33DA09B13FAEC1300FF0414 /* DSPSystemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSystemViewController.h; sourceTree = "<group>"; };
+		C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSystemViewController.m; sourceTree = "<group>"; };
+		C33DA09E13FAF18700FF0414 /* DSPSystemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSystemView.h; sourceTree = "<group>"; };
+		C33DA09F13FAF18700FF0414 /* DSPSystemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSystemView.m; sourceTree = "<group>"; };
+		C33DA0A213FB2A3500FF0414 /* chart_line_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chart_line_24.png; path = images/chart_line_24.png; sourceTree = "<group>"; };
+		C33DA0A313FB2A3500FF0414 /* delete_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete_24.png; path = images/delete_24.png; sourceTree = "<group>"; };
+		C33DA0A413FB2A3500FF0414 /* folder_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = folder_64.png; path = images/folder_64.png; sourceTree = "<group>"; };
+		C33DA0A813FB2A6200FF0414 /* gear_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear_24.png; path = images/gear_24.png; sourceTree = "<group>"; };
+		C33DA0A913FB2A6200FF0414 /* home_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_24.png; path = images/home_24.png; sourceTree = "<group>"; };
+		C33DA0AA13FB2A6200FF0414 /* pencil_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil_24.png; path = images/pencil_24.png; sourceTree = "<group>"; };
+		C33DA0AB13FB2A6200FF0414 /* plus_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus_24.png; path = images/plus_24.png; sourceTree = "<group>"; };
+		C33DA0AC13FB2A6200FF0414 /* save_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = save_24.png; path = images/save_24.png; sourceTree = "<group>"; };
+		C33DA0AD13FB2A6300FF0414 /* stop_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stop_24.png; path = images/stop_24.png; sourceTree = "<group>"; };
+		C33DA0AE13FB2A6300FF0414 /* storage_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = storage_24.png; path = images/storage_24.png; sourceTree = "<group>"; };
+		C33DA0AF13FB2A6300FF0414 /* trash_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash_24.png; path = images/trash_24.png; sourceTree = "<group>"; };
 		C3A231D613F9B4CB009A843C /* DSPComponentMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentMacros.h; sourceTree = "<group>"; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -401,9 +429,33 @@
 		C33DA02013F9E6C400FF0414 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C33DA0A813FB2A6200FF0414 /* gear_24.png */,
+				C33DA0A913FB2A6200FF0414 /* home_24.png */,
+				C33DA0AA13FB2A6200FF0414 /* pencil_24.png */,
+				C33DA0AB13FB2A6200FF0414 /* plus_24.png */,
+				C33DA0AC13FB2A6200FF0414 /* save_24.png */,
+				C33DA0AD13FB2A6300FF0414 /* stop_24.png */,
+				C33DA0AE13FB2A6300FF0414 /* storage_24.png */,
+				C33DA0AF13FB2A6300FF0414 /* trash_24.png */,
+				C33DA0A213FB2A3500FF0414 /* chart_line_24.png */,
+				C33DA0A313FB2A3500FF0414 /* delete_24.png */,
+				C33DA0A413FB2A3500FF0414 /* folder_64.png */,
 				C33DA02313F9E78700FF0414 /* schematic.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		C33DA0A113FAF1BF00FF0414 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				C33DA09E13FAF18700FF0414 /* DSPSystemView.h */,
+				C33DA09F13FAF18700FF0414 /* DSPSystemView.m */,
+				C33DA09B13FAEC1300FF0414 /* DSPSystemViewController.h */,
+				C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */,
+				C321450313F4A7F700DE738E /* Components */,
+				C3A7E4B313F482F70002491F /* Grid */,
+			);
+			name = System;
 			sourceTree = "<group>";
 		};
 		C3A7E37A13F352A50002491F = {
@@ -449,9 +501,8 @@
 				C321451913F5BF1200DE738E /* DSPGlobalSettings.h */,
 				C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */,
 				C321451813F4B8F500DE738E /* DSPHeader.h */,
+				C33DA0A113FAF1BF00FF0414 /* System */,
 				C33DA01E13F9E2B400FF0414 /* Launcher */,
-				C321450313F4A7F700DE738E /* Components */,
-				C3A7E4B313F482F70002491F /* Grid */,
 				C321451713F4B10400DE738E /* Additions */,
 				C3A7E39B13F352A60002491F /* iPhone */,
 				C3A7E3A213F352A60002491F /* iPad */,
@@ -713,6 +764,17 @@
 				C3A7E3A113F352A60002491F /* MainWindow_iPhone.xib in Resources */,
 				C3A7E3A813F352A60002491F /* MainWindow_iPad.xib in Resources */,
 				C33DA02413F9E78700FF0414 /* schematic.png in Resources */,
+				C33DA0A513FB2A3500FF0414 /* chart_line_24.png in Resources */,
+				C33DA0A613FB2A3500FF0414 /* delete_24.png in Resources */,
+				C33DA0A713FB2A3500FF0414 /* folder_64.png in Resources */,
+				C33DA0B013FB2A6300FF0414 /* gear_24.png in Resources */,
+				C33DA0B113FB2A6300FF0414 /* home_24.png in Resources */,
+				C33DA0B213FB2A6300FF0414 /* pencil_24.png in Resources */,
+				C33DA0B313FB2A6300FF0414 /* plus_24.png in Resources */,
+				C33DA0B413FB2A6300FF0414 /* save_24.png in Resources */,
+				C33DA0B513FB2A6300FF0414 /* stop_24.png in Resources */,
+				C33DA0B613FB2A6300FF0414 /* storage_24.png in Resources */,
+				C33DA0B713FB2A6300FF0414 /* trash_24.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +802,8 @@
 				C321451E13F5C28800DE738E /* DSPGrid.m in Sources */,
 				C33DA01A13F9E15600FF0414 /* DSPLauncherView.m in Sources */,
 				C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */,
+				C33DA09D13FAEC1500FF0414 /* DSPSystemViewController.m in Sources */,
+				C33DA0A013FAF18800FF0414 /* DSPSystemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

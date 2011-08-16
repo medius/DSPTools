@@ -11,7 +11,8 @@
 #import "DSPHeader.h"
 #import "DSPGrid.h"
 
-#import "DSPIntegratorViewController.h"
+//#import "DSPIntegratorViewController.h"
+#import "DSPIntegratorView.h"
 
 @implementation DSPGridViewController
 
@@ -67,18 +68,26 @@
 	[pinchgr release];
     
     // Initialize a sample Integrator
-    DSPIntegratorViewController *dspIVC = [[DSPIntegratorViewController alloc] init];
+    // DSPIntegratorViewController *dspIVC = [[DSPIntegratorViewController alloc] init];
+    
+    
+    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
     
     DSPGridSize componentSize;
-    componentSize = dspIVC.componentView.size;
+    componentSize = dspIV.size;
     
     DSPGridPoint componentLocation;
     componentLocation.x = 5;
     componentLocation.y = 7;
-    dspIVC.componentView.origin = componentLocation;
+    dspIV.origin = componentLocation;
     
-    [self.view addSubview:dspIVC.view];
-    [dspIVC release];
+    DSPGridRect componentFrame; 
+    componentFrame.origin = dspIV.origin;
+    componentFrame.size = dspIV.size;
+    dspIV.frame = [DSPGrid getRealRectFromGridRect:componentFrame];
+    
+    [self.view addSubview:dspIV];
+    [dspIV release];
 }
 
 
