@@ -7,7 +7,7 @@
 //
 
 #import "DSPToolsAppDelegate.h"
-#import "DSPGridViewController.h"
+#import "DSPLauncherViewController.h"
 
 @implementation DSPToolsAppDelegate
 
@@ -18,12 +18,12 @@
     // Override point for customization after application launch.
     
     UINavigationController *navcon = [[UINavigationController alloc] init];
-    navcon.navigationBarHidden = YES;
-    navcon.toolbarHidden = NO;
-    navcon.toolbar.barStyle = UIBarStyleBlackOpaque;
-    DSPGridViewController *gvc = [[DSPGridViewController alloc] init];
-    [navcon pushViewController:gvc  animated:NO];
-    [gvc release];
+    navcon.navigationBarHidden = NO;
+    //navcon.toolbarHidden = NO;
+    //navcon.toolbar.barStyle = UIBarStyleBlackOpaque;
+    DSPLauncherViewController *launcherViewController = [[DSPLauncherViewController alloc] init];
+    [navcon pushViewController:launcherViewController  animated:NO];
+    [launcherViewController release];
     
     [self.window addSubview:navcon.view];
     

@@ -26,6 +26,9 @@
 		C321451613F4B0F800DE738E /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451513F4B0F600DE738E /* NSObject+Additions.m */; };
 		C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */; };
 		C321451E13F5C28800DE738E /* DSPGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451D13F5C28800DE738E /* DSPGrid.m */; };
+		C33DA01A13F9E15600FF0414 /* DSPLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01913F9E15600FF0414 /* DSPLauncherView.m */; };
+		C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */; };
+		C33DA02413F9E78700FF0414 /* schematic.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA02313F9E78700FF0414 /* schematic.png */; };
 		C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38913F352A60002491F /* UIKit.framework */; };
 		C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38B13F352A60002491F /* Foundation.framework */; };
 		C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38D13F352A60002491F /* CoreGraphics.framework */; };
@@ -234,6 +237,11 @@
 		C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGlobalSettings.m; sourceTree = "<group>"; };
 		C321451C13F5C28700DE738E /* DSPGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGrid.h; sourceTree = "<group>"; };
 		C321451D13F5C28800DE738E /* DSPGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGrid.m; sourceTree = "<group>"; };
+		C33DA01813F9E15600FF0414 /* DSPLauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPLauncherView.h; sourceTree = "<group>"; };
+		C33DA01913F9E15600FF0414 /* DSPLauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPLauncherView.m; sourceTree = "<group>"; };
+		C33DA01B13F9E18800FF0414 /* DSPLauncherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPLauncherViewController.h; sourceTree = "<group>"; };
+		C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPLauncherViewController.m; sourceTree = "<group>"; };
+		C33DA02313F9E78700FF0414 /* schematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = schematic.png; path = images/schematic.png; sourceTree = "<group>"; };
 		C3A231D613F9B4CB009A843C /* DSPComponentMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentMacros.h; sourceTree = "<group>"; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -379,6 +387,25 @@
 			name = Additions;
 			sourceTree = "<group>";
 		};
+		C33DA01E13F9E2B400FF0414 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				C33DA01813F9E15600FF0414 /* DSPLauncherView.h */,
+				C33DA01913F9E15600FF0414 /* DSPLauncherView.m */,
+				C33DA01B13F9E18800FF0414 /* DSPLauncherViewController.h */,
+				C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */,
+			);
+			name = Launcher;
+			sourceTree = "<group>";
+		};
+		C33DA02013F9E6C400FF0414 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C33DA02313F9E78700FF0414 /* schematic.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		C3A7E37A13F352A50002491F = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +449,7 @@
 				C321451913F5BF1200DE738E /* DSPGlobalSettings.h */,
 				C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */,
 				C321451813F4B8F500DE738E /* DSPHeader.h */,
+				C33DA01E13F9E2B400FF0414 /* Launcher */,
 				C321450313F4A7F700DE738E /* Components */,
 				C3A7E4B313F482F70002491F /* Grid */,
 				C321451713F4B10400DE738E /* Additions */,
@@ -435,6 +463,7 @@
 		C3A7E39013F352A60002491F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C33DA02013F9E6C400FF0414 /* images */,
 				320B6C86F11D9990244A9730 /* Three20.bundle */,
 				C3A7E39113F352A60002491F /* DSPTools-Info.plist */,
 				C3A7E39213F352A60002491F /* InfoPlist.strings */,
@@ -683,6 +712,7 @@
 				C3A7E39413F352A60002491F /* InfoPlist.strings in Resources */,
 				C3A7E3A113F352A60002491F /* MainWindow_iPhone.xib in Resources */,
 				C3A7E3A813F352A60002491F /* MainWindow_iPad.xib in Resources */,
+				C33DA02413F9E78700FF0414 /* schematic.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +738,8 @@
 				C321451613F4B0F800DE738E /* NSObject+Additions.m in Sources */,
 				C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */,
 				C321451E13F5C28800DE738E /* DSPGrid.m in Sources */,
+				C33DA01A13F9E15600FF0414 /* DSPLauncherView.m in Sources */,
+				C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
