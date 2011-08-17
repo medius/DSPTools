@@ -16,11 +16,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    UINavigationController *navcon = [[UINavigationController alloc] init];
     DSPLauncherViewController *launcherViewController = [[DSPLauncherViewController alloc] init];
-    [navcon pushViewController:launcherViewController  animated:NO];
+    UINavigationController *navcon = [[UINavigationController alloc] initWithRootViewController:launcherViewController];
     [launcherViewController release];
+    
+    navcon.navigationBarHidden = NO;
+    navcon.toolbarHidden = YES;
     
     [self.window addSubview:navcon.view];
     

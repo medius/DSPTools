@@ -16,6 +16,25 @@
 
 static DSPGlobalSettings *sharedGlobalSettings = nil;
 
+#define MIN_GRIDSCALE 12
+#define MAX_GRIDSCALE 40
+
+// Set the limits on gridScale
+- (void)setGridScale:(CGFloat)newGridScale
+{
+    if (newGridScale < MIN_GRIDSCALE) {
+        gridScale = MIN_GRIDSCALE;
+    } 
+    else if (newGridScale > MAX_GRIDSCALE)
+    {
+        gridScale = MAX_GRIDSCALE;
+    }
+    else 
+    {
+        gridScale = newGridScale;
+    }
+}
+
 // Get the shared instance and create it if necessary.
 + (DSPGlobalSettings*)sharedGlobalSettings {
     if (sharedGlobalSettings == nil) {

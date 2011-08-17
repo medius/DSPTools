@@ -26,11 +26,17 @@
     return launcherView;
 }
 
+- (void)setup
+{
+
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setup];
     }
     return self;
 }
@@ -66,6 +72,7 @@
     [[TTURLCache sharedCache] storeImage:thumbnail forURL:imageName]; 
     TTLauncherItem *newSchematic = [[TTLauncherItem alloc] initWithTitle:@"New Schematic" image:imageName URL:@"tt://url" canDelete:NO];
     [self.launcherView addItem:newSchematic animated:NO];
+    [thumbnail release];
     [newSchematic release];
 }
 
@@ -76,6 +83,12 @@
     [super viewDidLoad];
 }
 */
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController setToolbarHidden:YES animated:NO];
+}
 
 - (void)viewDidUnload
 {

@@ -13,7 +13,7 @@
     CGFloat gridScale;
 }
 
-@property CGFloat gridScale;
+@property (nonatomic) CGFloat gridScale;
 
 // Shared Global Setting
 + (DSPGlobalSettings *)sharedGlobalSettings;

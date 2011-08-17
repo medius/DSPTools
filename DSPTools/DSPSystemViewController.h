@@ -7,16 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPSystemView.h"
 #import "DSPGridView.h"
 
 @interface DSPSystemViewController : UIViewController {
 @private
-    DSPSystemView *systemView;
+    UIView *systemView;
     DSPGridView *gridView;
 }
 
-@property (readonly) DSPSystemView *systemView;
+@property (readonly) UIView *systemView;
 @property (readonly) DSPGridView *gridView;
 
 @end
