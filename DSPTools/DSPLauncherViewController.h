@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPLauncherView.h"
-#import <Three20UI/Three20UI.h>
+#import "Three20UI/Three20UI.h"
 
-@interface DSPLauncherViewController : UIViewController <TTLauncherViewDelegate> {
+@interface DSPLauncherViewController : TTViewController <TTLauncherViewDelegate> {
 @private
-    DSPLauncherView *launcherView;
+    TTLauncherView *launcherView;
 }
 
-@property (readonly) DSPLauncherView *launcherView;
+@property (readonly) TTLauncherView *launcherView;
 
 @end

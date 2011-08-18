@@ -8,6 +8,8 @@
 
 #import "DSPGlobalSettings.h"
 
+static const CGFloat kMinGridScale = 12;
+static const CGFloat kMaxGridScale = 35;
 
 @implementation DSPGlobalSettings
 
@@ -16,18 +18,15 @@
 
 static DSPGlobalSettings *sharedGlobalSettings = nil;
 
-#define MIN_GRIDSCALE 12
-#define MAX_GRIDSCALE 40
-
 // Set the limits on gridScale
 - (void)setGridScale:(CGFloat)newGridScale
 {
-    if (newGridScale < MIN_GRIDSCALE) {
-        gridScale = MIN_GRIDSCALE;
+    if (newGridScale < kMinGridScale) {
+        gridScale = kMinGridScale;
     } 
-    else if (newGridScale > MAX_GRIDSCALE)
+    else if (newGridScale > kMaxGridScale)
     {
-        gridScale = MAX_GRIDSCALE;
+        gridScale = kMaxGridScale;
     }
     else 
     {

@@ -12,8 +12,9 @@
 // it's handling setting view.
 
 #import <UIKit/UIKit.h>
+#import "Three20/Three20.h"
 
-@interface DSPComponentViewController : UIViewController {
+@interface DSPComponentViewController : TTViewController {
 }
 
 @end

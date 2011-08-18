@@ -9,19 +9,16 @@
 #import "DSPLauncherViewController.h"
 #import "DSPSystemViewController.h"
 
-// Temporary
-#import "DSPGridViewController.h"
-
 @implementation DSPLauncherViewController
 
 // Setters/getter
 @synthesize launcherView;
 
-- (DSPLauncherView *)launcherView
+- (TTLauncherView *)launcherView
 {
     if (!launcherView)
     {
-        launcherView = [[DSPLauncherView alloc] init];
+        launcherView = [[TTLauncherView alloc] init];
     }
     return launcherView;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "DSPToolsAppDelegate.h"
+#import "Three20/Three20.h"
 #import "DSPLauncherViewController.h"
 
 @implementation DSPToolsAppDelegate
@@ -17,7 +18,7 @@
 {
     // Override point for customization after application launch.
     DSPLauncherViewController *launcherViewController = [[DSPLauncherViewController alloc] init];
-    UINavigationController *navcon = [[UINavigationController alloc] initWithRootViewController:launcherViewController];
+    TTNavigationController *navcon = [[TTNavigationController alloc] initWithRootViewController:launcherViewController];
     [launcherViewController release];
     
     navcon.navigationBarHidden = NO;

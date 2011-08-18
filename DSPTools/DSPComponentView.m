@@ -9,14 +9,38 @@
 #import "DSPComponentView.h"
 #import "DSPHeader.h"
 #import "DSPGlobalSettings.h"
-#import "DSPGrid.h"
+#import "DSPHelper.h"
+
+static const CGFloat kRectangleRadius = 5;
 
 @implementation DSPComponentView
 
 // Setters/getters
-@synthesize origin, size;
-@synthesize lineColor, lineWidth;
-@synthesize inViewTouchLocation;
+@synthesize origin              = _origin;
+@synthesize size                = _size;
+@synthesize lineWidth           = _lineWidth;
+@synthesize lineColor           = _lineColor;
+@synthesize fillColor           = _fillColor;
+@synthesize draggable           = _draggable;
+@synthesize inViewTouchLocation = _inViewTouchLocation;
+@synthesize rectangleRadius     = _rectangleRadius;
+
+//// Override the frame setting to add an extra margin
+//- (void)setFrame:(CGRect)newFrame
+//{
+//    CGRect frame = CGRectMake(newFrame.origin.x - self.frameMargin, newFrame.origin.y - self.frameMargin, newFrame.size.width + self.frameMargin*2, newFrame.size.height + self.frameMargin*2);
+//    [super setFrame:frame];
+//}
+
+- (CGFloat)gridScale
+{
+    return _gridScale;
+}
+
+- (void)setGridScale:(CGFloat)gridScale
+{
+    _gridScale = gridScale;
+}
 
 - (void)setupShape
 {
@@ -26,11 +50,12 @@
 - (void)setup
 {
     [self setupShape];
-    //self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight; 
     self.contentMode = UIViewContentModeRedraw;    
     self.backgroundColor = [UIColor clearColor];
     self.lineColor = [UIColor blueColor];
+    self.fillColor = [UIColor whiteColor];
     self.lineWidth = 2.0;
+    self.rectangleRadius = kRectangleRadius;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -64,19 +89,23 @@
 
 - (void)dealloc
 {
-    [lineColor release];
+    [_lineColor release];
     [super dealloc];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.draggable) return;
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
     self.lineWidth = 4.0;
+    self.backgroundColor = [UIColor yellowColor];
     [self updateUI];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (!self.draggable) return;
+    
     UITouch *aTouch = [touches anyObject];
     CGPoint location = [aTouch locationInView:self.superview];
     
@@ -108,8 +137,8 @@
     }
     
     // Align the new location to the grid
-    DSPGridPoint newGridOrigin = [DSPGrid getGridPointFromRealPoint:effectiveLocation];    
-    CGPoint newRealOrigin = [DSPGrid getRealPointFromGridPoint:newGridOrigin];
+    DSPGridPoint newGridOrigin = [DSPHelper getGridPointFromRealPoint:effectiveLocation forGridScale:self.gridScale];    
+    CGPoint newRealOrigin = [DSPHelper getRealPointFromGridPoint:newGridOrigin forGridScale:self.gridScale];
     
     // Change the frame according to the new origin
     // Use block animations if it is supported (iOS 4.0 and later)
@@ -135,62 +164,18 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.draggable) return;
     self.lineWidth = 2.0;
+    self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.draggable) return;
     self.lineWidth = 2.0;
+    self.backgroundColor = [UIColor clearColor];
     [self updateUI];
-}
-
-/* Class methods */
-
-// Draw a box for a given rectangle on a grid
-+ (void)drawBoxForGridRect:(DSPGridRect)gridRect 
-             withLineWidth:(CGFloat)lineWidth 
-             withLineColor:(UIColor *)lineColor
-{
-    CGRect realRect = [DSPGrid getRealRectFromGridRect:gridRect];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIGraphicsPushContext(context);
-    
-    // Set the line width, line color, and fill color
-    CGContextSetLineWidth(context, lineWidth);
-    CGContextSetStrokeColorWithColor(context, [lineColor CGColor]);
-    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
-
-    // Draw the box
-    CGContextAddRect(context, CGRectMake(realRect.origin.x, realRect.origin.y, realRect.size.width, realRect.size.height));
-    CGContextDrawPath(context, kCGPathFillStroke);
-
-    UIGraphicsPopContext();
-}
-
-// Draw a line on the grid from one point to the other 
-+ (void)drawLineFromPoint:(DSPGridPoint)startPoint 
-                  toPoint:(DSPGridPoint)endPoint 
-            withLineWidth:(CGFloat)lineWidth 
-            withLineColor:(UIColor *)lineColor
-{
-    CGPoint realStartPoint = [DSPGrid getRealPointFromGridPoint:startPoint];
-    CGPoint realEndPoint = [DSPGrid getRealPointFromGridPoint:endPoint];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    UIGraphicsPushContext(context);
-
-    // Set the line width and line color
-    CGContextSetLineWidth(context, lineWidth);
-    CGContextSetStrokeColorWithColor(context, [lineColor CGColor]);
-    
-    // Draw the line
-    CGContextMoveToPoint(context, realStartPoint.x, realStartPoint.y);
-    CGContextAddLineToPoint(context, realEndPoint.x, realEndPoint.y);
-    CGContextStrokePath(context);
-    
-    UIGraphicsPopContext();
 }
 
 @end

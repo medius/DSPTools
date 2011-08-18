@@ -9,39 +9,37 @@
 // This class handles all the common view functions a DSPComponent.
 
 #import <UIKit/UIKit.h>
+#import "Three20/Three20.h"
 #import "DSPHeader.h"
 
-@interface DSPComponentView : UIView {
+@interface DSPComponentView : TTView {
     // Define the bounding box of the component
     // Note: The origin of this rectangle is only relevant in the superview 
     // to decide the frame of this view.
-    DSPGridPoint origin;
-    DSPGridSize size;
+    DSPGridPoint    _origin;
+    DSPGridSize     _size;
     
-    UIColor *lineColor;
-    CGFloat lineWidth;
-
+    CGFloat         _gridScale;
+    CGFloat         _lineWidth;
+    UIColor*        _lineColor;
+    UIColor*        _fillColor;
+    BOOL            _draggable;
+    
 @private
-    CGPoint inViewTouchLocation;
+    CGPoint         _inViewTouchLocation;
+    CGFloat         _rectangleRadius;
 }
 
-@property DSPGridPoint origin;
-@property (readonly) DSPGridSize size;
+@property DSPGridPoint                  origin;
+@property (readonly) DSPGridSize        size;
 
-@property (nonatomic, retain) UIColor *lineColor;
+@property CGFloat gridScale;
 @property CGFloat lineWidth;
+@property (nonatomic, retain) UIColor*  lineColor;
+@property (nonatomic, retain) UIColor*  fillColor;
+@property BOOL                          draggable;
 
-@property CGPoint inViewTouchLocation;
+@property CGPoint                       inViewTouchLocation;
+@property CGFloat                       rectangleRadius;
 
-// Draw a box for a given rectangle on a grid
-+ (void)drawBoxForGridRect:(DSPGridRect)gridRect 
-             withLineWidth:(CGFloat)lineWidth 
-             withLineColor:(UIColor *)lineColor;
-
-
-// Draw a line on the grid from one point to the other 
-+ (void)drawLineFromPoint:(DSPGridPoint)startPoint 
-                  toPoint:(DSPGridPoint)endPoint 
-            withLineWidth:(CGFloat)lineWidth 
-            withLineColor:(UIColor *)lineColor;
 @end

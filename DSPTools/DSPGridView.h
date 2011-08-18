@@ -9,8 +9,9 @@
 // *** This should be a singleton class?
 
 #import <UIKit/UIKit.h>
+#import "Three20/Three20.h"
 
-@interface DSPGridView : UIView {
+@interface DSPGridView : TTView {
     UIColor *gridPointColor;
 }
 

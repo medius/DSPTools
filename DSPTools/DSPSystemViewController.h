@@ -7,15 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPGridView.h"
+#import "Three20UI/Three20UI.h"
 
-@interface DSPSystemViewController : UIViewController {
+@class DSPGridView;
+@class DSPComponentListView;
+
+@interface DSPSystemViewController : TTViewController {
 @private
-    UIView *systemView;
-    DSPGridView *gridView;
+    TTView*                 _systemView;
+    DSPGridView*            _gridView;
+    DSPComponentListView*   _componentListView;
 }
 
-@property (readonly) UIView *systemView;
-@property (readonly) DSPGridView *gridView;
+@property (readonly) TTView*                systemView;
+@property (readonly) DSPGridView*           gridView;
+@property (readonly) DSPComponentListView*  componentListView;
 
 @end

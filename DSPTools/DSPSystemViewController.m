@@ -7,97 +7,35 @@
 //
 
 #import "DSPSystemViewController.h"
-#import "DSPGridViewController.h"
+#import "DSPGridView.h"
+#import "DSPComponentListView.h"
+#import "Three20UI/Three20UI+Additions.h"
 
 // Temporary
 #import "DSPHeader.h"
-#import "DSPGrid.h"
+#import "DSPHelper.h"
+#import "DSPGlobalSettings.h"
 #import "DSPIntegratorView.h"
+#import "DSPSummationView.h"
+
+static const CGFloat kComponentListHeight = 60;
+static const CGFloat kToolBarItemWidth    = 40;
+
+@interface DSPSystemViewController()
+- (NSArray *)createToolBarItems;
+@end
 
 @implementation DSPSystemViewController
 
+
 // Setters/getters
-@synthesize systemView;
-@synthesize gridView;
-
-- (UIView *)systemView
-{
-    if (!systemView)
-    {
-        systemView = [[UIView alloc] init];
-    }
-    return systemView;
-}
-
-- (DSPGridView *)gridView
-{
-    if (!gridView)
-    {
-        gridView = [[DSPGridView alloc] init];
-    }
-    return gridView;
-}
-
-#define TOOLBAR_ITEM_WIDTH 40
-
-// Create toolbar items 
-- (NSArray *)createToolBarItems
-{
-    NSMutableArray *toolBarItems = [NSMutableArray array];
-    
-    // Create back button
-    UIImage *backButtonsImage = [UIImage imageNamed:@"arrow_left_24.png"];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:backButtonsImage style:UIBarButtonItemStylePlain target:self action:@selector(closeSchematic)];
-    backButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:backButton];
-    [backButton release];
-
-    
-    // Create add component button
-    UIImage *addButtonImage = [UIImage imageNamed:@"plus_24.png"];
-    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithImage:addButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
-//    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    addComponentButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:addComponentButton];
-    [addComponentButton release];
-    
-    // Create delete component button
-    UIImage *deleteButtonImage = [UIImage imageNamed:@"delete_24.png"];
-    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithImage:deleteButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
-//    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:nil action:nil];
-    deleteComponentButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:deleteComponentButton];
-    [deleteComponentButton release];
-    
-    // Create component setting button
-    UIImage *settingsButtonImage = [UIImage imageNamed:@"gear_24.png"];
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
-    settingsButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:settingsButton];
-    [settingsButton release];
-    
-    // Create pencil button
-    UIImage *pencilButtonImage = [UIImage imageNamed:@"pencil_24.png"];
-    UIBarButtonItem *pencilButton = [[UIBarButtonItem alloc] initWithImage:pencilButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
-    pencilButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:pencilButton];
-    [pencilButton release];
-    
-    // Create chart button
-    UIImage *chartButtonImage = [UIImage imageNamed:@"chart_line_24.png"];
-    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
-    chartButton.width = TOOLBAR_ITEM_WIDTH;
-    [toolBarItems addObject:chartButton];
-    [chartButton release];
-    
-    return toolBarItems;
-}
+@synthesize systemView          = _systemView;
+@synthesize gridView            = _gridView;
+@synthesize componentListView   = _componentListView;
 
 - (void)setup
 {
     self.systemView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    self.gridView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    
     [self setToolbarItems:[self createToolBarItems]];
 }
 
@@ -105,7 +43,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // Initialize the systemView
+        CGRect systemViewFrame = TTApplicationFrame();
+        _systemView = [[TTView alloc] initWithFrame:systemViewFrame];
+        
+        // Initialize the gridView
+        CGRect gridViewFrame = TTApplicationFrame();
+        _gridView = [[DSPGridView alloc] initWithFrame:gridViewFrame];
+        
+        // Initialize the componentListView
+        CGRect componentListFrame = CGRectMake(0, _systemView.bottom - kComponentListHeight, _systemView.width, kComponentListHeight);
+        _componentListView = [[DSPComponentListView alloc] initWithFrame:componentListFrame];
+        
         [self setup];
     }
     return self;
@@ -113,8 +62,9 @@
 
 - (void)dealloc
 {
-    [systemView release];
-    [gridView release];
+    [_systemView release];
+    [_gridView release];
+    [_componentListView release];
     [super dealloc];
 }
 
@@ -137,23 +87,17 @@
 - (void)loadView
 {
     self.view = self.systemView;
+    [self.view addSubview:self.gridView];
+    [self.view addSubview:self.componentListView];
     
     // Configure the navigation controller when in system view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController setToolbarHidden:NO animated:NO];
     self.navigationController.toolbar.barStyle = UIBarStyleBlackOpaque;
     
-    // Calculate grid view frame and add it as subview
-    CGRect navigationBarFrame = self.navigationController.navigationBar.frame;
-    CGRect toolbarFrame = self.navigationController.toolbar.frame;
-    CGRect gridViewFrame = CGRectMake(0, 0, navigationBarFrame.size.width, toolbarFrame.origin.y - navigationBarFrame.origin.y - navigationBarFrame.size.height);
-    self.gridView.frame = gridViewFrame;
-    [self.view addSubview:self.gridView];
     
-    // Create the ability to scale the gridView
-    UIPinchGestureRecognizer *pinchgr = [[UIPinchGestureRecognizer alloc] initWithTarget:self.gridView action:@selector(pinch:)];
-	[self.gridView addGestureRecognizer:pinchgr];
-	[pinchgr release];
+    // Get the gridScale
+    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
     
     DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
         
@@ -165,17 +109,34 @@
     DSPGridRect componentFrame; 
     componentFrame.origin = dspIV.origin;
     componentFrame.size = dspIV.size;
-    dspIV.frame = [DSPGrid getRealRectFromGridRect:componentFrame];
+    dspIV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
+    dspIV.gridScale = gridScale;
+    dspIV.draggable = YES;
     
     [self.gridView addSubview:dspIV];
     [dspIV release];
     
+    DSPSummationView *dspSV = [[DSPSummationView alloc] init];
+    
+    componentLocation.x = 10;
+    componentLocation.y = 7;
+    dspSV.origin = componentLocation;
+    
+    componentFrame.origin = dspSV.origin;
+    componentFrame.size = dspSV.size;
+    dspSV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
+    dspSV.gridScale = gridScale;
+    dspSV.draggable = YES;
+    
+    [self.gridView addSubview:dspSV];
+    [dspSV release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.componentListView.backgroundColor = [UIColor brownColor];
 }
 
 
@@ -191,6 +152,58 @@
     // Return YES for supported orientations
     // return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
+}
+
+// Create toolbar items 
+- (NSArray *)createToolBarItems
+{
+    NSMutableArray *toolBarItems = [NSMutableArray array];
+    
+    // Create back button
+    UIImage *backButtonsImage = [UIImage imageNamed:@"arrow_left_24.png"];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:backButtonsImage style:UIBarButtonItemStylePlain target:self action:@selector(closeSchematic)];
+    backButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:backButton];
+    [backButton release];
+    
+    // Create add component button
+    UIImage *addButtonImage = [UIImage imageNamed:@"plus_24.png"];
+    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithImage:addButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    //    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    addComponentButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:addComponentButton];
+    [addComponentButton release];
+    
+    // Create delete component button
+    UIImage *deleteButtonImage = [UIImage imageNamed:@"delete_24.png"];
+    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithImage:deleteButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    //    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:nil action:nil];
+    deleteComponentButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:deleteComponentButton];
+    [deleteComponentButton release];
+    
+    // Create component setting button
+    UIImage *settingsButtonImage = [UIImage imageNamed:@"gear_24.png"];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    settingsButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:settingsButton];
+    [settingsButton release];
+    
+    // Create pencil button
+    UIImage *pencilButtonImage = [UIImage imageNamed:@"pencil_24.png"];
+    UIBarButtonItem *pencilButton = [[UIBarButtonItem alloc] initWithImage:pencilButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    pencilButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:pencilButton];
+    [pencilButton release];
+    
+    // Create chart button
+    UIImage *chartButtonImage = [UIImage imageNamed:@"chart_line_24.png"];
+    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    chartButton.width = kToolBarItemWidth;
+    [toolBarItems addObject:chartButton];
+    [chartButton release];
+    
+    return toolBarItems;
 }
 
 @end

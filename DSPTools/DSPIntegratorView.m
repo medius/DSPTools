@@ -7,45 +7,39 @@
 //
 
 #import "DSPIntegratorView.h"
-#import "DSPGrid.h"
+#import "DSPHelper.h"
 
 @implementation DSPIntegratorView
 
 - (void)setupShape
 {
     DSPGridSize defaultSize;
-    defaultSize.width = 5;
+    defaultSize.width = 3;
     defaultSize.height = 4;
-    size = defaultSize;
+    _size = defaultSize;
 }
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Draw the inner box
-    DSPGridRect box;
-    box.origin.x = 1;
-    box.origin.y = 0;
-    box.size.width = self.size.width - 2;
-    box.size.height = self.size.height;
-    
-    [DSPComponentView drawBoxForGridRect:box withLineWidth:self.lineWidth withLineColor:self.lineColor];
+- (void)drawContent:(CGRect)rect
+{   
+    CGFloat margin = self.gridScale/2;
+    // Draw the box
+    CGRect box = CGRectMake(margin, margin, (self.size.width-1)*self.gridScale, (self.size.height-1)*self.gridScale);
+    [DSPHelper drawRoundedBoxForRect:box withRadius:self.rectangleRadius withLineWidth:self.lineWidth withLineColor:self.lineColor withFillColor:self.fillColor];
     
     // Draw the pins
-    DSPGridPoint startPoint, endPoint;
+    CGPoint startPoint, endPoint;
 
     // Draw the input pin
-    startPoint.x = 0; startPoint.y = 2;
-    endPoint.x = 1; endPoint.y = 2;
-    [DSPComponentView drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:lineWidth withLineColor:lineColor];
+    startPoint.x = 0; startPoint.y = self.size.height/2*self.gridScale;
+    endPoint.x = margin; endPoint.y = self.size.height/2*self.gridScale;
+    [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 
     // Draw the output pin
-    startPoint.x = 4; startPoint.y = 2;
-    endPoint.x = 5; endPoint.y = 2;
-    [DSPComponentView drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:lineWidth withLineColor:lineColor];
-    
-    //[self setNeedsDisplay];
+    startPoint.x = self.size.width*self.gridScale - margin; startPoint.y = self.size.height/2*self.gridScale;
+    endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
+    [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
 
