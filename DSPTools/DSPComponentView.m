@@ -12,35 +12,23 @@
 #import "DSPHelper.h"
 
 static const CGFloat kRectangleRadius = 5;
+static const CGFloat kDefaultLineWidth = 2.0;
+static const CGFloat kHighlightedLineWidth = 4.0;
 
 @implementation DSPComponentView
 
 // Setters/getters
 @synthesize origin              = _origin;
 @synthesize size                = _size;
+@synthesize anchor1             = _anchor1;
+@synthesize anchor2             = _anchor2;
+@synthesize gridScale           = _gridScale;
 @synthesize lineWidth           = _lineWidth;
 @synthesize lineColor           = _lineColor;
 @synthesize fillColor           = _fillColor;
 @synthesize draggable           = _draggable;
 @synthesize inViewTouchLocation = _inViewTouchLocation;
 @synthesize rectangleRadius     = _rectangleRadius;
-
-//// Override the frame setting to add an extra margin
-//- (void)setFrame:(CGRect)newFrame
-//{
-//    CGRect frame = CGRectMake(newFrame.origin.x - self.frameMargin, newFrame.origin.y - self.frameMargin, newFrame.size.width + self.frameMargin*2, newFrame.size.height + self.frameMargin*2);
-//    [super setFrame:frame];
-//}
-
-- (CGFloat)gridScale
-{
-    return _gridScale;
-}
-
-- (void)setGridScale:(CGFloat)gridScale
-{
-    _gridScale = gridScale;
-}
 
 - (void)setupShape
 {
@@ -54,7 +42,7 @@ static const CGFloat kRectangleRadius = 5;
     self.backgroundColor = [UIColor clearColor];
     self.lineColor = [UIColor blueColor];
     self.fillColor = [UIColor whiteColor];
-    self.lineWidth = 2.0;
+    self.lineWidth = kDefaultLineWidth;
     self.rectangleRadius = kRectangleRadius;
 }
 
@@ -98,8 +86,8 @@ static const CGFloat kRectangleRadius = 5;
     if (!self.draggable) return;
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
-    self.lineWidth = 4.0;
-    self.backgroundColor = [UIColor yellowColor];
+    self.lineWidth = kHighlightedLineWidth;
+    //self.backgroundColor = [UIColor yellowColor];
     [self updateUI];
 }
 
@@ -165,7 +153,7 @@ static const CGFloat kRectangleRadius = 5;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    self.lineWidth = 2.0;
+    self.lineWidth = kDefaultLineWidth;
     self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
@@ -173,7 +161,7 @@ static const CGFloat kRectangleRadius = 5;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    self.lineWidth = 2.0;
+    self.lineWidth = kDefaultLineWidth;
     self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }

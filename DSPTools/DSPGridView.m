@@ -16,15 +16,44 @@ static const CGFloat kGridPointRadius = 0.5;
 
 @implementation DSPGridView
 
-@synthesize gridPointColor;
+@synthesize gridPointColor        = _gridPointColor;
+@synthesize wirePoints            = _wirePoints;
 
 - (UIColor *)gridPointColor
 {
-    if (!gridPointColor)
+    if (!_gridPointColor)
     {
-        gridPointColor = [[UIColor alloc] init];
+        _gridPointColor = [[UIColor alloc] init];
     }
-    return gridPointColor;
+    return _gridPointColor;
+}
+
+- (NSMutableArray *)wirePoints
+{
+    if (!_wirePoints) 
+    {
+        _wirePoints = [[NSMutableArray array] retain];
+    }
+    return _wirePoints;
+}
+
+- (BOOL)wireDrawingInProgress
+{
+    return _wireDrawingInProgress;
+}
+
+-(void)setWireDrawingInProgress:(BOOL)wireDrawingInProgress
+{
+    _wireDrawingInProgress = wireDrawingInProgress;
+    
+    // If wire drawing is in progress, disable dragging of components
+    for (DSPComponentView *componentView in self.subviews)
+    {
+        if (_wireDrawingInProgress)
+            componentView.draggable = NO;
+        else
+            componentView.draggable = YES;
+    }
 }
 
 - (void)setup
@@ -53,6 +82,13 @@ static const CGFloat kGridPointRadius = 0.5;
 - (void)awakeFromNib
 {
     [self setup];
+}
+
+- (void)dealloc
+{
+    [_gridPointColor release];
+    [_wirePoints release];
+    [super dealloc];
 }
 
 // Update the subviews based on their properties.
@@ -124,6 +160,65 @@ static const CGFloat kGridPointRadius = 0.5;
         }
     }
     
+    // Draw the wire
+    BOOL firstPoint = YES;
+    DSPGridPoint currentGridPoint, lastGridPoint;
+    CGPoint lastPoint;
+    if (self.wirePoints) {
+        for (id point in self.wirePoints)
+        {
+            [point getValue:&currentGridPoint];
+            
+            if (!firstPoint) {
+                // Draw line from lastPoint to currentPoint
+                currentPoint = [DSPHelper getRealPointFromGridPoint:currentGridPoint forGridScale:gridScale];
+                lastPoint = [DSPHelper getRealPointFromGridPoint:lastGridPoint forGridScale:gridScale];
+                [DSPHelper drawLineFromPoint:lastPoint toPoint:currentPoint withLineWidth:2.0 withLineColor:[UIColor redColor]];
+            }
+            lastGridPoint = currentGridPoint;
+            firstPoint = NO;
+        }
+    }
+
+}
+
+- (NSArray *)createWireComponents:(NSArray *)wirePoints
+{
+    DSPGridPoint wireStartPoint, wireLastPoint, currentGridPoint;
+    BOOL isFirstPointOfArray = YES;
+    
+    NSMutableArray *wires = [NSMutableArray array];
+    for (id point in wirePoints)
+    {
+        // Get the DSPGridPoint value of the current point
+        [point getValue:&currentGridPoint];
+        
+        if (isFirstPointOfArray) {
+            wireStartPoint = currentGridPoint;
+            wireLastPoint = wireStartPoint;
+            isFirstPointOfArray = NO;
+        }
+        else 
+        {
+            // If the current point is not along the same line as the wire start and last points,
+            // create a wire component between first and last points
+            // Also, assign the first and last point for the new wire segment
+            if (!((wireStartPoint.x == wireLastPoint.x && wireStartPoint.x == currentGridPoint.x) ||
+                  (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y)))
+            {
+                // Create wire with wireStartPoint and wireLastPoint
+                // TODO: Write wire creating code here
+                
+                // Assign for latest segment
+                wireStartPoint = wireLastPoint;
+            }
+            // Move the last point to the current point
+            wireLastPoint = currentGridPoint;
+
+        }
+    }
+    
+    return wires;
 }
 
 // Control scaling with pinch gesture
@@ -142,12 +237,53 @@ static const CGFloat kGridPointRadius = 0.5;
 	}
 }
 
-
-- (void)dealloc
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [gridPointColor release];
-    [super dealloc];
+    if (!self.wireDrawingInProgress) return;
+    
+        
+    
+    UITouch *aTouch = [touches anyObject];
+    CGPoint currentTouch = [aTouch locationInView:self];
+    
+    // Get the gridScale
+    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
+    
+    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:gridScale];
+    [self.wirePoints addObject:[NSValue value: &gridPoint withObjCType:@encode(DSPGridPoint)]];
 }
 
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (!self.wireDrawingInProgress) return;
+    
+    UITouch *aTouch = [touches anyObject];
+    CGPoint currentTouch = [aTouch locationInView:self];
+    
+    // Get the gridScale
+    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
+    
+    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:gridScale];
+    DSPGridPoint lastPoint;
+    [[_wirePoints lastObject] getValue:&lastPoint];
+    
+    // Convert diagonal movements to horizontal movements
+    if (lastPoint.x != gridPoint.x && lastPoint.y != gridPoint.y) gridPoint.y = lastPoint.y;
+    
+    [self.wirePoints addObject:[NSValue value: &gridPoint withObjCType:@encode(DSPGridPoint)]];
+    
+    [self updateUI];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
+{
+    NSArray *wires = [self createWireComponents:self.wirePoints];
+    [self.wirePoints removeAllObjects];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.wirePoints removeAllObjects];
+}
 
 @end

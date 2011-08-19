@@ -18,7 +18,7 @@
 #import "DSPIntegratorView.h"
 #import "DSPSummationView.h"
 
-static const CGFloat kComponentListHeight = 60;
+static const CGFloat kComponentListHeight = 80;
 static const CGFloat kToolBarItemWidth    = 40;
 
 @interface DSPSystemViewController()
@@ -191,7 +191,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create pencil button
     UIImage *pencilButtonImage = [UIImage imageNamed:@"pencil_24.png"];
-    UIBarButtonItem *pencilButton = [[UIBarButtonItem alloc] initWithImage:pencilButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *pencilButton = [[UIBarButtonItem alloc] initWithImage:pencilButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(drawWire)];
     pencilButton.width = kToolBarItemWidth;
     [toolBarItems addObject:pencilButton];
     [pencilButton release];
@@ -204,6 +204,12 @@ static const CGFloat kToolBarItemWidth    = 40;
     [chartButton release];
     
     return toolBarItems;
+}
+
+// Wire drawing mode
+- (void)drawWire
+{
+    self.gridView.wireDrawingInProgress = YES;
 }
 
 @end

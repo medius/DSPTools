@@ -17,6 +17,7 @@
     TTView*                 _systemView;
     DSPGridView*            _gridView;
     DSPComponentListView*   _componentListView;
+    
 }
 
 @property (readonly) TTView*                systemView;

@@ -266,7 +266,7 @@
 		C358179F13FC4EBD00948309 /* DSPComponentListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponentListView.m; sourceTree = "<group>"; };
 		C35817A113FCD44100948309 /* DSPSummationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSummationView.h; sourceTree = "<group>"; };
 		C35817A213FCD45000948309 /* DSPSummationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSummationView.m; sourceTree = "<group>"; };
-		C35817A513FCECAD00948309 /* DSPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DSPHelper.h; sourceTree = "<group>"; };
+		C35817A513FCECAD00948309 /* DSPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPHelper.h; sourceTree = "<group>"; };
 		C35817A613FCECBA00948309 /* DSPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPHelper.m; sourceTree = "<group>"; };
 		C3A231D613F9B4CB009A843C /* DSPComponentMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentMacros.h; sourceTree = "<group>"; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };

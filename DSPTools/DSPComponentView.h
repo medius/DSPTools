@@ -19,6 +19,9 @@
     DSPGridPoint    _origin;
     DSPGridSize     _size;
     
+    DSPGridPoint    _anchor1;
+    DSPGridPoint    _anchor2;
+    
     CGFloat         _gridScale;
     CGFloat         _lineWidth;
     UIColor*        _lineColor;
@@ -32,6 +35,9 @@
 
 @property DSPGridPoint                  origin;
 @property (readonly) DSPGridSize        size;
+
+@property DSPGridPoint                  anchor1;
+@property DSPGridPoint                  anchor2;
 
 @property CGFloat gridScale;
 @property CGFloat lineWidth;

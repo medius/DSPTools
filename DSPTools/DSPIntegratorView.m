@@ -14,8 +14,8 @@
 - (void)setupShape
 {
     DSPGridSize defaultSize;
-    defaultSize.width = 3;
-    defaultSize.height = 4;
+    defaultSize.width = 4;
+    defaultSize.height = 6;
     _size = defaultSize;
 }
 
