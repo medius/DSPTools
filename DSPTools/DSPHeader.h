@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define marginForGridScale(gridScale) gridScale/2
+
 // Grid Point
 struct DSPGridPoint {
     NSUInteger x;

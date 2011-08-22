@@ -15,6 +15,10 @@ static const CGFloat kRectangleRadius = 5;
 static const CGFloat kDefaultLineWidth = 2.0;
 static const CGFloat kHighlightedLineWidth = 4.0;
 
+@interface DSPComponentView() 
+- (void)updateUI;
+@end
+
 @implementation DSPComponentView
 
 // Setters/getters
@@ -30,6 +34,28 @@ static const CGFloat kHighlightedLineWidth = 4.0;
 @synthesize inViewTouchLocation = _inViewTouchLocation;
 @synthesize rectangleRadius     = _rectangleRadius;
 
+- (BOOL)selected
+{
+    return _selected;
+}
+
+- (void)setSelected:(BOOL)selected
+{
+    _selected = selected;
+    if (_selected) 
+    {
+        self.lineWidth = kHighlightedLineWidth;
+        self.backgroundColor = [UIColor grayColor];
+        [self updateUI];
+    }
+    else
+    {
+        self.lineWidth = kDefaultLineWidth;
+        self.backgroundColor = [UIColor clearColor];
+        [self updateUI];
+    }
+}
+
 - (void)setupShape
 {
     // Override this in subclasses to setup shape properties
@@ -44,6 +70,11 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     self.fillColor = [UIColor whiteColor];
     self.lineWidth = kDefaultLineWidth;
     self.rectangleRadius = kRectangleRadius;
+    
+    // Create the ability to select the component
+    UITapGestureRecognizer *tapgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+	[self addGestureRecognizer:tapgr];
+	[tapgr release];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -81,19 +112,36 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     [super dealloc];
 }
 
+// Control scaling with pinch gesture
+- (void)tap:(UITapGestureRecognizer *)gesture 
+{
+	if (self.selected) 
+    {
+        self.selected = NO;
+    }
+    else
+    {
+        self.selected = YES;
+    }
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
+    if (!self.selected) return;
+    
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
     self.lineWidth = kHighlightedLineWidth;
-    //self.backgroundColor = [UIColor yellowColor];
+    self.backgroundColor = [UIColor grayColor];
+
     [self updateUI];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if (!self.draggable) return;
-    
+    if (!self.selected) return;
+
     UITouch *aTouch = [touches anyObject];
     CGPoint location = [aTouch locationInView:self.superview];
     
@@ -153,16 +201,16 @@ static const CGFloat kHighlightedLineWidth = 4.0;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    self.lineWidth = kDefaultLineWidth;
-    self.backgroundColor = [UIColor clearColor];
+    //self.lineWidth = kDefaultLineWidth;
+    //self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    self.lineWidth = kDefaultLineWidth;
-    self.backgroundColor = [UIColor clearColor];
+    //self.lineWidth = kDefaultLineWidth;
+    //self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
 

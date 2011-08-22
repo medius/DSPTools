@@ -8,14 +8,18 @@
 
 #import "DSPIntegratorView.h"
 #import "DSPHelper.h"
+#import "DSPHeader.h"
+
+static const NSUInteger kDefaultWidth = 4;
+static const NSUInteger kDefaultHeight = 6;
 
 @implementation DSPIntegratorView
 
 - (void)setupShape
 {
     DSPGridSize defaultSize;
-    defaultSize.width = 4;
-    defaultSize.height = 6;
+    defaultSize.width = kDefaultWidth;
+    defaultSize.height = kDefaultHeight;
     _size = defaultSize;
 }
 
@@ -23,7 +27,8 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawContent:(CGRect)rect
 {   
-    CGFloat margin = self.gridScale/2;
+    CGFloat margin = marginForGridScale(self.gridScale);
+    
     // Draw the box
     CGRect box = CGRectMake(margin, margin, (self.size.width-1)*self.gridScale, (self.size.height-1)*self.gridScale);
     [DSPHelper drawRoundedBoxForRect:box withRadius:self.rectangleRadius withLineWidth:self.lineWidth withLineColor:self.lineColor withFillColor:self.fillColor];
@@ -42,7 +47,36 @@
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
++ (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
+{
+    DSPGridRect gridFrame;
+    gridFrame.origin.x = anchor.x;
+    gridFrame.origin.y = anchor.y - kDefaultHeight/2;
+    gridFrame.size.width = kDefaultWidth;
+    gridFrame.size.height = kDefaultHeight;
+    
+    CGRect realFrame = [DSPHelper getRealRectFromGridRect:gridFrame forGridScale:gridScale];
+    return realFrame;
+}
 
++ (DSPGridPoint)defaultSecondaryAnchorForPrimaryAnchor:(DSPGridPoint)anchor
+{
+    DSPGridPoint secondaryAnchor;
+    secondaryAnchor.x = anchor.x + kDefaultWidth;
+    secondaryAnchor.y = anchor.y;
+    return secondaryAnchor;
+}
 
++ (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
+{
+    DSPGridRect gridFrame;
+    gridFrame.origin.x = anchor1.x;
+    gridFrame.origin.y = anchor1.y - kDefaultHeight/2;
+    gridFrame.size.width = anchor2.x - anchor1.x;
+    gridFrame.size.height = kDefaultHeight;
+    
+    CGRect realFrame = [DSPHelper getRealRectFromGridRect:gridFrame forGridScale:gridScale];
+    return realFrame;
+}
 
 @end

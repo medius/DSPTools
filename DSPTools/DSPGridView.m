@@ -10,7 +10,9 @@
 #import "DSPHeader.h"
 #import "DSPGlobalSettings.h"
 #import "DSPHelper.h"
-#import "DSPComponentView.h"
+
+#import "DSPIntegratorView.h"
+#import "DSPWireView.h"
 
 static const CGFloat kGridPointRadius = 0.5;
 
@@ -100,26 +102,38 @@ static const CGFloat kGridPointRadius = 0.5;
     for (DSPComponentView *componentView in self.subviews)
     {
         componentView.gridScale = gridScale;
-        DSPGridPoint origin = componentView.origin;
-        DSPGridSize size = componentView.size;
+//        DSPGridPoint origin = componentView.origin;
+//        DSPGridSize size = componentView.size;
+//        
+//        CGPoint realOrigin = [DSPHelper getRealPointFromGridPoint:origin forGridScale:gridScale];
+//        CGSize realSize = [DSPHelper getRealSizeFromGridSize:size forGridScale:gridScale];
         
-        CGPoint realOrigin = [DSPHelper getRealPointFromGridPoint:origin forGridScale:gridScale];
-        CGSize realSize = [DSPHelper getRealSizeFromGridSize:size forGridScale:gridScale];
+        DSPGridPoint anchor1 = componentView.anchor1;
+        DSPGridPoint anchor2 = componentView.anchor2;
+        
+        CGRect frame;
+        
+        if ([componentView isKindOfClass:[DSPIntegratorView class]]) 
+        {
+            frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+        } 
+        else if ([componentView isKindOfClass:[DSPWireView class]])
+        {
+            frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+        }
         
         // Use block animations if it is supported (iOS 4.0 and later)
         if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
         {
             [UIView animateWithDuration:0.0 animations:^{
-                componentView.frame = CGRectMake(realOrigin.x, realOrigin.y, 
-                                                 realSize.width, realSize.height);
+                componentView.frame = frame;
             }];
         }
         // If block animations are not supported, use the old way of animations
         else
         {
             [UIView beginAnimations:@"Scaling A ComponentView" context:nil];
-            componentView.frame = CGRectMake(realOrigin.x, realOrigin.y, 
-                                             realSize.width, realSize.height);
+            componentView.frame = frame;
             [UIView commitAnimations];
         }
         
@@ -182,14 +196,32 @@ static const CGFloat kGridPointRadius = 0.5;
 
 }
 
-- (NSArray *)createWireComponents:(NSArray *)wirePoints
+- (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
+{
+    // Get the gridScale
+    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
+    
+    CGRect frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    DSPWireView *wire = [[DSPWireView alloc] initWithFrame:frame];
+    wire.anchor1 = anchor1;
+    wire.anchor2 = anchor2;
+    wire.gridScale = gridScale;
+    wire.draggable = YES;
+    
+    [self addSubview:wire];
+    [wire release];
+    [self updateUI];
+}
+
+- (void)createWireComponents
 {
     DSPGridPoint wireStartPoint, wireLastPoint, currentGridPoint;
     BOOL isFirstPointOfArray = YES;
     
-    NSMutableArray *wires = [NSMutableArray array];
-    for (id point in wirePoints)
+    for (NSUInteger i=0; i<self.wirePoints.count; i=i+1)
     {
+        id point = [self.wirePoints objectAtIndex:i];
+        
         // Get the DSPGridPoint value of the current point
         [point getValue:&currentGridPoint];
         
@@ -206,19 +238,22 @@ static const CGFloat kGridPointRadius = 0.5;
             if (!((wireStartPoint.x == wireLastPoint.x && wireStartPoint.x == currentGridPoint.x) ||
                   (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y)))
             {
-                // Create wire with wireStartPoint and wireLastPoint
-                // TODO: Write wire creating code here
+                [self createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
                 
                 // Assign for latest segment
                 wireStartPoint = wireLastPoint;
             }
             // Move the last point to the current point
             wireLastPoint = currentGridPoint;
-
+            
+            // If currentGridPoint is the last grid point in the array, create a wire
+            if (i == self.wirePoints.count-1) 
+            {
+                [self createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
+            }
         }
     }
     
-    return wires;
 }
 
 // Control scaling with pinch gesture
@@ -241,8 +276,6 @@ static const CGFloat kGridPointRadius = 0.5;
 {
     if (!self.wireDrawingInProgress) return;
     
-        
-    
     UITouch *aTouch = [touches anyObject];
     CGPoint currentTouch = [aTouch locationInView:self];
     
@@ -250,7 +283,7 @@ static const CGFloat kGridPointRadius = 0.5;
     CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
     
     DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:gridScale];
-    [self.wirePoints addObject:[NSValue value: &gridPoint withObjCType:@encode(DSPGridPoint)]];
+    [self.wirePoints addObject:[NSValue value:&gridPoint withObjCType:@encode(DSPGridPoint)]];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -270,20 +303,25 @@ static const CGFloat kGridPointRadius = 0.5;
     // Convert diagonal movements to horizontal movements
     if (lastPoint.x != gridPoint.x && lastPoint.y != gridPoint.y) gridPoint.y = lastPoint.y;
     
-    [self.wirePoints addObject:[NSValue value: &gridPoint withObjCType:@encode(DSPGridPoint)]];
+    [self.wirePoints addObject:[NSValue value:&gridPoint withObjCType:@encode(DSPGridPoint)]];
     
     [self updateUI];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event 
 {
-    NSArray *wires = [self createWireComponents:self.wirePoints];
+    if (!self.wireDrawingInProgress) return;
+    [self createWireComponents];
     [self.wirePoints removeAllObjects];
+    self.wirePoints = nil;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!self.wireDrawingInProgress) return;
+    [self createWireComponents];
     [self.wirePoints removeAllObjects];
+    self.wirePoints = nil;
 }
 
 @end

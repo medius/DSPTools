@@ -104,12 +104,15 @@ static const CGFloat kToolBarItemWidth    = 40;
     DSPGridPoint componentLocation;
     componentLocation.x = 5;
     componentLocation.y = 7;
-    dspIV.origin = componentLocation;
+    //dspIV.origin = componentLocation;
     
     DSPGridRect componentFrame; 
-    componentFrame.origin = dspIV.origin;
-    componentFrame.size = dspIV.size;
-    dspIV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
+//    componentFrame.origin = dspIV.origin;
+//    componentFrame.size = dspIV.size;
+    //dspIV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
+    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
+    dspIV.anchor1 = componentLocation;
+    dspIV.anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
     dspIV.gridScale = gridScale;
     dspIV.draggable = YES;
     

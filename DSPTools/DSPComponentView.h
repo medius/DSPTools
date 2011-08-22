@@ -27,6 +27,7 @@
     UIColor*        _lineColor;
     UIColor*        _fillColor;
     BOOL            _draggable;
+    BOOL            _selected;
     
 @private
     CGPoint         _inViewTouchLocation;
@@ -44,6 +45,7 @@
 @property (nonatomic, retain) UIColor*  lineColor;
 @property (nonatomic, retain) UIColor*  fillColor;
 @property BOOL                          draggable;
+@property BOOL                          selected;
 
 @property CGPoint                       inViewTouchLocation;
 @property CGFloat                       rectangleRadius;
