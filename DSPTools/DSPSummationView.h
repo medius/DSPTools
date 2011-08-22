@@ -13,4 +13,13 @@
     
 }
 
+// Provide the default frame for the primary anchor
++ (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale;
+
+// Proivde the default secondary anchor for the primary anchor
++ (DSPGridPoint)defaultSecondaryAnchorForPrimaryAnchor:(DSPGridPoint)anchor;
+
+// Provide the frame for given anchors
++ (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
+
 @end

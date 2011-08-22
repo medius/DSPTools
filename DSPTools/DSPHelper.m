@@ -10,6 +10,11 @@
 #import "DSPHeader.h"
 #import "Three20/Three20.h"
 
+// Component views
+#import "DSPIntegratorView.h"
+#import "DSPSummationView.h"
+#import "DSPWireView.h"
+
 @implementation DSPHelper
 
 // Get the real point from grid point
@@ -176,6 +181,28 @@
     CGContextStrokePath(context);
 
     UIGraphicsPopContext();
+}
+
+// Get the frame for a given object based on its anchors
++ (CGRect)getFrameForObject:(id)object 
+                withAnchor1:(DSPGridPoint)anchor1
+                withAnchor2:(DSPGridPoint)anchor2
+               forGridScale:(CGFloat)gridScale
+{
+    CGRect frame;
+    if ([object isKindOfClass:[DSPIntegratorView class]])
+    {
+        frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    }
+    else if ([object isKindOfClass:[DSPSummationView class]])\
+    {
+        frame = [DSPSummationView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    }
+    else if ([object isKindOfClass:[DSPWireView class]])\
+    {
+        frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    }
+    return frame;
 }
 
 @end

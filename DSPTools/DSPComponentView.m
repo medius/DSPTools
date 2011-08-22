@@ -22,7 +22,6 @@ static const CGFloat kHighlightedLineWidth = 4.0;
 @implementation DSPComponentView
 
 // Setters/getters
-@synthesize origin              = _origin;
 @synthesize size                = _size;
 @synthesize anchor1             = _anchor1;
 @synthesize anchor2             = _anchor2;
@@ -172,30 +171,38 @@ static const CGFloat kHighlightedLineWidth = 4.0;
         effectiveLocation.y = self.superview.bounds.origin.y + self.superview.bounds.size.height - self.frame.size.width;
     }
     
-    // Align the new location to the grid
-    DSPGridPoint newGridOrigin = [DSPHelper getGridPointFromRealPoint:effectiveLocation forGridScale:self.gridScale];    
-    CGPoint newRealOrigin = [DSPHelper getRealPointFromGridPoint:newGridOrigin forGridScale:self.gridScale];
+    // Make the effectiveLocation relative to anchor1
+    effectiveLocation.y = effectiveLocation.y + self.size.height/2*self.gridScale;
     
+    // Align the new anchor1 to the grid
+    DSPGridPoint newAnchor1 = [DSPHelper getGridPointFromRealPoint:effectiveLocation forGridScale:self.gridScale];    
+    //CGPoint newRealOrigin = [DSPHelper getRealPointFromGridPoint:newGridOrigin forGridScale:self.gridScale];
+    
+    DSPGridPoint newAnchor2;
+    newAnchor2.x = self.anchor2.x + newAnchor1.x - self.anchor1.x;
+    newAnchor2.y = self.anchor2.y + newAnchor1.y - self.anchor1.y;
+    
+    CGRect frame = [DSPHelper getFrameForObject:self withAnchor1:newAnchor1 withAnchor2:newAnchor2 forGridScale:self.gridScale];
+        
     // Change the frame according to the new origin
     // Use block animations if it is supported (iOS 4.0 and later)
     if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
     {
         [UIView animateWithDuration:0.0 animations:^{
-            self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
-                                    self.frame.size.width, self.frame.size.height);
+            self.frame = frame;
         }];
     }
     // If block animations are not supported, use the old way of animations
     else
     {
         [UIView beginAnimations:@"Dragging A ComponentView" context:nil];
-        self.frame = CGRectMake(newRealOrigin.x, newRealOrigin.y, 
-                                self.frame.size.width, self.frame.size.height);
+        self.frame = frame;
         [UIView commitAnimations];
     }
     
     // Save the updated location
-    self.origin = newGridOrigin;
+    self.anchor1 = newAnchor1;
+    self.anchor2 = newAnchor2;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -212,6 +219,26 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     //self.lineWidth = kDefaultLineWidth;
     //self.backgroundColor = [UIColor clearColor];
     [self updateUI];
+}
+
+
+// Subclasses need to implement this
++ (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
+{
+    // Subclasses need to implement this
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil];
+}
+
++ (DSPGridPoint)defaultSecondaryAnchorForPrimaryAnchor:(DSPGridPoint)anchor
+{
+    // Subclasses need to implement this
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil];   
+}
+
++ (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
+{
+    // Subclasses need to implement this
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil];
 }
 
 @end

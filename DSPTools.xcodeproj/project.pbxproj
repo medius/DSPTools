@@ -24,6 +24,7 @@
 		C321451613F4B0F800DE738E /* NSObject+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451513F4B0F600DE738E /* NSObject+Additions.m */; };
 		C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */; };
 		C329B39813FF30A8003572E6 /* DSPWireView.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39713FF30A7003572E6 /* DSPWireView.m */; };
+		C329B39C14031A8B003572E6 /* DSPSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39B14031A81003572E6 /* DSPSignalSource.m */; };
 		C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */; };
 		C33DA02413F9E78700FF0414 /* schematic.png in Resources */ = {isa = PBXBuildFile; fileRef = C33DA02313F9E78700FF0414 /* schematic.png */; };
 		C33DA09D13FAEC1500FF0414 /* DSPSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */; };
@@ -247,6 +248,8 @@
 		C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGlobalSettings.m; sourceTree = "<group>"; };
 		C329B39613FF30A7003572E6 /* DSPWireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWireView.h; sourceTree = "<group>"; };
 		C329B39713FF30A7003572E6 /* DSPWireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPWireView.m; sourceTree = "<group>"; };
+		C329B39A14031A7D003572E6 /* DSPSignalSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSignalSource.h; sourceTree = "<group>"; };
+		C329B39B14031A81003572E6 /* DSPSignalSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSignalSource.m; sourceTree = "<group>"; };
 		C33DA01B13F9E18800FF0414 /* DSPLauncherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPLauncherViewController.h; sourceTree = "<group>"; };
 		C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPLauncherViewController.m; sourceTree = "<group>"; };
 		C33DA02313F9E78700FF0414 /* schematic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = schematic.png; path = images/schematic.png; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 				C321450113F4A7F200DE738E /* DSPComponentView.m */,
 				C321450413F4ACB200DE738E /* DSPComponentViewController.h */,
 				C321450513F4ACB200DE738E /* DSPComponentViewController.m */,
+				C329B39A14031A7D003572E6 /* DSPSignalSource.h */,
+				C329B39B14031A81003572E6 /* DSPSignalSource.m */,
 				C329B39913FF30AE003572E6 /* Wire */,
 				C321450D13F4AE0800DE738E /* Integrator */,
 				C35817A413FCD47700948309 /* Summation */,
@@ -822,6 +827,7 @@
 				C35817A313FCD45500948309 /* DSPSummationView.m in Sources */,
 				C35817A713FCECC500948309 /* DSPHelper.m in Sources */,
 				C329B39813FF30A8003572E6 /* DSPWireView.m in Sources */,
+				C329B39C14031A8B003572E6 /* DSPSignalSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

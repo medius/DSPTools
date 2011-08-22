@@ -106,7 +106,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     componentLocation.y = 7;
     //dspIV.origin = componentLocation;
     
-    DSPGridRect componentFrame; 
+//    DSPGridRect componentFrame; 
 //    componentFrame.origin = dspIV.origin;
 //    componentFrame.size = dspIV.size;
     //dspIV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
@@ -123,13 +123,16 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     componentLocation.x = 10;
     componentLocation.y = 7;
-    dspSV.origin = componentLocation;
+    //dspSV.anchor1 = componentLocation;
     
-    componentFrame.origin = dspSV.origin;
-    componentFrame.size = dspSV.size;
-    dspSV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
+   // componentFrame.origin = dspSV.origin;
+   // componentFrame.size = dspSV.size;
+    dspSV.frame = [DSPSummationView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
+    dspSV.anchor1 = componentLocation;
+    dspSV.anchor2 = [DSPSummationView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
     dspSV.gridScale = gridScale;
     dspSV.draggable = YES;
+
     
     [self.gridView addSubview:dspSV];
     [dspSV release];
@@ -179,7 +182,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create delete component button
     UIImage *deleteButtonImage = [UIImage imageNamed:@"delete_24.png"];
-    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithImage:deleteButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithImage:deleteButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(crossPressed)];
     //    UIBarButtonItem *deleteComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:nil action:nil];
     deleteComponentButton.width = kToolBarItemWidth;
     [toolBarItems addObject:deleteComponentButton];
@@ -213,6 +216,11 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)drawWire
 {
     self.gridView.wireDrawingInProgress = YES;
+}
+
+- (void)crossPressed
+{
+    if (self.gridView.wireDrawingInProgress) self.gridView.wireDrawingInProgress = NO;
 }
 
 @end

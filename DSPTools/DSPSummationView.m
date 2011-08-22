@@ -9,13 +9,16 @@
 #import "DSPSummationView.h"
 #import "DSPHelper.h"
 
+static const NSUInteger kDefaultWidth = 4;
+static const NSUInteger kDefaultHeight = 4;
+
 @implementation DSPSummationView
 
 - (void)setupShape
 {
     DSPGridSize defaultSize;
-    defaultSize.width = 4;
-    defaultSize.height = 4;
+    defaultSize.width = kDefaultWidth;
+    defaultSize.height = kDefaultWidth;
     _size = defaultSize;
 }
 
@@ -46,4 +49,37 @@
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
+/* Class methods */
+
++ (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
+{
+    DSPGridRect gridFrame;
+    gridFrame.origin.x = anchor.x;
+    gridFrame.origin.y = anchor.y - kDefaultHeight/2;
+    gridFrame.size.width = kDefaultWidth;
+    gridFrame.size.height = kDefaultHeight;
+    
+    CGRect realFrame = [DSPHelper getRealRectFromGridRect:gridFrame forGridScale:gridScale];
+    return realFrame;
+}
+
++ (DSPGridPoint)defaultSecondaryAnchorForPrimaryAnchor:(DSPGridPoint)anchor
+{
+    DSPGridPoint secondaryAnchor;
+    secondaryAnchor.x = anchor.x + kDefaultWidth;
+    secondaryAnchor.y = anchor.y;
+    return secondaryAnchor;
+}
+
++ (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
+{
+    DSPGridRect gridFrame;
+    gridFrame.origin.x = anchor1.x;
+    gridFrame.origin.y = anchor1.y - kDefaultHeight/2;
+    gridFrame.size.width = anchor2.x - anchor1.x;
+    gridFrame.size.height = kDefaultHeight;
+    
+    CGRect realFrame = [DSPHelper getRealRectFromGridRect:gridFrame forGridScale:gridScale];
+    return realFrame;
+}
 @end

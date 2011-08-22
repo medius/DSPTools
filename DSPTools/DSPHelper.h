@@ -63,5 +63,11 @@
             withLineColor:(UIColor *)lineColor
             withFillColor:(UIColor *)fillColor;
 
+// Get the frame for a given object based on its anchors
++ (CGRect)getFrameForObject:(id)object 
+                withAnchor1:(DSPGridPoint)anchor1
+                withAnchor2:(DSPGridPoint)anchor2
+               forGridScale:(CGFloat)gridScale;
+
 
 @end

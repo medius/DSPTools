@@ -47,6 +47,8 @@ static const NSUInteger kDefaultHeight = 6;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
+/* Class methods */
+
 + (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
 {
     DSPGridRect gridFrame;

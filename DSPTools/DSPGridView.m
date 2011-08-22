@@ -48,13 +48,20 @@ static const CGFloat kGridPointRadius = 0.5;
 {
     _wireDrawingInProgress = wireDrawingInProgress;
     
-    // If wire drawing is in progress, disable dragging of components
+    // If wire drawing is in progress, 
+    // - Disable dragging of components
+    // - Unselect the selected components
     for (DSPComponentView *componentView in self.subviews)
     {
         if (_wireDrawingInProgress)
+        {
             componentView.draggable = NO;
+            componentView.selected = NO;
+        }
         else
+        {
             componentView.draggable = YES;
+        }
     }
 }
 
@@ -111,16 +118,7 @@ static const CGFloat kGridPointRadius = 0.5;
         DSPGridPoint anchor1 = componentView.anchor1;
         DSPGridPoint anchor2 = componentView.anchor2;
         
-        CGRect frame;
-        
-        if ([componentView isKindOfClass:[DSPIntegratorView class]]) 
-        {
-            frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
-        } 
-        else if ([componentView isKindOfClass:[DSPWireView class]])
-        {
-            frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
-        }
+        CGRect frame = [DSPHelper getFrameForObject:componentView withAnchor1:anchor1 withAnchor2:anchor2 forGridScale:gridScale];
         
         // Use block animations if it is supported (iOS 4.0 and later)
         if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 

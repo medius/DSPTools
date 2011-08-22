@@ -13,10 +13,6 @@
 #import "DSPHeader.h"
 
 @interface DSPComponentView : TTView {
-    // Define the bounding box of the component
-    // Note: The origin of this rectangle is only relevant in the superview 
-    // to decide the frame of this view.
-    DSPGridPoint    _origin;
     DSPGridSize     _size;
     
     DSPGridPoint    _anchor1;
@@ -34,7 +30,6 @@
     CGFloat         _rectangleRadius;
 }
 
-@property DSPGridPoint                  origin;
 @property (readonly) DSPGridSize        size;
 
 @property DSPGridPoint                  anchor1;
