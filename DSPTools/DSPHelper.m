@@ -10,10 +10,7 @@
 #import "DSPHeader.h"
 #import "Three20/Three20.h"
 
-// Component views
-#import "DSPIntegratorView.h"
-#import "DSPSummationView.h"
-#import "DSPWireView.h"
+#import "DSPComponents.h"
 
 @implementation DSPHelper
 
@@ -165,7 +162,6 @@
             withLineColor:(UIColor *)lineColor
             withFillColor:(UIColor *)fillColor
 {
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(context);
     
@@ -182,6 +178,42 @@
 
     UIGraphicsPopContext();
 }
+
+// Draw sinewaves
++ (void)drawSineWaves:(NSUInteger)numberOfWaves 
+               inRect:(CGRect)rect
+        withLineWidth:(CGFloat)lineWidth
+        withLineColor:(UIColor *)lineColor
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(context);
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    float x = rect.size.width/numberOfWaves;
+    float y = rect.size.height;
+    float yc = rect.size.height/2;
+    float w = rect.origin.x; 
+    float yOffset = rect.origin.y;
+    
+    while (w<(rect.origin.x+rect.size.width)) {
+        CGPathMoveToPoint(path, nil, w,yOffset+y/2);
+        CGPathAddQuadCurveToPoint(path, nil, w+x/4, yOffset-yc,w+ x/2, yOffset+y/2);
+        CGPathMoveToPoint(path, nil, w+x/2,yOffset+y/2);
+        CGPathAddQuadCurveToPoint(path, nil, w+3*x/4, yOffset+y+yc, w+x, yOffset+y/2);
+        CGContextAddPath(context, path);
+        
+        CGContextSetLineWidth(context, lineWidth);
+        CGContextSetStrokeColorWithColor(context, [lineColor CGColor]);
+        
+        CGContextDrawPath(context, kCGPathStroke);
+        w+=x;
+    }
+
+    UIGraphicsPopContext();
+    CGPathRelease(path);
+
+}
+
 
 // Get the frame for a given object based on its anchors
 + (CGRect)getFrameForObject:(id)object 
@@ -201,6 +233,10 @@
     else if ([object isKindOfClass:[DSPWireView class]])\
     {
         frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    }    
+    else if ([object isKindOfClass:[DSPSignalSourceView class]])\
+    {
+        frame = [DSPSignalSourceView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
     }
     return frame;
 }

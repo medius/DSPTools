@@ -63,6 +63,12 @@
             withLineColor:(UIColor *)lineColor
             withFillColor:(UIColor *)fillColor;
 
+// Draw sinewaves
++ (void)drawSineWaves:(NSUInteger)numberOfWaves 
+               inRect:(CGRect)rect
+        withLineWidth:(CGFloat)lineWidth
+        withLineColor:(UIColor *)lineColor;
+
 // Get the frame for a given object based on its anchors
 + (CGRect)getFrameForObject:(id)object 
                 withAnchor1:(DSPGridPoint)anchor1

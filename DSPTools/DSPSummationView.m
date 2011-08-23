@@ -82,4 +82,5 @@ static const NSUInteger kDefaultHeight = 4;
     CGRect realFrame = [DSPHelper getRealRectFromGridRect:gridFrame forGridScale:gridScale];
     return realFrame;
 }
+
 @end

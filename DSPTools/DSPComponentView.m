@@ -11,9 +11,11 @@
 #import "DSPGlobalSettings.h"
 #import "DSPHelper.h"
 
+#define highlightedBackgroundColor blueColor
+
 static const CGFloat kRectangleRadius = 5;
-static const CGFloat kDefaultLineWidth = 2.0;
-static const CGFloat kHighlightedLineWidth = 4.0;
+static const CGFloat kDefaultLineWidth = 3.0;
+static const CGFloat kHighlightedLineWidth = 3.0;
 
 @interface DSPComponentView() 
 - (void)updateUI;
@@ -44,7 +46,7 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     if (_selected) 
     {
         self.lineWidth = kHighlightedLineWidth;
-        self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = [UIColor highlightedBackgroundColor];
         [self updateUI];
     }
     else
@@ -65,7 +67,7 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     [self setupShape];
     self.contentMode = UIViewContentModeRedraw;    
     self.backgroundColor = [UIColor clearColor];
-    self.lineColor = [UIColor blueColor];
+    self.lineColor = [UIColor blackColor];
     self.fillColor = [UIColor whiteColor];
     self.lineWidth = kDefaultLineWidth;
     self.rectangleRadius = kRectangleRadius;
@@ -132,7 +134,7 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
     self.lineWidth = kHighlightedLineWidth;
-    self.backgroundColor = [UIColor grayColor];
+    self.backgroundColor = [UIColor highlightedBackgroundColor];
 
     [self updateUI];
 }
@@ -172,7 +174,8 @@ static const CGFloat kHighlightedLineWidth = 4.0;
     }
     
     // Make the effectiveLocation relative to anchor1
-    effectiveLocation.y = effectiveLocation.y + self.size.height/2*self.gridScale;
+    // TODO: This does not work for blocks whose anchors are at top and bottom. 
+    // effectiveLocation.y = effectiveLocation.y + self.size.height/2*self.gridScale;
     
     // Align the new anchor1 to the grid
     DSPGridPoint newAnchor1 = [DSPHelper getGridPointFromRealPoint:effectiveLocation forGridScale:self.gridScale];    

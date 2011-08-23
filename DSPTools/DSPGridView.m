@@ -11,8 +11,7 @@
 #import "DSPGlobalSettings.h"
 #import "DSPHelper.h"
 
-#import "DSPIntegratorView.h"
-#import "DSPWireView.h"
+#import "DSPComponents.h"
 
 static const CGFloat kGridPointRadius = 0.5;
 

@@ -45,6 +45,7 @@ static const NSUInteger kDefaultHeight = 6;
     startPoint.x = self.size.width*self.gridScale - margin; startPoint.y = self.size.height/2*self.gridScale;
     endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
+
 }
 
 /* Class methods */
