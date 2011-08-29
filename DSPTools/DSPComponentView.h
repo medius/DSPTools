@@ -13,8 +13,6 @@
 #import "DSPHeader.h"
 
 @interface DSPComponentView : TTView {
-    DSPGridSize     _size;
-    
     DSPGridPoint    _anchor1;
     DSPGridPoint    _anchor2;
     
@@ -24,13 +22,15 @@
     UIColor*        _fillColor;
     BOOL            _draggable;
     BOOL            _selected;
+   
+    DSPGridSize     _size;
     
 @private
     CGPoint         _inViewTouchLocation;
     CGFloat         _rectangleRadius;
 }
 
-@property (readonly) DSPGridSize        size;
+
 
 @property DSPGridPoint                  anchor1;
 @property DSPGridPoint                  anchor2;
@@ -42,7 +42,7 @@
 @property BOOL                          draggable;
 @property BOOL                          selected;
 
-@property CGPoint                       inViewTouchLocation;
+@property (readonly) DSPGridSize        size;
 @property CGFloat                       rectangleRadius;
 
 @end

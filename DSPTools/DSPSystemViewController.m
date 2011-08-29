@@ -88,7 +88,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     self.view = self.systemView;
     [self.view addSubview:self.gridView];
-    [self.view addSubview:self.componentListView];
+    //[self.view addSubview:self.componentListView];
     
     // Configure the navigation controller when in system view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];

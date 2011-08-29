@@ -10,6 +10,8 @@
 #import "DSPHeader.h"
 #import "DSPHelper.h"
 
+static const CGFloat kDefaultWireLineWidth = 1.0;
+
 @implementation DSPWireView
 
 // Setters/getters
@@ -37,6 +39,16 @@
         _isVertical = NO;
     }
     return _isVertical;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        self.lineWidth = kDefaultWireLineWidth;
+    }
+    return self;
 }
 
 // Only override drawRect: if you perform custom drawing.

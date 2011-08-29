@@ -15,16 +15,18 @@
 
 static const CGFloat kRectangleRadius = 5;
 static const CGFloat kDefaultLineWidth = 3.0;
-static const CGFloat kHighlightedLineWidth = 3.0;
+//static const CGFloat kHighlightedLineWidth = 3.0;
 
 @interface DSPComponentView() 
+@property CGPoint     inViewTouchLocation;
+
 - (void)updateUI;
 @end
 
 @implementation DSPComponentView
 
 // Setters/getters
-@synthesize size                = _size;
+
 @synthesize anchor1             = _anchor1;
 @synthesize anchor2             = _anchor2;
 @synthesize gridScale           = _gridScale;
@@ -32,6 +34,8 @@ static const CGFloat kHighlightedLineWidth = 3.0;
 @synthesize lineColor           = _lineColor;
 @synthesize fillColor           = _fillColor;
 @synthesize draggable           = _draggable;
+
+@synthesize size                = _size;
 @synthesize inViewTouchLocation = _inViewTouchLocation;
 @synthesize rectangleRadius     = _rectangleRadius;
 
@@ -45,13 +49,11 @@ static const CGFloat kHighlightedLineWidth = 3.0;
     _selected = selected;
     if (_selected) 
     {
-        self.lineWidth = kHighlightedLineWidth;
         self.backgroundColor = [UIColor highlightedBackgroundColor];
         [self updateUI];
     }
     else
     {
-        self.lineWidth = kDefaultLineWidth;
         self.backgroundColor = [UIColor clearColor];
         [self updateUI];
     }
@@ -98,15 +100,6 @@ static const CGFloat kHighlightedLineWidth = 3.0;
     [self setNeedsDisplay];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 - (void)dealloc
 {
     [_lineColor release];
@@ -133,7 +126,6 @@ static const CGFloat kHighlightedLineWidth = 3.0;
     
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
-    self.lineWidth = kHighlightedLineWidth;
     self.backgroundColor = [UIColor highlightedBackgroundColor];
 
     [self updateUI];
@@ -211,16 +203,12 @@ static const CGFloat kHighlightedLineWidth = 3.0;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    //self.lineWidth = kDefaultLineWidth;
-    //self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (!self.draggable) return;
-    //self.lineWidth = kDefaultLineWidth;
-    //self.backgroundColor = [UIColor clearColor];
     [self updateUI];
 }
 

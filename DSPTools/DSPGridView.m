@@ -163,12 +163,29 @@ static const CGFloat kGridPointRadius = 0.5;
     endPoint.x = self.bounds.origin.x + self.bounds.size.width;
     endPoint.y = self.bounds.origin.y + self.bounds.size.height;
     
-    // Draw the main grid
+    // Draw the main grid with dots
+//    CGPoint currentPoint;
+//    for (currentPoint.x = startPoint.x; currentPoint.x <= endPoint.x; currentPoint.x += gridScale) {
+//        for (currentPoint.y = startPoint.y; currentPoint.y <= endPoint.y; currentPoint.y += gridScale) {
+//            [DSPHelper drawCircleAtPoint:currentPoint withRadius:kGridPointRadius withLineWidth:0.5 withLineColor:self.gridPointColor withFillColor:self.gridPointColor];
+//        }
+//    }
+    
+    // Draw the main grid with lines
     CGPoint currentPoint;
-    for (currentPoint.x = startPoint.x; currentPoint.x <= endPoint.x; currentPoint.x += gridScale) {
-        for (currentPoint.y = startPoint.y; currentPoint.y <= endPoint.y; currentPoint.y += gridScale) {
-            [DSPHelper drawCircleAtPoint:currentPoint withRadius:kGridPointRadius withLineWidth:0.5 withLineColor:self.gridPointColor withFillColor:self.gridPointColor];
-        }
+    
+    // Horizontal lines
+    for (CGFloat y = startPoint.y; y <= endPoint.y; y += gridScale) {
+        CGPoint fromPoint = CGPointMake(startPoint.x, y);
+        CGPoint toPoint = CGPointMake(endPoint.x, y);
+        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
+    }
+    
+    // Vertical lines
+    for (CGFloat x = startPoint.x; x <= endPoint.x; x += gridScale) {
+        CGPoint fromPoint = CGPointMake(x, startPoint.y);
+        CGPoint toPoint = CGPointMake(x, endPoint.y);
+        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
     }
     
     // Draw the wire
