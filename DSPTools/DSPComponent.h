@@ -13,7 +13,9 @@
 
 
 @interface DSPComponent : NSObject {
-    
+    NSArray*    _inputPins;
+    NSArray*    _outputPins;
+    BOOL        _hasMemory;         // Whether the component remembers its last output value
 }
 
 @end

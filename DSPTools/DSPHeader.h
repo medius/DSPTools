@@ -31,3 +31,28 @@ struct DSPGridRect {
 };
 typedef struct DSPGridRect DSPGridRect;
 
+// Value type
+enum DSPValueType {
+    DSPAllValues = 0,
+    DSPAnalogValue,
+    DSPDigitalValue
+    };
+typedef enum DSPValueType DSPValueType;
+
+// Domain type
+enum DSPDomainType {
+    DSPAllDomains = 0,
+    DSPTimeDomain,
+    DSPFrequencyDomain
+    };
+typedef enum DSPDomainType DSPDomainType;
+
+// Signal type
+struct DSPSignalType {
+    DSPValueType valueType;
+    DSPDomainType domainType;
+};
+typedef struct DSPSignalType DSPSignalType;
+
+// Signal value
+typedef float DSPSignalValue;
