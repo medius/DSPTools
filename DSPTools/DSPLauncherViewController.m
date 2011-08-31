@@ -106,7 +106,8 @@
 {
     if (item.title == @"New Schematic")
     {
-        DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"FirstCircuit" ofType:@"cir"];
+        DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] initWithCircuitFile:filePath];
         [self.navigationController pushViewController:systemViewController animated:YES];
         [systemViewController release];
         

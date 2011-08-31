@@ -56,3 +56,4 @@ typedef struct DSPSignalType DSPSignalType;
 
 // Signal value
 typedef float DSPSignalValue;
+

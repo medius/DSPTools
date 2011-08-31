@@ -10,7 +10,7 @@
 #import "DSPHeader.h"
 
 @interface DSPNode : NSObject {
-    NSArray*        _fanInComponents;
+    id              _fanInComponent;            // Only one fan in to a node is allowed
     NSArray*        _fanOutComponents;
     DSPSignalType   _signalType;
     DSPSignalValue  _currentValue;

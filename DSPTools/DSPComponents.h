@@ -11,3 +11,8 @@
 #import "DSPSummationView.h"
 #import "DSPWireView.h"
 #import "DSPSignalSourceView.h"
+
+// Component ID values
+#define INTEGRATOR @"int"
+#define SIGNAL_SOURCE @"sig"
+#define WIRE @"w"

@@ -214,7 +214,6 @@
 
 }
 
-
 // Get the frame for a given object based on its anchors
 + (CGRect)getFrameForObject:(id)object 
                 withAnchor1:(DSPGridPoint)anchor1
@@ -226,15 +225,15 @@
     {
         frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
     }
-    else if ([object isKindOfClass:[DSPSummationView class]])\
+    else if ([object isKindOfClass:[DSPSummationView class]])
     {
         frame = [DSPSummationView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
     }
-    else if ([object isKindOfClass:[DSPWireView class]])\
+    else if ([object isKindOfClass:[DSPWireView class]])
     {
         frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
     }    
-    else if ([object isKindOfClass:[DSPSignalSourceView class]])\
+    else if ([object isKindOfClass:[DSPSignalSourceView class]])
     {
         frame = [DSPSignalSourceView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
     }

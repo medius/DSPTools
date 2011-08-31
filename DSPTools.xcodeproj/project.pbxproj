@@ -25,6 +25,8 @@
 		C321451B13F5BF1300DE738E /* DSPGlobalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C321451A13F5BF1200DE738E /* DSPGlobalSettings.m */; };
 		C3257D12140C4E350055BFD5 /* DSPNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D11140C4E350055BFD5 /* DSPNode.m */; };
 		C3257D15140C58DC0055BFD5 /* DSPPin.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D14140C58DC0055BFD5 /* DSPPin.m */; };
+		C3257D8E140C7CB30055BFD5 /* DSPCircuitFileIO.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */; };
+		C3257D92140C83C70055BFD5 /* FirstCircuit.cir in Resources */ = {isa = PBXBuildFile; fileRef = C3257D91140C83C70055BFD5 /* FirstCircuit.cir */; };
 		C329B39813FF30A8003572E6 /* DSPWireView.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39713FF30A7003572E6 /* DSPWireView.m */; };
 		C329B39C14031A8B003572E6 /* DSPSignalSourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39B14031A81003572E6 /* DSPSignalSourceView.m */; };
 		C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */; };
@@ -252,6 +254,9 @@
 		C3257D11140C4E350055BFD5 /* DSPNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPNode.m; sourceTree = "<group>"; };
 		C3257D13140C58DC0055BFD5 /* DSPPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPPin.h; sourceTree = "<group>"; };
 		C3257D14140C58DC0055BFD5 /* DSPPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPPin.m; sourceTree = "<group>"; };
+		C3257D8C140C7CB30055BFD5 /* DSPCircuitFileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitFileIO.h; sourceTree = "<group>"; };
+		C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuitFileIO.m; sourceTree = "<group>"; };
+		C3257D91140C83C70055BFD5 /* FirstCircuit.cir */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = FirstCircuit.cir; path = DSPTools.xcodeproj/FirstCircuit.cir; sourceTree = SOURCE_ROOT; };
 		C329B39613FF30A7003572E6 /* DSPWireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWireView.h; sourceTree = "<group>"; };
 		C329B39713FF30A7003572E6 /* DSPWireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPWireView.m; sourceTree = "<group>"; };
 		C329B39A14031A7D003572E6 /* DSPSignalSourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSignalSourceView.h; sourceTree = "<group>"; };
@@ -426,6 +431,14 @@
 			name = Additions;
 			sourceTree = "<group>";
 		};
+		C3257D93140C83D70055BFD5 /* Example Circuits */ = {
+			isa = PBXGroup;
+			children = (
+				C3257D91140C83C70055BFD5 /* FirstCircuit.cir */,
+			);
+			name = "Example Circuits";
+			sourceTree = "<group>";
+		};
 		C329B39913FF30AE003572E6 /* Wire */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +558,9 @@
 				C3257D11140C4E350055BFD5 /* DSPNode.m */,
 				C3257D13140C58DC0055BFD5 /* DSPPin.h */,
 				C3257D14140C58DC0055BFD5 /* DSPPin.m */,
+				C3257D8C140C7CB30055BFD5 /* DSPCircuitFileIO.h */,
+				C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */,
+				C3257D93140C83D70055BFD5 /* Example Circuits */,
 				C33DA0A113FAF1BF00FF0414 /* System */,
 				C33DA01E13F9E2B400FF0414 /* Launcher */,
 				C321451713F4B10400DE738E /* Additions */,
@@ -817,6 +833,7 @@
 				C33DA0B713FB2A6300FF0414 /* trash_24.png in Resources */,
 				C33DA0BB13FB363E00FF0414 /* TestView.xib in Resources */,
 				C33DA0BD13FB3D9800FF0414 /* arrow_left_24.png in Resources */,
+				C3257D92140C83C70055BFD5 /* FirstCircuit.cir in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +865,7 @@
 				C329B39C14031A8B003572E6 /* DSPSignalSourceView.m in Sources */,
 				C3257D12140C4E350055BFD5 /* DSPNode.m in Sources */,
 				C3257D15140C58DC0055BFD5 /* DSPPin.m in Sources */,
+				C3257D8E140C7CB30055BFD5 /* DSPCircuitFileIO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

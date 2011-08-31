@@ -11,6 +11,8 @@
 #import "DSPComponentListView.h"
 #import "Three20UI/Three20UI+Additions.h"
 
+#import "DSPCircuitFileIO.h"
+
 // Temporary
 #import "DSPHeader.h"
 #import "DSPHelper.h"
@@ -32,6 +34,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 @synthesize systemView          = _systemView;
 @synthesize gridView            = _gridView;
 @synthesize componentListView   = _componentListView;
+@synthesize circuit             = _circuit;
 
 - (void)setup
 {
@@ -39,10 +42,14 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self setToolbarItems:[self createToolBarItems]];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil filePath:(NSString *)filePath
+- (id)initWithCircuitFile:(NSString *)filePath
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
+        // Get the circuit from the file
+        _circuit = [[DSPCircuitFileIO circuitInFile:filePath] retain];
+        
         // Initialize the systemView
         CGRect systemViewFrame = TTApplicationFrame();
         _systemView = [[TTView alloc] initWithFrame:systemViewFrame];
@@ -65,6 +72,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     [_systemView release];
     [_gridView release];
     [_componentListView release];
+    [_circuit release];
     [super dealloc];
 }
 
@@ -98,43 +106,54 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Get the gridScale
     CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    DSPGridPoint componentLocation;
+//    DSPGridPoint componentLocation;
 
-    // Integrator block
-    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
-    componentLocation.x = 5;
-    componentLocation.y = 7;
-    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-    dspIV.anchor1 = componentLocation;
-    dspIV.anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-    dspIV.gridScale = gridScale;
-    dspIV.draggable = YES;
-    [self.gridView addSubview:dspIV];
-    [dspIV release];
+//    // Integrator block
+//    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
+//    componentLocation.x = 5;
+//    componentLocation.y = 7;
+//    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
+//    dspIV.anchor1 = componentLocation;
+//    dspIV.anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
+//    dspIV.gridScale = gridScale;
+//    dspIV.draggable = YES;
+//    [self.gridView addSubview:dspIV];
+//    [dspIV release];
+//    
+//    // Summation block
+//    DSPSummationView *dspSV = [[DSPSummationView alloc] init];
+//    componentLocation.x = 10;
+//    componentLocation.y = 7;
+//    dspSV.frame = [DSPSummationView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
+//    dspSV.anchor1 = componentLocation;
+//    dspSV.anchor2 = [DSPSummationView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
+//    dspSV.gridScale = gridScale;
+//    dspSV.draggable = YES;
+//    [self.gridView addSubview:dspSV];
+//    [dspSV release];
+//    
+//    // Signal source 
+//    DSPSummationView *dspSS = [[DSPSignalSourceView alloc] init];
+//    componentLocation.x = 2;
+//    componentLocation.y = 7;
+//    dspSS.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
+//    dspSS.anchor1 = componentLocation;
+//    dspSS.anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
+//    dspSS.gridScale = gridScale;
+//    dspSS.draggable = YES;
+//    [self.gridView addSubview:dspSS];
+//    [dspSS release];
     
-    // Summation block
-    DSPSummationView *dspSV = [[DSPSummationView alloc] init];
-    componentLocation.x = 10;
-    componentLocation.y = 7;
-    dspSV.frame = [DSPSummationView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-    dspSV.anchor1 = componentLocation;
-    dspSV.anchor2 = [DSPSummationView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-    dspSV.gridScale = gridScale;
-    dspSV.draggable = YES;
-    [self.gridView addSubview:dspSV];
-    [dspSV release];
+    NSArray *components = [self.circuit objectForKey:@"components"];
     
-    // Signal source 
-    DSPSummationView *dspSS = [[DSPSignalSourceView alloc] init];
-    componentLocation.x = 2;
-    componentLocation.y = 7;
-    dspSS.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-    dspSS.anchor1 = componentLocation;
-    dspSS.anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-    dspSS.gridScale = gridScale;
-    dspSS.draggable = YES;
-    [self.gridView addSubview:dspSS];
-    [dspSS release];
+    // Populate the grid with the components
+    for (DSPComponentView *componentView in components) {
+        componentView.frame = [DSPHelper getFrameForObject:componentView withAnchor1:componentView.anchor1 withAnchor2:componentView.anchor2 forGridScale:gridScale];
+        componentView.gridScale = gridScale;
+        componentView.draggable = YES;
+        [self.gridView addSubview:componentView];
+    };
+    
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

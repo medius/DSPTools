@@ -17,11 +17,15 @@
     TTView*                 _systemView;
     DSPGridView*            _gridView;
     DSPComponentListView*   _componentListView;
-    
+    NSDictionary*           _circuit;
 }
 
 @property (readonly) TTView*                systemView;
 @property (readonly) DSPGridView*           gridView;
 @property (readonly) DSPComponentListView*  componentListView;
+@property (readonly) NSDictionary*          circuit;
+
+// Initialize with a circuit file
+- (id)initWithCircuitFile:(NSString *)filePath;
 
 @end
