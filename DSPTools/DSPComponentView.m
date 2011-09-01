@@ -36,8 +36,22 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @synthesize draggable           = _draggable;
 
 @synthesize size                = _size;
+@synthesize delegate            = _delegate;
 @synthesize inViewTouchLocation = _inViewTouchLocation;
 @synthesize rectangleRadius     = _rectangleRadius;
+
+
+- (void)setAnchor1:(DSPGridPoint)newAnchor1
+{
+    _anchor1 = newAnchor1;
+    [self.delegate anchor1Set:self toValue:newAnchor1];
+}
+
+- (void)setAnchor2:(DSPGridPoint)newAnchor2
+{
+    _anchor2 = newAnchor2;
+    [self.delegate anchor2Set:self toValue:newAnchor2];
+}
 
 - (BOOL)selected
 {
@@ -59,14 +73,13 @@ static const CGFloat kDefaultLineWidth = 3.0;
     }
 }
 
-- (void)setupShape
+- (void)componentViewSetup
 {
     // Override this in subclasses to setup shape properties
 }
 
 - (void)setup
 {
-    [self setupShape];
     self.contentMode = UIViewContentModeRedraw;    
     self.backgroundColor = [UIColor clearColor];
     self.lineColor = [UIColor blackColor];
@@ -78,6 +91,8 @@ static const CGFloat kDefaultLineWidth = 3.0;
     UITapGestureRecognizer *tapgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
 	[self addGestureRecognizer:tapgr];
 	[tapgr release];
+    
+    [self componentViewSetup];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -173,9 +188,13 @@ static const CGFloat kDefaultLineWidth = 3.0;
     DSPGridPoint newAnchor1 = [DSPHelper getGridPointFromRealPoint:effectiveLocation forGridScale:self.gridScale];    
     //CGPoint newRealOrigin = [DSPHelper getRealPointFromGridPoint:newGridOrigin forGridScale:self.gridScale];
     
+    DSPGridPoint shift;
+    shift.x = newAnchor1.x - self.anchor1.x;
+    shift.y = newAnchor1.y - self.anchor1.y;
+    
     DSPGridPoint newAnchor2;
-    newAnchor2.x = self.anchor2.x + newAnchor1.x - self.anchor1.x;
-    newAnchor2.y = self.anchor2.y + newAnchor1.y - self.anchor1.y;
+    newAnchor2.x = self.anchor2.x + shift.x;
+    newAnchor2.y = self.anchor2.y + shift.y;
     
     CGRect frame = [DSPHelper getFrameForObject:self withAnchor1:newAnchor1 withAnchor2:newAnchor2 forGridScale:self.gridScale];
         

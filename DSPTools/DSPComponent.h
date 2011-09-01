@@ -16,6 +16,12 @@
     NSArray*    _inputPins;
     NSArray*    _outputPins;
     BOOL        _hasMemory;         // Whether the component remembers its last output value
+    BOOL        _isWire;
 }
+
+@property (nonatomic, retain) NSArray* inputPins;
+@property (nonatomic, retain) NSArray* outputPins;
+@property (readonly) BOOL              hasMemory;
+@property (readonly) BOOL              isWire;
 
 @end

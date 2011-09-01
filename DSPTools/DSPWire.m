@@ -1,16 +1,17 @@
 //
-//  DSPIntegrator.m
+//  DSPWire.m
 //  DSPTools
 //
-//  Created by Puru Choudhary on 8/11/11.
+//  Created by Puru Choudhary on 8/31/11.
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPIntegrator.h"
+#import "DSPWire.h"
 #import "DSPPin.h"
 
-@implementation DSPIntegrator
+@implementation DSPWire
 
+// This stores one end of the wire (anchor1). It is used for circuit analysis, but not in simulation.
 - (NSArray *)inputPins
 {
     if (!_inputPins) 
@@ -18,28 +19,19 @@
         // Setup the input pin
         DSPPin *pin = [[DSPPin alloc] init];
         
-        DSPSignalType signalType;
-        signalType.valueType = DSPAnalogValue;
-        signalType.domainType = DSPTimeDomain;
-        pin.signalType = signalType;
-        
         _inputPins = [[NSArray alloc] initWithObjects:pin, nil];
         [pin release];
     }
     return _inputPins;
 }
 
+// This stores one end of the wire (anchor2). It is used for circuit analysis, but not in simulation.
 - (NSArray *)outputPins
 {
     if (!_outputPins) 
     {
-        // Setup the output pin
+        // Setup the input pin
         DSPPin *pin = [[DSPPin alloc] init];
-        
-        DSPSignalType signalType;
-        signalType.valueType = DSPAnalogValue;
-        signalType.domainType = DSPTimeDomain;
-        pin.signalType = signalType;
         
         _outputPins = [[NSArray alloc] initWithObjects:pin, nil];
         [pin release];
@@ -52,6 +44,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _isWire = YES;
     }
     return self;
 }

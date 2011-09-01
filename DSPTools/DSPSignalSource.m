@@ -1,15 +1,15 @@
 //
-//  DSPIntegrator.m
+//  DSPSignalSource.m
 //  DSPTools
 //
-//  Created by Puru Choudhary on 8/11/11.
+//  Created by Puru Choudhary on 8/31/11.
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPIntegrator.h"
+#import "DSPSignalSource.h"
 #import "DSPPin.h"
 
-@implementation DSPIntegrator
+@implementation DSPSignalSource
 
 - (NSArray *)inputPins
 {

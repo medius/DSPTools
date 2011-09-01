@@ -17,7 +17,7 @@
     // Circuit data
     NSMutableDictionary *circuit = [NSMutableDictionary dictionary];
     NSMutableArray *components = [[NSMutableArray alloc] init];
-    DSPComponentView *componentView;
+    DSPComponentViewController *componentViewController;
     
     // Get the lines in the file
     NSArray *lines;
@@ -38,27 +38,27 @@
         
         NSLog(@"%@", line);
         
-        // Find the type of component and initialize the related view object
+        /* Find the type of component and initialize the related view object */
         NSString *identifier = [fields objectAtIndex:0];
         
         // Signal source
         if ([identifier isEqualToString:SIGNAL_SOURCE]) 
         {
-            componentView = [[DSPSignalSourceView alloc] init];
+            componentViewController = [[DSPSignalSourceViewController alloc] init];
         }
         // Integrator
         else if ([identifier isEqualToString:INTEGRATOR]) 
         {
-            componentView = [[DSPIntegratorView alloc] init];
+            componentViewController = [[DSPIntegratorViewController alloc] init];
         }
         // Wire
         else if ([identifier isEqualToString:WIRE]) 
         {
-            componentView = [[DSPWireView alloc] init];
+            componentViewController = [[DSPWireViewController alloc] init];
         }
         else
         {
-            componentView = nil;
+            componentViewController = nil;
         }
         
         // TODO: Careful, a bad circuit description will crash this
@@ -67,27 +67,26 @@
         DSPGridPoint anchor1;
         anchor1.x = [[fields objectAtIndex:1] integerValue];
         anchor1.y = [[fields objectAtIndex:2] integerValue];
-        if (componentView)
+        if (componentViewController)
         {
-            componentView.anchor1 = anchor1;
+            componentViewController.componentView.anchor1 = anchor1;
         }
         
         // Get the second anchor of the component
         DSPGridPoint anchor2;
         anchor2.x = [[fields objectAtIndex:3] integerValue];
         anchor2.y = [[fields objectAtIndex:4] integerValue];
-        if (componentView)
+        if (componentViewController)
         {
-            componentView.anchor2 = anchor2;
+            componentViewController.componentView.anchor2 = anchor2;
         }
         
-        //NSLog(@"%g %g %g %g", )
         // Add the object to the component list
-        if (componentView) {
-            [components addObject:componentView];
-            [componentView release];
+        if (componentViewController) {
+            [components addObject:componentViewController];
+            [componentViewController release];
         }      
-        componentView = nil;
+        componentViewController = nil;
     }
     
     [circuit setObject:components forKey:@"components"];

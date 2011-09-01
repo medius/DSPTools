@@ -147,11 +147,15 @@ static const CGFloat kToolBarItemWidth    = 40;
     NSArray *components = [self.circuit objectForKey:@"components"];
     
     // Populate the grid with the components
-    for (DSPComponentView *componentView in components) {
-        componentView.frame = [DSPHelper getFrameForObject:componentView withAnchor1:componentView.anchor1 withAnchor2:componentView.anchor2 forGridScale:gridScale];
-        componentView.gridScale = gridScale;
-        componentView.draggable = YES;
-        [self.gridView addSubview:componentView];
+    for (DSPComponentViewController *componentViewController in components) {
+        componentViewController.componentView.frame = 
+        [DSPHelper getFrameForObject:componentViewController.componentView 
+                         withAnchor1:componentViewController.componentView.anchor1 
+                         withAnchor2:componentViewController.componentView.anchor2 
+                        forGridScale:gridScale];
+        componentViewController.componentView.gridScale = gridScale;
+        componentViewController.componentView.draggable = YES;
+        [self.gridView addSubview:componentViewController.componentView];
     };
     
 }

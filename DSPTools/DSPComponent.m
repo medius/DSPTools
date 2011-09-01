@@ -11,4 +11,28 @@
 
 @implementation DSPComponent
 
+// Setters/getters
+@synthesize inputPins  = _inputPins;
+@synthesize outputPins = _outputPins;
+@synthesize hasMemory  = _hasMemory;
+@synthesize isWire     = _isWire;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+        _isWire = NO;
+        _hasMemory = NO;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [_inputPins release];
+    [_outputPins release];
+    [super dealloc];
+}
+
 @end

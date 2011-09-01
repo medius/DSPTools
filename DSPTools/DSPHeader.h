@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+/* UI related */
 #define marginForGridScale(gridScale) gridScale/2
 
 // Grid Point
@@ -31,6 +32,7 @@ struct DSPGridRect {
 };
 typedef struct DSPGridRect DSPGridRect;
 
+/* Model related */
 // Value type
 enum DSPValueType {
     DSPAllValues = 0,

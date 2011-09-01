@@ -11,8 +11,12 @@
 
 @interface DSPPin : NSObject {
     DSPSignalType   _signalType;
-    BOOL            _isOutput;
     id              _node;          // Node this pin is connected to
+    DSPGridPoint    _location;
 }
+
+@property DSPSignalType signalType;
+@property (retain) id   node;
+@property DSPGridPoint  location;
 
 @end

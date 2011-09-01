@@ -7,15 +7,20 @@
 //
 
 #import "DSPComponentViewController.h"
-
+#import "DSPPin.h"
 
 @implementation DSPComponentViewController
+
+// Setters/getters
+@synthesize component     = _component;
+@synthesize componentView = _componentView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.componentView.delegate = self;
     }
     return self;
 }
@@ -39,6 +44,7 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+
 }
 
 
@@ -56,6 +62,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.component = nil;
+    self.componentView = nil;
 }
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -64,5 +72,40 @@
 //    // return (interfaceOrientation == UIInterfaceOrientationPortrait);
 //    return YES;
 //}
+
+// Set the pin locations based on anchor 1
+- (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
+{
+    // Subclasses need to implement this
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil]; 
+}
+
+// Set the pin locations based on anchor 2
+- (void)anchor2Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
+{
+    // Subclasses need to implement this
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil]; 
+}
+
+//// Message from the view about the changed position.
+//- (void)viewPositionChanged:(DSPComponentView *)requestor byShiftValue:(DSPGridPoint)shiftValue
+//{
+//    // Move the input pins as necessary
+//    for (DSPPin* pin in self.component.inputPins) {
+//        DSPGridPoint newLocation;
+//        newLocation.x = pin.location.x + shiftValue.x;
+//        newLocation.y = pin.location.y + shiftValue.y;
+//        pin.location = newLocation;
+//    }
+//    
+//    // Move the output pins as necessary
+//    for (DSPPin* pin in self.component.outputPins) {
+//        DSPGridPoint newLocation;
+//        newLocation.x = pin.location.x + shiftValue.x;
+//        newLocation.y = pin.location.y + shiftValue.y;
+//        pin.location = newLocation;
+//    }
+//}
+
 
 @end

@@ -7,6 +7,10 @@
 //
 
 // Components
+#import "DSPIntegratorViewController.h"
+#import "DSPSignalSourceViewController.h"
+#import "DSPWireViewController.h"
+
 #import "DSPIntegratorView.h"
 #import "DSPSummationView.h"
 #import "DSPWireView.h"

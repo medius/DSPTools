@@ -11,4 +11,8 @@
 
 @implementation DSPPin
 
+@synthesize signalType = _signalType;
+@synthesize node       = _node;
+@synthesize location   = _location;
+
 @end

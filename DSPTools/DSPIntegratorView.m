@@ -15,7 +15,7 @@ static const NSUInteger kDefaultHeight = 6;
 
 @implementation DSPIntegratorView
 
-- (void)setupShape
+- (void)componentViewSetup
 {
     DSPGridSize defaultSize;
     defaultSize.width = kDefaultWidth;

@@ -10,12 +10,12 @@
 #import "DSPComponentView.h"
 
 @interface DSPWireView : DSPComponentView {
-    NSUInteger _wireLength;
-    BOOL _isVertical;
+    NSUInteger  _wireLength;
+    BOOL        _isVertical;
 }
 
 @property (readonly) NSUInteger wireLength;
-@property (readonly) BOOL isVertical;
+@property (readonly) BOOL       isVertical;
 
 // Provide the frame for given anchors
 + (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
