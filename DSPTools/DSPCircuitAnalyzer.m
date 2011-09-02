@@ -59,6 +59,7 @@
                 if (existingNode.signalType.valueType != pin.signalType.valueType) {
                     // TODO: Mismatch of value type. Register an error
                     // TODO: Improve this to check if a node supports both modes, then allow the stricter version
+                    // e.g if a node allows both values, then the pin with analog value is allowed.
                     // Think about this in greater detail
                 }
                 
@@ -98,6 +99,7 @@
                 }
                 
             }
+            // ^ TODO: Above code is repeated.
             
             // Add the new node to the nodes array
             [nodes addObject:newNode];
@@ -112,7 +114,7 @@
 
 + (NSDictionary *)simulatonModelForCircuit:(NSDictionary *)circuit
 {
-
+    // First Pass:
     // Loop through each component and create a node for each pin of every 
     // component, including wires. For components with pins sharing a common
     // position, create a single node.
@@ -133,9 +135,24 @@
         [DSPCircuitAnalyzer createNodesForComponent:component inNodes:nodes isInput:NO];
     }
     
+    // Note: Circuit can be simulated with only first pass. 
+    
+    // Second pass
+    // Merge the nodes that connect to wires to adjacent nodes and remove all wires.
+    // TODO: Iterate over wires and merge their nodes. Only one pass is required and is 
+    // guaranteed to finish.
+    
+    
+    // Sanity check
+    // Perform sanity checks here. Make sure there is at least one source,
+    // sources are not shorted, etc.
+    
+    // Add the data to the simulation model
     [simulationModel setValue:nodes forKey:@"nodes"];
     [simulationModel setValue:components forKey:@"components"];
     [simulationModel setValue:errors forKey:@"errors"];
+    
+    // Cleanup 
     [nodes release];
     [components release];
     [errors release];
