@@ -1,5 +1,5 @@
 //
-//  DSPWire.h
+//  DSPWireModel.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/31/11.
@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 
-@interface DSPWire : DSPComponent {
+@interface DSPWireModel : DSPComponentModel {
 }
 @end

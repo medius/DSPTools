@@ -1,5 +1,5 @@
 //
-//  DSPIntegrator.h
+//  DSPIntegratorModel.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/11/11.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 
-@interface DSPIntegrator : DSPComponent {
+@interface DSPIntegratorModel : DSPComponentModel {
     
 }
 

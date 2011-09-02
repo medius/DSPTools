@@ -1,5 +1,5 @@
 //
-//  DSPComponent.h
+//  DSPComponentModel.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/11/11.
@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface DSPComponent : NSObject {
+@interface DSPComponentModel : NSObject {
     NSArray*    _inputPins;
     NSArray*    _outputPins;
     BOOL        _hasMemory;         // Whether the component remembers its last output value

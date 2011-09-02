@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "DSPHeader.h"
+#import "DSPNode.h"
 
 @interface DSPPin : NSObject {
     DSPSignalType   _signalType;
-    id              _node;          // Node this pin is connected to
+    DSPNode*        _node;          // Node this pin is connected to
     DSPGridPoint    _location;
 }
 
-@property DSPSignalType signalType;
-@property (retain) id   node;
-@property DSPGridPoint  location;
+@property (nonatomic) DSPSignalType    signalType;
+@property (nonatomic, retain) DSPNode* node;
+@property (nonatomic) DSPGridPoint     location;
 
 @end

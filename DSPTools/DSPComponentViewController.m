@@ -12,14 +12,17 @@
 @implementation DSPComponentViewController
 
 // Setters/getters
-@synthesize component     = _component;
-@synthesize componentView = _componentView;
+@synthesize componentModel = _componentModel;
+@synthesize componentView  = _componentView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        // This part is necessary as loadView is not called on this controller when it is created.
+        // The componentView needs to be able to pass the information about anchor setting to the
+        // controller so that the pins in the model can be set.
         self.componentView.delegate = self;
     }
     return self;
@@ -62,7 +65,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.component = nil;
+    self.componentModel = nil;
     self.componentView = nil;
 }
 

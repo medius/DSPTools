@@ -7,18 +7,18 @@
 //
 
 #import "DSPSignalSourceViewController.h"
-#import "DSPSignalSource.h"
+#import "DSPSignalSourceModel.h"
 #import "DSPSignalSourceView.h"
 #import "DSPPin.h"
 
 @implementation DSPSignalSourceViewController
 
-- (DSPComponent *)component
+- (DSPComponentModel *)componentModel
 {
-    if (!_component) {
-        _component = [[DSPSignalSource alloc] init];
+    if (!_componentModel) {
+        _componentModel = [[DSPSignalSourceModel alloc] init];
     }
-    return _component;
+    return _componentModel;
 }
 
 - (id)componentView
@@ -40,7 +40,7 @@
 
 - (void)dealloc
 {
-    [_component release];
+    [_componentModel release];
     [_componentView removeFromSuperview];
     [super dealloc];
 }
@@ -57,11 +57,10 @@
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-    self.view = self.componentView;
-    self.componentView.delegate = self;
-}
+//- (void)loadView
+//{
+//
+//}
 
 
 /*
@@ -88,12 +87,8 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *outputPin = [self.component.outputPins lastObject];
-    DSPGridPoint newLocation;
-    newLocation.x = newValue.x + 1;  // Change these constants to use values from the view later;
-    newLocation.y = newValue.y - 1;
-    
-    outputPin.location = newLocation;
+    DSPPin *outputPin = [self.componentModel.outputPins lastObject];    
+    outputPin.location = newValue;
 }
 
 // Set the pin locations based on anchor 2

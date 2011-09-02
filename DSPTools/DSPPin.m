@@ -15,4 +15,9 @@
 @synthesize node       = _node;
 @synthesize location   = _location;
 
+- (void)dealloc
+{
+    [_node release];
+    [super dealloc];
+}
 @end

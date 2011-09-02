@@ -7,18 +7,18 @@
 //
 
 #import "DSPWireViewController.h"
-#import "DSPWire.h"
+#import "DSPWireModel.h"
 #import "DSPWireView.h"
 #import "DSPPin.h"
 
 @implementation DSPWireViewController
 
-- (DSPComponent *)component
+- (DSPComponentModel *)componentModel
 {
-    if (!_component) {
-        _component = [[DSPWire alloc] init];
+    if (!_componentModel) {
+        _componentModel = [[DSPWireModel alloc] init];
     }
-    return _component;
+    return _componentModel;
 }
 
 - (DSPComponentView *)componentView
@@ -55,11 +55,10 @@
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-    self.view = self.componentView;
-    self.componentView.delegate = self;
-}
+//- (void)loadView
+//{
+//
+//}
 
 
 /*
@@ -86,14 +85,14 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *pin = [self.component.inputPins lastObject];
+    DSPPin *pin = [self.componentModel.inputPins lastObject];
     pin.location = newValue;
 }
 
 // Set the pin locations based on anchor 2
 - (void)anchor2Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *pin = [self.component.outputPins lastObject];
+    DSPPin *pin = [self.componentModel.outputPins lastObject];
     pin.location = newValue;
 }
 

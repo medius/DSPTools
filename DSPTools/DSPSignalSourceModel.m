@@ -1,33 +1,15 @@
 //
-//  DSPSignalSource.m
+//  DSPSignalSourceModel.m
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/31/11.
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPSignalSource.h"
+#import "DSPSignalSourceModel.h"
 #import "DSPPin.h"
 
-@implementation DSPSignalSource
-
-- (NSArray *)inputPins
-{
-    if (!_inputPins) 
-    {
-        // Setup the input pin
-        DSPPin *pin = [[DSPPin alloc] init];
-        
-        DSPSignalType signalType;
-        signalType.valueType = DSPAnalogValue;
-        signalType.domainType = DSPTimeDomain;
-        pin.signalType = signalType;
-        
-        _inputPins = [[NSArray alloc] initWithObjects:pin, nil];
-        [pin release];
-    }
-    return _inputPins;
-}
+@implementation DSPSignalSourceModel
 
 - (NSArray *)outputPins
 {

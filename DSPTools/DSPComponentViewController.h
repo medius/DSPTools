@@ -13,15 +13,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Three20/Three20.h"
-#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 #import "DSPComponentView.h"
 
 @interface DSPComponentViewController : TTViewController <DSPComponentViewDelegate> {
-    DSPComponent*     _component;
-    DSPComponentView* _componentView;
+    DSPComponentModel* _componentModel;
+    DSPComponentView*  _componentView;
 }
 
-@property (nonatomic, retain) DSPComponent*     component;
-@property (nonatomic, retain) DSPComponentView* componentView;
+@property (nonatomic, retain) DSPComponentModel* componentModel;
+@property (nonatomic, retain) DSPComponentView*  componentView;
 
 @end

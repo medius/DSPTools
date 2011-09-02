@@ -13,6 +13,7 @@
     
 }
 
-+ (NSDictionary *)nodesForCircuit:(NSDictionary *)circuit;
+// Returns a set of nodes and list of components with pins updated with node information
++ (NSDictionary *)simulatonModelForCircuit:(NSDictionary *)circuit;
 
 @end

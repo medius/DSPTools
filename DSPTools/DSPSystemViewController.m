@@ -12,6 +12,7 @@
 #import "Three20UI/Three20UI+Additions.h"
 
 #import "DSPCircuitFileIO.h"
+#import "DSPCircuitAnalyzer.h"
 
 // Temporary
 #import "DSPHeader.h"
@@ -19,6 +20,8 @@
 #import "DSPGlobalSettings.h"
 
 #import "DSPComponents.h"
+#import "DSPNode.h"
+
 
 static const CGFloat kComponentListHeight = 80;
 static const CGFloat kToolBarItemWidth    = 40;
@@ -226,7 +229,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create chart button
     UIImage *chartButtonImage = [UIImage imageNamed:@"chart_line_24.png"];
-    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(analyzeCircuit)];
     chartButton.width = kToolBarItemWidth;
     [toolBarItems addObject:chartButton];
     [chartButton release];
@@ -243,6 +246,18 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)crossPressed
 {
     if (self.gridView.wireDrawingInProgress) self.gridView.wireDrawingInProgress = NO;
+}
+
+- (void)analyzeCircuit
+{
+    NSDictionary *simulationModel = [DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit];
+    
+    NSArray *nodes = [simulationModel objectForKey:@"nodes"];
+    
+    for (DSPNode* node in nodes) {
+        DSPGridPoint location = node.location;
+        NSLog(@"Node x:%d y:%d", location.x, location.y);
+    }
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  DSPSignalSource.h
+//  DSPSignalSourceModel.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/31/11.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 
-@interface DSPSignalSource : DSPComponent {
+@interface DSPSignalSourceModel : DSPComponentModel {
     
 }
 

@@ -7,18 +7,18 @@
 //
 
 #import "DSPIntegratorViewController.h"
-#import "DSPIntegrator.h"
+#import "DSPIntegratorModel.h"
 #import "DSPIntegratorView.h"
 #import "DSPPin.h"
 
 @implementation DSPIntegratorViewController
 
-- (DSPComponent *)component
+- (DSPComponentModel *)componentModel
 {
-    if (!_component) {
-        _component = [[DSPIntegrator alloc] init];
+    if (!_componentModel) {
+        _componentModel = [[DSPIntegratorModel alloc] init];
     }
-    return _component;
+    return _componentModel;
 }
 
 - (DSPComponentView *)componentView
@@ -55,10 +55,10 @@
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-    self.view = self.componentView;
-}
+//- (void)loadView
+//{
+//
+//}
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -84,10 +84,10 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *inputPin = [self.component.inputPins lastObject];
+    DSPPin *inputPin = [self.componentModel.inputPins lastObject];
     inputPin.location = newValue;
     
-    DSPPin *outputPin = [self.component.outputPins lastObject];
+    DSPPin *outputPin = [self.componentModel.outputPins lastObject];
     DSPGridPoint newLocation;
     newLocation.x = newValue.x + 4;  // Change these constants to use values from the view later;
     newLocation.y = newValue.y;
