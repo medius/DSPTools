@@ -411,6 +411,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C3150CFE14118D6000AB0A98 /* Circuit Analyzer */ = {
+			isa = PBXGroup;
+			children = (
+				C3150CEC140DBA8400AB0A98 /* DSPCircuitAnalyzer.h */,
+				C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */,
+			);
+			name = "Circuit Analyzer";
+			sourceTree = "<group>";
+		};
+		C3150CFF14118DBA00AB0A98 /* Circuit File IO */ = {
+			isa = PBXGroup;
+			children = (
+				C3257D8C140C7CB30055BFD5 /* DSPCircuitFileIO.h */,
+				C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */,
+			);
+			name = "Circuit File IO";
+			sourceTree = "<group>";
+		};
 		C321450313F4A7F700DE738E /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +539,12 @@
 				C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */,
 				C358179E13FC4EB800948309 /* DSPComponentListView.h */,
 				C358179F13FC4EBD00948309 /* DSPComponentListView.m */,
+				C3257D10140C4E350055BFD5 /* DSPNode.h */,
+				C3257D11140C4E350055BFD5 /* DSPNode.m */,
+				C3257D13140C58DC0055BFD5 /* DSPPin.h */,
+				C3257D14140C58DC0055BFD5 /* DSPPin.m */,
+				C3150CFF14118DBA00AB0A98 /* Circuit File IO */,
+				C3150CFE14118D6000AB0A98 /* Circuit Analyzer */,
 				C321450313F4A7F700DE738E /* Components */,
 				C3A7E4B313F482F70002491F /* Grid */,
 				C33DA0BA13FB363D00FF0414 /* TestView.xib */,
@@ -582,14 +606,6 @@
 				C321451813F4B8F500DE738E /* DSPHeader.h */,
 				C35817A513FCECAD00948309 /* DSPHelper.h */,
 				C35817A613FCECBA00948309 /* DSPHelper.m */,
-				C3257D10140C4E350055BFD5 /* DSPNode.h */,
-				C3257D11140C4E350055BFD5 /* DSPNode.m */,
-				C3257D13140C58DC0055BFD5 /* DSPPin.h */,
-				C3257D14140C58DC0055BFD5 /* DSPPin.m */,
-				C3257D8C140C7CB30055BFD5 /* DSPCircuitFileIO.h */,
-				C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */,
-				C3150CEC140DBA8400AB0A98 /* DSPCircuitAnalyzer.h */,
-				C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */,
 				C3257D93140C83D70055BFD5 /* Example Circuits */,
 				C33DA0A113FAF1BF00FF0414 /* System */,
 				C33DA01E13F9E2B400FF0414 /* Launcher */,
