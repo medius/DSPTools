@@ -9,42 +9,50 @@
 #import "DSPIntegratorModel.h"
 #import "DSPPin.h"
 
+@interface DSPIntegratorModel() 
+@property (nonatomic) double currentValue;
+@property (nonatomic) double previousSimulationTime;
+@end
+
 @implementation DSPIntegratorModel
 
-- (NSArray *)inputPins
+@synthesize initialValue           = _initialValue;
+@synthesize saturationValue        = _saturationValue;
+@synthesize currentValue           = _currentValue;
+@synthesize previousSimulationTime = _previousSimulationTime;
+
+- (NSArray *)pins
 {
-    if (!_inputPins) 
+    if (!_pins) 
     {
         // Setup the input pin
-        DSPPin *pin = [[DSPPin alloc] init];
+        DSPPin *inputPin = [[DSPPin alloc] init];
         
         DSPSignalType signalType;
         signalType.valueType = DSPAnalogValue;
         signalType.domainType = DSPTimeDomain;
-        pin.signalType = signalType;
+        inputPin.signalType = signalType;
+        inputPin.isOutput = NO;
+                
+        // Setup the output pin
+        DSPPin *outputPin = [[DSPPin alloc] init];
         
-        _inputPins = [[NSArray alloc] initWithObjects:pin, nil];
-        [pin release];
+        signalType.valueType = DSPAnalogValue;
+        signalType.domainType = DSPTimeDomain;
+        outputPin.signalType = signalType;
+        outputPin.isOutput = YES;
+        
+        _pins = [[NSArray alloc] initWithObjects:inputPin, outputPin, nil];
+        [inputPin release]; [outputPin release];
     }
-    return _inputPins;
+    return _pins;
 }
 
-- (NSArray *)outputPins
+- (void)reset
 {
-    if (!_outputPins) 
-    {
-        // Setup the output pin
-        DSPPin *pin = [[DSPPin alloc] init];
-        
-        DSPSignalType signalType;
-        signalType.valueType = DSPAnalogValue;
-        signalType.domainType = DSPTimeDomain;
-        pin.signalType = signalType;
-        
-        _outputPins = [[NSArray alloc] initWithObjects:pin, nil];
-        [pin release];
-    }
-    return _outputPins;
+    [super reset];
+    self.currentValue = self.initialValue;
+    self.previousSimulationTime = 0;
 }
 
 - (id)init
@@ -52,8 +60,35 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        self.saturationValue = 1.0;
     }
     return self;
 }
+
+- (double)inputValue
+{
+    DSPPin *inputPin = [[self inputPins] lastObject];
+    return (double)inputPin.signalValue;
+}
+
+// Update the value of pins at the output
+- (void)updateOutput:(double)outputValue
+{
+    DSPPin *pin = [[self outputPins] lastObject];
+    pin.signalValue = outputValue;
+}
+
+- (void)evaluteAtTime:(double)simulationTime
+{
+    double deltaTime = simulationTime - self.previousSimulationTime;
+    
+    // Perform the integral function
+    self.currentValue = self.currentValue + [self inputValue] * deltaTime;
+    
+    self.previousSimulationTime = simulationTime;
+    [self updateOutput:self.currentValue];
+}
+
+
 
 @end

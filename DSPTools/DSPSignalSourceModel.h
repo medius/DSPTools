@@ -10,7 +10,15 @@
 #import "DSPComponentModel.h"
 
 @interface DSPSignalSourceModel : DSPComponentModel {
-    
+    double _maxAmplitude;
+    double _frequency;
+    double _phaseShift;
+    double _amplitudeBias;
 }
+
+@property (nonatomic) double maxAmplitude;
+@property (nonatomic) double frequency;
+@property (nonatomic) double phaseShift;
+@property (nonatomic) double amplitudeBias;
 
 @end

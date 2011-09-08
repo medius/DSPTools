@@ -15,11 +15,16 @@
     DSPComponentViewController* _fanInComponent;            // Only one fan in to a node is allowed
     NSMutableArray*             _fanOutComponents;
     DSPSignalType               _signalType;
-    DSPSignalValue              _currentValue;
-    DSPSignalValue              _previousValue;
+    DSPSignalValue              _currentValue;              // Value at current time step
     BOOL                        _currentValueIsValid;
+    DSPSignalValue              _previousValue;             // Value at previous time step
+    BOOL                        _usePreviousValue;          // Use the previous value of this node 
+                                                            // (output of a memory component)
     
     // These are used only during circuit analysis
+    // TODO: Remove this from here and use a local structure in circuit analyzer if needed
+    // If a node does not have an inherent location, it does not belong here.
+    // Maybe rename this object to a net?
     DSPGridPoint                _location;
     NSMutableArray*             _wires;
 }
@@ -28,10 +33,17 @@
 @property (nonatomic, retain) NSMutableArray*             fanOutComponents;
 @property (nonatomic) DSPSignalType                       signalType;
 @property (nonatomic) DSPSignalValue                      currentValue;
-@property (nonatomic) DSPSignalValue                      previousValue;
 @property (nonatomic) BOOL                                currentValueIsValid;
+@property (nonatomic) DSPSignalValue                      previousValue;
+@property (nonatomic) BOOL                                usePreviousValue;
 
 @property (nonatomic) DSPGridPoint                        location;
 @property (nonatomic, retain) NSMutableArray*             wires;
+
+// Update the node based on new value
+- (void)updateValue:(DSPSignalValue)newValue;
+
+// Reset the signal values
+- (void)reset;
 
 @end

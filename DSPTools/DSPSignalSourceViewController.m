@@ -40,8 +40,6 @@
 
 - (void)dealloc
 {
-    [_componentModel release];
-    [_componentView removeFromSuperview];
     [super dealloc];
 }
 
@@ -87,7 +85,7 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *outputPin = [self.componentModel.outputPins lastObject];    
+    DSPPin *outputPin = [[self.componentModel outputPins] lastObject];    
     outputPin.location = newValue;
 }
 

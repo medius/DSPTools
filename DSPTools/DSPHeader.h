@@ -57,5 +57,7 @@ struct DSPSignalType {
 typedef struct DSPSignalType DSPSignalType;
 
 // Signal value
-typedef float DSPSignalValue;
+typedef double DSPSignalValue;
 
+// NodeID type
+typedef NSUInteger NodeID;

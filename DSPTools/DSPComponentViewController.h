@@ -19,9 +19,11 @@
 @interface DSPComponentViewController : TTViewController <DSPComponentViewDelegate> {
     DSPComponentModel* _componentModel;
     DSPComponentView*  _componentView;
+    BOOL               _isWire;
 }
 
 @property (nonatomic, retain) DSPComponentModel* componentModel;
 @property (nonatomic, retain) DSPComponentView*  componentView;
+@property (nonatomic) BOOL                       isWire;
 
 @end

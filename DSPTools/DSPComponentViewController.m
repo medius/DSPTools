@@ -14,6 +14,7 @@
 // Setters/getters
 @synthesize componentModel = _componentModel;
 @synthesize componentView  = _componentView;
+@synthesize isWire         = _isWire;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,12 +25,15 @@
         // The componentView needs to be able to pass the information about anchor setting to the
         // controller so that the pins in the model can be set.
         self.componentView.delegate = self;
+        self.isWire = NO;
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [_componentModel release];
+    [_componentView removeFromSuperview];
     [super dealloc];
 }
 
@@ -45,19 +49,18 @@
 
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-
-}
+//- (void)loadView
+//{
+//
+//}
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-
-}
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//    
+//}
 
 
 - (void)viewDidUnload
@@ -65,7 +68,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.componentModel = nil;
+    // self.componentModel = nil;
     self.componentView = nil;
 }
 

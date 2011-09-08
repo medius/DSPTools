@@ -11,13 +11,27 @@
 
 @implementation DSPPin
 
-@synthesize signalType = _signalType;
-@synthesize node       = _node;
-@synthesize location   = _location;
+@synthesize signalValue   = _signalValue;
+@synthesize signalType    = _signalType;
+@synthesize connectedNode = _connectedNode;
+@synthesize location      = _location;
+@synthesize isOutput      = _isOutput;
 
 - (void)dealloc
 {
-    [_node release];
+    [_connectedNode release];
     [super dealloc];
 }
+
+// Update the pin based on new value
+- (void)updateValue:(DSPSignalValue)newValue
+{
+    self.signalValue = newValue;
+}
+
+- (void)reset
+{
+    self.signalValue = 0;
+}
+
 @end

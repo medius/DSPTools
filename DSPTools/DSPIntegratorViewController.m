@@ -84,10 +84,10 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *inputPin = [self.componentModel.inputPins lastObject];
+    DSPPin *inputPin = [[self.componentModel inputPins] lastObject];
     inputPin.location = newValue;
     
-    DSPPin *outputPin = [self.componentModel.outputPins lastObject];
+    DSPPin *outputPin = [[self.componentModel outputPins] lastObject];
     DSPGridPoint newLocation;
     newLocation.x = newValue.x + 4;  // Change these constants to use values from the view later;
     newLocation.y = newValue.y;

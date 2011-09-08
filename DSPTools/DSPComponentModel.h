@@ -13,15 +13,25 @@
 
 
 @interface DSPComponentModel : NSObject {
-    NSArray*    _inputPins;
-    NSArray*    _outputPins;
+    NSArray*    _pins;
     BOOL        _hasMemory;         // Whether the component remembers its last output value
-    BOOL        _isWire;
+    BOOL        _isASource;
 }
 
-@property (nonatomic, retain) NSArray* inputPins;
-@property (nonatomic, retain) NSArray* outputPins;
+@property (nonatomic, retain) NSArray* pins;
 @property (readonly) BOOL              hasMemory;
-@property (readonly) BOOL              isWire;
+@property (readonly) BOOL              isASource;
+
+// Returns all the input pins
+- (NSArray *)inputPins;
+
+// Returns all the output pins
+- (NSArray *)outputPins;
+
+// Evaluate the output at a given simulation time
+- (void)evaluteAtTime:(double)simulationTime;
+
+// Reset the model values
+- (void)reset;
 
 @end

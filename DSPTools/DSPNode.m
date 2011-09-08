@@ -10,23 +10,14 @@
 
 @implementation DSPNode
 
-//@property (nonatomic, retain) DSPComponentViewController* _fanInComponent;
-//@property (nonatomic, retain) NSArray*                    _fanOutComponents;
-//@property (nonatomic) DSPSignalType                       _signalType;
-//@property (nonatomic) DSPSignalValue                      _currentValue;
-//@property (nonatomic) DSPSignalValue                      _previousValue;
-//@property (nonatomic) BOOL                                _currentValueIsValid;
-//
-//@property (nonatomic) DSPGridPoint                        _location;
-//@property (nonatomic, retain) NSArray*                    _wires;
-
 // Setters/getters
 @synthesize fanInComponent      = _fanInComponent;
 @synthesize fanOutComponents    = _fanOutComponents;
 @synthesize signalType          = _signalType;
 @synthesize currentValue        = _currentValue;
-@synthesize previousValue       = _previousValue;
 @synthesize currentValueIsValid = _currentValueIsValid;
+@synthesize previousValue       = _previousValue;
+@synthesize usePreviousValue    = _usePreviousValue;
 @synthesize location            = _location;
 @synthesize wires               = _wires;
 
@@ -48,12 +39,44 @@
     return _wires;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+        self.currentValue = 0;
+        self.currentValueIsValid = NO;
+        self.previousValue = 0;
+    }
+    return self;
+}
+
 - (void)dealloc
 {
     [_fanInComponent release];
     [_fanOutComponents release];
     [_wires release];
     [super dealloc];
+}
+
+- (void)updateValue:(DSPSignalValue)newValue
+{
+    if (self.currentValueIsValid) {
+        // TODO: Error this should not happen
+    } else
+    {
+        // Move the current value to previous value
+        self.previousValue = self.currentValue;
+        self.currentValue = newValue;
+        self.currentValueIsValid = YES;
+    }
+}
+
+- (void)reset
+{
+    self.previousValue = 0;
+    self.currentValue = 0;
+    self.currentValueIsValid = NO;
 }
 
 @end

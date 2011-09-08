@@ -13,6 +13,7 @@
 
 #import "DSPCircuitFileIO.h"
 #import "DSPCircuitAnalyzer.h"
+#import "DSPSimulator.h"
 
 // Temporary
 #import "DSPHeader.h"
@@ -50,6 +51,8 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     self = [super init];
     if (self) {
+        // TODO: Change this to use self.*
+        
         // Get the circuit from the file
         _circuit = [[DSPCircuitFileIO circuitInFile:filePath] retain];
         
@@ -250,14 +253,18 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 - (void)analyzeCircuit
 {
-    NSDictionary *simulationModel = [DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit];
+    NSDictionary *simulationModel = [[DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit] retain];
     
+    NSArray *components = [simulationModel objectForKey:@"components"];
     NSArray *nodes = [simulationModel objectForKey:@"nodes"];
     
     for (DSPNode* node in nodes) {
         DSPGridPoint location = node.location;
         NSLog(@"Node x:%d y:%d", location.x, location.y);
     }
+    
+    [DSPSimulator runSimulationForComponents:components andNodes:nodes];
+    [simulationModel release];
 }
 
 @end

@@ -13,6 +13,8 @@
 
 @implementation DSPWireViewController
 
+@synthesize isReverse = _isReverse;
+
 - (DSPComponentModel *)componentModel
 {
     if (!_componentModel) {
@@ -34,6 +36,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.isWire = YES;
     }
     return self;
 }
@@ -85,14 +88,32 @@
 // Set the pin locations based on anchor 1
 - (void)anchor1Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *pin = [self.componentModel.inputPins lastObject];
+    DSPPin *pin;
+    if (self.isReverse) 
+    {
+        pin = [[self.componentModel outputPins] lastObject];
+    } 
+    else
+    {
+        pin =[[self.componentModel inputPins] lastObject];
+    }
+     
     pin.location = newValue;
 }
 
 // Set the pin locations based on anchor 2
 - (void)anchor2Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
-    DSPPin *pin = [self.componentModel.outputPins lastObject];
+    DSPPin *pin;
+    if (self.isReverse) 
+    {
+        pin = [[self.componentModel inputPins] lastObject];
+    } 
+    else
+    {
+        pin =[[self.componentModel outputPins] lastObject];
+    }
+    
     pin.location = newValue;
 }
 

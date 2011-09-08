@@ -11,32 +11,22 @@
 
 @implementation DSPWireModel
 
-// This stores one end of the wire (anchor1). It is used for circuit analysis, but not in simulation.
-- (NSArray *)inputPins
+// This stores one end of the wire (anchor2). 
+- (NSArray *)pins
 {
-    if (!_inputPins) 
+    if (!_pins) 
     {
-        // Setup the input pin
-        DSPPin *pin = [[DSPPin alloc] init];
+        // Setup the pins
+        DSPPin *pin1 = [[DSPPin alloc] init];
+        pin1.isOutput = NO;
         
-        _inputPins = [[NSArray alloc] initWithObjects:pin, nil];
-        [pin release];
-    }
-    return _inputPins;
-}
-
-// This stores one end of the wire (anchor2). It is used for circuit analysis, but not in simulation.
-- (NSArray *)outputPins
-{
-    if (!_outputPins) 
-    {
-        // Setup the input pin
-        DSPPin *pin = [[DSPPin alloc] init];
+        DSPPin *pin2 = [[DSPPin alloc] init];
+        pin2.isOutput = YES;
         
-        _outputPins = [[NSArray alloc] initWithObjects:pin, nil];
-        [pin release];
+        _pins = [[NSArray alloc] initWithObjects:pin1, pin2, nil];
+        [pin1 release]; [pin2 release];
     }
-    return _outputPins;
+    return _pins;
 }
 
 - (id)init
@@ -44,7 +34,6 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        _isWire = YES;
     }
     return self;
 }

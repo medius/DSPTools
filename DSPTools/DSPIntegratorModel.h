@@ -10,7 +10,15 @@
 #import "DSPComponentModel.h"
 
 @interface DSPIntegratorModel : DSPComponentModel {
+    double _initialValue;
+    double _saturationValue;
     
+@private
+    double _currentValue;
+    double _previousSimulationTime;
 }
+
+@property (nonatomic) double initialValue;
+@property (nonatomic) double saturationValue;
 
 @end

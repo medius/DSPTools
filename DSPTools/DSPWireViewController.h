@@ -10,7 +10,9 @@
 #import "DSPComponentViewController.h"
 
 @interface DSPWireViewController : DSPComponentViewController {
-    
+    BOOL _isReverse;        // When YES, anchor1 is output and anchor2 is input
 }
+
+@property (nonatomic) BOOL isReverse;
 
 @end
