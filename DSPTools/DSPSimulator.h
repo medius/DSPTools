@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DSPWaveformViewController.h"
 
+@protocol DSPWaveformViewDelegate;
 
-@interface DSPSimulator : NSObject {
+@interface DSPSimulator : NSObject <DSPWaveformViewDelegate> {
     
 }
 

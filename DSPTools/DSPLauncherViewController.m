@@ -111,9 +111,6 @@
         [self.navigationController pushViewController:systemViewController animated:YES];
         [systemViewController release];
         
-//        DSPGridViewController *gridViewController = [[DSPGridViewController alloc] init];
-//        [self.navigationController pushViewController:gridViewController animated:YES];
-//        [gridViewController release];
     }
 }
 @end

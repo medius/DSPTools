@@ -12,52 +12,49 @@
 #define marginForGridScale(gridScale) gridScale/2
 
 // Grid Point
-struct DSPGridPoint {
+typedef struct {
     NSUInteger x;
     NSUInteger y;
-};
-typedef struct DSPGridPoint DSPGridPoint;
+} DSPGridPoint;
 
 // Grid Size
-struct DSPGridSize {
+typedef struct {
     NSUInteger width;
     NSUInteger height;
-};
-typedef struct DSPGridSize DSPGridSize;
+} DSPGridSize;
 
 // Grid Rectangle
-struct DSPGridRect {
+typedef struct {
     DSPGridPoint origin;
     DSPGridSize size;
-};
-typedef struct DSPGridRect DSPGridRect;
+} DSPGridRect;
 
 /* Model related */
 // Value type
-enum DSPValueType {
+typedef enum {
     DSPAllValues = 0,
     DSPAnalogValue,
     DSPDigitalValue
-    };
-typedef enum DSPValueType DSPValueType;
+} DSPValueType;
 
 // Domain type
-enum DSPDomainType {
+typedef enum {
     DSPAllDomains = 0,
     DSPTimeDomain,
     DSPFrequencyDomain
-    };
-typedef enum DSPDomainType DSPDomainType;
+} DSPDomainType;
 
 // Signal type
-struct DSPSignalType {
+typedef struct {
     DSPValueType valueType;
     DSPDomainType domainType;
-};
-typedef struct DSPSignalType DSPSignalType;
+} DSPSignalType;
 
 // Signal value
 typedef double DSPSignalValue;
 
-// NodeID type
-typedef NSUInteger NodeID;
+// Waveform axis
+typedef enum {
+    DSPWaveformAxisX = 0,
+    DSPWaveformAxisY
+} DSPWaveformAxis;

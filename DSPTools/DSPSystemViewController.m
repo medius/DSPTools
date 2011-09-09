@@ -14,6 +14,7 @@
 #import "DSPCircuitFileIO.h"
 #import "DSPCircuitAnalyzer.h"
 #import "DSPSimulator.h"
+#import "DSPWaveformViewController.h"
 
 // Temporary
 #import "DSPHeader.h"
@@ -22,8 +23,6 @@
 
 #import "DSPComponents.h"
 #import "DSPNode.h"
-
-#import "CorePlot-CocoaTouch.h"
 
 static const CGFloat kComponentListHeight = 80;
 static const CGFloat kToolBarItemWidth    = 40;
@@ -266,6 +265,12 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     [DSPSimulator runSimulationForComponents:components andNodes:nodes];
     [simulationModel release];
+    
+    DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
+    waveform.graphView.frame = self.view.bounds;
+    waveform.delegate = self;
+    [self presentModalViewController:waveform animated:YES];
+    [waveform release];
 }
 
 @end
