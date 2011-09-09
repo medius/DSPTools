@@ -55,6 +55,7 @@
 		C35817A313FCD45500948309 /* DSPSummationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C35817A213FCD45000948309 /* DSPSummationView.m */; };
 		C35817A713FCECC500948309 /* DSPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C35817A613FCECBA00948309 /* DSPHelper.m */; };
 		C358D86114119A8C00C0EAFA /* DSPSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = C358D86014119A8C00C0EAFA /* DSPSimulator.m */; };
+		C358D901141958E700C0EAFA /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C358D900141958E700C0EAFA /* libCorePlot-CocoaTouch.a */; };
 		C3A7E38A13F352A60002491F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38913F352A60002491F /* UIKit.framework */; };
 		C3A7E38C13F352A60002491F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38B13F352A60002491F /* Foundation.framework */; };
 		C3A7E38E13F352A60002491F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A7E38D13F352A60002491F /* CoreGraphics.framework */; };
@@ -166,6 +167,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = BEF31F3A0F352DF5000DE5D2;
 			remoteInfo = Three20UI;
+		};
+		C358D8F81419564B00C0EAFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		C358D8FA141956AF00C0EAFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
 		};
 		C3A7E3E313F454B00002491F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -307,6 +322,8 @@
 		C35817A613FCECBA00948309 /* DSPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPHelper.m; sourceTree = "<group>"; };
 		C358D85F14119A8C00C0EAFA /* DSPSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSimulator.h; sourceTree = "<group>"; };
 		C358D86014119A8C00C0EAFA /* DSPSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSimulator.m; sourceTree = "<group>"; };
+		C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../shared/core-plot/Source/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		C358D900141958E700C0EAFA /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = SOURCE_ROOT; };
 		C3A7E38513F352A60002491F /* DSPTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSPTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A7E38913F352A60002491F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3A7E38B13F352A60002491F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -332,6 +349,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C358D901141958E700C0EAFA /* libCorePlot-CocoaTouch.a in Frameworks */,
 				3201088596B4756681693705 /* libThree20UICommon.a in Frameworks */,
 				320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */,
 				320A737074758E53BA54BE95 /* libThree20UINavigator.a in Frameworks */,
@@ -574,9 +592,18 @@
 			name = Simulator;
 			sourceTree = "<group>";
 		};
+		C358D8F01419564A00C0EAFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C358D8F91419564B00C0EAFA /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C3A7E37A13F352A50002491F = {
 			isa = PBXGroup;
 			children = (
+				C358D900141958E700C0EAFA /* libCorePlot-CocoaTouch.a */,
 				C3A7E38F13F352A60002491F /* DSPTools */,
 				C3A7E38813F352A60002491F /* Frameworks */,
 				C3A7E38613F352A60002491F /* Products */,
@@ -594,6 +621,7 @@
 		C3A7E38813F352A60002491F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */,
 				3201088596B4756681693700 /* Three20UICommon.xcodeproj */,
 				320D7DCCE32703ACAB9A45E0 /* Three20.xcodeproj */,
 				320A737074758E53BA54BE90 /* Three20UINavigator.xcodeproj */,
@@ -686,6 +714,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C358D8FB141956AF00C0EAFA /* PBXTargetDependency */,
 				3201088596B4756681693701 /* PBXTargetDependency */,
 				320D7DCCE32703ACAB9A45E1 /* PBXTargetDependency */,
 				320A737074758E53BA54BE91 /* PBXTargetDependency */,
@@ -718,6 +747,10 @@
 			productRefGroup = C3A7E38613F352A60002491F /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = C358D8F01419564A00C0EAFA /* Products */;
+					ProjectRef = C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */;
+				},
 				{
 					ProductGroup = 320D7DCCE32703ACAB9A45E3 /* Products */;
 					ProjectRef = 320D7DCCE32703ACAB9A45E0 /* Three20.xcodeproj */;
@@ -802,6 +835,13 @@
 			fileType = archive.ar;
 			path = libThree20UI.a;
 			remoteRef = 320F2C48872C2E2C4DF86206 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C358D8F91419564B00C0EAFA /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = C358D8F81419564B00C0EAFA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C3A7E3E413F454B00002491F /* Three20UnitTests.octest */ = {
@@ -973,6 +1013,11 @@
 			name = Three20UI;
 			targetProxy = 320F2C48872C2E2C4DF86202 /* PBXContainerItemProxy */;
 		};
+		C358D8FB141956AF00C0EAFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = C358D8FA141956AF00C0EAFA /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -1057,8 +1102,22 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DSPTools/DSPTools-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/../three20",
+					"$(BUILT_PRODUCTS_DIR)/../../three20",
+					../shared/three20/Build/Products/three20,
+					"$(BUILT_PRODUCTS_DIR)/../core-plot/**",
+					"$(BUILT_PRODUCTS_DIR)/../../core-plot/**",
+					"../shared/core-plot/Source/framework/**",
+					"../../shared/core-plot/Source/framework/**",
+				);
 				INFOPLIST_FILE = "DSPTools/DSPTools-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../shared/core-plot/Binaries/iOS\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1071,8 +1130,21 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DSPTools/DSPTools-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/../three20",
+					"$(BUILT_PRODUCTS_DIR)/../../three20",
+					../shared/three20/Build/Products/three20,
+					"$(BUILT_PRODUCTS_DIR)/../core-plot/**",
+					"$(BUILT_PRODUCTS_DIR)/../../core-plot/**",
+					"../shared/core-plot/Source/framework/**",
+				);
 				INFOPLIST_FILE = "DSPTools/DSPTools-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../shared/core-plot/Binaries/iOS\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

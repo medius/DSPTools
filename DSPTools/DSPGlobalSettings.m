@@ -15,7 +15,6 @@ static const CGFloat kMaxGridScale = 35;
 
 // Setters/getters
 @synthesize gridScale;
-@synthesize currentMaxNodeID;
 
 static DSPGlobalSettings *sharedGlobalSettings = nil;
 
@@ -47,7 +46,6 @@ static DSPGlobalSettings *sharedGlobalSettings = nil;
 - (void)setupDefaults
 {
     self.gridScale = 20;
-    self.currentMaxNodeID = 0;
 }
 
 // We can still have a regular init method, that will get called the first time the Singleton is used.

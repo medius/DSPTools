@@ -6,6 +6,8 @@
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
+// TODO: Use json file format for circuits
+
 #import "DSPCircuitFileIO.h"
 #import "DSPComponents.h"
 

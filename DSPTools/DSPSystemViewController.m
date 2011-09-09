@@ -23,6 +23,7 @@
 #import "DSPComponents.h"
 #import "DSPNode.h"
 
+#import "CorePlot-CocoaTouch.h"
 
 static const CGFloat kComponentListHeight = 80;
 static const CGFloat kToolBarItemWidth    = 40;
