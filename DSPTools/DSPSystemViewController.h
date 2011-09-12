@@ -17,7 +17,7 @@
     TTView*                 _systemView;
     DSPGridView*            _gridView;
     DSPComponentListView*   _componentListView;
-    NSDictionary*           _circuit;
+    NSDictionary*           _circuit;   // I am not sure if this needed as instance variable. What about simulaton model?
 }
 
 @property (readonly) TTView*                systemView;

@@ -10,20 +10,17 @@
 #import "DSPHeader.h"
 #import "Three20/Three20.h"
 #import "CorePlot-CocoaTouch.h"
-
-@protocol DSPWaveformViewDelegate
-- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
-@end
+#import "DSPWaveformDelegateProtocol.h"
 
 @interface DSPWaveformViewController : TTViewController <CPTPlotDataSource> {
-    CPTGraphHostingView          *_graphView;
-    id <DSPWaveformViewDelegate>  _delegate;
+    CPTGraphHostingView              *_graphView;
+    id <DSPWaveformDelegateProtocol>  _delegate;
     
 @private
     CPTXYGraph                   *_graph;
 }
 
-@property (nonatomic, retain) CPTGraphHostingView *graphView;
-@property (assign) id <DSPWaveformViewDelegate>    delegate;
+@property (nonatomic, retain) CPTGraphHostingView   *graphView;
+@property (assign) id <DSPWaveformDelegateProtocol>  delegate;
 
 @end

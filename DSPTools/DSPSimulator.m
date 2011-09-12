@@ -11,9 +11,46 @@
 #import "DSPPin.h"
 #import "DSPNode.h"
 
+@interface DSPSimulator () 
+@property (nonatomic, retain) NSMutableArray* xAxisBuffer;
+@property (nonatomic, retain) NSMutableArray* yAxisBuffer1;
+@property (nonatomic, retain) NSMutableArray* yAxisBuffer2;
+@end
+
 @implementation DSPSimulator
 
-+ (void)evaluateComponent:(DSPComponentViewController *)component atTime:(double)time
+#pragma mark - Accessors
+@synthesize xAxisBuffer = _xAxisBuffer;
+@synthesize yAxisBuffer1 = _yAxisBuffer1;
+@synthesize yAxisBuffer2 = _yAxisBuffer2;
+
+- (NSMutableArray *)xAxisBuffer
+{
+    if (!_xAxisBuffer) {
+        _xAxisBuffer = [[NSMutableArray alloc] init];
+    }
+    return _xAxisBuffer;
+}
+
+- (NSMutableArray *)yAxisBuffer1
+{
+    if (!_yAxisBuffer1) {
+        _yAxisBuffer1 = [[NSMutableArray alloc] init];
+    }
+    return _yAxisBuffer1;
+}
+
+- (NSMutableArray *)yAxisBuffer2
+{
+    if (!_yAxisBuffer2) {
+        _yAxisBuffer2 = [[NSMutableArray alloc] init];
+    }
+    return _yAxisBuffer2;
+}
+
+
+#pragma mark - Simulation
+- (void)evaluateComponent:(DSPComponentViewController *)component atTime:(double)time
 {
     // Evaluate the component
     [component.componentModel evaluteAtTime:time];
@@ -28,7 +65,7 @@
 // Updates the signal values of input pins of the component 
 // Returns yes, if all the inputs are ready.
 // Returns NO, if any input is not ready
-+ (BOOL)inputsReadyForComponent:(DSPComponentViewController *)component
+- (BOOL)inputsReadyForComponent:(DSPComponentViewController *)component
 {
     // Inputs are ready if all of them are connected to a node with usePreviousValue set or the currentValue is valid
     // If a component is a source, its inputs are ready since it does not have any inputs
@@ -51,7 +88,7 @@
     return inputsReady;
 }
 
-+ (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes
+- (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes
 {
     // Even though the circuit analyzer will try to arrange the components in the best order
     // possible, assume a random order of components and nodes.
@@ -65,11 +102,11 @@
     while ([temporaryComponents count]) {
         DSPComponentViewController *component = [[temporaryComponents objectAtIndex:0] retain];
         
-        BOOL inputsReady = [DSPSimulator inputsReadyForComponent:component];
+        BOOL inputsReady = [self inputsReadyForComponent:component];
         
         // Evaluate the output if the inputs are ready
         if (inputsReady) {
-            [DSPSimulator evaluateComponent:component atTime:time];
+            [self evaluateComponent:component atTime:time];
             
             // Add the component to the simulation component list
             [simulationComponents addObject:component];
@@ -100,7 +137,7 @@
     }
     
     // Iterate through each time step
-    for (double simulationTime; simulationTime<5 ; simulationTime = simulationTime + 0.1) {
+    for (double simulationTime = 0; simulationTime<5 ; simulationTime = simulationTime + 0.05) {
         // Invalidate all the current values of the nodes
         for (DSPNode *node in nodes) {
             node.currentValueIsValid = NO;
@@ -108,19 +145,49 @@
         
         // Evaluate each component
         for (DSPComponentViewController *component in simulationComponents) {
-            BOOL inputsReady = [DSPSimulator inputsReadyForComponent:component];
+            BOOL inputsReady = [self inputsReadyForComponent:component];
             
             if (inputsReady) {
-                [DSPSimulator evaluateComponent:component atTime:simulationTime];
+                [self evaluateComponent:component atTime:simulationTime];
             } else {
                 // TODO: This condition should not occur as all the inputs should be ready
                 NSLog(@"ERROR: Simulator - Inputs not ready!");
             }
         }
+        
+        NSNumber *xValue = [NSNumber numberWithDouble:simulationTime];
+        [self.xAxisBuffer addObject:xValue];
+
+        DSPNode *sourceOutput = [nodes objectAtIndex:0];
+        NSNumber *yValue1 = [NSNumber numberWithDouble:(double)sourceOutput.currentValue];
+        [self.yAxisBuffer1 addObject:yValue1];
+        
+        DSPNode *integratorOutput = [nodes lastObject];
+        NSNumber *yValue2 = [NSNumber numberWithDouble:(double)integratorOutput.currentValue];
+        [self.yAxisBuffer2 addObject:yValue2];
+        
     }
     
     [simulationComponents release];
 
+}
+
+#pragma mark - Waveform Data Source Methods
+
+// This might not be suitable here. It should respond to probes rather than waveform.
+- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
+{
+    if (waveformAxis == DSPWaveformAxisX) {
+        return [self.xAxisBuffer objectAtIndex:index];
+    }
+    else {
+        if (waveformIndex == 0) {
+            return [self.yAxisBuffer1 objectAtIndex:index];
+        }
+        else {
+            return [self.yAxisBuffer2 objectAtIndex:index];
+        }
+    }
 }
 
 @end

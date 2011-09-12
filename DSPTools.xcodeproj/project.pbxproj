@@ -349,6 +349,7 @@
 		C3A7E3A713F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
 		C3A7E4B013F482D00002491F /* DSPGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGridView.h; sourceTree = "<group>"; };
 		C3A7E4B113F482D00002491F /* DSPGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGridView.m; sourceTree = "<group>"; };
+		C3A7E806141AE06400187F4B /* DSPWaveformDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformDelegateProtocol.h; sourceTree = "<group>"; };
 		C3C8E7BB141A974800EBC7DA /* _CPTFillColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillColor.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillColor.h"; sourceTree = "<group>"; };
 		C3C8E7BC141A974800EBC7DA /* _CPTFillGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillGradient.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillGradient.h"; sourceTree = "<group>"; };
 		C3C8E7BD141A974800EBC7DA /* _CPTFillImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillImage.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillImage.h"; sourceTree = "<group>"; };
@@ -687,6 +688,7 @@
 			children = (
 				C39E9C7E14199B5200C94CA6 /* DSPWaveformViewController.h */,
 				C39E9C7F14199B5200C94CA6 /* DSPWaveformViewController.m */,
+				C3A7E806141AE06400187F4B /* DSPWaveformDelegateProtocol.h */,
 				C39E9C8214199B9200C94CA6 /* DSPWaveformView.h */,
 				C39E9C8314199B9200C94CA6 /* DSPWaveformView.m */,
 			);

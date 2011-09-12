@@ -263,14 +263,18 @@ static const CGFloat kToolBarItemWidth    = 40;
         NSLog(@"Node x:%d y:%d", location.x, location.y);
     }
     
-    [DSPSimulator runSimulationForComponents:components andNodes:nodes];
-    [simulationModel release];
+    DSPSimulator *sim = [[DSPSimulator alloc] init];
+    
+    [sim runSimulationForComponents:components andNodes:nodes];
     
     DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
     waveform.graphView.frame = self.view.bounds;
-    waveform.delegate = self;
+    waveform.delegate = sim;
     [self presentModalViewController:waveform animated:YES];
     [waveform release];
+    
+    [simulationModel release];
+
 }
 
 @end

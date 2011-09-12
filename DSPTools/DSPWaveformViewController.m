@@ -88,8 +88,8 @@
     
     // Plotspace
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)self.graph.defaultPlotSpace;
-    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-6) length:CPTDecimalFromFloat(12)];
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-5) length:CPTDecimalFromFloat(30)];
+    plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-0.5) length:CPTDecimalFromFloat(6)];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(-1.5) length:CPTDecimalFromFloat(3)];
     
     // AxisSet
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *)self.graph.axisSet;
@@ -110,7 +110,7 @@
     axisSet.xAxis.labelOffset = 3.0f;
  
     // Y Axis
-    axisSet.yAxis.majorIntervalLength = [[NSDecimalNumber decimalNumberWithString:@"5"] decimalValue];
+    axisSet.yAxis.majorIntervalLength = [[NSDecimalNumber decimalNumberWithString:@"1"] decimalValue];
     axisSet.yAxis.minorTicksPerInterval = 4;
     axisSet.yAxis.majorTickLineStyle = lineStyle;
     axisSet.yAxis.minorTickLineStyle = lineStyle;
@@ -121,7 +121,7 @@
     
     // X Squared Plot
     CPTScatterPlot *xSquaredPlot = [[CPTScatterPlot alloc] init];
-    xSquaredPlot.identifier = @"X Squared Plot";
+    xSquaredPlot.identifier = @"Signal Source";
     CPTMutableLineStyle *xSquaredPlotLineStyle = [[xSquaredPlot.dataLineStyle mutableCopy] autorelease];
     xSquaredPlotLineStyle.lineWidth = 1.0f;
     xSquaredPlotLineStyle.lineColor = [CPTColor redColor];
@@ -137,7 +137,7 @@
     
     // X Inverse Plot
     CPTScatterPlot *xInversePlot = [[CPTScatterPlot alloc] init];
-    xInversePlot.identifier = @"X Inverse Plot";
+    xInversePlot.identifier = @"Integrator";
     CPTMutableLineStyle *xInversePlotLineStyle = [[xInversePlot.dataLineStyle mutableCopy] autorelease];
     xInversePlotLineStyle.lineWidth = 1.0f;
     xInversePlotLineStyle.lineColor = [CPTColor greenColor];
@@ -165,22 +165,34 @@
 
 - (NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
-    return 51;
+    return 100;
 }
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-    double val = (index/5.0)-5;
+//    double val = (index/5.0)-5;
+//    
+//    if(fieldEnum == CPTScatterPlotFieldX){ 
+//        return [NSNumber numberWithDouble:val]; 
+//    }
+//    else {
+//        if(plot.identifier == @"X Squared Plot") { 
+//            return [NSNumber numberWithDouble:val*val]; 
+//        }
+//        else { 
+//            return [NSNumber numberWithDouble:1/val]; 
+//        }
+//    }
     
-    if(fieldEnum == CPTScatterPlotFieldX){ 
-        return [NSNumber numberWithDouble:val]; 
+    if (fieldEnum == CPTScatterPlotFieldX) {
+        return [self.delegate numberForWaveformIndex:0 axis:DSPWaveformAxisX recordIndex:index];
     }
     else {
-        if(plot.identifier == @"X Squared Plot") { 
-            return [NSNumber numberWithDouble:val*val]; 
+        if (plot.identifier == @"Signal Source") {
+            return [self.delegate numberForWaveformIndex:0 axis:DSPWaveformAxisY recordIndex:index];
         }
-        else { 
-            return [NSNumber numberWithDouble:1/val]; 
+        else {
+            return [self.delegate numberForWaveformIndex:1 axis:DSPWaveformAxisY recordIndex:index];            
         }
     }
 }

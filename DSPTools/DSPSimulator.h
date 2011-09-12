@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DSPWaveformViewController.h"
+#import "DSPWaveformDelegateProtocol.h"
 
-@protocol DSPWaveformViewDelegate;
-
-@interface DSPSimulator : NSObject <DSPWaveformViewDelegate> {
-    
+@interface DSPSimulator : NSObject <DSPWaveformDelegateProtocol> {
+@private
+    NSMutableArray* _xAxisBuffer;
+    NSMutableArray* _yAxisBuffer1;
+    NSMutableArray* _yAxisBuffer2;
 }
 
-+ (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes;
+- (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes;
 
 @end
