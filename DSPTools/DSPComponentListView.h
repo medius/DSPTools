@@ -10,6 +10,11 @@
 #import "Three20/Three20.h"
 
 @interface DSPComponentListView : UIScrollView {
+    CGFloat _gridScale;
 }
+
+@property (nonatomic) CGFloat gridScale;
+
+- (id)initWithFrame:(CGRect)frame andGridScale:(CGFloat)initGridScale;
 
 @end

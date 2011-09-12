@@ -10,12 +10,24 @@
 #import "Three20UI/Three20UI+Additions.h"
 #import "DSPHelper.h"
 
-#import "DSPIntegratorView.h"
-#import "DSPSummationView.h"
+#import "DSPComponents.h"
 
-static const CGFloat kDefaultWidth = 1500;
+static const CGFloat kDefaultWidth = 1000;
 
 @implementation DSPComponentListView
+
+#pragma mark - Accessors
+@synthesize gridScale = _gridScale;
+
+- (void)setGridScale:(CGFloat)newGridScale
+{
+    if (newGridScale != _gridScale) {
+        _gridScale = newGridScale;
+        // TODO: Update the gridscale of all the components
+    }
+}
+
+#pragma mark - Setup and dealloc
 
 - (void)setup
 {
@@ -26,51 +38,45 @@ static const CGFloat kDefaultWidth = 1500;
     self.showsVerticalScrollIndicator = NO;    
     self.contentSize = CGSizeMake(kDefaultWidth, self.height);
     
-    //CGFloat gridScale = 12;
+    DSPGridPoint anchor1, anchor2;
 
-//    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];    
-//    
-//    DSPGridPoint componentLocation;
-//    componentLocation.x = 1;
-//    componentLocation.y = 0;
-//    //dspIV.origin = componentLocation;
-//    
-//    DSPGridRect componentFrame; 
-//    componentFrame.origin = dspIV.origin;
-//    componentFrame.size = dspIV.size;
-//    dspIV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
-//    dspIV.gridScale = gridScale;
-//    dspIV.draggable = NO;
-//    dspIV.lineColor = [UIColor blackColor];
-//    dspIV.fillColor = [UIColor clearColor];
-//    
-//    [self addSubview:dspIV];
-//    
-//    DSPSummationView *dspSV = [[DSPSummationView alloc] init];
-//    
-//    componentLocation.x = dspIV.frame.size.width;
-//    [dspIV release];
-//
-//    componentLocation.y = 0;
-//    //dspSV.origin = componentLocation;
-//    
-//    //componentFrame.origin = dspSV.origin;
-//    //componentFrame.size = dspSV.size;
-//    dspSV.frame = [DSPHelper getRealRectFromGridRect:componentFrame forGridScale:gridScale];
-//    dspSV.gridScale = gridScale;
-//    dspSV.draggable = NO;
-//    dspSV.lineColor = [UIColor blackColor];
-//    dspSV.fillColor = [UIColor clearColor];
-//    
-//    [self addSubview:dspSV];
-//    [dspSV release];
+    // Integrator
+    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];        
+    anchor1.x = 1;
+    anchor1.y = 3;
+    anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
+    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:anchor1 forGridScale:_gridScale];
+    dspIV.anchor1 = anchor1;
+    dspIV.anchor2 = anchor2;
+    dspIV.gridScale = _gridScale;
+    dspIV.draggable = NO;
+    dspIV.lineColor = [UIColor blackColor];
+    dspIV.fillColor = [UIColor clearColor];
+    [self addSubview:dspIV];
+    [dspIV release];
+
+    // Signal Source
+    DSPSignalSourceView *dspSSV = [[DSPSignalSourceView alloc] init];
+    anchor1.x = 7;
+    anchor1.y = 2;
+    anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
+    dspSSV.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:anchor1 forGridScale:self.gridScale];
+    dspSSV.anchor1 = anchor1;
+    dspSSV.anchor2 = anchor2;
+    dspSSV.gridScale = _gridScale;
+    dspSSV.draggable = NO;
+    dspSSV.lineColor = [UIColor blackColor];
+    dspSSV.fillColor = [UIColor clearColor];
+    [self addSubview:dspSSV];
+    [dspSSV release];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame andGridScale:(CGFloat)initGridScale;
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        _gridScale = initGridScale;
         [self setup];
     }
     return self;

@@ -17,8 +17,9 @@ static const CGFloat kGridPointRadius = 0.5;
 
 @implementation DSPGridView
 
-@synthesize gridPointColor        = _gridPointColor;
-@synthesize wirePoints            = _wirePoints;
+@synthesize gridScale      = _gridScale;
+@synthesize gridPointColor = _gridPointColor;
+@synthesize wirePoints     = _wirePoints;
 
 - (UIColor *)gridPointColor
 {
@@ -101,13 +102,10 @@ static const CGFloat kGridPointRadius = 0.5;
 
 // Update the subviews based on their properties.
 - (void)updateSubViews
-{
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    
+{    
     for (DSPComponentView *componentView in self.subviews)
     {
-        componentView.gridScale = gridScale;
+        componentView.gridScale = self.gridScale;
 //        DSPGridPoint origin = componentView.origin;
 //        DSPGridSize size = componentView.size;
 //        
@@ -117,7 +115,7 @@ static const CGFloat kGridPointRadius = 0.5;
         DSPGridPoint anchor1 = componentView.anchor1;
         DSPGridPoint anchor2 = componentView.anchor2;
         
-        CGRect frame = [DSPHelper getFrameForObject:componentView withAnchor1:anchor1 withAnchor2:anchor2 forGridScale:gridScale];
+        CGRect frame = [DSPHelper getFrameForObject:componentView withAnchor1:anchor1 withAnchor2:anchor2 forGridScale:self.gridScale];
         
         // Use block animations if it is supported (iOS 4.0 and later)
         if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
@@ -148,9 +146,6 @@ static const CGFloat kGridPointRadius = 0.5;
 // An empty implementation adversely affects performance during animation.
 - (void)drawContent:(CGRect)rect
 {
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    
     // Start point of the grid
     CGPoint startPoint;
     startPoint.x = self.bounds.origin.x;
@@ -175,14 +170,14 @@ static const CGFloat kGridPointRadius = 0.5;
     CGPoint currentPoint;
     
     // Horizontal lines
-    for (CGFloat y = startPoint.y; y <= endPoint.y; y += gridScale) {
+    for (CGFloat y = startPoint.y; y <= endPoint.y; y += self.gridScale) {
         CGPoint fromPoint = CGPointMake(startPoint.x, y);
         CGPoint toPoint = CGPointMake(endPoint.x, y);
         [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
     }
     
     // Vertical lines
-    for (CGFloat x = startPoint.x; x <= endPoint.x; x += gridScale) {
+    for (CGFloat x = startPoint.x; x <= endPoint.x; x += self.gridScale) {
         CGPoint fromPoint = CGPointMake(x, startPoint.y);
         CGPoint toPoint = CGPointMake(x, endPoint.y);
         [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
@@ -199,8 +194,8 @@ static const CGFloat kGridPointRadius = 0.5;
             
             if (!firstPoint) {
                 // Draw line from lastPoint to currentPoint
-                currentPoint = [DSPHelper getRealPointFromGridPoint:currentGridPoint forGridScale:gridScale];
-                lastPoint = [DSPHelper getRealPointFromGridPoint:lastGridPoint forGridScale:gridScale];
+                currentPoint = [DSPHelper getRealPointFromGridPoint:currentGridPoint forGridScale:self.gridScale];
+                lastPoint = [DSPHelper getRealPointFromGridPoint:lastGridPoint forGridScale:self.gridScale];
                 [DSPHelper drawLineFromPoint:lastPoint toPoint:currentPoint withLineWidth:2.0 withLineColor:[UIColor redColor]];
             }
             lastGridPoint = currentGridPoint;
@@ -213,14 +208,11 @@ static const CGFloat kGridPointRadius = 0.5;
 // TODO: Pass on the creation of wire/components to systemview controller
 - (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
 {
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    
-    CGRect frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    CGRect frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:self.gridScale];
     DSPWireView *wire = [[DSPWireView alloc] initWithFrame:frame];
     wire.anchor1 = anchor1;
     wire.anchor2 = anchor2;
-    wire.gridScale = gridScale;
+    wire.gridScale = self.gridScale;
     wire.draggable = YES;
     
     [self addSubview:wire];
@@ -277,12 +269,8 @@ static const CGFloat kGridPointRadius = 0.5;
 	if (gesture.state == UIGestureRecognizerStateChanged ||
 		gesture.state == UIGestureRecognizerStateEnded) 
     {
-        // Get the gridScale
-        CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-        
-		gridScale *= gesture.scale;
+		self.gridScale *= gesture.scale;
 		gesture.scale = 1;
-        [DSPGlobalSettings sharedGlobalSettings].gridScale = gridScale;
         [self updateUI];
 	}
 }
@@ -294,10 +282,7 @@ static const CGFloat kGridPointRadius = 0.5;
     UITouch *aTouch = [touches anyObject];
     CGPoint currentTouch = [aTouch locationInView:self];
     
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    
-    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:gridScale];
+    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:self.gridScale];
     [self.wirePoints addObject:[NSValue value:&gridPoint withObjCType:@encode(DSPGridPoint)]];
 }
 
@@ -308,10 +293,7 @@ static const CGFloat kGridPointRadius = 0.5;
     UITouch *aTouch = [touches anyObject];
     CGPoint currentTouch = [aTouch locationInView:self];
     
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-    
-    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:gridScale];
+    DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:self.gridScale];
     DSPGridPoint lastPoint;
     [[_wirePoints lastObject] getValue:&lastPoint];
     

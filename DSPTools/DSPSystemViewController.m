@@ -24,7 +24,8 @@
 #import "DSPComponents.h"
 #import "DSPNode.h"
 
-static const CGFloat kComponentListHeight = 80;
+static const CGFloat kGridScale = 20;
+static const CGFloat kComponentListHeight = 120;
 static const CGFloat kToolBarItemWidth    = 40;
 
 @interface DSPSystemViewController()
@@ -63,10 +64,11 @@ static const CGFloat kToolBarItemWidth    = 40;
         // Initialize the gridView
         CGRect gridViewFrame = TTApplicationFrame();
         _gridView = [[DSPGridView alloc] initWithFrame:gridViewFrame];
+        _gridView.gridScale = kGridScale;
         
         // Initialize the componentListView
         CGRect componentListFrame = CGRectMake(0, _systemView.bottom - kComponentListHeight, _systemView.width, kComponentListHeight);
-        _componentListView = [[DSPComponentListView alloc] initWithFrame:componentListFrame];
+        _componentListView = [[DSPComponentListView alloc] initWithFrame:componentListFrame andGridScale:kGridScale];
         
         [self setup];
     }
@@ -102,53 +104,13 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     self.view = self.systemView;
     [self.view addSubview:self.gridView];
-    //[self.view addSubview:self.componentListView];
+    [self.view addSubview:self.componentListView];
     
     // Configure the navigation controller when in system view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self.navigationController setToolbarHidden:NO animated:NO];
     self.navigationController.toolbar.barStyle = UIBarStyleBlackOpaque;
     
-    
-    // Get the gridScale
-    CGFloat gridScale = [DSPGlobalSettings sharedGlobalSettings].gridScale;
-//    DSPGridPoint componentLocation;
-
-//    // Integrator block
-//    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];
-//    componentLocation.x = 5;
-//    componentLocation.y = 7;
-//    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-//    dspIV.anchor1 = componentLocation;
-//    dspIV.anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-//    dspIV.gridScale = gridScale;
-//    dspIV.draggable = YES;
-//    [self.gridView addSubview:dspIV];
-//    [dspIV release];
-//    
-//    // Summation block
-//    DSPSummationView *dspSV = [[DSPSummationView alloc] init];
-//    componentLocation.x = 10;
-//    componentLocation.y = 7;
-//    dspSV.frame = [DSPSummationView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-//    dspSV.anchor1 = componentLocation;
-//    dspSV.anchor2 = [DSPSummationView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-//    dspSV.gridScale = gridScale;
-//    dspSV.draggable = YES;
-//    [self.gridView addSubview:dspSV];
-//    [dspSV release];
-//    
-//    // Signal source 
-//    DSPSummationView *dspSS = [[DSPSignalSourceView alloc] init];
-//    componentLocation.x = 2;
-//    componentLocation.y = 7;
-//    dspSS.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:componentLocation forGridScale:gridScale];
-//    dspSS.anchor1 = componentLocation;
-//    dspSS.anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:componentLocation];
-//    dspSS.gridScale = gridScale;
-//    dspSS.draggable = YES;
-//    [self.gridView addSubview:dspSS];
-//    [dspSS release];
     
     NSArray *components = [self.circuit objectForKey:@"components"];
     
@@ -158,8 +120,8 @@ static const CGFloat kToolBarItemWidth    = 40;
         [DSPHelper getFrameForObject:componentViewController.componentView 
                          withAnchor1:componentViewController.componentView.anchor1 
                          withAnchor2:componentViewController.componentView.anchor2 
-                        forGridScale:gridScale];
-        componentViewController.componentView.gridScale = gridScale;
+                        forGridScale:self.gridView.gridScale];
+        componentViewController.componentView.gridScale = self.gridView.gridScale;
         componentViewController.componentView.draggable = YES;
         [self.gridView addSubview:componentViewController.componentView];
     };
@@ -170,7 +132,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.componentListView.backgroundColor = [UIColor brownColor];
+    self.componentListView.backgroundColor = [UIColor grayColor];
 }
 
 

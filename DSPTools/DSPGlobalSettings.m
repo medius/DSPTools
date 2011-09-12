@@ -14,25 +14,24 @@ static const CGFloat kMaxGridScale = 35;
 @implementation DSPGlobalSettings
 
 // Setters/getters
-@synthesize gridScale;
 
 static DSPGlobalSettings *sharedGlobalSettings = nil;
 
 // Set the limits on gridScale
-- (void)setGridScale:(CGFloat)newGridScale
-{
-    if (newGridScale < kMinGridScale) {
-        gridScale = kMinGridScale;
-    } 
-    else if (newGridScale > kMaxGridScale)
-    {
-        gridScale = kMaxGridScale;
-    }
-    else 
-    {
-        gridScale = newGridScale;
-    }
-}
+//- (void)setGridScale:(CGFloat)newGridScale
+//{
+//    if (newGridScale < kMinGridScale) {
+//        gridScale = kMinGridScale;
+//    } 
+//    else if (newGridScale > kMaxGridScale)
+//    {
+//        gridScale = kMaxGridScale;
+//    }
+//    else 
+//    {
+//        gridScale = newGridScale;
+//    }
+//}
 
 // Get the shared instance and create it if necessary.
 + (DSPGlobalSettings*)sharedGlobalSettings {
@@ -45,7 +44,7 @@ static DSPGlobalSettings *sharedGlobalSettings = nil;
 
 - (void)setupDefaults
 {
-    self.gridScale = 20;
+    //self.gridScale = 20;
 }
 
 // We can still have a regular init method, that will get called the first time the Singleton is used.

@@ -12,6 +12,7 @@
 #import "Three20/Three20.h"
 
 @interface DSPGridView : TTView {
+    CGFloat     _gridScale;
     UIColor*    _gridPointColor;
     BOOL        _wireDrawingInProgress;
     
@@ -19,6 +20,7 @@
     NSMutableArray* _wirePoints;
 }
 
+@property (nonatomic) CGFloat          gridScale;
 @property (nonatomic, retain) UIColor* gridPointColor;
 @property BOOL                         wireDrawingInProgress;
 

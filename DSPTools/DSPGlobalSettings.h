@@ -10,10 +10,7 @@
 #import "DSPHeader.h"
 
 @interface DSPGlobalSettings : NSObject {
-    CGFloat gridScale;
 }
-
-@property (nonatomic) CGFloat gridScale;
 
 // Shared Global Setting
 + (DSPGlobalSettings *)sharedGlobalSettings;

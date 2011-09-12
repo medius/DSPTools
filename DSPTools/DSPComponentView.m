@@ -25,7 +25,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 @implementation DSPComponentView
 
-// Setters/getters
+#pragma mark - Accessors
 
 @synthesize anchor1             = _anchor1;
 @synthesize anchor2             = _anchor2;
@@ -72,6 +72,8 @@ static const CGFloat kDefaultLineWidth = 3.0;
         [self updateUI];
     }
 }
+
+#pragma mark - Setup and dealloc
 
 - (void)componentViewSetup
 {
