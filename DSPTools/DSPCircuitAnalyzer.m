@@ -141,6 +141,9 @@
     NSMutableArray *errors = [[NSMutableArray alloc] init];
 
     for (DSPComponentViewController *component in components) {
+        // Debug
+        NSLog(@"%d %d %d %d\n", component.componentView.anchor1.x, component.componentView.anchor1.y, component.componentView.anchor2.x, component.componentView.anchor2.y);
+        
         // Create nodes for pins
         [DSPCircuitAnalyzer createNodesForComponent:component inNodes:nodes];
     }

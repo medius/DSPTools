@@ -210,6 +210,7 @@ static const CGFloat kGridPointRadius = 0.5;
 
 }
 
+// TODO: Pass on the creation of wire/components to systemview controller
 - (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
 {
     // Get the gridScale
