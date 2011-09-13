@@ -269,7 +269,7 @@ static const CGFloat kGridPointRadius = 0.5;
 	if (gesture.state == UIGestureRecognizerStateChanged ||
 		gesture.state == UIGestureRecognizerStateEnded) 
     {
-		self.gridScale *= gesture.scale;
+		// self.gridScale *= gesture.scale;
 		gesture.scale = 1;
         [self updateUI];
 	}

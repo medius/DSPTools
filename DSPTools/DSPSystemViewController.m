@@ -47,13 +47,10 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self setToolbarItems:[self createToolBarItems]];
 }
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil filePath:(NSString *)filePath
 - (id)initWithCircuitFile:(NSString *)filePath
 {
     self = [super init];
     if (self) {
-        // TODO: Change this to use self.*
-        
         // Get the circuit from the file
         _circuit = [[DSPCircuitFileIO circuitInFile:filePath] retain];
         

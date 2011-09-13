@@ -28,19 +28,6 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     return _wireLength;
 }
 
-- (BOOL)isVertical
-{
-    if (_anchor1.x == _anchor2.x) 
-    {
-        _isVertical = YES;
-    }
-    else 
-    {
-        _isVertical = NO;
-    }
-    return _isVertical;
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -88,7 +75,7 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     // Build frame for a horizontal wire
     if (anchor1.y == anchor2.y) 
     {
-        // Based on the x direction of the wire, generated a frame that is left to right
+        // Based on the x direction of the wire, generate a frame that is left to right
         if (anchor1.x < anchor2.x) 
         {
             frame = CGRectMake(realAnchor1.x, realAnchor1.y-margin, abs(realAnchor1.x-realAnchor2.x), 2*margin);
@@ -102,7 +89,7 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     // Build frame for a vertical wire
     else if (anchor1.x == anchor2.x) 
     {
-        // Based on the y direction of the wire, generated a frame that is left to right
+        // Based on the y direction of the wire, generate a frame that is top to bottom
         if (anchor1.y < anchor2.y) 
         {
             frame = CGRectMake(realAnchor1.x-margin, realAnchor1.y, 2*margin, abs(realAnchor1.y-realAnchor2.y));
