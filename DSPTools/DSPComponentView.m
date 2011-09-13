@@ -35,6 +35,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @synthesize lineColor           = _lineColor;
 @synthesize fillColor           = _fillColor;
 @synthesize draggable           = _draggable;
+@synthesize isListMember        = _isListMember;
 
 @synthesize size                = _size;
 @synthesize delegate            = _delegate;
@@ -190,6 +191,16 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    // If addDelegate is assigned, it is probably a componentlist member
+    // TODO: This is a really bad coding. ComponentView should not know anything about componentlist, etc.
+//    if (self.isListMember) {
+//        id viewCopy = [self mutableCopy];
+//        [self.superview.superview addSubview:self];
+//        [self.superview addSubview:viewCopy];
+//        [viewCopy release];
+//        self.draggable = YES;
+//    }
+    
     if (!self.draggable) return;
     //if (!self.selected) return;
     
@@ -204,7 +215,8 @@ static const CGFloat kDefaultLineWidth = 3.0;
     [self updateUI];
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
+{
     if (!self.draggable) return;
     //if (!self.selected) return;
 
@@ -270,6 +282,55 @@ static const CGFloat kDefaultLineWidth = 3.0;
 {
     // Subclasses need to implement this
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil];
+}
+
+#pragma mark -
+#pragma mark NSCopying methods
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    DSPComponentView *viewCopy = [[DSPComponentView allocWithZone:zone] init];
+    
+    viewCopy->_anchor1 = self->_anchor1;
+    viewCopy->_anchor2 = self->_anchor2;
+    viewCopy->_gridScale = self->_gridScale;
+    viewCopy->_lineWidth = self->_lineWidth;
+    viewCopy->_lineColor = [self->_lineColor copy];
+    viewCopy->_fillColor = [self->_fillColor copy];
+    viewCopy->_draggable = self->_draggable;
+    viewCopy->_selected = self->_selected;
+    viewCopy->_isVertical = self->_isVertical;
+    viewCopy->_isListMember = self->_isListMember;
+    viewCopy->_size = self->_size;
+    
+    viewCopy->_inViewTouchLocation = self->_inViewTouchLocation;
+    viewCopy->_anchor1RelativeToOrigin = self->_anchor1RelativeToOrigin;
+    viewCopy->_rectangleRadius = self->_rectangleRadius;
+    
+    return viewCopy;
+}
+
+-(id)mutableCopyWithZone:(NSZone *)zone
+{
+    DSPComponentView *viewCopy = [[DSPComponentView allocWithZone:zone] init];
+ 	
+    viewCopy->_anchor1 = self->_anchor1;
+    viewCopy->_anchor2 = self->_anchor2;
+    viewCopy->_gridScale = self->_gridScale;
+    viewCopy->_lineWidth = self->_lineWidth;
+    viewCopy->_lineColor = [self->_lineColor copy];
+    viewCopy->_fillColor = [self->_fillColor copy];
+    viewCopy->_draggable = self->_draggable;
+    viewCopy->_selected = self->_selected;
+    viewCopy->_isVertical = self->_isVertical;
+    viewCopy->_isListMember = self->_isListMember;
+    viewCopy->_size = self->_size;
+    
+    viewCopy->_inViewTouchLocation = self->_inViewTouchLocation;
+    viewCopy->_anchor1RelativeToOrigin = self->_anchor1RelativeToOrigin;
+    viewCopy->_rectangleRadius = self->_rectangleRadius;
+    
+    return viewCopy;
 }
 
 @end

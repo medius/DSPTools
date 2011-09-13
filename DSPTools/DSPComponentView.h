@@ -19,7 +19,11 @@
 - (void)anchor2Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue;
 @end
 
-@interface DSPComponentView : TTView {
+//@protocol DSPComponentAddProtocol <NSObject>
+//- (void)addComponent:(DSPComponentView *)componentView;
+//@end
+
+@interface DSPComponentView : TTView <NSCopying, NSMutableCopying> {
     DSPGridPoint    _anchor1;
     DSPGridPoint    _anchor2;
     
@@ -30,7 +34,7 @@
     BOOL            _draggable;
     BOOL            _selected;
     BOOL            _isVertical;
-    
+    BOOL            _isListMember;
     DSPGridSize     _size;
     
     id <DSPComponentViewDelegate> _delegate;
@@ -53,6 +57,7 @@
 @property BOOL                          draggable;  // isDraggable
 @property BOOL                          selected;   // isSelected
 @property (readonly) BOOL               isVertical;
+@property BOOL                          isListMember;
 
 @property (readonly) DSPGridSize        size;
 @property (assign) id <DSPComponentViewDelegate> delegate;

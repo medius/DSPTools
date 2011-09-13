@@ -23,7 +23,7 @@ static const CGFloat kDefaultWidth = 1000;
 {
     if (newGridScale != _gridScale) {
         _gridScale = newGridScale;
-        // TODO: Update the gridscale of all the components
+        // TODO: Update the gridscale of all the subview components
     }
 }
 
@@ -50,6 +50,7 @@ static const CGFloat kDefaultWidth = 1000;
     dspIV.anchor2 = anchor2;
     dspIV.gridScale = _gridScale;
     dspIV.draggable = NO;
+    dspIV.isListMember = YES;
     dspIV.lineColor = [UIColor blackColor];
     dspIV.fillColor = [UIColor clearColor];
     [self addSubview:dspIV];
@@ -65,6 +66,7 @@ static const CGFloat kDefaultWidth = 1000;
     dspSSV.anchor2 = anchor2;
     dspSSV.gridScale = _gridScale;
     dspSSV.draggable = NO;
+    dspSSV.isListMember = YES;
     dspSSV.lineColor = [UIColor blackColor];
     dspSSV.fillColor = [UIColor clearColor];
     [self addSubview:dspSSV];
