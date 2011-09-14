@@ -17,9 +17,11 @@ static const CGFloat kGridPointRadius = 0.5;
 
 @implementation DSPGridView
 
+#pragma mark - Accessors
 @synthesize gridScale      = _gridScale;
 @synthesize gridPointColor = _gridPointColor;
 @synthesize wirePoints     = _wirePoints;
+@synthesize delegate       = _delegate;
 
 - (UIColor *)gridPointColor
 {
@@ -205,20 +207,7 @@ static const CGFloat kGridPointRadius = 0.5;
 
 }
 
-// TODO: Pass on the creation of wire/components to systemview controller
-- (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
-{
-    CGRect frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:self.gridScale];
-    DSPWireView *wire = [[DSPWireView alloc] initWithFrame:frame];
-    wire.anchor1 = anchor1;
-    wire.anchor2 = anchor2;
-    wire.gridScale = self.gridScale;
-    wire.draggable = YES;
-    
-    [self addSubview:wire];
-    [wire release];
-    [self updateUI];
-}
+
 
 - (void)createWireComponents
 {
@@ -245,7 +234,7 @@ static const CGFloat kGridPointRadius = 0.5;
             if (!((wireStartPoint.x == wireLastPoint.x && wireStartPoint.x == currentGridPoint.x) ||
                   (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y)))
             {
-                [self createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
+                [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
                 
                 // Assign for latest segment
                 wireStartPoint = wireLastPoint;
@@ -256,7 +245,7 @@ static const CGFloat kGridPointRadius = 0.5;
             // If currentGridPoint is the last grid point in the array, create a wire
             if (i == self.wirePoints.count-1) 
             {
-                [self createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
+                [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
             }
         }
     }

@@ -15,6 +15,6 @@
 
 // Parses a circuit file and returns a dictionary with circuit components
 // and options
-+ (NSDictionary *)circuitInFile:(NSString *)filePath;
++ (NSMutableDictionary *)circuitInFile:(NSString *)filePath;
 
 @end

@@ -62,6 +62,7 @@ static const CGFloat kToolBarItemWidth    = 40;
         CGRect gridViewFrame = TTApplicationFrame();
         _gridView = [[DSPGridView alloc] initWithFrame:gridViewFrame];
         _gridView.gridScale = kGridScale;
+        _gridView.delegate = self;
         
         // Initialize the componentListView
         CGRect componentListFrame = CGRectMake(0, _systemView.bottom - kComponentListHeight, _systemView.width, kComponentListHeight);
@@ -234,6 +235,27 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     [simulationModel release];
 
+}
+
+- (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
+{
+    DSPWireViewController *newWire = [[DSPWireViewController alloc] init];
+    newWire.componentView.frame = 
+    [DSPHelper getFrameForObject:newWire.componentView 
+                     withAnchor1:anchor1 
+                     withAnchor2:anchor2 
+                    forGridScale:self.gridView.gridScale];
+    newWire.componentView.anchor1 = anchor1;
+    newWire.componentView.anchor2 = anchor2;
+    newWire.componentView.gridScale = self.gridView.gridScale;
+    newWire.componentView.draggable = YES;
+
+    
+    [self.gridView addSubview:newWire.componentView];
+    NSMutableArray *components = [self.circuit objectForKey:@"components"];
+    [components addObject:newWire];
+    [newWire release];
+    [self.gridView setNeedsDisplay];
 }
 
 @end

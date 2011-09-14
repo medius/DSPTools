@@ -14,7 +14,7 @@
 @implementation DSPCircuitFileIO
 
 
-+ (NSDictionary *)circuitInFile:(NSString *)filePath
++ (NSMutableDictionary *)circuitInFile:(NSString *)filePath
 {
     // Circuit data
     NSMutableDictionary *circuit = [NSMutableDictionary dictionary];
