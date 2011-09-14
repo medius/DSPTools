@@ -75,10 +75,10 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 - (void)dealloc
 {
-    [_systemView release];
-    [_gridView release];
-    [_componentListView release];
-    [_circuit release];
+    TT_RELEASE_SAFELY(_systemView);
+    TT_RELEASE_SAFELY(_gridView);
+    TT_RELEASE_SAFELY(_componentListView);
+    TT_RELEASE_SAFELY(_circuit);
     [super dealloc];
 }
 
@@ -120,7 +120,7 @@ static const CGFloat kToolBarItemWidth    = 40;
                          withAnchor2:componentViewController.componentView.anchor2 
                         forGridScale:self.gridView.gridScale];
         componentViewController.componentView.gridScale = self.gridView.gridScale;
-        componentViewController.componentView.draggable = YES;
+        componentViewController.componentView.isDraggable = YES;
         [self.gridView addSubview:componentViewController.componentView];
     };
     
@@ -237,6 +237,8 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 }
 
+#pragma mark - Wire Creation Protocol
+
 - (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
 {
     DSPWireViewController *newWire = [[DSPWireViewController alloc] init];
@@ -248,7 +250,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     newWire.componentView.anchor1 = anchor1;
     newWire.componentView.anchor2 = anchor2;
     newWire.componentView.gridScale = self.gridView.gridScale;
-    newWire.componentView.draggable = YES;
+    newWire.componentView.isDraggable = YES;
 
     
     [self.gridView addSubview:newWire.componentView];

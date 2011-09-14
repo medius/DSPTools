@@ -105,12 +105,10 @@
 - (void)anchor2Set:(DSPComponentView *)requestor toValue:(DSPGridPoint)newValue
 {
     DSPPin *pin;
-    if (self.isReverse) 
-    {
+    if (self.isReverse) {
         pin = [[self.componentModel inputPins] lastObject];
     } 
-    else
-    {
+    else {
         pin =[[self.componentModel outputPins] lastObject];
     }
     

@@ -31,8 +31,8 @@
     CGFloat         _lineWidth;
     UIColor*        _lineColor;
     UIColor*        _fillColor;
-    BOOL            _draggable;
-    BOOL            _selected;
+    BOOL            _isDraggable;
+    BOOL            _isSelected;
     BOOL            _isVertical;
     BOOL            _isListMember;
     DSPGridSize     _size;
@@ -54,8 +54,8 @@
 @property CGFloat                       lineWidth;
 @property (nonatomic, retain) UIColor*  lineColor;
 @property (nonatomic, retain) UIColor*  fillColor;
-@property BOOL                          draggable;  // isDraggable
-@property BOOL                          selected;   // isSelected
+@property BOOL                          isDraggable;
+@property BOOL                          isSelected;
 @property (readonly) BOOL               isVertical;
 @property BOOL                          isListMember;
 

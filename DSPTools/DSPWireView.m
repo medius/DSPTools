@@ -17,12 +17,10 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
 // Setters/getters
 - (NSUInteger)wireLength
 {
-    if (_anchor1.x == _anchor2.x) 
-    {
+    if (_anchor1.x == _anchor2.x) {
         _wireLength = abs(_anchor1.y - _anchor2.y);
     }
-    else if (_anchor1.y == _anchor2.y)
-    {
+    else if (_anchor1.y == _anchor2.y) {
         _wireLength = abs(_anchor1.x - _anchor2.x);
     }
     return _wireLength;
@@ -47,13 +45,11 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     // Draw the wire
     CGPoint startPoint, endPoint;
     
-    if (self.isVertical) 
-    {
+    if (self.isVertical) {
         startPoint.x = margin; startPoint.y = 0;
         endPoint.x = margin; endPoint.y = self.wireLength*self.gridScale;
     } 
-    else
-    {
+    else {
         startPoint.x = 0; startPoint.y = margin;
         endPoint.x = self.wireLength*self.gridScale; endPoint.y = margin;
     }
@@ -76,26 +72,21 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     if (anchor1.y == anchor2.y) 
     {
         // Based on the x direction of the wire, generate a frame that is left to right
-        if (anchor1.x < anchor2.x) 
-        {
+        if (anchor1.x < anchor2.x) {
             frame = CGRectMake(realAnchor1.x, realAnchor1.y-margin, abs(realAnchor1.x-realAnchor2.x), 2*margin);
         }
-        else
-        {
+        else {
             frame = CGRectMake(realAnchor2.x, realAnchor2.y-margin, abs(realAnchor1.x-realAnchor2.x), 2*margin);   
         }
         
     } 
     // Build frame for a vertical wire
-    else if (anchor1.x == anchor2.x) 
-    {
+    else if (anchor1.x == anchor2.x) {
         // Based on the y direction of the wire, generate a frame that is top to bottom
-        if (anchor1.y < anchor2.y) 
-        {
+        if (anchor1.y < anchor2.y) {
             frame = CGRectMake(realAnchor1.x-margin, realAnchor1.y, 2*margin, abs(realAnchor1.y-realAnchor2.y));
         }
-        else
-        {
+        else {
             frame = CGRectMake(realAnchor2.x-margin, realAnchor2.y, 2*margin, abs(realAnchor1.y-realAnchor2.y));
         }
     }

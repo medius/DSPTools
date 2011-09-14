@@ -14,8 +14,7 @@
 // This stores one end of the wire (anchor2). 
 - (NSArray *)pins
 {
-    if (!_pins) 
-    {
+    if (!_pins) {
         // Setup the pins
         DSPPin *pin1 = [[DSPPin alloc] init];
         pin1.isOutput = NO;

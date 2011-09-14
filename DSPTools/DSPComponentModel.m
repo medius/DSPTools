@@ -8,6 +8,7 @@
 
 #import "DSPComponentModel.h"
 #import "DSPPin.h"
+#import "Three20/Three20.h"
 
 @implementation DSPComponentModel
 
@@ -39,7 +40,7 @@
 
 - (void)dealloc
 {
-    [_pins release];
+    TT_RELEASE_SAFELY(_pins);
     [super dealloc];
 }
 

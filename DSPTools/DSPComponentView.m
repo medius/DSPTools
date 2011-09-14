@@ -22,6 +22,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @property (nonatomic) CGPoint anchor1RelativeToOrigin;
 
 - (void)updateUI;
+- (DSPComponentView *)copyComponentView;
 @end
 
 @implementation DSPComponentView
@@ -34,7 +35,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @synthesize lineWidth           = _lineWidth;
 @synthesize lineColor           = _lineColor;
 @synthesize fillColor           = _fillColor;
-@synthesize draggable           = _draggable;
+@synthesize isDraggable         = _isDraggable;
 @synthesize isListMember        = _isListMember;
 
 @synthesize size                = _size;
@@ -56,16 +57,16 @@ static const CGFloat kDefaultLineWidth = 3.0;
     [self.delegate anchor2Set:self toValue:newAnchor2];
 }
 
-- (BOOL)selected
+- (BOOL)isSelected
 {
-    return _selected;
+    return _isSelected;
 }
 
-- (void)setSelected:(BOOL)newSelected
+- (void)setIsSelected:(BOOL)newIsSelected
 {
-    if (newSelected != _selected) {
-        _selected = newSelected;
-        if (_selected) {
+    if (newIsSelected != _isSelected) {
+        _isSelected = newIsSelected;
+        if (_isSelected) {
             self.backgroundColor = [UIColor highlightedBackgroundColor];
             [self updateUI];
         }
@@ -134,18 +135,20 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 - (void)dealloc
 {
-    [_lineColor release];
+    TT_RELEASE_SAFELY(_lineColor);
     [super dealloc];
 }
+
+#pragma mark - Touch management
 
 // Control scaling with pinch gesture
 - (void)tap:(UITapGestureRecognizer *)gesture 
 {
-	if (self.selected) {
-        self.selected = NO;
+	if (self.isSelected) {
+        self.isSelected = NO;
     }
     else {
-        self.selected = YES;
+        self.isSelected = YES;
     }
 }
 
@@ -193,15 +196,17 @@ static const CGFloat kDefaultLineWidth = 3.0;
 {
     // If addDelegate is assigned, it is probably a componentlist member
     // TODO: This is a really bad coding. ComponentView should not know anything about componentlist, etc.
-//    if (self.isListMember) {
-//        id viewCopy = [self mutableCopy];
-//        [self.superview.superview addSubview:self];
-//        [self.superview addSubview:viewCopy];
-//        [viewCopy release];
-//        self.draggable = YES;
-//    }
+    if (self.isListMember) {
+        Class classOfSelf = [self class];
+        DSPComponentView *viewCopy = [[classOfSelf alloc] init];
+        
+        [self.superview.superview addSubview:self];
+        [self.superview addSubview:viewCopy];
+        [viewCopy release];
+        self.isDraggable = YES;
+    }
     
-    if (!self.draggable) return;
+    if (!self.isDraggable) return;
     //if (!self.selected) return;
     
     UITouch *aTouch = [touches anyObject];
@@ -217,7 +222,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event 
 {
-    if (!self.draggable) return;
+    if (!self.isDraggable) return;
     //if (!self.selected) return;
 
     UITouch *aTouch = [touches anyObject];
@@ -252,14 +257,14 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!self.draggable) return;
+    if (!self.isDraggable) return;
     [self snapToGrid];
     [self updateUI];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!self.draggable) return;
+    if (!self.isDraggable) return;
     [self snapToGrid];
     [self updateUI];
 }
@@ -297,8 +302,8 @@ static const CGFloat kDefaultLineWidth = 3.0;
     viewCopy->_lineWidth = self->_lineWidth;
     viewCopy->_lineColor = [self->_lineColor copy];
     viewCopy->_fillColor = [self->_fillColor copy];
-    viewCopy->_draggable = self->_draggable;
-    viewCopy->_selected = self->_selected;
+    viewCopy->_isDraggable = self->_isDraggable;
+    viewCopy->_isSelected = self->_isSelected;
     viewCopy->_isVertical = self->_isVertical;
     viewCopy->_isListMember = self->_isListMember;
     viewCopy->_size = self->_size;
@@ -310,9 +315,9 @@ static const CGFloat kDefaultLineWidth = 3.0;
     return viewCopy;
 }
 
--(id)mutableCopyWithZone:(NSZone *)zone
+- (DSPComponentView *)copyComponentView
 {
-    DSPComponentView *viewCopy = [[DSPComponentView allocWithZone:zone] init];
+    DSPComponentView *viewCopy = [[DSPComponentView alloc] init];
  	
     viewCopy->_anchor1 = self->_anchor1;
     viewCopy->_anchor2 = self->_anchor2;
@@ -320,8 +325,8 @@ static const CGFloat kDefaultLineWidth = 3.0;
     viewCopy->_lineWidth = self->_lineWidth;
     viewCopy->_lineColor = [self->_lineColor copy];
     viewCopy->_fillColor = [self->_fillColor copy];
-    viewCopy->_draggable = self->_draggable;
-    viewCopy->_selected = self->_selected;
+    viewCopy->_isDraggable = self->_isDraggable;
+    viewCopy->_isSelected = self->_isSelected;
     viewCopy->_isVertical = self->_isVertical;
     viewCopy->_isListMember = self->_isListMember;
     viewCopy->_size = self->_size;

@@ -20,6 +20,7 @@
 @implementation DSPSimulator
 
 #pragma mark - Accessors
+
 @synthesize xAxisBuffer = _xAxisBuffer;
 @synthesize yAxisBuffer1 = _yAxisBuffer1;
 @synthesize yAxisBuffer2 = _yAxisBuffer2;
@@ -48,6 +49,15 @@
     return _yAxisBuffer2;
 }
 
+#pragma mark - Setup and dealloc
+
+- (void)dealloc
+{
+    TT_RELEASE_SAFELY(_xAxisBuffer);
+    TT_RELEASE_SAFELY(_yAxisBuffer1);
+    TT_RELEASE_SAFELY(_yAxisBuffer2);
+    [super dealloc];
+}
 
 #pragma mark - Simulation
 - (void)evaluateComponent:(DSPComponentViewController *)component atTime:(double)time

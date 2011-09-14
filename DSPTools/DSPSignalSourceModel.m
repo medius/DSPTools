@@ -19,8 +19,7 @@
 // Set the output pins
 - (NSArray *)pins
 {
-    if (!_pins) 
-    {
+    if (!_pins) {
         // Setup the output pin
         DSPPin *pin = [[DSPPin alloc] init];
         

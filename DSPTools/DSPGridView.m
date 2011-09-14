@@ -18,6 +18,7 @@ static const CGFloat kGridPointRadius = 0.5;
 @implementation DSPGridView
 
 #pragma mark - Accessors
+
 @synthesize gridScale      = _gridScale;
 @synthesize gridPointColor = _gridPointColor;
 @synthesize wirePoints     = _wirePoints;
@@ -25,8 +26,7 @@ static const CGFloat kGridPointRadius = 0.5;
 
 - (UIColor *)gridPointColor
 {
-    if (!_gridPointColor)
-    {
+    if (!_gridPointColor) {
         _gridPointColor = [[UIColor alloc] init];
     }
     return _gridPointColor;
@@ -34,8 +34,7 @@ static const CGFloat kGridPointRadius = 0.5;
 
 - (NSMutableArray *)wirePoints
 {
-    if (!_wirePoints) 
-    {
+    if (!_wirePoints) {
         _wirePoints = [[NSMutableArray array] retain];
     }
     return _wirePoints;
@@ -55,17 +54,17 @@ static const CGFloat kGridPointRadius = 0.5;
     // - Unselect the selected components
     for (DSPComponentView *componentView in self.subviews)
     {
-        if (_wireDrawingInProgress)
-        {
-            componentView.draggable = NO;
-            componentView.selected = NO;
+        if (_wireDrawingInProgress) {
+            componentView.isDraggable = NO;
+            componentView.isSelected = NO;
         }
-        else
-        {
-            componentView.draggable = YES;
+        else {
+            componentView.isSelected = YES;
         }
     }
 }
+
+#pragma mark - Setup and dealloc
 
 - (void)setup
 {
@@ -97,16 +96,15 @@ static const CGFloat kGridPointRadius = 0.5;
 
 - (void)dealloc
 {
-    [_gridPointColor release];
-    [_wirePoints release];
+    TT_RELEASE_SAFELY(_gridPointColor);
+    TT_RELEASE_SAFELY(_wirePoints);
     [super dealloc];
 }
 
 // Update the subviews based on their properties.
 - (void)updateSubViews
 {    
-    for (DSPComponentView *componentView in self.subviews)
-    {
+    for (DSPComponentView *componentView in self.subviews) {
         componentView.gridScale = self.gridScale;
 //        DSPGridPoint origin = componentView.origin;
 //        DSPGridSize size = componentView.size;
@@ -120,15 +118,13 @@ static const CGFloat kGridPointRadius = 0.5;
         CGRect frame = [DSPHelper getFrameForObject:componentView withAnchor1:anchor1 withAnchor2:anchor2 forGridScale:self.gridScale];
         
         // Use block animations if it is supported (iOS 4.0 and later)
-        if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) 
-        {
+        if ([UIView respondsToSelector:@selector(animateWithDuration:animations:)]) {
             [UIView animateWithDuration:0.0 animations:^{
                 componentView.frame = frame;
             }];
         }
         // If block animations are not supported, use the old way of animations
-        else
-        {
+        else {
             [UIView beginAnimations:@"Scaling A ComponentView" context:nil];
             componentView.frame = frame;
             [UIView commitAnimations];
@@ -190,8 +186,7 @@ static const CGFloat kGridPointRadius = 0.5;
     DSPGridPoint currentGridPoint, lastGridPoint;
     CGPoint lastPoint;
     if (self.wirePoints) {
-        for (id point in self.wirePoints)
-        {
+        for (id point in self.wirePoints) {
             [point getValue:&currentGridPoint];
             
             if (!firstPoint) {
@@ -214,8 +209,7 @@ static const CGFloat kGridPointRadius = 0.5;
     DSPGridPoint wireStartPoint, wireLastPoint, currentGridPoint;
     BOOL isFirstPointOfArray = YES;
     
-    for (NSUInteger i=0; i<self.wirePoints.count; i=i+1)
-    {
+    for (NSUInteger i=0; i<self.wirePoints.count; i=i+1) {
         id point = [self.wirePoints objectAtIndex:i];
         
         // Get the DSPGridPoint value of the current point
@@ -226,14 +220,12 @@ static const CGFloat kGridPointRadius = 0.5;
             wireLastPoint = wireStartPoint;
             isFirstPointOfArray = NO;
         }
-        else 
-        {
+        else {
             // If the current point is not along the same line as the wire start and last points,
             // create a wire component between first and last points
             // Also, assign the first and last point for the new wire segment
             if (!((wireStartPoint.x == wireLastPoint.x && wireStartPoint.x == currentGridPoint.x) ||
-                  (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y)))
-            {
+                  (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y))) {
                 [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
                 
                 // Assign for latest segment
@@ -243,8 +235,7 @@ static const CGFloat kGridPointRadius = 0.5;
             wireLastPoint = currentGridPoint;
             
             // If currentGridPoint is the last grid point in the array, create a wire
-            if (i == self.wirePoints.count-1) 
-            {
+            if (i == self.wirePoints.count-1) {
                 [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
             }
         }
@@ -256,8 +247,7 @@ static const CGFloat kGridPointRadius = 0.5;
 - (void)pinch:(UIPinchGestureRecognizer *)gesture 
 {
 	if (gesture.state == UIGestureRecognizerStateChanged ||
-		gesture.state == UIGestureRecognizerStateEnded) 
-    {
+		gesture.state == UIGestureRecognizerStateEnded) {
 		// self.gridScale *= gesture.scale;
 		gesture.scale = 1;
         [self updateUI];

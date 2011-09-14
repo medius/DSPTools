@@ -32,8 +32,8 @@
 
 - (void)dealloc
 {
-    [_componentModel release];
-    [_componentView removeFromSuperview];
+    TT_RELEASE_SAFELY(_componentModel);
+    TT_RELEASE_SAFELY(_componentView);
     [super dealloc];
 }
 

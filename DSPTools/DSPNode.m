@@ -7,6 +7,7 @@
 //
 
 #import "DSPNode.h"
+#import "Three20/Three20.h"
 
 @implementation DSPNode
 
@@ -23,8 +24,7 @@
 
 - (NSMutableArray *)fanOutComponents
 {
-    if (!_fanOutComponents)
-    {
+    if (!_fanOutComponents) {
         _fanOutComponents = [[NSMutableArray alloc] init];
     }
     return _fanOutComponents;
@@ -32,8 +32,7 @@
 
 - (NSMutableArray *)wires
 {
-    if (!_wires) 
-    {
+    if (!_wires) {
         _wires = [[NSMutableArray alloc] init];
     }
     return _wires;
@@ -53,9 +52,9 @@
 
 - (void)dealloc
 {
-    [_fanInComponent release];
-    [_fanOutComponents release];
-    [_wires release];
+    TT_RELEASE_SAFELY(_fanInComponent);
+    TT_RELEASE_SAFELY(_fanOutComponents);
+    TT_RELEASE_SAFELY(_wires);
     [super dealloc];
 }
 
@@ -63,8 +62,7 @@
 {
     if (self.currentValueIsValid) {
         // TODO: Error this should not happen
-    } else
-    {
+    } else {
         // Move the current value to previous value
         self.previousValue = self.currentValue;
         self.currentValue = newValue;

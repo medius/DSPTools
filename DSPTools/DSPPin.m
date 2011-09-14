@@ -7,7 +7,7 @@
 //
 
 #import "DSPPin.h"
-
+#import "Three20/Three20.h"
 
 @implementation DSPPin
 
@@ -19,7 +19,7 @@
 
 - (void)dealloc
 {
-    [_connectedNode release];
+    TT_RELEASE_SAFELY(_connectedNode);
     [super dealloc];
 }
 

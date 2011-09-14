@@ -44,22 +44,18 @@
         NSString *identifier = [fields objectAtIndex:0];
         
         // Signal source
-        if ([identifier isEqualToString:SIGNAL_SOURCE]) 
-        {
+        if ([identifier isEqualToString:SIGNAL_SOURCE]) {
             componentViewController = [[DSPSignalSourceViewController alloc] init];
         }
         // Integrator
-        else if ([identifier isEqualToString:INTEGRATOR]) 
-        {
+        else if ([identifier isEqualToString:INTEGRATOR]) {
             componentViewController = [[DSPIntegratorViewController alloc] init];
         }
         // Wire
-        else if ([identifier isEqualToString:WIRE]) 
-        {
+        else if ([identifier isEqualToString:WIRE]) {
             componentViewController = [[DSPWireViewController alloc] init];
         }
-        else
-        {
+        else {
             componentViewController = nil;
         }
         
@@ -69,8 +65,7 @@
         DSPGridPoint anchor1;
         anchor1.x = [[fields objectAtIndex:1] integerValue];
         anchor1.y = [[fields objectAtIndex:2] integerValue];
-        if (componentViewController)
-        {
+        if (componentViewController) {
             componentViewController.componentView.anchor1 = anchor1;
         }
         
@@ -78,8 +73,7 @@
         DSPGridPoint anchor2;
         anchor2.x = [[fields objectAtIndex:3] integerValue];
         anchor2.y = [[fields objectAtIndex:4] integerValue];
-        if (componentViewController)
-        {
+        if (componentViewController) {
             componentViewController.componentView.anchor2 = anchor2;
         }
         

@@ -15,18 +15,15 @@
 
 + (void)connectNode:(DSPNode *)node toComponent:(DSPComponentViewController *)component withPin:(DSPPin *)pin;
 {
-    if (component.isWire) 
-    {
+    if (component.isWire) {
         [node.wires addObject:component];
     }
-    else 
-    {
+    else {
         if (!pin.isOutput) {
             // Components with input pins are fanouts of a given node
             [node.fanOutComponents addObject:component];
         }
-        else
-        {
+        else {
             // Component with an output pin is a fanin of a given node
             node.fanInComponent = component;
             
@@ -235,52 +232,5 @@
     
     return simulationModel;
 }
-
-// Second pass: 
-// Detect the true direction of the signal flow in all the wires.
-
-//    // Create a queue of nodeIDs
-//    NSMutableArray *nodeQueue = [[NSMutableArray alloc] init];
-//    
-//    for (NSUInteger i=0; i<[nodes count]; i++) {
-//        [nodeQueue addObject:[NSValue value:&i withObjCType:@encode(NSUInteger)]];
-//    }
-//    
-//    while ([nodeQueue count]>0) {
-//        
-//        NSUInteger currentNodeID;
-//        id nodeID = [nodeQueue objectAtIndex:0];
-//        [nodeID getValue:&currentNodeID];
-//        
-//        DSPNode *node = [nodes objectAtIndex:currentNodeID];
-//        [nodeQueue removeObject:nodeID];
-//
-//        // If a node has a fanin component and also has wires
-//        // TODO: If a node has a fanout and no fanin, but has wires, should the wires be fanin or fanout?
-//        if (node.fanInComponent && node.wires) {
-//            for (int i=0; i<[node.wires count]; i++) {
-//                DSPWireViewController *wire = [node.wires objectAtIndex:i];
-//                
-//                // If the output pin is connected to the current node, swap the pins of the wire
-//                DSPPin *inputPin = [[wire.componentModel inputPins] lastObject];
-//                DSPPin *outputPin = [[wire.componentModel outputPins] lastObject];
-//                if (outputPin.nodeID == currentNodeID) {
-//                    inputPin.isOutput = YES;
-//                    outputPin.isOutput = NO;
-//                }
-//                
-//                // Assign this wire as a fanout of the current node
-//                [node.fanOutComponents addObject:wire];
-//
-//            }
-//        }
-//        // If a node does not have a fanin, add it to the back of the queue.
-//        else
-//        {
-//            [nodeQueue addObject:nodeID];
-//        }
-//    }
-//    
-//    [nodeQueue release];
 
 @end
