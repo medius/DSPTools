@@ -77,6 +77,11 @@ static const CGFloat kGridPointRadius = 0.5;
     UIPinchGestureRecognizer *pinchgr = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
 	[self addGestureRecognizer:pinchgr];
 	[pinchgr release];
+    
+    // Tap gesture recognizer
+    UITapGestureRecognizer *tapgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self addGestureRecognizer:tapgr];
+    [tapgr release];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -202,8 +207,6 @@ static const CGFloat kGridPointRadius = 0.5;
 
 }
 
-
-
 - (void)createWireComponents
 {
     DSPGridPoint wireStartPoint, wireLastPoint, currentGridPoint;
@@ -243,6 +246,8 @@ static const CGFloat kGridPointRadius = 0.5;
     
 }
 
+#pragma mark - Touch handlers
+
 // Control scaling with pinch gesture
 - (void)pinch:(UIPinchGestureRecognizer *)gesture 
 {
@@ -252,6 +257,14 @@ static const CGFloat kGridPointRadius = 0.5;
 		gesture.scale = 1;
         [self updateUI];
 	}
+}
+
+// Tap handler
+- (void)tap:(UITapGestureRecognizer *)gesture
+{
+    for (DSPComponentView *componentView in self.subviews) {
+        componentView.isSelected = NO;
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
