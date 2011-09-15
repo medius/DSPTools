@@ -262,6 +262,7 @@ static const CGFloat kGridPointRadius = 0.5;
 // Tap handler
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
+    // Component deselection
     for (DSPComponentView *componentView in self.subviews) {
         componentView.isSelected = NO;
     }

@@ -23,7 +23,7 @@
 //- (void)addComponent:(DSPComponentView *)componentView;
 //@end
 
-@interface DSPComponentView : TTView <NSCopying, NSMutableCopying> {
+@interface DSPComponentView : TTView {
     DSPGridPoint    _anchor1;
     DSPGridPoint    _anchor2;
     
