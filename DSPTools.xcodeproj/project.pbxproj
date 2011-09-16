@@ -16,6 +16,7 @@
 		320CC833B8AF0ACFD35E6225 /* libThree20Style.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320CC833B8AF0ACFD35E6224 /* libThree20Style.a */; };
 		320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320D7DCCE32703ACAB9A45E4 /* libThree20.a */; };
 		320F2C48872C2E2C4DF86205 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F2C48872C2E2C4DF86204 /* libThree20UI.a */; };
+		C3008C6A1422ABAC00C6FF9A /* DSPComponentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */; };
 		C3150CEE140DBA8500AB0A98 /* DSPCircuitAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */; };
 		C3150CF1140EE85A00AB0A98 /* DSPIntegratorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CF0140EE85A00AB0A98 /* DSPIntegratorViewController.m */; };
 		C3150CF4140EF27900AB0A98 /* DSPSignalSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CF3140EF27900AB0A98 /* DSPSignalSourceViewController.m */; };
@@ -259,6 +260,8 @@
 		320CC833B8AF0ACFD35E6220 /* Three20Style.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Style.xcodeproj; path = ../shared/three20/src/Three20Style/Three20Style.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320D7DCCE32703ACAB9A45E0 /* Three20.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20.xcodeproj; path = ../shared/three20/src/Three20/Three20.xcodeproj; sourceTree = SOURCE_ROOT; };
 		320F2C48872C2E2C4DF86200 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = ../shared/three20/src/Three20UI/Three20UI.xcodeproj; sourceTree = SOURCE_ROOT; };
+		C3008C681422AB1300C6FF9A /* DSPComponentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentListTableViewController.h; sourceTree = "<group>"; };
+		C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponentListTableViewController.m; sourceTree = "<group>"; };
 		C3150CEC140DBA8400AB0A98 /* DSPCircuitAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitAnalyzer.h; sourceTree = "<group>"; };
 		C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuitAnalyzer.m; sourceTree = "<group>"; };
 		C3150CEF140EE85A00AB0A98 /* DSPIntegratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPIntegratorViewController.h; sourceTree = "<group>"; };
@@ -640,6 +643,8 @@
 			children = (
 				C33DA09B13FAEC1300FF0414 /* DSPSystemViewController.h */,
 				C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */,
+				C3008C681422AB1300C6FF9A /* DSPComponentListTableViewController.h */,
+				C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */,
 				C358179E13FC4EB800948309 /* DSPComponentListView.h */,
 				C358179F13FC4EBD00948309 /* DSPComponentListView.m */,
 				C3257D10140C4E350055BFD5 /* DSPNode.h */,
@@ -1152,6 +1157,7 @@
 				C358D86114119A8C00C0EAFA /* DSPSimulator.m in Sources */,
 				C39E9C8014199B5300C94CA6 /* DSPWaveformViewController.m in Sources */,
 				C39E9C8414199B9200C94CA6 /* DSPWaveformView.m in Sources */,
+				C3008C6A1422ABAC00C6FF9A /* DSPComponentListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

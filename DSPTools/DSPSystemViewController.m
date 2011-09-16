@@ -15,6 +15,7 @@
 #import "DSPCircuitAnalyzer.h"
 #import "DSPSimulator.h"
 #import "DSPWaveformViewController.h"
+#import "DSPComponentListTableViewController.h"
 
 // Temporary
 #import "DSPHeader.h"
@@ -38,7 +39,6 @@ static const CGFloat kToolBarItemWidth    = 40;
 // Setters/getters
 @synthesize systemView          = _systemView;
 @synthesize gridView            = _gridView;
-@synthesize componentListView   = _componentListView;
 @synthesize circuit             = _circuit;
 
 - (void)setup
@@ -64,10 +64,6 @@ static const CGFloat kToolBarItemWidth    = 40;
         _gridView.gridScale = kGridScale;
         _gridView.delegate = self;
         
-        // Initialize the componentListView
-        CGRect componentListFrame = CGRectMake(0, _systemView.bottom - kComponentListHeight, _systemView.width, kComponentListHeight);
-        _componentListView = [[DSPComponentListView alloc] initWithFrame:componentListFrame andGridScale:kGridScale];
-        
         [self setup];
     }
     return self;
@@ -77,7 +73,6 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     TT_RELEASE_SAFELY(_systemView);
     TT_RELEASE_SAFELY(_gridView);
-    TT_RELEASE_SAFELY(_componentListView);
     TT_RELEASE_SAFELY(_circuit);
     [super dealloc];
 }
@@ -102,7 +97,6 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     self.view = self.systemView;
     [self.view addSubview:self.gridView];
-    [self.view addSubview:self.componentListView];
     
     // Configure the navigation controller when in system view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -130,7 +124,6 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.componentListView.backgroundColor = [UIColor grayColor];
 }
 
 
@@ -162,7 +155,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create add component button
     UIImage *addButtonImage = [UIImage imageNamed:@"plus_24.png"];
-    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithImage:addButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithImage:addButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(addComponent)];
     //    UIBarButtonItem *addComponentButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
     addComponentButton.width = kToolBarItemWidth;
     [toolBarItems addObject:addComponentButton];
@@ -198,6 +191,17 @@ static const CGFloat kToolBarItemWidth    = 40;
     [chartButton release];
     
     return toolBarItems;
+}
+
+// Add component
+- (void)addComponent
+{
+    DSPComponentListTableViewController *componentListTVC = [[DSPComponentListTableViewController alloc] init];
+    componentListTVC.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:componentListTVC];
+    [self presentModalViewController:navigationController animated:YES];
+    [componentListTVC release];
+    [navigationController release];
 }
 
 // Wire drawing mode
@@ -260,4 +264,16 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self.gridView setNeedsDisplay];
 }
 
+#pragma mark - ComponentList Protocol methods
+
+- (void)componentListCancelButtonPressed
+{
+    [self.modalViewController dismissModalViewControllerAnimated:YES];
+}
+
+- (void)componentSelected:(NSString *)componentName
+{
+    NSLog(@"%@", componentName);
+    [self.modalViewController dismissModalViewControllerAnimated:YES];
+}
 @end

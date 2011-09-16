@@ -9,21 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "Three20UI/Three20UI.h"
 #import "DSPGridView.h"
+#import "DSPComponentListTableViewController.h"
 
 @class DSPGridView;
 @class DSPComponentListView;
 
-@interface DSPSystemViewController : TTViewController <DSPWireCreation> {
+@interface DSPSystemViewController : TTViewController <DSPWireCreation, DSPComponentListProtocol> {
 @private
     TTView*                 _systemView;
     DSPGridView*            _gridView;
-    DSPComponentListView*   _componentListView;
     NSMutableDictionary*    _circuit;   // I am not sure if this needed as instance variable. What about simulaton model?
 }
 
 @property (readonly) TTView*                systemView;
 @property (readonly) DSPGridView*           gridView;
-@property (readonly) DSPComponentListView*  componentListView;
 @property (readonly) NSMutableDictionary*   circuit;
 
 // Initialize with a circuit file

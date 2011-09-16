@@ -34,7 +34,6 @@
     BOOL            _isDraggable;
     BOOL            _isSelected;
     BOOL            _isVertical;
-    BOOL            _isListMember;
     DSPGridSize     _size;
     
     id <DSPComponentViewDelegate> _delegate;
@@ -57,7 +56,6 @@
 @property BOOL                          isDraggable;
 @property BOOL                          isSelected;
 @property (readonly) BOOL               isVertical;
-@property BOOL                          isListMember;
 
 @property (readonly) DSPGridSize        size;
 @property (assign) id <DSPComponentViewDelegate> delegate;

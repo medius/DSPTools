@@ -22,7 +22,6 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @property (nonatomic) CGPoint anchor1RelativeToOrigin;
 
 - (void)updateUI;
-//- (DSPComponentView *)copyComponentView;
 
 @end
 
@@ -37,7 +36,6 @@ static const CGFloat kDefaultLineWidth = 3.0;
 @synthesize lineColor           = _lineColor;
 @synthesize fillColor           = _fillColor;
 @synthesize isDraggable         = _isDraggable;
-@synthesize isListMember        = _isListMember;
 
 @synthesize size                = _size;
 @synthesize delegate            = _delegate;
@@ -195,23 +193,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // If addDelegate is assigned, it is probably a componentlist member
-    // TODO: This is a really bad coding. ComponentView should not know anything about componentlist, etc.
-    if (self.isListMember) {
-        DSPComponentView *viewCopy = [self copy];
-        Class *classOfCopy = [viewCopy class];
-        
-        NSLog(@"Copied Class:%@", classOfCopy);
-        NSLog(@"Copied Instance:%@", viewCopy);
-        viewCopy.isDraggable = YES;
-        [self.superview.superview addSubview:viewCopy];
-        //[self.superview addSubview:viewCopy];
-        [viewCopy release];
-        self.isDraggable = NO;
-    }
-    
     if (!self.isDraggable) return;
-    //if (!self.selected) return;
     
     UITouch *aTouch = [touches anyObject];
     self.inViewTouchLocation = [aTouch locationInView:self];
@@ -291,79 +273,6 @@ static const CGFloat kDefaultLineWidth = 3.0;
 {
     // Subclasses need to implement this
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"You must override %@ in a subclass" userInfo:nil];
-}
-
-#pragma mark -
-#pragma mark Copy methods
-
-//- (DSPComponentView *)copy:(DSPComponentView *)newInstance
-//{
-//    Class classOfSelf = [self class];
-//    DSPComponentView *viewCopy = [[classOfSelf alloc] init];
-//    
-//    newInstance->_anchor1 = self->_anchor1;
-//    newInstance->_anchor2 = self->_anchor2;
-//    newInstance->_gridScale = self->_gridScale;
-//    newInstance->_lineWidth = self->_lineWidth;
-//    newInstance->_lineColor = [self->_lineColor copy];
-//    newInstance->_fillColor = [self->_fillColor copy];
-//    newInstance->_isDraggable = self->_isDraggable;
-//    newInstance->_isSelected = self->_isSelected;
-//    newInstance->_isVertical = self->_isVertical;
-//    newInstance->_isListMember = self->_isListMember;
-//    newInstance->_size = self->_size;
-//    
-//    newInstance->_inViewTouchLocation = self->_inViewTouchLocation;
-//    newInstance->_anchor1RelativeToOrigin = self->_anchor1RelativeToOrigin;
-//    newInstance->_rectangleRadius = self->_rectangleRadius;
-//}
-
-//-(id)copyWithZone:(NSZone *)zone
-//{
-//    DSPComponentView *viewCopy = [[DSPComponentView allocWithZone:zone] init];
-//    
-//    viewCopy->_anchor1 = self->_anchor1;
-//    viewCopy->_anchor2 = self->_anchor2;
-//    viewCopy->_gridScale = self->_gridScale;
-//    viewCopy->_lineWidth = self->_lineWidth;
-//    viewCopy->_lineColor = [self->_lineColor copy];
-//    viewCopy->_fillColor = [self->_fillColor copy];
-//    viewCopy->_isDraggable = self->_isDraggable;
-//    viewCopy->_isSelected = self->_isSelected;
-//    viewCopy->_isVertical = self->_isVertical;
-//    viewCopy->_isListMember = self->_isListMember;
-//    viewCopy->_size = self->_size;
-//    
-//    viewCopy->_inViewTouchLocation = self->_inViewTouchLocation;
-//    viewCopy->_anchor1RelativeToOrigin = self->_anchor1RelativeToOrigin;
-//    viewCopy->_rectangleRadius = self->_rectangleRadius;
-//    
-//    return viewCopy;
-//}
-//
-
-- (DSPComponentView *)copy
-{
-    Class classOfSelf = [self class];
-    DSPComponentView *viewCopy = [[classOfSelf alloc] init];
- 	
-    viewCopy->_anchor1 = self->_anchor1;
-    viewCopy->_anchor2 = self->_anchor2;
-    viewCopy->_gridScale = self->_gridScale;
-    viewCopy->_lineWidth = self->_lineWidth;
-    viewCopy->_lineColor = [self->_lineColor copy];
-    viewCopy->_fillColor = [self->_fillColor copy];
-    viewCopy->_isDraggable = self->_isDraggable;
-    viewCopy->_isSelected = self->_isSelected;
-    viewCopy->_isVertical = self->_isVertical;
-    viewCopy->_isListMember = self->_isListMember;
-    viewCopy->_size = self->_size;
-    
-    viewCopy->_inViewTouchLocation = self->_inViewTouchLocation;
-    viewCopy->_anchor1RelativeToOrigin = self->_anchor1RelativeToOrigin;
-    viewCopy->_rectangleRadius = self->_rectangleRadius;
-    
-    return viewCopy;
 }
 
 @end
