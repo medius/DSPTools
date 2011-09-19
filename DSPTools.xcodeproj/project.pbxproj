@@ -353,6 +353,7 @@
 		C3A7E4B013F482D00002491F /* DSPGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGridView.h; sourceTree = "<group>"; };
 		C3A7E4B113F482D00002491F /* DSPGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGridView.m; sourceTree = "<group>"; };
 		C3A7E806141AE06400187F4B /* DSPWaveformDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformDelegateProtocol.h; sourceTree = "<group>"; };
+		C3BDAB9A1427EB4C00536C08 /* DSPCircuitModificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitModificationProtocol.h; sourceTree = "<group>"; };
 		C3C8E7BB141A974800EBC7DA /* _CPTFillColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillColor.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillColor.h"; sourceTree = "<group>"; };
 		C3C8E7BC141A974800EBC7DA /* _CPTFillGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillGradient.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillGradient.h"; sourceTree = "<group>"; };
 		C3C8E7BD141A974800EBC7DA /* _CPTFillImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillImage.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillImage.h"; sourceTree = "<group>"; };
@@ -651,6 +652,7 @@
 				C3257D11140C4E350055BFD5 /* DSPNode.m */,
 				C3257D13140C58DC0055BFD5 /* DSPPin.h */,
 				C3257D14140C58DC0055BFD5 /* DSPPin.m */,
+				C3BDAB9A1427EB4C00536C08 /* DSPCircuitModificationProtocol.h */,
 				C3150CFF14118DBA00AB0A98 /* Circuit File IO */,
 				C3150CFE14118D6000AB0A98 /* Circuit Analyzer */,
 				C39E9C8114199B6200C94CA6 /* Waveform */,
