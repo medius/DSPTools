@@ -9,12 +9,12 @@
 // TODO: Use json file format for circuits
 
 #import "DSPCircuitFileIO.h"
-#import "DSPComponents.h"
+#import "SBJson.h"
 
 @implementation DSPCircuitFileIO
 
 
-+ (NSMutableDictionary *)circuitInFile:(NSString *)filePath
+- (NSMutableDictionary *)circuitInFile:(NSString *)filePath
 {
     // Circuit data
     NSMutableDictionary *circuit = [NSMutableDictionary dictionary];
