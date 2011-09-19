@@ -61,25 +61,33 @@
     self.title = @"DSP Tools";
     self.launcherView.delegate = self;
     self.view = self.launcherView;
-
     self.view.backgroundColor = [UIColor blackColor];
+    
+    self.launcherView.columnCount = 4;
     
     NSString *imageName  = @"schematic.png";
     UIImage *thumbnail = [UIImage imageNamed:@"schematic.png"]; 
     [[TTURLCache sharedCache] storeImage:thumbnail forURL:imageName]; 
-    TTLauncherItem *newSchematic = [[TTLauncherItem alloc] initWithTitle:@"New Schematic" image:imageName URL:@"tt://url" canDelete:NO];
-    [self.launcherView addItem:newSchematic animated:NO];
-    [thumbnail release];
+    
+    TTLauncherItem *newSchematic = [[TTLauncherItem alloc] initWithTitle:@"New Schematic" image:nil URL:@"" canDelete:NO];
+    self.launcherView.currentPageIndex = 0;
+    TTLauncherItem *basicCircuit = [[TTLauncherItem alloc] initWithTitle:@"Basic Circuit" image:imageName URL:@"tt://url" canDelete:YES];
+    
+    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, nil];
+    self.launcherView.pages = [NSArray arrayWithObjects:firstPage, nil];
+    
     [newSchematic release];
+    [basicCircuit release];
+    
 }
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-*/
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -104,13 +112,19 @@
 // Push the right controllers when an item is selected
 - (void)launcherView:(TTLauncherView*)launcher didSelectItem:(TTLauncherItem*)item
 {
+    NSString *filePath;
+    
     if (item.title == @"New Schematic")
     {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"FirstCircuit" ofType:@"cir"];
-        DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] initWithCircuitFile:filePath];
-        [self.navigationController pushViewController:systemViewController animated:YES];
-        [systemViewController release];
-        
+        filePath = [[NSBundle mainBundle] pathForResource:@"Untitled" ofType:@"cir"];
     }
+    if (item.title == @"Basic Circuit")
+    {
+        filePath = [[NSBundle mainBundle] pathForResource:@"FirstCircuit" ofType:@"cir"];        
+    }
+    
+    DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] initWithCircuitFile:filePath];
+    [self.navigationController pushViewController:systemViewController animated:YES];
+    [systemViewController release];
 }
 @end

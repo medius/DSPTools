@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DSPWaveformViewController.h"
-#import "DSPWaveformDelegateProtocol.h"
 
-@interface DSPSimulator : NSObject <DSPWaveformDelegateProtocol> {
+@interface DSPSimulator : NSObject {
 @private
     NSMutableArray* _xAxisBuffer;
     NSMutableArray* _yAxisBuffer1;
@@ -18,5 +17,6 @@
 }
 
 - (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes;
+- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
 
 @end

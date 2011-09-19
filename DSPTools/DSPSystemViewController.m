@@ -36,10 +36,21 @@ static const CGFloat kToolBarItemWidth    = 40;
 @implementation DSPSystemViewController
 
 
-// Setters/getters
-@synthesize systemView          = _systemView;
-@synthesize gridView            = _gridView;
-@synthesize circuit             = _circuit;
+#pragma mark - Accessors
+@synthesize systemView   = _systemView;
+@synthesize gridView     = _gridView;
+@synthesize circuit      = _circuit;
+@synthesize simulator    = _simulator;
+
+- (DSPSimulator *)simulator
+{
+    if (!_simulator) {
+        _simulator = [[DSPSimulator alloc] init];
+    }
+    return _simulator;
+}
+
+#pragma mark - Setup and dealloc
 
 - (void)setup
 {
@@ -74,6 +85,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     TT_RELEASE_SAFELY(_systemView);
     TT_RELEASE_SAFELY(_gridView);
     TT_RELEASE_SAFELY(_circuit);
+    TT_RELEASE_SAFELY(_simulator);
     [super dealloc];
 }
 
@@ -226,17 +238,17 @@ static const CGFloat kToolBarItemWidth    = 40;
         DSPGridPoint location = node.location;
         NSLog(@"Node x:%d y:%d", location.x, location.y);
     }
-    
-    DSPSimulator *sim = [[DSPSimulator alloc] init];
-    
-    [sim runSimulationForComponents:components andNodes:nodes];
+        
+    [self.simulator runSimulationForComponents:components andNodes:nodes];
+
     
     DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
     waveform.graphView.frame = self.view.bounds;
-    waveform.delegate = sim;
-    [self presentModalViewController:waveform animated:YES];
+    waveform.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:waveform];
+    [self presentModalViewController:navigationController animated:YES];
     [waveform release];
-    
+    [navigationController release];
     [simulationModel release];
 
 }
@@ -276,4 +288,17 @@ static const CGFloat kToolBarItemWidth    = 40;
     NSLog(@"%@", componentName);
     [self.modalViewController dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark - Waveform Data Source Methods
+
+- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
+{
+    return [self.simulator numberForWaveformIndex:waveformIndex axis:waveformAxis recordIndex:index];
+}
+
+- (void)waveformDoneButtonPressed
+{
+    [self.modalViewController dismissModalViewControllerAnimated:YES];
+}
+
 @end

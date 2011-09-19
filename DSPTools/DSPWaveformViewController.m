@@ -76,6 +76,19 @@
 {
     [super viewDidLoad];
     
+    // Screen setup
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.translucent = YES;
+    
+    // Cancel button
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self.delegate action:@selector(waveformDoneButtonPressed)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    [doneButton release];
+    
+    self.title = @"Waveform";
+    
     // Graph
     self.graph.frame = self.view.bounds;
     self.graphView.hostedGraph = self.graph;
@@ -170,20 +183,6 @@
 
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
-//    double val = (index/5.0)-5;
-//    
-//    if(fieldEnum == CPTScatterPlotFieldX){ 
-//        return [NSNumber numberWithDouble:val]; 
-//    }
-//    else {
-//        if(plot.identifier == @"X Squared Plot") { 
-//            return [NSNumber numberWithDouble:val*val]; 
-//        }
-//        else { 
-//            return [NSNumber numberWithDouble:1/val]; 
-//        }
-//    }
-    
     if (fieldEnum == CPTScatterPlotFieldX) {
         return [self.delegate numberForWaveformIndex:0 axis:DSPWaveformAxisX recordIndex:index];
     }

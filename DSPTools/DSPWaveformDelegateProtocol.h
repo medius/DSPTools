@@ -11,4 +11,5 @@
 
 @protocol DSPWaveformDelegateProtocol <NSObject>
 - (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
+- (void)waveformDoneButtonPressed;
 @end
