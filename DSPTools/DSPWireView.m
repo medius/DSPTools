@@ -56,6 +56,7 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
+#pragma mark - View information methods
 
 + (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale
 {

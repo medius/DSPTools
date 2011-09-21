@@ -1,5 +1,5 @@
 //
-//  DSPSignalSourceViewController.h
+//  DSPSignalSource.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/31/11.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPComponentViewController.h"
+#import "DSPComponent.h"
 
-@interface DSPSignalSourceViewController : DSPComponentViewController {
+@interface DSPSignalSource : DSPComponent {
     
 }
 

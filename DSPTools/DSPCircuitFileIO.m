@@ -6,8 +6,6 @@
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-// TODO: Use json file format for circuits
-
 #import "DSPCircuitFileIO.h"
 #import "Three20/Three20.h"
 #import "SBJson.h"

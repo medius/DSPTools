@@ -1,5 +1,5 @@
 //
-//  DSPWireViewController.h
+//  DSPWire.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/31/11.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPComponentViewController.h"
+#import "DSPComponent.h"
 
-@interface DSPWireViewController : DSPComponentViewController {
+@interface DSPWire : DSPComponent {
     BOOL _isReverse;        // When YES, anchor1 is output and anchor2 is input
 }
 

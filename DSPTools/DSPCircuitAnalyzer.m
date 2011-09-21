@@ -7,7 +7,8 @@
 //
 
 #import "DSPCircuitAnalyzer.h"
-#import "DSPComponentViewController.h"
+#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 #import "DSPPin.h"
 #import "DSPNode.h"
 
@@ -44,6 +45,7 @@
 }
 
 #pragma mark - Setup and dealloc
+
 - (void)dealloc
 {
     TT_RELEASE_SAFELY(_components);
@@ -54,7 +56,7 @@
 
 #pragma mark - Circuit Analysis Core Methods
 
-- (void)connectNode:(DSPNode *)node toComponent:(DSPComponentViewController *)component withPin:(DSPPin *)pin;
+- (void)connectNode:(DSPNode *)node toComponent:(DSPComponent *)component withPin:(DSPPin *)pin;
 {
     if (component.isWire) {
         [node.wires addObject:component];
@@ -69,7 +71,7 @@
             node.fanInComponent = component;
             
             // Use the previous value if this component has a memory
-            if (component.componentModel.hasMemory) {
+            if (component.model.hasMemory) {
                 node.usePreviousValue = YES;
             }
         }
@@ -81,10 +83,10 @@
 
 }
 
-- (void)createNodesForComponent:(DSPComponentViewController *)component
+- (void)createNodesForComponent:(DSPComponent *)component
 {
     // Create nodes for pins
-    for (DSPPin *pin in component.componentModel.pins) 
+    for (DSPPin *pin in component.model.pins) 
     {
         BOOL nodeForThisPinExists = NO;
         for (int i=0; i<[self.nodes count]; i++) {
@@ -139,8 +141,8 @@
     [targetNode.fanOutComponents addObjectsFromArray:sourceNode.fanOutComponents];
     
     // For each input pin of each fanout of sourceNode that is connected to sourceNode, assign its connectedNode to targetNode
-    for (DSPComponentViewController *fanOut in sourceNode.fanOutComponents) {
-        for (DSPPin *pin in [fanOut.componentModel inputPins]) {
+    for (DSPComponent *fanOut in sourceNode.fanOutComponents) {
+        for (DSPPin *pin in [fanOut.model inputPins]) {
             if ([pin.connectedNode isEqual:sourceNode]) {
                 pin.connectedNode = targetNode;
             }
@@ -151,8 +153,8 @@
     [targetNode.wires addObjectsFromArray:sourceNode.wires];
     
     // For each pin of wires of sourceNode that are connected to sourceNode, assign to targetNode
-    for (DSPComponentViewController *wire in sourceNode.wires) {
-        for (DSPPin *pin in wire.componentModel.pins) {
+    for (DSPComponent *wire in sourceNode.wires) {
+        for (DSPPin *pin in wire.model.pins) {
             if ([pin.connectedNode isEqual:sourceNode]) {
                 pin.connectedNode = targetNode;
             }
@@ -175,9 +177,9 @@
     // component, including wires. For components with pins sharing a common
     // position, create a single node.
     
-    for (DSPComponentViewController *component in self.components) {
+    for (DSPComponent *component in self.components) {
         // Debug
-        NSLog(@"%d %d %d %d\n", component.componentView.anchor1.x, component.componentView.anchor1.y, component.componentView.anchor2.x, component.componentView.anchor2.y);
+        NSLog(@"%d %d %d %d\n", component.view.anchor1.x, component.view.anchor1.y, component.view.anchor2.x, component.view.anchor2.y);
         
         // Create nodes for pins
         [self createNodesForComponent:component];
@@ -186,11 +188,11 @@
     // Second pass:
     // Merge the nodes that connect to wires to adjacent nodes
     
-    for (DSPComponentViewController *component in self.components) {
+    for (DSPComponent *component in self.components) {
         if (component.isWire) {            
             // Get the two nodes connected to the wire
-            DSPPin *pinA = [[component.componentModel inputPins] lastObject];
-            DSPPin *pinB = [[component.componentModel outputPins] lastObject];
+            DSPPin *pinA = [[component.model inputPins] lastObject];
+            DSPPin *pinB = [[component.model outputPins] lastObject];
             
             // One of these nodes will be released in this iteration from nodes list and the 
             // references will no longer be valid. Hence we need to retain them till we are done.

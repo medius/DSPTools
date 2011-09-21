@@ -48,7 +48,7 @@ static const NSUInteger kDefaultHeight = 6;
 
 }
 
-/* Class methods */
+#pragma mark - View information methods
 
 + (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
 {

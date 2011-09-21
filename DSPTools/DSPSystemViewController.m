@@ -154,15 +154,15 @@ static const CGFloat kToolBarItemWidth    = 40;
     self.navigationController.toolbar.barStyle = UIBarStyleBlackOpaque;
     
     // Populate the grid with the components
-    for (DSPComponentViewController *componentViewController in self.circuit.components) {
-        componentViewController.componentView.frame = 
-        [DSPHelper getFrameForObject:componentViewController.componentView 
-                         withAnchor1:componentViewController.componentView.anchor1 
-                         withAnchor2:componentViewController.componentView.anchor2 
+    for (DSPComponent *component in self.circuit.components) {
+        component.view.frame = 
+        [DSPHelper getFrameForObject:component.view 
+                         withAnchor1:component.view.anchor1 
+                         withAnchor2:component.view.anchor2 
                         forGridScale:self.gridView.gridScale];
-        componentViewController.componentView.gridScale = self.gridView.gridScale;
-        componentViewController.componentView.isDraggable = YES;
-        [self.gridView addSubview:componentViewController.componentView];
+        component.view.gridScale = self.gridView.gridScale;
+        component.view.isDraggable = YES;
+        [self.gridView addSubview:component.view];
     };
     
 }
@@ -304,19 +304,19 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 - (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
 {
-    DSPWireViewController *newWire = [[DSPWireViewController alloc] init];
-    newWire.componentView.frame = 
-    [DSPHelper getFrameForObject:newWire.componentView 
+    DSPWire *newWire = [[DSPWire alloc] init];
+    newWire.view.frame = 
+    [DSPHelper getFrameForObject:newWire.view 
                      withAnchor1:anchor1 
                      withAnchor2:anchor2 
                     forGridScale:self.gridView.gridScale];
-    newWire.componentView.anchor1 = anchor1;
-    newWire.componentView.anchor2 = anchor2;
-    newWire.componentView.gridScale = self.gridView.gridScale;
-    newWire.componentView.isDraggable = YES;
+    newWire.view.anchor1 = anchor1;
+    newWire.view.anchor2 = anchor2;
+    newWire.view.gridScale = self.gridView.gridScale;
+    newWire.view.isDraggable = YES;
 
     
-    [self.gridView addSubview:newWire.componentView];
+    [self.gridView addSubview:newWire.view];
     NSMutableArray *components = [self.circuit objectForKey:@"components"];
     [components addObject:newWire];
     [newWire release];

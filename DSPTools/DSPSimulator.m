@@ -7,7 +7,8 @@
 //
 
 #import "DSPSimulator.h"
-#import "DSPComponentViewController.h"
+#import "DSPComponent.h"
+#import "DSPComponentModel.h"
 #import "DSPPin.h"
 #import "DSPNode.h"
 
@@ -82,13 +83,13 @@
 }
 
 #pragma mark - Simulation
-- (void)evaluateComponent:(DSPComponentViewController *)component atTime:(double)time
+- (void)evaluateComponent:(DSPComponent *)component atTime:(double)time
 {
     // Evaluate the component
-    [component.componentModel evaluteAtTime:time];
+    [component.model evaluteAtTime:time];
     
     // Update the node connected to the output pins
-    for (DSPPin *pin in [component.componentModel outputPins]) {
+    for (DSPPin *pin in [component.model outputPins]) {
         DSPNode *currentNode = pin.connectedNode;
         [currentNode updateValue:pin.signalValue];
     }
@@ -97,12 +98,12 @@
 // Updates the signal values of input pins of the component 
 // Returns yes, if all the inputs are ready.
 // Returns NO, if any input is not ready
-- (BOOL)inputsReadyForComponent:(DSPComponentViewController *)component
+- (BOOL)inputsReadyForComponent:(DSPComponent *)component
 {
     // Inputs are ready if all of them are connected to a node with usePreviousValue set or the currentValue is valid
     // If a component is a source, its inputs are ready since it does not have any inputs
     BOOL inputsReady = YES;
-    for (DSPPin *pin in [component.componentModel inputPins]) {
+    for (DSPPin *pin in [component.model inputPins]) {
         DSPNode *node = pin.connectedNode;
         
         // Update the pins of the components
@@ -141,7 +142,7 @@
     double time = 0;
     
     while ([temporaryComponents count]) {
-        DSPComponentViewController *component = [[temporaryComponents objectAtIndex:0] retain];
+        DSPComponent *component = [[temporaryComponents objectAtIndex:0] retain];
         
         // Do not simulate wires
         if (component.isWire) {
@@ -178,8 +179,8 @@
     }
     
     // Reset the components
-    for (DSPComponentViewController *component in simulationComponents) {
-        [component.componentModel reset];
+    for (DSPComponent *component in simulationComponents) {
+        [component.model reset];
     }
     
     // Iterate through each time step
@@ -190,7 +191,7 @@
         }
         
         // Evaluate each component
-        for (DSPComponentViewController *component in simulationComponents) {
+        for (DSPComponent *component in simulationComponents) {
             BOOL inputsReady = [self inputsReadyForComponent:component];
             
             if (inputsReady) {

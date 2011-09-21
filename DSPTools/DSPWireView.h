@@ -15,7 +15,4 @@
 
 @property (readonly) NSUInteger wireLength;
 
-//// Provide the frame for given anchors
-//+ (CGRect)frameForAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale;
-
 @end

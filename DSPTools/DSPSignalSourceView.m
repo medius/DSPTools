@@ -40,13 +40,11 @@ static const NSUInteger kDefaultHeight = 2;
     
     // Draw a sinewave
     CGRect waveRect = CGRectMake(self.gridScale*3/4, self.gridScale*3/4, self.gridScale/2, self.gridScale/2);
-   // CGRect waveRect = CGRectMake(self.gridScale/2, self.gridScale/2, self.gridScale, self.gridScale);
-
     [DSPHelper drawSineWaves:1 inRect:waveRect withLineWidth:self.lineWidth withLineColor:self.lineColor];
 
 }
 
-/* Class methods */
+#pragma mark - View information methods
 
 + (CGRect)defaultFrameForPrimaryAnchor:(DSPGridPoint)anchor forGridScale:(CGFloat)gridScale
 {

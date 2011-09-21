@@ -6,8 +6,8 @@
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPIntegratorViewController.h"
-#import "DSPSignalSourceViewController.h"
-#import "DSPWireViewController.h"
+#import "DSPIntegrator.h"
+#import "DSPSignalSource.h"
+#import "DSPWire.h"
 
 

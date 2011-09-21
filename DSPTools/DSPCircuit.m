@@ -13,6 +13,7 @@
 @implementation DSPCircuit
 
 #pragma mark - Accessors
+
 @synthesize components = _components;
 @synthesize nodes      = _nodes;
 @synthesize errors     = _errors;
@@ -55,10 +56,10 @@
 
 - (void)addComponentWithName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2
 {
-    DSPComponentViewController* newComponent = [[NSClassFromString(className) alloc] init];
+    DSPComponent *newComponent = [[NSClassFromString(className) alloc] init];
     if (newComponent) {
-        newComponent.componentView.anchor1 = anchor1;
-        newComponent.componentView.anchor2 = anchor2;
+        newComponent.view.anchor1 = anchor1;
+        newComponent.view.anchor2 = anchor2;
         
         [self.components addObject:newComponent];
         [newComponent release];

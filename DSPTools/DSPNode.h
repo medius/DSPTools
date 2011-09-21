@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "DSPHeader.h"
 
-@class DSPComponentViewController;
+@class DSPComponent;
 
 @interface DSPNode : NSObject {
-    DSPComponentViewController* _fanInComponent;            // Only one fan in to a node is allowed
-    NSMutableArray*             _fanOutComponents;
+    DSPComponent               *_fanInComponent;            // Only one fan in to a node is allowed
+    NSMutableArray             *_fanOutComponents;
     DSPSignalType               _signalType;
     DSPSignalValue              _currentValue;              // Value at current time step
     BOOL                        _currentValueIsValid;
@@ -26,19 +26,19 @@
     // If a node does not have an inherent location, it does not belong here.
     // Maybe rename this object to a net?
     DSPGridPoint                _location;
-    NSMutableArray*             _wires;
+    NSMutableArray             *_wires;
 }
 
-@property (nonatomic, retain) DSPComponentViewController* fanInComponent;
-@property (nonatomic, retain) NSMutableArray*             fanOutComponents;
-@property (nonatomic) DSPSignalType                       signalType;
-@property (nonatomic) DSPSignalValue                      currentValue;
-@property (nonatomic) BOOL                                currentValueIsValid;
-@property (nonatomic) DSPSignalValue                      previousValue;
-@property (nonatomic) BOOL                                usePreviousValue;
+@property (nonatomic, retain) DSPComponent   *fanInComponent;
+@property (nonatomic, retain) NSMutableArray *fanOutComponents;
+@property (nonatomic) DSPSignalType           signalType;
+@property (nonatomic) DSPSignalValue          currentValue;
+@property (nonatomic) BOOL                    currentValueIsValid;
+@property (nonatomic) DSPSignalValue          previousValue;
+@property (nonatomic) BOOL                    usePreviousValue;
 
-@property (nonatomic) DSPGridPoint                        location;
-@property (nonatomic, retain) NSMutableArray*             wires;
+@property (nonatomic) DSPGridPoint            location;
+@property (nonatomic, retain) NSMutableArray *wires;
 
 // Update the node based on new value
 - (void)updateValue:(DSPSignalValue)newValue;

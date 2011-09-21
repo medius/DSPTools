@@ -4,7 +4,7 @@
       name = "Integrator";
       id = "int";
       description = "Integrates the input signal";
-      className = "DSPIntegratorViewController";
+      className = "DSPIntegrator";
       viewClassName = "DSPIntegratorView";
     },
     
@@ -12,7 +12,7 @@
       name = "Signal Source";
       id = "sig";
       description = "Generates a sine waveform with a given frequency and amplitude";
-      className = "DSPSignalSourceViewController";
+      className = "DSPSignalSource";
       viewClassName = "DSPSignalSourceView";
     },
     
@@ -20,7 +20,7 @@
       name = "Wire";
       id = "w";
       description = "Connects components to allow transfer of signal";
-      className = "DSPWireViewController";
+      className = "DSPWire";
       viewClassName = "DSPWireView";
     }
   );

@@ -8,6 +8,7 @@
 
 #import "DSPNode.h"
 #import "Three20/Three20.h"
+#import "DSPComponent.h"
 
 @implementation DSPNode
 
