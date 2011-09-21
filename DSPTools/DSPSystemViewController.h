@@ -7,29 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Three20UI/Three20UI.h"
-#import "DSPGridView.h"
-#import "DSPComponentListTableViewController.h"
-#import "DSPWaveformDelegateProtocol.h"
-#import "DSPSimulator.h"
+#import "Three20/Three20.h"
 
+#import "DSPComponentListProtocol.h"
+
+@protocol DSPWireCreation;
+@protocol DSPWaveformDelegateProtocol;
+
+@class DSPCircuitFileIO;
+@class DSPCircuit;
+@class DSPCircuitUIManager;
+@class DSPSimulator;
 @class DSPGridView;
-@class DSPComponentListView;
 
-@interface DSPSystemViewController : TTViewController <DSPWireCreation, DSPComponentListProtocol, DSPWaveformDelegateProtocol> {
+@interface DSPSystemViewController : TTViewController <DSPComponentListProtocol, DSPWireCreation, DSPWaveformDelegateProtocol> {
+    NSString               *_circuitFilePath;
+    
 @private
+    DSPCircuitFileIO       *_fileIO;
+    DSPCircuit             *_circuit;
+    DSPCircuitUIManager    *_circuitUIManager;
+    DSPSimulator           *_simulator;
+    
     TTView                 *_systemView;
     DSPGridView            *_gridView;
-    NSMutableDictionary    *_circuit;   // I am not sure if this needed as instance variable. What about simulaton model?
-    DSPSimulator           *_simulator; 
+
 }
 
-@property (readonly) TTView              *systemView;
-@property (readonly) DSPGridView         *gridView;
-@property (readonly) NSMutableDictionary *circuit;
-@property (readonly) DSPSimulator        *simulator;
-
-// Initialize with a circuit file
-- (id)initWithCircuitFile:(NSString *)filePath;
+@property (copy) NSString *circuitFilePath;
 
 @end

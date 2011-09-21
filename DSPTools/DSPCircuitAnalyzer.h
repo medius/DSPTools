@@ -10,10 +10,16 @@
 
 
 @interface DSPCircuitAnalyzer : NSObject {
-    
+    NSArray        *_components;
+    NSMutableArray *_nodes;
+    NSMutableArray *_errors;
 }
 
-// Returns a set of nodes and list of components with pins updated with node information
-+ (NSDictionary *)simulatonModelForCircuit:(NSDictionary *)circuit;
+@property (nonatomic, retain) NSArray          *components;
+@property (nonatomic, readonly) NSMutableArray *nodes;
+@property (nonatomic, readonly) NSMutableArray *errors;
+
+// Analyzes the circuit
+- (void)analyze;
 
 @end

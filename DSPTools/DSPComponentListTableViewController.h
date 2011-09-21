@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Three20/Three20.h"
 
-@protocol DSPComponentListProtocol <NSObject>
-- (void)componentListCancelButtonPressed;
-- (void)componentSelected:(NSString *)componentName;
-@end
+@protocol DSPComponentListProtocol;
 
 @interface DSPComponentListTableViewController : UITableViewController {
     id <DSPComponentListProtocol> _delegate;

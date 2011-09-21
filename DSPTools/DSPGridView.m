@@ -7,11 +7,11 @@
 //
 
 #import "DSPGridView.h"
-#import "DSPHeader.h"
-#import "DSPGlobalSettings.h"
-#import "DSPHelper.h"
 
-#import "DSPComponents.h"
+#import "DSPHeader.h"
+#import "DSPHelper.h"
+#import "DSPComponentViews.h"
+#import "DSPWireCreationProtocol.h"
 
 static const CGFloat kGridPointRadius = 0.5;
 
@@ -288,7 +288,7 @@ static const CGFloat kGridPointRadius = 0.5;
     
     DSPGridPoint gridPoint = [DSPHelper getGridPointFromRealPoint:currentTouch forGridScale:self.gridScale];
     DSPGridPoint lastPoint;
-    [[_wirePoints lastObject] getValue:&lastPoint];
+    [[self.wirePoints lastObject] getValue:&lastPoint];
     
     // Convert diagonal movements to horizontal movements
     if (lastPoint.x != gridPoint.x && lastPoint.y != gridPoint.y) gridPoint.y = lastPoint.y;

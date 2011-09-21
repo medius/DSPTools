@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DSPHeader.h"
 #import "Three20/Three20.h"
 #import "CorePlot-CocoaTouch.h"
-#import "DSPWaveformDelegateProtocol.h"
+
+@protocol DSPWaveformDelegateProtocol;
 
 @interface DSPWaveformViewController : TTViewController <CPTPlotDataSource> {
     CPTGraphHostingView              *_graphView;
     id <DSPWaveformDelegateProtocol>  _delegate;
     
 @private
-    CPTXYGraph                   *_graph;
+    CPTXYGraph                       *_graph;
 }
 
 @property (nonatomic, retain) CPTGraphHostingView   *graphView;

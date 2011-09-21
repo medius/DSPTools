@@ -21,6 +21,25 @@
 
 #pragma mark - Accessors
 
+@synthesize components = _components;
+@synthesize nodes      = _nodes;
+
+- (NSArray *)components
+{
+    if (!_components) {
+        _components = [[NSArray alloc] init];
+    }
+    return _components;
+}
+
+- (NSArray *)nodes
+{
+    if (!_nodes) {
+        _nodes = [[NSArray alloc] init];
+    }
+    return _nodes;
+}
+
 @synthesize xAxisBuffer = _xAxisBuffer;
 @synthesize yAxisBuffer1 = _yAxisBuffer1;
 @synthesize yAxisBuffer2 = _yAxisBuffer2;
@@ -53,6 +72,9 @@
 
 - (void)dealloc
 {
+    TT_RELEASE_SAFELY(_components);
+    TT_RELEASE_SAFELY(_nodes);
+    
     TT_RELEASE_SAFELY(_xAxisBuffer);
     TT_RELEASE_SAFELY(_yAxisBuffer1);
     TT_RELEASE_SAFELY(_yAxisBuffer2);
@@ -98,19 +120,33 @@
     return inputsReady;
 }
 
-- (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes
+- (void)simulate
 {
+    // Components and nodes should be set
+    if (!self.components) {
+        return;
+    }
+    
+    if (!self.nodes) {
+        return;
+    }
+    
     // Even though the circuit analyzer will try to arrange the components in the best order
     // possible, assume a random order of components and nodes.
     
     // Run a dummy simulation to arrange the components in the right order
-    NSMutableArray *temporaryComponents = [components mutableCopy];
+    NSMutableArray *temporaryComponents = [self.components mutableCopy];
     NSMutableArray *simulationComponents = [[NSMutableArray alloc] init];
     
     double time = 0;
     
     while ([temporaryComponents count]) {
         DSPComponentViewController *component = [[temporaryComponents objectAtIndex:0] retain];
+        
+        // Do not simulate wires
+        if (component.isWire) {
+            continue;
+        }
         
         BOOL inputsReady = [self inputsReadyForComponent:component];
         
@@ -134,9 +170,9 @@
     [temporaryComponents release];
     
     // Verify that all the nodes are updated and then reset the nodes
-    for (DSPNode *node in nodes) {
+    for (DSPNode *node in self.nodes) {
         if (!node.currentValueIsValid) {
-            NSLog(@"ERROR: Simulator - A node is not updated.");
+            TTDERROR(@"ERROR: Simulator - A node is not updated.");
         }
         [node reset];
     }
@@ -149,7 +185,7 @@
     // Iterate through each time step
     for (double simulationTime = 0; simulationTime<5 ; simulationTime = simulationTime + 0.05) {
         // Invalidate all the current values of the nodes
-        for (DSPNode *node in nodes) {
+        for (DSPNode *node in self.nodes) {
             node.currentValueIsValid = NO;
         }
         
@@ -168,11 +204,11 @@
         NSNumber *xValue = [NSNumber numberWithDouble:simulationTime];
         [self.xAxisBuffer addObject:xValue];
 
-        DSPNode *sourceOutput = [nodes objectAtIndex:0];
+        DSPNode *sourceOutput = [self.nodes objectAtIndex:0];
         NSNumber *yValue1 = [NSNumber numberWithDouble:(double)sourceOutput.currentValue];
         [self.yAxisBuffer1 addObject:yValue1];
         
-        DSPNode *integratorOutput = [nodes lastObject];
+        DSPNode *integratorOutput = [self.nodes lastObject];
         NSNumber *yValue2 = [NSNumber numberWithDouble:(double)integratorOutput.currentValue];
         [self.yAxisBuffer2 addObject:yValue2];
         

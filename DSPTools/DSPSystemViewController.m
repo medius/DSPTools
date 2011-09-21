@@ -7,13 +7,14 @@
 //
 
 #import "DSPSystemViewController.h"
-#import "DSPGridView.h"
-#import "DSPComponentListView.h"
-#import "Three20UI/Three20UI+Additions.h"
 
 #import "DSPCircuitFileIO.h"
+#import "DSPCircuit.h"
+#import "DSPCircuitUIManager.h"
 #import "DSPCircuitAnalyzer.h"
 #import "DSPSimulator.h"
+#import "DSPGridView.h"
+
 #import "DSPWaveformViewController.h"
 #import "DSPComponentListTableViewController.h"
 
@@ -30,6 +31,13 @@ static const CGFloat kComponentListHeight = 120;
 static const CGFloat kToolBarItemWidth    = 40;
 
 @interface DSPSystemViewController()
+@property (readonly) DSPCircuitFileIO    *fileIO;
+@property (readonly) DSPCircuit          *circuit;
+@property (readonly) DSPCircuitUIManager *circuitUIManager;
+@property (readonly) DSPSimulator        *simulator;
+@property (readonly) TTView              *systemView;
+@property (readonly) DSPGridView         *gridView;
+
 - (NSArray *)createToolBarItems;
 @end
 
@@ -37,10 +45,39 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 
 #pragma mark - Accessors
-@synthesize systemView   = _systemView;
-@synthesize gridView     = _gridView;
-@synthesize circuit      = _circuit;
-@synthesize simulator    = _simulator;
+
+//@synthesize circuitFilePath  = _circuitFilePath;
+//@synthesize fileIO           = _fileIO;
+//@synthesize circuit          = _circuit;
+//@synthesize circuitUIManager = _circuitUIManager;
+//@synthesize simulator        = _simulator;
+@synthesize systemView       = _systemView;
+@synthesize gridView         = _gridView;
+
+- (DSPCircuitFileIO *)fileIO
+{
+    if (!_fileIO) {
+        _fileIO = [[DSPCircuitFileIO alloc] init];
+        _fileIO.delegate = self.circuit;
+    }
+    return _fileIO;
+}
+
+- (DSPCircuit *)circuit
+{
+    if (!_circuit) {
+        _circuit = [[DSPCircuit alloc] init];
+    }
+    return _circuit;
+}
+
+- (DSPCircuitUIManager *)circuitUIManager
+{
+    if (!_circuitUIManager) {
+        _circuitUIManager = [[DSPCircuitUIManager alloc] init];
+    }
+    return _circuitUIManager;
+}
 
 - (DSPSimulator *)simulator
 {
@@ -58,13 +95,10 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self setToolbarItems:[self createToolBarItems]];
 }
 
-- (id)initWithCircuitFile:(NSString *)filePath
+- (id)init
 {
     self = [super init];
     if (self) {
-        // Get the circuit from the file
-        _circuit = [[DSPCircuitFileIO circuitInFile:filePath] retain];
-        
         // Initialize the systemView
         CGRect systemViewFrame = TTApplicationFrame();
         _systemView = [[TTView alloc] initWithFrame:systemViewFrame];
@@ -86,6 +120,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     TT_RELEASE_SAFELY(_gridView);
     TT_RELEASE_SAFELY(_circuit);
     TT_RELEASE_SAFELY(_simulator);
+    TT_RELEASE_SAFELY(_fileIO);
     [super dealloc];
 }
 
@@ -107,6 +142,9 @@ static const CGFloat kToolBarItemWidth    = 40;
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    // Read the circuit from the file
+    [self.fileIO readCircuitFile:self.circuitFilePath];
+    
     self.view = self.systemView;
     [self.view addSubview:self.gridView];
     
@@ -115,11 +153,8 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self.navigationController setToolbarHidden:NO animated:NO];
     self.navigationController.toolbar.barStyle = UIBarStyleBlackOpaque;
     
-    
-    NSArray *components = [self.circuit objectForKey:@"components"];
-    
     // Populate the grid with the components
-    for (DSPComponentViewController *componentViewController in components) {
+    for (DSPComponentViewController *componentViewController in self.circuit.components) {
         componentViewController.componentView.frame = 
         [DSPHelper getFrameForObject:componentViewController.componentView 
                          withAnchor1:componentViewController.componentView.anchor1 
@@ -197,7 +232,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create chart button
     UIImage *chartButtonImage = [UIImage imageNamed:@"chart_line_24.png"];
-    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(analyzeCircuit)];
+    UIBarButtonItem *chartButton = [[UIBarButtonItem alloc] initWithImage:chartButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(waveformButtonPressed)];
     chartButton.width = kToolBarItemWidth;
     [toolBarItems addObject:chartButton];
     [chartButton release];
@@ -209,7 +244,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)addComponent
 {
     DSPComponentListTableViewController *componentListTVC = [[DSPComponentListTableViewController alloc] init];
-    componentListTVC.delegate = self;
+    componentListTVC.delegate = self.circuitUIManager;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:componentListTVC];
     [self presentModalViewController:navigationController animated:YES];
     [componentListTVC release];
@@ -225,6 +260,18 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)crossPressed
 {
     if (self.gridView.wireDrawingInProgress) self.gridView.wireDrawingInProgress = NO;
+}
+
+- (void)waveformButtonPressed
+{
+    DSPCircuitAnalyzer *circuitAnalyzer = [[DSPCircuitAnalyzer alloc] init];
+    circuitAnalyzer.components = self.circuit.components;
+    [circuitAnalyzer analyze];
+    self.circuit.nodes = circuitAnalyzer.nodes;
+    self.circuit.errors = circuitAnalyzer.errors;
+    [circuitAnalyzer release];
+    
+    
 }
 
 - (void)analyzeCircuit

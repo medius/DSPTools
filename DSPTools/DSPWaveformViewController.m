@@ -7,6 +7,8 @@
 //
 
 #import "DSPWaveformViewController.h"
+#import "DSPHeader.h"
+#import "DSPWaveformDelegateProtocol.h"
 
 @interface DSPWaveformViewController()
 @property (nonatomic, retain) CPTXYGraph *graph;

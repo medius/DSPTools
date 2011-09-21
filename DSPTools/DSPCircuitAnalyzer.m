@@ -13,7 +13,48 @@
 
 @implementation DSPCircuitAnalyzer
 
-+ (void)connectNode:(DSPNode *)node toComponent:(DSPComponentViewController *)component withPin:(DSPPin *)pin;
+#pragma mark - Accessors
+
+@synthesize components = _components;
+@synthesize nodes      = _nodes;
+@synthesize errors     = _errors;
+
+- (NSArray *)components
+{
+    if (!_components) {
+        _components = [[NSMutableArray alloc] init];
+    }
+    return _components;
+}
+
+- (NSMutableArray *)nodes
+{
+    if (!_nodes) {
+        _nodes = [[NSMutableArray alloc] init];
+    }
+    return _nodes;
+}
+
+- (NSMutableArray *)errors
+{
+    if (!_errors) {
+        _errors = [[NSMutableArray alloc] init];
+    }
+    return _errors;
+}
+
+#pragma mark - Setup and dealloc
+- (void)dealloc
+{
+    TT_RELEASE_SAFELY(_components);
+    TT_RELEASE_SAFELY(_nodes);
+    TT_RELEASE_SAFELY(_errors);
+    [super dealloc];
+}
+
+#pragma mark - Circuit Analysis Core Methods
+
+- (void)connectNode:(DSPNode *)node toComponent:(DSPComponentViewController *)component withPin:(DSPPin *)pin;
 {
     if (component.isWire) {
         [node.wires addObject:component];
@@ -40,19 +81,19 @@
 
 }
 
-+ (void)createNodesForComponent:(DSPComponentViewController *)component inNodes:(NSMutableArray *)nodes
+- (void)createNodesForComponent:(DSPComponentViewController *)component
 {
     // Create nodes for pins
     for (DSPPin *pin in component.componentModel.pins) 
     {
         BOOL nodeForThisPinExists = NO;
-        for (int i=0; i<[nodes count]; i++) {
-            DSPNode *existingNode = (DSPNode *)[nodes objectAtIndex:i];
+        for (int i=0; i<[self.nodes count]; i++) {
+            DSPNode *existingNode = (DSPNode *)[self.nodes objectAtIndex:i];
             
             // A node is found that matches the pin location
             if (existingNode.location.x == pin.location.x && existingNode.location.y == pin.location.y) {
                 // Connect the existing node to the component and its pin
-                [DSPCircuitAnalyzer connectNode:existingNode toComponent:component withPin:pin];
+                [self connectNode:existingNode toComponent:component withPin:pin];
                 
                 nodeForThisPinExists = YES;
                 
@@ -83,16 +124,16 @@
             newNode.signalType = pin.signalType;
             
             // Connect the new node to the component and its pin
-            [DSPCircuitAnalyzer connectNode:newNode toComponent:component withPin:pin];
+            [self connectNode:newNode toComponent:component withPin:pin];
 
             // Add the new node to the nodes array
-            [nodes addObject:newNode];
+            [self.nodes addObject:newNode];
             [newNode release];
         }
     }
 }
 
-+ (void)transferComponentstoNode:(DSPNode *)targetNode fromNode:(DSPNode *)sourceNode withNodesList:(NSMutableArray *)nodes
+- (void)transferComponentstoNode:(DSPNode *)targetNode fromNode:(DSPNode *)sourceNode
 {
     // Move all the fanout components
     [targetNode.fanOutComponents addObjectsFromArray:sourceNode.fanOutComponents];
@@ -119,41 +160,34 @@
     }
     
     // Remove sourceNode from the list of nodes
-    [nodes removeObject:sourceNode];
+    [self.nodes removeObject:sourceNode];
 }
 
-+ (NSDictionary *)simulatonModelForCircuit:(NSDictionary *)circuit
+- (void)analyze
 {
+    // Components property must be set before calling this method
+    if (!self.components) {
+        return;
+    }
+    
     // First Pass:
     // Loop through each component and create a node for each pin of every 
     // component, including wires. For components with pins sharing a common
     // position, create a single node.
     
-    NSMutableDictionary *simulationModel = [NSMutableDictionary dictionary];
-    NSMutableArray *nodes = [[NSMutableArray alloc] init];
-    NSMutableArray *components = [[circuit objectForKey:@"components"] mutableCopy];
-    
-    // Errors are noted in components with mismatching value types, mismatching domains,
-    // unconnected components, etc.
-    NSMutableArray *errors = [[NSMutableArray alloc] init];
-
-    for (DSPComponentViewController *component in components) {
+    for (DSPComponentViewController *component in self.components) {
         // Debug
         NSLog(@"%d %d %d %d\n", component.componentView.anchor1.x, component.componentView.anchor1.y, component.componentView.anchor2.x, component.componentView.anchor2.y);
         
         // Create nodes for pins
-        [DSPCircuitAnalyzer createNodesForComponent:component inNodes:nodes];
+        [self createNodesForComponent:component];
     }
         
     // Second pass:
-    // Merge the nodes that connect to wires to adjacent nodes and remove all wires.
-    NSMutableArray *wiresToRemove = [[NSMutableArray alloc] init];
+    // Merge the nodes that connect to wires to adjacent nodes
     
-    for (DSPComponentViewController *component in components) {
-        if (component.isWire) {
-            // Mark the wire for removal from the components list
-            [wiresToRemove addObject:component];
-            
+    for (DSPComponentViewController *component in self.components) {
+        if (component.isWire) {            
             // Get the two nodes connected to the wire
             DSPPin *pinA = [[component.componentModel inputPins] lastObject];
             DSPPin *pinB = [[component.componentModel outputPins] lastObject];
@@ -167,13 +201,13 @@
             if (![nodeA.wires containsObject:component]) {
                 // TODO: Error in circuit analysis
                 // Assert something here
-                NSLog(@"ERROR: CircuitAnalyzer - nodeA does not contain the wire.");
+                TTDERROR(@"CircuitAnalyzer - nodeA does not contain the wire.");
             }
             
             if (![nodeB.wires containsObject:component]) {
                 // TODO: Error in circuit analysis
                 // Assert something here
-                NSLog(@"ERROR: CircuitAnalyzer - nodeB does not contain the wire.");
+                TTDERROR(@"CircuitAnalyzer - nodeB does not contain the wire.");
             }
             
             // Remove the wire from nodeA and nodeB
@@ -185,16 +219,16 @@
             if (nodeA.fanInComponent && nodeB.fanInComponent) {
                 // TODO: Error 
                 // Assert something here
-                NSLog(@"Error: CircuitAnalyzer - Both the nodes are fan in type.");
+                TTDERROR(@"CircuitAnalyzer - Both the nodes are fanin type.");
             }
             
             // If nodeB has a fanin
             if (nodeB.fanInComponent) {
-                [DSPCircuitAnalyzer transferComponentstoNode:nodeB fromNode:nodeA withNodesList:nodes];
+                [self transferComponentstoNode:nodeB fromNode:nodeA];
             }
             // If nodeA has a fanin or neither have a fanin
             else {
-                [DSPCircuitAnalyzer transferComponentstoNode:nodeA fromNode:nodeB withNodesList:nodes];
+                [self transferComponentstoNode:nodeA fromNode:nodeB];
             }
             
             // Release both the nodes. The node that was removed from the nodes list will be removed permanently.
@@ -202,10 +236,6 @@
             [nodeB release];
         }
     }
-
-    // Remove the wires from the component list
-    [components removeObjectsInArray:wiresToRemove];
-    
     
     // Sanity check
     // Perform sanity checks here. Make sure there is at least one source,
@@ -220,17 +250,6 @@
     // There is a definite order for each circuit, but 
     // can the entire component order be determined statically?
     
-    // Add the data to the simulation model
-    [simulationModel setValue:nodes forKey:@"nodes"];
-    [simulationModel setValue:components forKey:@"components"];
-    [simulationModel setValue:errors forKey:@"errors"];
-    
-    // Cleanup 
-    [nodes release];
-    [components release];
-    [errors release];
-    
-    return simulationModel;
 }
 
 @end

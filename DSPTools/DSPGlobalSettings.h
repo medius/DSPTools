@@ -10,7 +10,10 @@
 #import "DSPHeader.h"
 
 @interface DSPGlobalSettings : NSObject {
+    NSArray *_componentsInfo;
 }
+
+@property (nonatomic, readonly) NSArray *componentsInfo;
 
 // Shared Global Setting
 + (DSPGlobalSettings *)sharedGlobalSettings;

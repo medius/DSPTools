@@ -10,13 +10,19 @@
 #import "DSPWaveformViewController.h"
 
 @interface DSPSimulator : NSObject {
+    NSArray *_components;
+    NSArray *_nodes;
+    
 @private
     NSMutableArray* _xAxisBuffer;
     NSMutableArray* _yAxisBuffer1;
     NSMutableArray* _yAxisBuffer2;
 }
 
-- (void)runSimulationForComponents:(NSArray *)components andNodes:(NSArray *)nodes;
-- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
+@property (nonatomic, retain) NSArray *components;
+@property (nonatomic, retain) NSArray *nodes;
+
+- (void)simulate;
+//- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
 
 @end

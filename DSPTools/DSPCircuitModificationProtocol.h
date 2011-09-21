@@ -13,13 +13,13 @@
 
 @protocol DSPCircuitModificationProtocol <NSObject>
 
-// Add a component with anchor1
-- (void)addComponentWithName:(NSString *)name withAnchor1:(DSPGridPoint)anchor1;
-
 // Add a component with anchor1 and anchor2
-- (void)addComponentWithName:(NSString *)name withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2;
+- (void)addComponentWithName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2;
 
 // Remove a component
 - (void)removeComponent:(DSPComponentViewController *)component;
 
+@optional
+// Add a component with anchor1
+- (void)addComponentWithName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1;
 @end

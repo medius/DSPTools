@@ -120,10 +120,11 @@
     }
     if (item.title == @"Basic Circuit")
     {
-        filePath = [[NSBundle mainBundle] pathForResource:@"FirstCircuit" ofType:@"cir"];        
+        filePath = [[NSBundle mainBundle] pathForResource:@"Example1" ofType:@"dsp"];        
     }
     
-    DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] initWithCircuitFile:filePath];
+    DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];
+    systemViewController.circuitFilePath = filePath;
     [self.navigationController pushViewController:systemViewController animated:YES];
     [systemViewController release];
 }

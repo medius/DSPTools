@@ -7,31 +7,14 @@
 //
 
 #import "DSPGlobalSettings.h"
-
-static const CGFloat kMinGridScale = 12;
-static const CGFloat kMaxGridScale = 35;
+#import "Three20Core/Three20Core.h"
 
 @implementation DSPGlobalSettings
 
-// Setters/getters
 
 static DSPGlobalSettings *sharedGlobalSettings = nil;
 
-// Set the limits on gridScale
-//- (void)setGridScale:(CGFloat)newGridScale
-//{
-//    if (newGridScale < kMinGridScale) {
-//        gridScale = kMinGridScale;
-//    } 
-//    else if (newGridScale > kMaxGridScale)
-//    {
-//        gridScale = kMaxGridScale;
-//    }
-//    else 
-//    {
-//        gridScale = newGridScale;
-//    }
-//}
+#pragma mark - Accessors
 
 // Get the shared instance and create it if necessary.
 + (DSPGlobalSettings*)sharedGlobalSettings {
@@ -42,9 +25,23 @@ static DSPGlobalSettings *sharedGlobalSettings = nil;
     return sharedGlobalSettings;
 }
 
+// Components info
+- (NSArray *)componentsInfo
+{
+    if (!_componentsInfo) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"DSPComponents-Info" ofType:@"plist"];
+        if (!path) {
+            TTDERROR(@"Could not find file DSPComponents-Info.plist");
+        }
+        NSDictionary *fileContents = [[[NSDictionary alloc] initWithContentsOfFile:path] retain];
+        _componentsInfo = [fileContents objectForKey:@"components"];
+    }
+    return _componentsInfo;
+}
+
+#pragma mark - Setup and dealloc
 - (void)setupDefaults
 {
-    //self.gridScale = 20;
 }
 
 // We can still have a regular init method, that will get called the first time the Singleton is used.
@@ -73,11 +70,13 @@ static DSPGlobalSettings *sharedGlobalSettings = nil;
     return [[self sharedGlobalSettings] retain];
 }
 
+#pragma mark - Copy
 // Equally, we don't want to generate multiple copies of the singleton.
 - (id)copyWithZone:(NSZone *)zone {
     return self;
 }
 
+#pragma mark - Memory Management
 // Once again - do nothing, as we don't have a retain counter for this object.
 - (id)retain {
     return self;

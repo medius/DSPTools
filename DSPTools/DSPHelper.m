@@ -7,10 +7,11 @@
 //
 
 #import "DSPHelper.h"
-#import "DSPHeader.h"
 #import "Three20/Three20.h"
 
-#import "DSPComponents.h"
+#import "DSPHeader.h"
+#import "DSPGlobalSettings.h"
+#import "DSPComponentView.h"
 
 @implementation DSPHelper
 
@@ -221,23 +222,39 @@
                forGridScale:(CGFloat)gridScale
 {
     CGRect frame;
-    if ([object isKindOfClass:[DSPIntegratorView class]])
-    {
-        frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
-    }
-    else if ([object isKindOfClass:[DSPSummationView class]])
-    {
-        frame = [DSPSummationView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
-    }
-    else if ([object isKindOfClass:[DSPWireView class]])
-    {
-        frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
-    }    
-    else if ([object isKindOfClass:[DSPSignalSourceView class]])
-    {
-        frame = [DSPSignalSourceView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+    
+    for (NSDictionary *componentInfo in [DSPGlobalSettings sharedGlobalSettings].componentsInfo ) {
+        NSString *viewClassName = (NSString *)[componentInfo objectForKey:@"viewClassName"];
+        
+        if (viewClassName) {
+            Class componentViewClass = NSClassFromString(viewClassName);
+            
+            if ([object isKindOfClass:componentViewClass]) {
+                frame = [componentViewClass frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+                break;
+            }
+        }
+
     }
     return frame;
 }
 
+
 @end
+
+//    if ([object isKindOfClass:[DSPIntegratorView class]])
+//    {
+//        frame = [DSPIntegratorView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+//    }
+//    else if ([object isKindOfClass:[DSPSummationView class]])
+//    {
+//        frame = [DSPSummationView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+//    }
+//    else if ([object isKindOfClass:[DSPWireView class]])
+//    {
+//        frame = [DSPWireView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+//    }    
+//    else if ([object isKindOfClass:[DSPSignalSourceView class]])
+//    {
+//        frame = [DSPSignalSourceView frameForAnchor1:anchor1 andAnchor2:anchor2 forGridScale:gridScale];
+//    }

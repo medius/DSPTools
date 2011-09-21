@@ -82,6 +82,10 @@
 		C3BDABE41427F2EE00536C08 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABD61427F2EE00536C08 /* SBJsonTokeniser.m */; };
 		C3BDABE51427F2EE00536C08 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABD81427F2EE00536C08 /* SBJsonUTF8Stream.m */; };
 		C3BDABE61427F2EE00536C08 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABDA1427F2EE00536C08 /* SBJsonWriter.m */; };
+		C3BDABE8142824F700536C08 /* DSPComponents-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3BDABE7142824F700536C08 /* DSPComponents-Info.plist */; };
+		C3BDABEA14282CB200536C08 /* Example1.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C3BDABE914282CB200536C08 /* Example1.dsp */; };
+		C3BDABED142862D500536C08 /* DSPCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABEC142862D500536C08 /* DSPCircuit.m */; };
+		C3BDABF214296A6D00536C08 /* DSPCircuitUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABF114296A6C00536C08 /* DSPCircuitUIManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +395,15 @@
 		C3BDABD81427F2EE00536C08 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonUTF8Stream.m; path = JSONParser/SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		C3BDABD91427F2EE00536C08 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBJsonWriter.h; path = JSONParser/SBJsonWriter.h; sourceTree = "<group>"; };
 		C3BDABDA1427F2EE00536C08 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBJsonWriter.m; path = JSONParser/SBJsonWriter.m; sourceTree = "<group>"; };
+		C3BDABE7142824F700536C08 /* DSPComponents-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DSPComponents-Info.plist"; sourceTree = "<group>"; };
+		C3BDABE914282CB200536C08 /* Example1.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Example1.dsp; path = circuits/Example1.dsp; sourceTree = "<group>"; };
+		C3BDABEB142862D500536C08 /* DSPCircuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuit.h; sourceTree = "<group>"; };
+		C3BDABEC142862D500536C08 /* DSPCircuit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuit.m; sourceTree = "<group>"; };
+		C3BDABEF14286ABA00536C08 /* DSPComponentViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentViews.h; sourceTree = "<group>"; };
+		C3BDABF014296A6900536C08 /* DSPCircuitUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitUIManager.h; sourceTree = "<group>"; };
+		C3BDABF114296A6C00536C08 /* DSPCircuitUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuitUIManager.m; sourceTree = "<group>"; };
+		C3BDABF414296E8300536C08 /* DSPComponentListProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentListProtocol.h; sourceTree = "<group>"; };
+		C3BDABF51429708000536C08 /* DSPWireCreationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWireCreationProtocol.h; sourceTree = "<group>"; };
 		C3C8E7BB141A974800EBC7DA /* _CPTFillColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillColor.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillColor.h"; sourceTree = "<group>"; };
 		C3C8E7BC141A974800EBC7DA /* _CPTFillGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillGradient.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillGradient.h"; sourceTree = "<group>"; };
 		C3C8E7BD141A974800EBC7DA /* _CPTFillImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillImage.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillImage.h"; sourceTree = "<group>"; };
@@ -577,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				C329B41414031FF3003572E6 /* DSPComponents.h */,
+				C3BDABEF14286ABA00536C08 /* DSPComponentViews.h */,
 				C321450713F4ACF400DE738E /* DSPComponentModel.h */,
 				C321450813F4ACF400DE738E /* DSPComponentModel.m */,
 				C321450013F4A7F200DE738E /* DSPComponentView.h */,
@@ -617,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				C3257D91140C83C70055BFD5 /* FirstCircuit.cir */,
+				C3BDABE914282CB200536C08 /* Example1.dsp */,
 			);
 			name = "Example Circuits";
 			sourceTree = "<group>";
@@ -681,15 +696,15 @@
 			children = (
 				C33DA09B13FAEC1300FF0414 /* DSPSystemViewController.h */,
 				C33DA09C13FAEC1400FF0414 /* DSPSystemViewController.m */,
-				C3008C681422AB1300C6FF9A /* DSPComponentListTableViewController.h */,
-				C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */,
-				C358179E13FC4EB800948309 /* DSPComponentListView.h */,
-				C358179F13FC4EBD00948309 /* DSPComponentListView.m */,
+				C3BDABF314296E5100536C08 /* Component Selection List */,
 				C3257D10140C4E350055BFD5 /* DSPNode.h */,
 				C3257D11140C4E350055BFD5 /* DSPNode.m */,
 				C3257D13140C58DC0055BFD5 /* DSPPin.h */,
 				C3257D14140C58DC0055BFD5 /* DSPPin.m */,
 				C3BDAB9A1427EB4C00536C08 /* DSPCircuitModificationProtocol.h */,
+				C3BDABF014296A6900536C08 /* DSPCircuitUIManager.h */,
+				C3BDABF114296A6C00536C08 /* DSPCircuitUIManager.m */,
+				C3BDABEE142862E000536C08 /* Circuit */,
 				C3150CFF14118DBA00AB0A98 /* Circuit File IO */,
 				C3150CFE14118D6000AB0A98 /* Circuit Analyzer */,
 				C39E9C8114199B6200C94CA6 /* Waveform */,
@@ -802,6 +817,7 @@
 		C3A7E39013F352A60002491F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C3BDABE7142824F700536C08 /* DSPComponents-Info.plist */,
 				C3C8E7BA141A96B000EBC7DA /* CorePlot Headers */,
 				C33DA02013F9E6C400FF0414 /* images */,
 				320B6C86F11D9990244A9730 /* Three20.bundle */,
@@ -836,6 +852,7 @@
 		C3A7E4B313F482F70002491F /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				C3BDABF51429708000536C08 /* DSPWireCreationProtocol.h */,
 				C3A7E4B013F482D00002491F /* DSPGridView.h */,
 				C3A7E4B113F482D00002491F /* DSPGridView.m */,
 			);
@@ -872,6 +889,27 @@
 				C3BDABDA1427F2EE00536C08 /* SBJsonWriter.m */,
 			);
 			name = JSONParser;
+			sourceTree = "<group>";
+		};
+		C3BDABEE142862E000536C08 /* Circuit */ = {
+			isa = PBXGroup;
+			children = (
+				C3BDABEB142862D500536C08 /* DSPCircuit.h */,
+				C3BDABEC142862D500536C08 /* DSPCircuit.m */,
+			);
+			name = Circuit;
+			sourceTree = "<group>";
+		};
+		C3BDABF314296E5100536C08 /* Component Selection List */ = {
+			isa = PBXGroup;
+			children = (
+				C3008C681422AB1300C6FF9A /* DSPComponentListTableViewController.h */,
+				C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */,
+				C358179E13FC4EB800948309 /* DSPComponentListView.h */,
+				C358179F13FC4EBD00948309 /* DSPComponentListView.m */,
+				C3BDABF414296E8300536C08 /* DSPComponentListProtocol.h */,
+			);
+			name = "Component Selection List";
 			sourceTree = "<group>";
 		};
 		C3C8E7BA141A96B000EBC7DA /* CorePlot Headers */ = {
@@ -1188,6 +1226,8 @@
 				C33DA0BB13FB363E00FF0414 /* TestView.xib in Resources */,
 				C33DA0BD13FB3D9800FF0414 /* arrow_left_24.png in Resources */,
 				C3257D92140C83C70055BFD5 /* FirstCircuit.cir in Resources */,
+				C3BDABE8142824F700536C08 /* DSPComponents-Info.plist in Resources */,
+				C3BDABEA14282CB200536C08 /* Example1.dsp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1242,6 +1282,8 @@
 				C3BDABE41427F2EE00536C08 /* SBJsonTokeniser.m in Sources */,
 				C3BDABE51427F2EE00536C08 /* SBJsonUTF8Stream.m in Sources */,
 				C3BDABE61427F2EE00536C08 /* SBJsonWriter.m in Sources */,
+				C3BDABED142862D500536C08 /* DSPCircuit.m in Sources */,
+				C3BDABF214296A6D00536C08 /* DSPCircuitUIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,37 +38,37 @@ static const CGFloat kDefaultWidth = 1000;
     self.showsVerticalScrollIndicator = NO;    
     self.contentSize = CGSizeMake(kDefaultWidth, self.height);
     
-    DSPGridPoint anchor1, anchor2;
+//    DSPGridPoint anchor1, anchor2;
 
-    // Integrator
-    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];        
-    anchor1.x = 1;
-    anchor1.y = 3;
-    anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
-    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:anchor1 forGridScale:_gridScale];
-    dspIV.anchor1 = anchor1;
-    dspIV.anchor2 = anchor2;
-    dspIV.gridScale = _gridScale;
-    dspIV.isDraggable = NO;
-    dspIV.lineColor = [UIColor blackColor];
-    dspIV.fillColor = [UIColor clearColor];
-    [self addSubview:dspIV];
-    [dspIV release];
-
-    // Signal Source
-    DSPSignalSourceView *dspSSV = [[DSPSignalSourceView alloc] init];
-    anchor1.x = 7;
-    anchor1.y = 2;
-    anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
-    dspSSV.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:anchor1 forGridScale:self.gridScale];
-    dspSSV.anchor1 = anchor1;
-    dspSSV.anchor2 = anchor2;
-    dspSSV.gridScale = _gridScale;
-    dspSSV.isDraggable = NO;
-    dspSSV.lineColor = [UIColor blackColor];
-    dspSSV.fillColor = [UIColor clearColor];
-    [self addSubview:dspSSV];
-    [dspSSV release];
+//    // Integrator
+//    DSPIntegratorView *dspIV = [[DSPIntegratorView alloc] init];        
+//    anchor1.x = 1;
+//    anchor1.y = 3;
+//    anchor2 = [DSPIntegratorView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
+//    dspIV.frame = [DSPIntegratorView defaultFrameForPrimaryAnchor:anchor1 forGridScale:_gridScale];
+//    dspIV.anchor1 = anchor1;
+//    dspIV.anchor2 = anchor2;
+//    dspIV.gridScale = _gridScale;
+//    dspIV.isDraggable = NO;
+//    dspIV.lineColor = [UIColor blackColor];
+//    dspIV.fillColor = [UIColor clearColor];
+//    [self addSubview:dspIV];
+//    [dspIV release];
+//
+//    // Signal Source
+//    DSPSignalSourceView *dspSSV = [[DSPSignalSourceView alloc] init];
+//    anchor1.x = 7;
+//    anchor1.y = 2;
+//    anchor2 = [DSPSignalSourceView defaultSecondaryAnchorForPrimaryAnchor:anchor1];
+//    dspSSV.frame = [DSPSignalSourceView defaultFrameForPrimaryAnchor:anchor1 forGridScale:self.gridScale];
+//    dspSSV.anchor1 = anchor1;
+//    dspSSV.anchor2 = anchor2;
+//    dspSSV.gridScale = _gridScale;
+//    dspSSV.isDraggable = NO;
+//    dspSSV.lineColor = [UIColor blackColor];
+//    dspSSV.fillColor = [UIColor clearColor];
+//    [self addSubview:dspSSV];
+//    [dspSSV release];
 }
 
 - (id)initWithFrame:(CGRect)frame andGridScale:(CGFloat)initGridScale;

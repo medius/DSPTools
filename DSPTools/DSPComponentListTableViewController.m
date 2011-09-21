@@ -7,7 +7,8 @@
 //
 
 #import "DSPComponentListTableViewController.h"
-
+#import "Three20/Three20.h"
+#import "DSPComponentListProtocol.h"
 
 @implementation DSPComponentListTableViewController
 
