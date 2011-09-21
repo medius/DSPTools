@@ -18,6 +18,5 @@
 }
 
 @property (nonatomic, assign) id <DSPComponentListProtocol> delegate;
-@property (nonatomic, retain) NSArray *componentList;
 
 @end

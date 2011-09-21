@@ -116,7 +116,7 @@
     
     if (item.title == @"New Schematic")
     {
-        filePath = [[NSBundle mainBundle] pathForResource:@"Untitled" ofType:@"cir"];
+        filePath = [[NSBundle mainBundle] pathForResource:@"Untitled" ofType:@"dsp"];
     }
     if (item.title == @"Basic Circuit")
     {

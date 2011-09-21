@@ -78,7 +78,7 @@
             for (NSDictionary *componentInfo in [DSPGlobalSettings sharedGlobalSettings].componentsInfo ) {
                 if ([(NSString *)[componentInfo objectForKey:@"id"] isEqual:componentID]) {
                     NSString *componentClassName = (NSString *)[componentInfo objectForKey:@"className"];
-                    [self.delegate addComponentWithName:componentClassName withAnchor1:anchor1 withAnchor2:anchor2];
+                    [self.delegate addComponentWithClassName:componentClassName withAnchor1:anchor1 withAnchor2:anchor2];
                     break;
                 }
             }

@@ -46,11 +46,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 
 #pragma mark - Accessors
 
-//@synthesize circuitFilePath  = _circuitFilePath;
-//@synthesize fileIO           = _fileIO;
-//@synthesize circuit          = _circuit;
-//@synthesize circuitUIManager = _circuitUIManager;
-//@synthesize simulator        = _simulator;
+@synthesize circuitFilePath  = _circuitFilePath;
 @synthesize systemView       = _systemView;
 @synthesize gridView         = _gridView;
 
@@ -244,7 +240,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)addComponent
 {
     DSPComponentListTableViewController *componentListTVC = [[DSPComponentListTableViewController alloc] init];
-    componentListTVC.delegate = self.circuitUIManager;
+    componentListTVC.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:componentListTVC];
     [self presentModalViewController:navigationController animated:YES];
     [componentListTVC release];
@@ -271,6 +267,9 @@ static const CGFloat kToolBarItemWidth    = 40;
     self.circuit.errors = circuitAnalyzer.errors;
     [circuitAnalyzer release];
     
+    self.simulator.components = self.circuit.components;
+    self.simulator.nodes = self.circuit.nodes;
+    [self.simulator simulate];
     
 }
 

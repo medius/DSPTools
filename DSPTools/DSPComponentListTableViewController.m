@@ -8,18 +8,24 @@
 
 #import "DSPComponentListTableViewController.h"
 #import "Three20/Three20.h"
+#import "DSPGlobalSettings.h"
 #import "DSPComponentListProtocol.h"
+
+@interface DSPComponentListTableViewController ()
+@property (nonatomic, readonly) NSArray *componentList;
+@end
 
 @implementation DSPComponentListTableViewController
 
 #pragma mark - Accessors
 @synthesize delegate = _delegate;
-@synthesize componentList = _componentList;
 
 - (NSArray *)componentList
 {
-    NSArray *componentList = [[NSArray arrayWithObjects:@"Integrator", @"Signal Source", nil] retain];
-    return componentList;
+    if (!_componentList) {
+        _componentList = [[DSPGlobalSettings sharedGlobalSettings].componentsInfo retain];
+    }
+    return _componentList;
 }
 
 #pragma mark - Setup and dealloc
@@ -73,7 +79,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.componentList = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -127,7 +132,8 @@
     }
     
     // Configure the cell...
-    cell.textLabel.text = [self.componentList objectAtIndex:indexPath.row];
+    NSDictionary *component = [self.componentList objectAtIndex:indexPath.row];
+    cell.textLabel.text = [component objectForKey:@"name"];
     return cell;
 }
 
@@ -136,7 +142,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate componentSelected:[self.componentList objectAtIndex:indexPath.row]];
+    NSDictionary *selectedComponent = [self.componentList objectAtIndex:indexPath.row];
+    [self.delegate componentSelected:[selectedComponent objectForKey:@"className"]];
 }
 
 
