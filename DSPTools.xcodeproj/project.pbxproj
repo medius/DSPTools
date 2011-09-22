@@ -86,9 +86,9 @@
 		C3BDABED142862D500536C08 /* DSPCircuit.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABEC142862D500536C08 /* DSPCircuit.m */; };
 		C3BDABF214296A6D00536C08 /* DSPCircuitUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABF114296A6C00536C08 /* DSPCircuitUIManager.m */; };
 		C3BDABF7142A843B00536C08 /* DSPIntegrator.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABF6142A843B00536C08 /* DSPIntegrator.m */; };
-		C3BDABFD142AA4B000536C08 /* DSPScope.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDABFC142AA4AB00536C08 /* DSPScope.m */; };
 		C3BDAC01142AA5AE00536C08 /* DSPScopeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC00142AA5AE00536C08 /* DSPScopeModel.m */; };
 		C3BDAC04142AA5ED00536C08 /* DSPScopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC03142AA5ED00536C08 /* DSPScopeView.m */; };
+		C3BDAC07142AD51400536C08 /* DSPScope.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC06142AD51300536C08 /* DSPScope.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,12 +407,12 @@
 		C3BDABF414296E8300536C08 /* DSPComponentListProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentListProtocol.h; sourceTree = "<group>"; };
 		C3BDABF51429708000536C08 /* DSPWireCreationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWireCreationProtocol.h; sourceTree = "<group>"; };
 		C3BDABF6142A843B00536C08 /* DSPIntegrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPIntegrator.m; sourceTree = "<group>"; };
-		C3BDABFB142AA4A700536C08 /* DSPScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSPScope.h; path = DSPTools.xcodeproj/DSPScope.h; sourceTree = SOURCE_ROOT; };
-		C3BDABFC142AA4AB00536C08 /* DSPScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPScope.m; path = DSPTools.xcodeproj/DSPScope.m; sourceTree = SOURCE_ROOT; };
 		C3BDABFF142AA5AD00536C08 /* DSPScopeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPScopeModel.h; sourceTree = "<group>"; };
 		C3BDAC00142AA5AE00536C08 /* DSPScopeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPScopeModel.m; sourceTree = "<group>"; };
 		C3BDAC02142AA5EC00536C08 /* DSPScopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPScopeView.h; sourceTree = "<group>"; };
 		C3BDAC03142AA5ED00536C08 /* DSPScopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPScopeView.m; sourceTree = "<group>"; };
+		C3BDAC05142AD50900536C08 /* DSPScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPScope.h; sourceTree = "<group>"; };
+		C3BDAC06142AD51300536C08 /* DSPScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPScope.m; sourceTree = "<group>"; };
 		C3C8E7BB141A974800EBC7DA /* _CPTFillColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillColor.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillColor.h"; sourceTree = "<group>"; };
 		C3C8E7BC141A974800EBC7DA /* _CPTFillGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillGradient.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillGradient.h"; sourceTree = "<group>"; };
 		C3C8E7BD141A974800EBC7DA /* _CPTFillImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _CPTFillImage.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/_CPTFillImage.h"; sourceTree = "<group>"; };
@@ -925,8 +925,8 @@
 		C3BDABFE142AA4D600536C08 /* Scope */ = {
 			isa = PBXGroup;
 			children = (
-				C3BDABFB142AA4A700536C08 /* DSPScope.h */,
-				C3BDABFC142AA4AB00536C08 /* DSPScope.m */,
+				C3BDAC05142AD50900536C08 /* DSPScope.h */,
+				C3BDAC06142AD51300536C08 /* DSPScope.m */,
 				C3BDABFF142AA5AD00536C08 /* DSPScopeModel.h */,
 				C3BDAC00142AA5AE00536C08 /* DSPScopeModel.m */,
 				C3BDAC02142AA5EC00536C08 /* DSPScopeView.h */,
@@ -1307,9 +1307,9 @@
 				C3BDABED142862D500536C08 /* DSPCircuit.m in Sources */,
 				C3BDABF214296A6D00536C08 /* DSPCircuitUIManager.m in Sources */,
 				C3BDABF7142A843B00536C08 /* DSPIntegrator.m in Sources */,
-				C3BDABFD142AA4B000536C08 /* DSPScope.m in Sources */,
 				C3BDAC01142AA5AE00536C08 /* DSPScopeModel.m in Sources */,
 				C3BDAC04142AA5ED00536C08 /* DSPScopeView.m in Sources */,
+				C3BDAC07142AD51400536C08 /* DSPScope.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
