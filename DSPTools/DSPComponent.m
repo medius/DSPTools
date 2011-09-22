@@ -24,9 +24,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        // The componentView needs to be able to pass the information about anchor setting to the
-        // controller so that the pins in the model can be set.
-        _view.delegate = self;
+
         _isWire = NO;
     }
     return self;

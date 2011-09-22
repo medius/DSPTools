@@ -17,6 +17,14 @@
     },
     
     {
+      name = "Scope";
+      id = "sco";
+      description = "Displays the waveform of signal connected to its input";
+      className = "DSPScope";
+      viewClassName = "DSPScopeView";
+    },
+    
+    {
       name = "Wire";
       id = "w";
       description = "Connects components to allow transfer of signal";

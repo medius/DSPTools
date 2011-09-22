@@ -184,6 +184,8 @@ static const CGFloat kToolBarItemWidth    = 40;
     return YES;
 }
 
+#pragma mark - Toolbar buttons and their actions
+
 // Create toolbar items 
 - (NSArray *)createToolBarItems
 {

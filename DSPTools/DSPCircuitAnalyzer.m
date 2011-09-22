@@ -88,6 +88,11 @@
     // Create nodes for pins
     for (DSPPin *pin in component.model.pins) 
     {
+        if (pin.location.x == 0 && pin.location.y == 0) {
+            TTDERROR(@"Pin location of component %@ is 0", [component class]);
+            break;
+        };
+        
         BOOL nodeForThisPinExists = NO;
         for (int i=0; i<[self.nodes count]; i++) {
             DSPNode *existingNode = (DSPNode *)[self.nodes objectAtIndex:i];

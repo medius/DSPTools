@@ -6,7 +6,7 @@
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "DSPComponent.h"
 
 @interface DSPIntegrator : DSPComponent {

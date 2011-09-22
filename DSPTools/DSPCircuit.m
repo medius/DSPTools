@@ -58,6 +58,7 @@
 {
     DSPComponent *newComponent = [[NSClassFromString(className) alloc] init];
     if (newComponent) {
+        newComponent.view.delegate = newComponent;
         newComponent.view.anchor1 = anchor1;
         newComponent.view.anchor2 = anchor2;
         
