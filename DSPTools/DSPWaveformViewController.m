@@ -43,7 +43,7 @@
 - (NSArray *)colorList
 {
     if (!_colorList) {
-        _colorList = [NSArray arrayWithObjects:[CPTColor redColor], [CPTColor blueColor], [CPTColor greenColor], nil];
+        _colorList = [NSArray arrayWithObjects:[CPTColor redColor], [CPTColor greenColor], [CPTColor yellowColor], nil];
     }
     return _colorList;
 }
@@ -145,6 +145,8 @@
     axisSet.yAxis.majorTickLength = 7.0f;
     axisSet.yAxis.labelOffset = 3.0f;
     
+    NSUInteger colorIndex = 0;
+    
     // Setup all the plots
     for (NSString *plotName in self.plotList) {
         if ([plotName isKindOfClass:[NSString class]]) {
@@ -152,11 +154,18 @@
             plot.identifier = plotName;
             CPTMutableLineStyle *plotLineStyle = [[plot.dataLineStyle mutableCopy] autorelease];
             plotLineStyle.lineWidth = 1.0f;
-            plotLineStyle.lineColor = [CPTColor redColor];
+            plotLineStyle.lineColor = [self.colorList objectAtIndex:colorIndex];
+
             plot.dataLineStyle = plotLineStyle;
             plot.dataSource = self;
             [self.graph addPlot:plot];
             TT_RELEASE_SAFELY(plot);
+            
+            // Get the next color
+            colorIndex++;
+            if (colorIndex >= [self.colorList count]) {
+                colorIndex = 0;
+            }
         }
     }
     

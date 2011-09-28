@@ -38,6 +38,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _name = @"Integrator";
     }
     return self;
 }

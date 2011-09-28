@@ -41,6 +41,7 @@
     if (self) {
         // Custom initialization
         _isWire = YES;
+        _name = @"Wire";
     }
     return self;
 }

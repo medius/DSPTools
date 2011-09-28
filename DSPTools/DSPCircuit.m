@@ -99,8 +99,10 @@
 - (NSArray *)scopeNames
 {
     NSMutableArray *names = [NSMutableArray array];
-    for (DSPScope *scope in self.scopes) {
-        [names addObject:@"Scope"];
+    for (int i=0; i<[self.scopes count]; i++) {
+        DSPScope *scope = [self.scopes objectAtIndex:i];
+        NSString *name = [scope.name stringByAppendingFormat:@" %d", i];
+        [names addObject:name];
     }
     return names;
 }
@@ -117,12 +119,15 @@
         return [scopeModel.simulationTimeBuffer objectAtIndex:index];
     }
     else {
-        if (waveformIndex == 0) {
+        scope = [self.scopes objectAtIndex:waveformIndex];
+        scopeModel = (DSPScopeModel *)scope.model;
+        if (scopeModel) {
             return [scopeModel.valueBuffer objectAtIndex:index];
         }
         else {
             return 0;
         }
+        
     }
 }
 

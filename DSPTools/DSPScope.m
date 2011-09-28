@@ -39,6 +39,7 @@
     if (self) {
         // Custom initialization
         _isScope = YES;
+        _name = @"Scope";
     }
     return self;
 }

@@ -18,6 +18,8 @@
 @synthesize isWire = _isWire;
 @synthesize isScope = _isScope;
 
+@synthesize name   = _name;
+
 #pragma mark - Setup and dealloc
 
 - (id)init
@@ -25,9 +27,9 @@
     self = [super init];
     if (self) {
         // Custom initialization
-
         _isWire = NO;
         _isScope = NO;
+        _name = @"Component";
     }
     return self;
 }
@@ -36,6 +38,7 @@
 {
     TT_RELEASE_SAFELY(_model);
     TT_RELEASE_SAFELY(_view);
+    TT_RELEASE_SAFELY(_name);
     [super dealloc];
 }
 

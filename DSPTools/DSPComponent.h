@@ -17,11 +17,13 @@
     DSPComponentView  *_view;
     BOOL               _isWire;
     BOOL               _isScope;
+    NSString          *_name;
 }
 
 @property (nonatomic, retain) DSPComponentModel *model;
 @property (nonatomic, retain) DSPComponentView  *view;
 @property (nonatomic, readonly) BOOL             isWire;
 @property (nonatomic, readonly) BOOL             isScope;
+@property (nonatomic, copy) NSString            *name;
 
 @end
