@@ -9,6 +9,7 @@
 #import "DSPCircuit.h"
 #import "Three20/Three20.h"
 #import "DSPComponents.h"
+#import "DSPComponentModels.h"
 
 @implementation DSPCircuit
 
@@ -42,6 +43,23 @@
     return _errors;
 }
 
+- (NSMutableArray *)scopes
+{    
+    if (!_scopes) {
+        _scopes = [[NSMutableArray alloc] init];
+    }
+    
+    [_scopes removeAllObjects];
+    
+    for (DSPComponent *component in self.components) {
+        if (component.isScope) {
+            [_scopes addObject:component];
+        }
+    }
+    
+    return _scopes;
+}
+
 #pragma mark - Setup and dealloc
 
 - (void)dealloc
@@ -49,6 +67,7 @@
     TT_RELEASE_SAFELY(_components);
     TT_RELEASE_SAFELY(_nodes);
     TT_RELEASE_SAFELY(_errors);
+    TT_RELEASE_SAFELY(_scopes);
     [super dealloc];
 }
 
@@ -74,6 +93,37 @@
 - (void)removeComponent:(DSPComponentViewController *)component
 {
     
+}
+
+#pragma mark - Public methods
+- (NSArray *)scopeNames
+{
+    NSMutableArray *names = [NSMutableArray array];
+    for (DSPScope *scope in self.scopes) {
+        [names addObject:@"Scope"];
+    }
+    return names;
+}
+
+
+#pragma mark - Waveform Data Source Methods
+
+- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
+{
+    DSPScope *scope = [self.scopes lastObject];
+    DSPScopeModel *scopeModel = (DSPScopeModel *)scope.model;
+    
+    if (waveformAxis == DSPWaveformAxisX) {
+        return [scopeModel.simulationTimeBuffer objectAtIndex:index];
+    }
+    else {
+        if (waveformIndex == 0) {
+            return [scopeModel.valueBuffer objectAtIndex:index];
+        }
+        else {
+            return 0;
+        }
+    }
 }
 
 @end

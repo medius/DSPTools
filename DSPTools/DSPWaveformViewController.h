@@ -10,17 +10,26 @@
 #import "Three20/Three20.h"
 #import "CorePlot-CocoaTouch.h"
 
-@protocol DSPWaveformDelegateProtocol;
+@protocol DSPWaveformDataSourceProtocol;
+
+@protocol DSPWaveformDelegateProtocol <NSObject>
+- (void)waveformDoneButtonPressed;
+@end
 
 @interface DSPWaveformViewController : TTViewController <CPTPlotDataSource> {
-    CPTGraphHostingView              *_graphView;
-    id <DSPWaveformDelegateProtocol>  _delegate;
+    NSArray                           *_plotList;
+    CPTGraphHostingView               *_graphView;
+    id <DSPWaveformDataSourceProtocol> _dataSource;
+    id <DSPWaveformDelegateProtocol>   _delegate;
     
 @private
-    CPTXYGraph                       *_graph;
+    CPTXYGraph                         *_graph;
+    NSArray                            *_colorList;
 }
 
-@property (nonatomic, retain) CPTGraphHostingView   *graphView;
-@property (assign) id <DSPWaveformDelegateProtocol>  delegate;
+@property (nonatomic, retain) NSArray                 *plotList;
+@property (nonatomic, retain) CPTGraphHostingView     *graphView;
+@property (assign) id <DSPWaveformDataSourceProtocol>  dataSource;
+@property (assign) id <DSPWaveformDelegateProtocol>    delegate;
 
 @end

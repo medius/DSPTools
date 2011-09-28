@@ -11,8 +11,10 @@
 
 #import "DSPComponentListProtocol.h"
 
+//@protocol DSPWaveformDelegateProtocol;
+#import "DSPWaveformViewController.h"
+
 @protocol DSPWireCreationProtocol;
-@protocol DSPWaveformDelegateProtocol;
 
 @class DSPCircuitFileIO;
 @class DSPCircuit;

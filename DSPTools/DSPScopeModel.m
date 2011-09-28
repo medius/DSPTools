@@ -7,9 +7,46 @@
 //
 
 #import "DSPScopeModel.h"
+#import "Three20/Three20.h"
 #import "DSPPin.h"
 
 @implementation DSPScopeModel
+
+#pragma mark - Accessors
+
+- (NSMutableArray *)simulationTimeBuffer
+{
+    if (!_simulationTimeBuffer) {
+        _simulationTimeBuffer = [[NSMutableArray alloc] init];
+    }
+    return _simulationTimeBuffer;
+}
+
+- (NSMutableArray *)valueBuffer
+{
+    if (!_valueBuffer) {
+        _valueBuffer = [[NSMutableArray alloc] init];
+    }
+    return _valueBuffer;
+    
+}
+
+#pragma mark - Setup and dealloc
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    TT_RELEASE_SAFELY(_simulationTimeBuffer);
+    TT_RELEASE_SAFELY(_valueBuffer);
+    [super dealloc];
+}
 
 // Set the input pins
 - (NSArray *)pins
@@ -35,10 +72,20 @@
     // Empty the buffers
 }
 
+- (double)inputValue
+{
+    DSPPin *inputPin = [[self inputPins] lastObject];
+    return (double)inputPin.signalValue;
+}
+
 // Evaluate the output for a given simulation time
 - (void)evaluteAtTime:(double)simulationTime
 {
-    // TODO: Update the buffer with the new input pin value
+    NSNumber *time = [NSNumber numberWithDouble:simulationTime];
+    [self.simulationTimeBuffer addObject:time];
+    
+    NSNumber *value = [NSNumber numberWithDouble:[self inputValue]];
+    [self.valueBuffer addObject:value];
 }
 
 @end

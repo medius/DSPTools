@@ -1,5 +1,5 @@
 //
-//  DSPWaveformDelegateProtocol.h
+//  DSPWaveformDataSourceProtocol.h
 //  DSPTools
 //
 //  Created by Puru Choudhary on 9/9/11.
@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "DSPHeader.h"
 
-@protocol DSPWaveformDelegateProtocol <NSObject>
+@protocol DSPWaveformDataSourceProtocol <NSObject>
 - (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index;
-- (void)waveformDoneButtonPressed;
 @end

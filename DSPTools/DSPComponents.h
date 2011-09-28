@@ -9,5 +9,6 @@
 #import "DSPIntegrator.h"
 #import "DSPSignalSource.h"
 #import "DSPWire.h"
+#import "DSPScope.h"
 
 

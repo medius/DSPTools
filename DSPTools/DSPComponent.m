@@ -16,6 +16,7 @@
 @synthesize model  = _model;
 @synthesize view   = _view;
 @synthesize isWire = _isWire;
+@synthesize isScope = _isScope;
 
 #pragma mark - Setup and dealloc
 
@@ -26,6 +27,7 @@
         // Custom initialization
 
         _isWire = NO;
+        _isScope = NO;
     }
     return self;
 }

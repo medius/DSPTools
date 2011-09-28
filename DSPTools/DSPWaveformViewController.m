@@ -8,18 +8,21 @@
 
 #import "DSPWaveformViewController.h"
 #import "DSPHeader.h"
-#import "DSPWaveformDelegateProtocol.h"
+#import "DSPWaveformDataSourceProtocol.h"
 
 @interface DSPWaveformViewController()
 @property (nonatomic, retain) CPTXYGraph *graph;
+@property (readonly) NSArray             *colorList;
 @end
 
 @implementation DSPWaveformViewController
 
 #pragma mark - Accessors
-@synthesize graphView = _graphView;
-@synthesize graph     = _graph;
-@synthesize delegate  = _delegate;
+@synthesize plotList   = _plotList;
+@synthesize graphView  = _graphView;
+@synthesize graph      = _graph;
+@synthesize dataSource = _dataSource;
+@synthesize delegate   = _delegate;
 
 - (CPTGraphHostingView *)graphView
 {
@@ -37,6 +40,14 @@
     return _graph;
 }
 
+- (NSArray *)colorList
+{
+    if (!_colorList) {
+        _colorList = [NSArray arrayWithObjects:[CPTColor redColor], [CPTColor blueColor], [CPTColor greenColor], nil];
+    }
+    return _colorList;
+}
+
 #pragma mark - Initialization and deallocation
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,6 +63,7 @@
 {
     TT_RELEASE_SAFELY(_graphView);
     TT_RELEASE_SAFELY(_graph);
+    TT_RELEASE_SAFELY(_colorList);
     [super dealloc];
 }
 
@@ -79,7 +91,6 @@
     [super viewDidLoad];
     
     // Screen setup
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.translucent = YES;
@@ -134,32 +145,47 @@
     axisSet.yAxis.majorTickLength = 7.0f;
     axisSet.yAxis.labelOffset = 3.0f;
     
-    // X Squared Plot
-    CPTScatterPlot *xSquaredPlot = [[CPTScatterPlot alloc] init];
-    xSquaredPlot.identifier = @"Signal Source";
-    CPTMutableLineStyle *xSquaredPlotLineStyle = [[xSquaredPlot.dataLineStyle mutableCopy] autorelease];
-    xSquaredPlotLineStyle.lineWidth = 1.0f;
-    xSquaredPlotLineStyle.lineColor = [CPTColor redColor];
-    xSquaredPlot.dataLineStyle = xSquaredPlotLineStyle;
-    xSquaredPlot.dataSource = self;
-    [self.graph addPlot:xSquaredPlot];
-    TT_RELEASE_SAFELY(xSquaredPlot);
+    // Setup all the plots
+    for (NSString *plotName in self.plotList) {
+        if ([plotName isKindOfClass:[NSString class]]) {
+            CPTScatterPlot *plot = [[CPTScatterPlot alloc] init];
+            plot.identifier = plotName;
+            CPTMutableLineStyle *plotLineStyle = [[plot.dataLineStyle mutableCopy] autorelease];
+            plotLineStyle.lineWidth = 1.0f;
+            plotLineStyle.lineColor = [CPTColor redColor];
+            plot.dataLineStyle = plotLineStyle;
+            plot.dataSource = self;
+            [self.graph addPlot:plot];
+            TT_RELEASE_SAFELY(plot);
+        }
+    }
     
-    CPTPlotSymbol *greenCirclePlotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
-    greenCirclePlotSymbol.fill = [CPTFill fillWithColor:[CPTColor greenColor]];
-    greenCirclePlotSymbol.size = CGSizeMake(2.0, 2.0);
-    xSquaredPlot.plotSymbol = greenCirclePlotSymbol;
-    
-    // X Inverse Plot
-    CPTScatterPlot *xInversePlot = [[CPTScatterPlot alloc] init];
-    xInversePlot.identifier = @"Integrator";
-    CPTMutableLineStyle *xInversePlotLineStyle = [[xInversePlot.dataLineStyle mutableCopy] autorelease];
-    xInversePlotLineStyle.lineWidth = 1.0f;
-    xInversePlotLineStyle.lineColor = [CPTColor greenColor];
-    xInversePlot.dataLineStyle = xInversePlotLineStyle;
-    xInversePlot.dataSource = self;
-    [self.graph addPlot:xInversePlot];
-    TT_RELEASE_SAFELY(xInversePlot)
+//    // X Squared Plot
+//    CPTScatterPlot *xSquaredPlot = [[CPTScatterPlot alloc] init];
+//    xSquaredPlot.identifier = @"Signal Source";
+//    CPTMutableLineStyle *xSquaredPlotLineStyle = [[xSquaredPlot.dataLineStyle mutableCopy] autorelease];
+//    xSquaredPlotLineStyle.lineWidth = 1.0f;
+//    xSquaredPlotLineStyle.lineColor = [CPTColor redColor];
+//    xSquaredPlot.dataLineStyle = xSquaredPlotLineStyle;
+//    xSquaredPlot.dataSource = self;
+//    [self.graph addPlot:xSquaredPlot];
+//    TT_RELEASE_SAFELY(xSquaredPlot);
+//    
+//    CPTPlotSymbol *greenCirclePlotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+//    greenCirclePlotSymbol.fill = [CPTFill fillWithColor:[CPTColor greenColor]];
+//    greenCirclePlotSymbol.size = CGSizeMake(2.0, 2.0);
+//    xSquaredPlot.plotSymbol = greenCirclePlotSymbol;
+//    
+//    // X Inverse Plot
+//    CPTScatterPlot *xInversePlot = [[CPTScatterPlot alloc] init];
+//    xInversePlot.identifier = @"Integrator";
+//    CPTMutableLineStyle *xInversePlotLineStyle = [[xInversePlot.dataLineStyle mutableCopy] autorelease];
+//    xInversePlotLineStyle.lineWidth = 1.0f;
+//    xInversePlotLineStyle.lineColor = [CPTColor greenColor];
+//    xInversePlot.dataLineStyle = xInversePlotLineStyle;
+//    xInversePlot.dataSource = self;
+//    [self.graph addPlot:xInversePlot];
+//    TT_RELEASE_SAFELY(xInversePlot)
 }
 
 
@@ -186,14 +212,15 @@
 - (NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     if (fieldEnum == CPTScatterPlotFieldX) {
-        return [self.delegate numberForWaveformIndex:0 axis:DSPWaveformAxisX recordIndex:index];
+        return [self.dataSource numberForWaveformIndex:0 axis:DSPWaveformAxisX recordIndex:index];
     }
     else {
-        if (plot.identifier == @"Signal Source") {
-            return [self.delegate numberForWaveformIndex:0 axis:DSPWaveformAxisY recordIndex:index];
+        NSUInteger waveformIndex = [self.plotList indexOfObject:plot.identifier];
+        if (waveformIndex != NSNotFound) {
+            return [self.dataSource numberForWaveformIndex:waveformIndex axis:DSPWaveformAxisY recordIndex:index];
         }
         else {
-            return [self.delegate numberForWaveformIndex:1 axis:DSPWaveformAxisY recordIndex:index];            
+            return 0;
         }
     }
 }

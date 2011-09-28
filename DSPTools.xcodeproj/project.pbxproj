@@ -32,7 +32,6 @@
 		C3257D12140C4E350055BFD5 /* DSPNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D11140C4E350055BFD5 /* DSPNode.m */; };
 		C3257D15140C58DC0055BFD5 /* DSPPin.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D14140C58DC0055BFD5 /* DSPPin.m */; };
 		C3257D8E140C7CB30055BFD5 /* DSPCircuitFileIO.m in Sources */ = {isa = PBXBuildFile; fileRef = C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */; };
-		C3257D92140C83C70055BFD5 /* FirstCircuit.cir in Resources */ = {isa = PBXBuildFile; fileRef = C3257D91140C83C70055BFD5 /* FirstCircuit.cir */; };
 		C329B39813FF30A8003572E6 /* DSPWireView.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39713FF30A7003572E6 /* DSPWireView.m */; };
 		C329B39C14031A8B003572E6 /* DSPSignalSourceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C329B39B14031A81003572E6 /* DSPSignalSourceView.m */; };
 		C33DA01D13F9E18800FF0414 /* DSPLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33DA01C13F9E18800FF0414 /* DSPLauncherViewController.m */; };
@@ -313,7 +312,6 @@
 		C3257D14140C58DC0055BFD5 /* DSPPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPPin.m; sourceTree = "<group>"; };
 		C3257D8C140C7CB30055BFD5 /* DSPCircuitFileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitFileIO.h; sourceTree = "<group>"; };
 		C3257D8D140C7CB30055BFD5 /* DSPCircuitFileIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuitFileIO.m; sourceTree = "<group>"; };
-		C3257D91140C83C70055BFD5 /* FirstCircuit.cir */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = FirstCircuit.cir; path = DSPTools.xcodeproj/FirstCircuit.cir; sourceTree = SOURCE_ROOT; };
 		C329B39613FF30A7003572E6 /* DSPWireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWireView.h; sourceTree = "<group>"; };
 		C329B39713FF30A7003572E6 /* DSPWireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPWireView.m; sourceTree = "<group>"; };
 		C329B39A14031A7D003572E6 /* DSPSignalSourceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSignalSourceView.h; sourceTree = "<group>"; };
@@ -347,6 +345,7 @@
 		C358D86014119A8C00C0EAFA /* DSPSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSimulator.m; sourceTree = "<group>"; };
 		C358D8EF1419564A00C0EAFA /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../shared/core-plot/Source/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		C358D900141958E700C0EAFA /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = SOURCE_ROOT; };
+		C388D8C11433C4A400F816A6 /* DSPComponentModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentModels.h; sourceTree = "<group>"; };
 		C39E9C7E14199B5200C94CA6 /* DSPWaveformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformViewController.h; sourceTree = "<group>"; };
 		C39E9C7F14199B5200C94CA6 /* DSPWaveformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPWaveformViewController.m; sourceTree = "<group>"; };
 		C39E9C8214199B9200C94CA6 /* DSPWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformView.h; sourceTree = "<group>"; };
@@ -370,7 +369,7 @@
 		C3A7E3A713F352A60002491F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = iPad/en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
 		C3A7E4B013F482D00002491F /* DSPGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPGridView.h; sourceTree = "<group>"; };
 		C3A7E4B113F482D00002491F /* DSPGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPGridView.m; sourceTree = "<group>"; };
-		C3A7E806141AE06400187F4B /* DSPWaveformDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformDelegateProtocol.h; sourceTree = "<group>"; };
+		C3A7E806141AE06400187F4B /* DSPWaveformDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPWaveformDataSourceProtocol.h; sourceTree = "<group>"; };
 		C3BDAB9A1427EB4C00536C08 /* DSPCircuitModificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitModificationProtocol.h; sourceTree = "<group>"; };
 		C3BDABC21427F2EE00536C08 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJson.h"; path = "JSONParser/NSObject+SBJson.h"; sourceTree = "<group>"; };
 		C3BDABC31427F2EE00536C08 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJson.m"; path = "JSONParser/NSObject+SBJson.m"; sourceTree = "<group>"; };
@@ -600,6 +599,7 @@
 			children = (
 				C329B41414031FF3003572E6 /* DSPComponents.h */,
 				C3BDABEF14286ABA00536C08 /* DSPComponentViews.h */,
+				C388D8C11433C4A400F816A6 /* DSPComponentModels.h */,
 				C321450413F4ACB200DE738E /* DSPComponent.h */,
 				C321450513F4ACB200DE738E /* DSPComponent.m */,
 				C321450713F4ACF400DE738E /* DSPComponentModel.h */,
@@ -640,7 +640,6 @@
 		C3257D93140C83D70055BFD5 /* Example Circuits */ = {
 			isa = PBXGroup;
 			children = (
-				C3257D91140C83C70055BFD5 /* FirstCircuit.cir */,
 				C3BDABE914282CB200536C08 /* Example1.dsp */,
 			);
 			name = "Example Circuits";
@@ -757,7 +756,7 @@
 			children = (
 				C39E9C7E14199B5200C94CA6 /* DSPWaveformViewController.h */,
 				C39E9C7F14199B5200C94CA6 /* DSPWaveformViewController.m */,
-				C3A7E806141AE06400187F4B /* DSPWaveformDelegateProtocol.h */,
+				C3A7E806141AE06400187F4B /* DSPWaveformDataSourceProtocol.h */,
 				C39E9C8214199B9200C94CA6 /* DSPWaveformView.h */,
 				C39E9C8314199B9200C94CA6 /* DSPWaveformView.m */,
 			);
@@ -1248,7 +1247,6 @@
 				C33DA0B713FB2A6300FF0414 /* trash_24.png in Resources */,
 				C33DA0BB13FB363E00FF0414 /* TestView.xib in Resources */,
 				C33DA0BD13FB3D9800FF0414 /* arrow_left_24.png in Resources */,
-				C3257D92140C83C70055BFD5 /* FirstCircuit.cir in Resources */,
 				C3BDABE8142824F700536C08 /* DSPComponents-Info.plist in Resources */,
 				C3BDABEA14282CB200536C08 /* Example1.dsp in Resources */,
 			);

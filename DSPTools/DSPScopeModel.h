@@ -10,7 +10,11 @@
 #import "DSPComponentModel.h"
 
 @interface DSPScopeModel : DSPComponentModel {
-    
+    NSMutableArray *_simulationTimeBuffer;
+    NSMutableArray *_valueBuffer;
 }
+
+@property (nonatomic, readonly) NSMutableArray *simulationTimeBuffer;
+@property (nonatomic, readonly) NSMutableArray *valueBuffer;
 
 @end

@@ -273,33 +273,43 @@ static const CGFloat kToolBarItemWidth    = 40;
     self.simulator.nodes = self.circuit.nodes;
     [self.simulator simulate];
     
-}
-
-- (void)analyzeCircuit
-{
-    NSDictionary *simulationModel = [[DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit] retain];
-    
-    NSArray *components = [simulationModel objectForKey:@"components"];
-    NSArray *nodes = [simulationModel objectForKey:@"nodes"];
-    
-    for (DSPNode* node in nodes) {
-        DSPGridPoint location = node.location;
-        NSLog(@"Node x:%d y:%d", location.x, location.y);
-    }
-        
-    [self.simulator runSimulationForComponents:components andNodes:nodes];
-
-    
     DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
     waveform.graphView.frame = self.view.bounds;
     waveform.delegate = self;
+    waveform.dataSource = self.circuit;
+    waveform.plotList = [self.circuit scopeNames];
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:waveform];
     [self presentModalViewController:navigationController animated:YES];
     [waveform release];
-    [navigationController release];
-    [simulationModel release];
-
+    
 }
+
+//- (void)analyzeCircuit
+//{
+//    NSDictionary *simulationModel = [[DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit] retain];
+//    
+//    NSArray *components = [simulationModel objectForKey:@"components"];
+//    NSArray *nodes = [simulationModel objectForKey:@"nodes"];
+//    
+//    for (DSPNode* node in nodes) {
+//        DSPGridPoint location = node.location;
+//        NSLog(@"Node x:%d y:%d", location.x, location.y);
+//    }
+//        
+//    [self.simulator runSimulationForComponents:components andNodes:nodes];
+//
+//    
+//    DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
+//    waveform.graphView.frame = self.view.bounds;
+//    waveform.delegate = self;
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:waveform];
+//    [self presentModalViewController:navigationController animated:YES];
+//    [waveform release];
+//    [navigationController release];
+//    [simulationModel release];
+//
+//}
 
 #pragma mark - Wire Creation Protocol
 
@@ -337,12 +347,12 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self.modalViewController dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - Waveform Data Source Methods
+#pragma mark - Waveform Delegate Protocol methods
 
-- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
-{
-    return [self.simulator numberForWaveformIndex:waveformIndex axis:waveformAxis recordIndex:index];
-}
+//- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
+//{
+//    return [self.simulator numberForWaveformIndex:waveformIndex axis:waveformAxis recordIndex:index];
+//}
 
 - (void)waveformDoneButtonPressed
 {

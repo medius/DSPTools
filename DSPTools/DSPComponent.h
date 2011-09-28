@@ -16,10 +16,12 @@
     DSPComponentModel *_model;
     DSPComponentView  *_view;
     BOOL               _isWire;
+    BOOL               _isScope;
 }
 
 @property (nonatomic, retain) DSPComponentModel *model;
 @property (nonatomic, retain) DSPComponentView  *view;
 @property (nonatomic, readonly) BOOL             isWire;
+@property (nonatomic, readonly) BOOL             isScope;
 
 @end
