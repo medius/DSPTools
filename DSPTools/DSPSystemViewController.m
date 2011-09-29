@@ -261,12 +261,15 @@ static const CGFloat kToolBarItemWidth    = 40;
 {
     if (self.gridView.wireDrawingInProgress) self.gridView.wireDrawingInProgress = NO;
     
+    NSMutableArray *removedComponents = [[NSMutableArray alloc] init];
     for (DSPComponent *component in self.circuit.components) {
         if (component.view.isSelected) {
             [component.view removeFromSuperview];
-            [self.circuit removeComponent:component];
+            [removedComponents addObject:component];
         }
     }
+    [self.circuit.components removeObjectsInArray:removedComponents];
+    [removedComponents release];
 }
 
 - (void)waveformButtonPressed
