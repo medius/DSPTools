@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "DSPHeader.h"
 
-@class DSPComponentViewController;
+@class DSPComponent;
 
 @protocol DSPCircuitModificationProtocol <NSObject>
 
 // Add a component with anchor1 and anchor2
-- (void)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2;
+- (DSPComponent *)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2;
 
 // Remove a component
-- (void)removeComponent:(DSPComponentViewController *)component;
+- (void)removeComponent:(DSPComponent *)component;
 
 @optional
 // Add a component with anchor1
-- (void)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1;
+- (DSPComponent *)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1;
 @end

@@ -7,10 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DSPComponentListProtocol.h"
+//#import "DSPComponentListProtocol.h"
+#import "DSPWireCreationProtocol.h"
 
-@interface DSPCircuitUIManager : NSObject <DSPComponentListProtocol> {
-    
+@protocol DSPCircuitModificationProtocol;
+
+@interface DSPCircuitUIManager : NSObject <DSPWireCreationProtocol> {
+    id <DSPCircuitModificationProtocol> _delegate;
 }
+
+@property (assign) id <DSPCircuitModificationProtocol> delegate;
+
+- (DSPComponentView *)addComponentWithClassName:(NSString *)componentClassName 
+                        viewClass:(NSString *)viewClassName 
+                     forGridScale:(CGFloat)gridScale;
+- (void)deleteComponents;
 
 @end

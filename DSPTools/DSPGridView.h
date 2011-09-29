@@ -30,4 +30,8 @@
 @property (assign) id <DSPWireCreationProtocol> delegate;
 
 @property (nonatomic, retain )NSMutableArray *wirePoints;
+
+
+- (void)updateUI;
+
 @end

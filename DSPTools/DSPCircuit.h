@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSMutableArray *components;
 @property (nonatomic, retain) NSMutableArray *nodes;
 @property (nonatomic, retain) NSMutableArray *errors;
-@property (nonatomic, readonly) NSArray      *scopes;
+@property (nonatomic, readonly) NSMutableArray *scopes;
 
 // Return a list of names of all the scopes
 - (NSArray *)scopeNames;

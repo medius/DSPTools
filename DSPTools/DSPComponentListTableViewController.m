@@ -143,7 +143,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *selectedComponent = [self.componentList objectAtIndex:indexPath.row];
-    [self.delegate componentSelected:[selectedComponent objectForKey:@"className"]];
+    NSString *componentClassName = [selectedComponent objectForKey:@"className"];
+    NSString *viewClassName = [selectedComponent objectForKey:@"viewClassName"];
+    [self.delegate componentSelected:componentClassName viewClass:viewClassName];
 }
 
 

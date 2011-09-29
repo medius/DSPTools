@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DSPHeader.h"
+
+@class DSPComponentView;
 
 @protocol DSPWireCreationProtocol <NSObject>
-- (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2;
+- (DSPComponentView *)createWireforAnchor1:(DSPGridPoint)anchor1 
+                                andAnchor2:(DSPGridPoint)anchor2 
+                              forGridScale:(CGFloat)gridScale;
 @end

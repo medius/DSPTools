@@ -103,7 +103,6 @@ static const CGFloat kToolBarItemWidth    = 40;
         CGRect gridViewFrame = TTApplicationFrame();
         _gridView = [[DSPGridView alloc] initWithFrame:gridViewFrame];
         _gridView.gridScale = kGridScale;
-        _gridView.delegate = self;
         
         [self setup];
     }
@@ -115,6 +114,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     TT_RELEASE_SAFELY(_systemView);
     TT_RELEASE_SAFELY(_gridView);
     TT_RELEASE_SAFELY(_circuit);
+    TT_RELEASE_SAFELY(_circuitUIManager)
     TT_RELEASE_SAFELY(_simulator);
     TT_RELEASE_SAFELY(_fileIO);
     [super dealloc];
@@ -143,6 +143,8 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     self.view = self.systemView;
     [self.view addSubview:self.gridView];
+    self.gridView.delegate = self.circuitUIManager;
+    self.circuitUIManager.delegate = self.circuit;
     
     // Configure the navigation controller when in system view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -258,6 +260,13 @@ static const CGFloat kToolBarItemWidth    = 40;
 - (void)crossPressed
 {
     if (self.gridView.wireDrawingInProgress) self.gridView.wireDrawingInProgress = NO;
+    
+    for (DSPComponent *component in self.circuit.components) {
+        if (component.view.isSelected) {
+            [component.view removeFromSuperview];
+            [self.circuit removeComponent:component];
+        }
+    }
 }
 
 - (void)waveformButtonPressed
@@ -311,28 +320,7 @@ static const CGFloat kToolBarItemWidth    = 40;
 //
 //}
 
-#pragma mark - Wire Creation Protocol
 
-- (void)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2
-{
-    DSPWire *newWire = [[DSPWire alloc] init];
-    newWire.view.frame = 
-    [DSPHelper getFrameForObject:newWire.view 
-                     withAnchor1:anchor1 
-                     withAnchor2:anchor2 
-                    forGridScale:self.gridView.gridScale];
-    newWire.view.anchor1 = anchor1;
-    newWire.view.anchor2 = anchor2;
-    newWire.view.gridScale = self.gridView.gridScale;
-    newWire.view.isDraggable = YES;
-
-    
-    [self.gridView addSubview:newWire.view];
-    NSMutableArray *components = [self.circuit objectForKey:@"components"];
-    [components addObject:newWire];
-    [newWire release];
-    [self.gridView setNeedsDisplay];
-}
 
 #pragma mark - ComponentList Protocol methods
 
@@ -341,18 +329,17 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self.modalViewController dismissModalViewControllerAnimated:YES];
 }
 
-- (void)componentSelected:(NSString *)componentName
+- (void)componentSelected:(NSString *)componentClassName viewClass:(NSString *)viewClassName;
 {
-    NSLog(@"%@", componentName);
+    NSLog(@"%@", componentClassName);
+
     [self.modalViewController dismissModalViewControllerAnimated:YES];
+    DSPComponentView *componentView = [self.circuitUIManager addComponentWithClassName:componentClassName viewClass:viewClassName forGridScale:self.gridView.gridScale];
+    [self.gridView addSubview:componentView];
+    [self.gridView updateUI];
 }
 
 #pragma mark - Waveform Delegate Protocol methods
-
-//- (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
-//{
-//    return [self.simulator numberForWaveformIndex:waveformIndex axis:waveformAxis recordIndex:index];
-//}
 
 - (void)waveformDoneButtonPressed
 {

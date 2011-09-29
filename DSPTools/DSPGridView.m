@@ -106,16 +106,13 @@ static const CGFloat kGridPointRadius = 0.5;
     [super dealloc];
 }
 
+#pragma mark - View display and updates
+
 // Update the subviews based on their properties.
 - (void)updateSubViews
 {    
     for (DSPComponentView *componentView in self.subviews) {
         componentView.gridScale = self.gridScale;
-//        DSPGridPoint origin = componentView.origin;
-//        DSPGridSize size = componentView.size;
-//        
-//        CGPoint realOrigin = [DSPHelper getRealPointFromGridPoint:origin forGridScale:gridScale];
-//        CGSize realSize = [DSPHelper getRealSizeFromGridSize:size forGridScale:gridScale];
         
         DSPGridPoint anchor1 = componentView.anchor1;
         DSPGridPoint anchor2 = componentView.anchor2;
@@ -186,7 +183,7 @@ static const CGFloat kGridPointRadius = 0.5;
         [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
     }
     
-    // Draw the wire
+    // Display the wires that are being drawn by the user
     BOOL firstPoint = YES;
     DSPGridPoint currentGridPoint, lastGridPoint;
     CGPoint lastPoint;
@@ -229,7 +226,8 @@ static const CGFloat kGridPointRadius = 0.5;
             // Also, assign the first and last point for the new wire segment
             if (!((wireStartPoint.x == wireLastPoint.x && wireStartPoint.x == currentGridPoint.x) ||
                   (wireStartPoint.y == wireLastPoint.y && wireStartPoint.y == currentGridPoint.y))) {
-                [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
+                DSPComponentView *newWire = [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint forGridScale:self.gridScale];
+                [self addSubview:newWire];
                 
                 // Assign for latest segment
                 wireStartPoint = wireLastPoint;
@@ -239,11 +237,12 @@ static const CGFloat kGridPointRadius = 0.5;
             
             // If currentGridPoint is the last grid point in the array, create a wire
             if (i == self.wirePoints.count-1) {
-                [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint];
+                DSPComponentView *newWire = [self.delegate createWireforAnchor1:wireStartPoint andAnchor2:wireLastPoint forGridScale:self.gridScale];
+                [self addSubview:newWire];
             }
         }
     }
-    
+    [self updateUI];
 }
 
 #pragma mark - Touch handlers

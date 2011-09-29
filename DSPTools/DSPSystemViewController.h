@@ -14,15 +14,13 @@
 //@protocol DSPWaveformDelegateProtocol;
 #import "DSPWaveformViewController.h"
 
-@protocol DSPWireCreationProtocol;
-
 @class DSPCircuitFileIO;
 @class DSPCircuit;
 @class DSPCircuitUIManager;
 @class DSPSimulator;
 @class DSPGridView;
 
-@interface DSPSystemViewController : TTViewController <DSPComponentListProtocol, DSPWireCreationProtocol, DSPWaveformDelegateProtocol> {
+@interface DSPSystemViewController : TTViewController <DSPComponentListProtocol, DSPWaveformDelegateProtocol> {
     NSString               *_circuitFilePath;
     
 @private

@@ -73,7 +73,7 @@
 
 #pragma mark - Circuit Modification Protocol
 
-- (void)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2
+- (DSPComponent *)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2
 {
     DSPComponent *newComponent = [[NSClassFromString(className) alloc] init];
     if (newComponent) {
@@ -83,16 +83,23 @@
         
         [self.components addObject:newComponent];
         [newComponent release];
+        return [self.components lastObject];
     }
     else {
         // TODO: Log errors in errors dictionary to help user resolve it later
         TTDERROR(@"Could not create component for class %@", className);
+        return nil;
     }
 }
 
-- (void)removeComponent:(DSPComponentViewController *)component
+- (DSPComponent *)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1
 {
-    
+    return nil;
+}
+
+- (void)removeComponent:(DSPComponent *)component
+{
+    [self.components removeObject:component];
 }
 
 #pragma mark - Public methods
