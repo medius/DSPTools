@@ -88,6 +88,10 @@
 		C3BDAC01142AA5AE00536C08 /* DSPScopeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC00142AA5AE00536C08 /* DSPScopeModel.m */; };
 		C3BDAC04142AA5ED00536C08 /* DSPScopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC03142AA5ED00536C08 /* DSPScopeView.m */; };
 		C3BDAC07142AD51400536C08 /* DSPScope.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC06142AD51300536C08 /* DSPScope.m */; };
+		C3F6D4AF1436702F004E76C1 /* DSPSampleAndHold.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AA1436702F004E76C1 /* DSPSampleAndHold.m */; };
+		C3F6D4B01436702F004E76C1 /* DSPSampleAndHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AC1436702F004E76C1 /* DSPSampleAndHoldModel.m */; };
+		C3F6D4B11436702F004E76C1 /* DSPSampleAndHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */; };
+		C3F6D4B314367B9B004E76C1 /* SaH.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C3F6D4B214367B9B004E76C1 /* SaH.dsp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,6 +490,13 @@
 		C3C8E802141A974800EBC7DA /* CPTXYTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPTXYTheme.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/CPTXYTheme.h"; sourceTree = "<group>"; };
 		C3C8E803141A974800EBC7DA /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDecimalNumberExtensions.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/NSDecimalNumberExtensions.h"; sourceTree = "<group>"; };
 		C3C8E804141A974800EBC7DA /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNumberExtensions.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/NSNumberExtensions.h"; sourceTree = "<group>"; };
+		C3F6D4A91436702F004E76C1 /* DSPSampleAndHold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHold.h; sourceTree = "<group>"; };
+		C3F6D4AA1436702F004E76C1 /* DSPSampleAndHold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSampleAndHold.m; sourceTree = "<group>"; };
+		C3F6D4AB1436702F004E76C1 /* DSPSampleAndHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHoldModel.h; sourceTree = "<group>"; };
+		C3F6D4AC1436702F004E76C1 /* DSPSampleAndHoldModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSampleAndHoldModel.m; sourceTree = "<group>"; };
+		C3F6D4AD1436702F004E76C1 /* DSPSampleAndHoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHoldView.h; sourceTree = "<group>"; };
+		C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSampleAndHoldView.m; sourceTree = "<group>"; };
+		C3F6D4B214367B9B004E76C1 /* SaH.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SaH.dsp; path = circuits/SaH.dsp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -610,6 +621,7 @@
 				C329B41314031B51003572E6 /* Signal Source */,
 				C329B39913FF30AE003572E6 /* Wire */,
 				C321450D13F4AE0800DE738E /* Integrator */,
+				C3F6D4A814367005004E76C1 /* Sample and Hold */,
 				C35817A413FCD47700948309 /* Summation */,
 			);
 			name = Components;
@@ -641,6 +653,7 @@
 			isa = PBXGroup;
 			children = (
 				C3BDABE914282CB200536C08 /* Example1.dsp */,
+				C3F6D4B214367B9B004E76C1 /* SaH.dsp */,
 			);
 			name = "Example Circuits";
 			sourceTree = "<group>";
@@ -1015,6 +1028,19 @@
 			name = "CorePlot Headers";
 			sourceTree = "<group>";
 		};
+		C3F6D4A814367005004E76C1 /* Sample and Hold */ = {
+			isa = PBXGroup;
+			children = (
+				C3F6D4A91436702F004E76C1 /* DSPSampleAndHold.h */,
+				C3F6D4AA1436702F004E76C1 /* DSPSampleAndHold.m */,
+				C3F6D4AB1436702F004E76C1 /* DSPSampleAndHoldModel.h */,
+				C3F6D4AC1436702F004E76C1 /* DSPSampleAndHoldModel.m */,
+				C3F6D4AD1436702F004E76C1 /* DSPSampleAndHoldView.h */,
+				C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */,
+			);
+			name = "Sample and Hold";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1249,6 +1275,7 @@
 				C33DA0BD13FB3D9800FF0414 /* arrow_left_24.png in Resources */,
 				C3BDABE8142824F700536C08 /* DSPComponents-Info.plist in Resources */,
 				C3BDABEA14282CB200536C08 /* Example1.dsp in Resources */,
+				C3F6D4B314367B9B004E76C1 /* SaH.dsp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1308,6 +1335,9 @@
 				C3BDAC01142AA5AE00536C08 /* DSPScopeModel.m in Sources */,
 				C3BDAC04142AA5ED00536C08 /* DSPScopeView.m in Sources */,
 				C3BDAC07142AD51400536C08 /* DSPScope.m in Sources */,
+				C3F6D4AF1436702F004E76C1 /* DSPSampleAndHold.m in Sources */,
+				C3F6D4B01436702F004E76C1 /* DSPSampleAndHoldModel.m in Sources */,
+				C3F6D4B11436702F004E76C1 /* DSPSampleAndHoldView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
