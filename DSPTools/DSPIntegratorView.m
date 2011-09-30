@@ -15,16 +15,25 @@ static const NSUInteger kDefaultHeight = 6;
 
 @implementation DSPIntegratorView
 
-- (void)componentViewSetup
+#pragma mark - Setup and dealloc
+
+- (id)initWithFrame:(CGRect)frame
 {
-    DSPGridSize defaultSize;
-    defaultSize.width = kDefaultWidth;
-    defaultSize.height = kDefaultHeight;
-    _size = defaultSize;
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        
+        // Size
+        DSPGridSize defaultSize;
+        defaultSize.width = kDefaultWidth;
+        defaultSize.height = kDefaultHeight;
+        _size = defaultSize;
+    }
+    return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+#pragma mark - Draw methods
+
 - (void)drawContent:(CGRect)rect
 {   
     CGFloat margin = marginForGridScale(self.gridScale);

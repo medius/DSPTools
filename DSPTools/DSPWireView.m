@@ -14,7 +14,7 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
 
 @implementation DSPWireView
 
-// Setters/getters
+#pragma mark - Accessors
 - (NSUInteger)wireLength
 {
     if (_anchor1.x == _anchor2.x) {
@@ -26,6 +26,8 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     return _wireLength;
 }
 
+#pragma mark - Setup and dealloc
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -36,8 +38,8 @@ static const CGFloat kDefaultWireLineWidth = 1.0;
     return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+#pragma mark - Draw methods
+
 - (void)drawContent:(CGRect)rect
 {   
     CGFloat margin = marginForGridScale(self.gridScale);

@@ -14,16 +14,25 @@ static const NSUInteger kDefaultHeight = 2;
 
 @implementation DSPSignalSourceView
 
-- (void)setupShape
+#pragma mark - Setup and dealloc
+
+- (id)initWithFrame:(CGRect)frame
 {
-    DSPGridSize defaultSize;
-    defaultSize.width = kDefaultWidth;
-    defaultSize.height = kDefaultWidth;
-    _size = defaultSize;
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        
+        // Size
+        DSPGridSize defaultSize;
+        defaultSize.width = kDefaultWidth;
+        defaultSize.height = kDefaultHeight;
+        _size = defaultSize;
+    }
+    return self;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+#pragma mark - Draw methods
+
 - (void)drawContent:(CGRect)rect
 {   
     // Draw the circle

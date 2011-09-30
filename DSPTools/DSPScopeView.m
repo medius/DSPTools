@@ -31,6 +31,8 @@ static const NSUInteger kDefaultHeight = 4;
     return self;
 }
 
+#pragma mark - Draw methods
+
 - (void)drawContent:(CGRect)rect
 {   
     CGFloat margin = marginForGridScale(self.gridScale);
