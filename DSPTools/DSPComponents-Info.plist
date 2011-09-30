@@ -25,6 +25,14 @@
     },
     
     {
+      name = "Sample and Hold";
+      id = "sah";
+      description = "Samples the input signal and holds it for the specified interval";
+      className = "DSPSampleAndHold";
+      viewClassName = "DSPSampleAndHoldView";
+    },
+    
+    {
       name = "Wire";
       id = "w";
       description = "Connects components to allow transfer of signal";

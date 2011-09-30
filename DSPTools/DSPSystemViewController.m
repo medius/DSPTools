@@ -297,34 +297,6 @@ static const CGFloat kToolBarItemWidth    = 40;
     
 }
 
-//- (void)analyzeCircuit
-//{
-//    NSDictionary *simulationModel = [[DSPCircuitAnalyzer simulatonModelForCircuit:self.circuit] retain];
-//    
-//    NSArray *components = [simulationModel objectForKey:@"components"];
-//    NSArray *nodes = [simulationModel objectForKey:@"nodes"];
-//    
-//    for (DSPNode* node in nodes) {
-//        DSPGridPoint location = node.location;
-//        NSLog(@"Node x:%d y:%d", location.x, location.y);
-//    }
-//        
-//    [self.simulator runSimulationForComponents:components andNodes:nodes];
-//
-//    
-//    DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
-//    waveform.graphView.frame = self.view.bounds;
-//    waveform.delegate = self;
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:waveform];
-//    [self presentModalViewController:navigationController animated:YES];
-//    [waveform release];
-//    [navigationController release];
-//    [simulationModel release];
-//
-//}
-
-
-
 #pragma mark - ComponentList Protocol methods
 
 - (void)componentListCancelButtonPressed
