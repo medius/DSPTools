@@ -72,8 +72,9 @@
     TTLauncherItem *newSchematic = [[TTLauncherItem alloc] initWithTitle:@"New Schematic" image:nil URL:@"" canDelete:NO];
     self.launcherView.currentPageIndex = 0;
     TTLauncherItem *basicCircuit = [[TTLauncherItem alloc] initWithTitle:@"Basic Circuit" image:imageName URL:@"tt://url" canDelete:YES];
+    TTLauncherItem *sahCircuit = [[TTLauncherItem alloc] initWithTitle:@"SH Circuit" image:imageName URL:@"tt://url" canDelete:YES];
     
-    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, nil];
+    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, sahCircuit, nil];
     self.launcherView.pages = [NSArray arrayWithObjects:firstPage, nil];
     
     [newSchematic release];
@@ -121,6 +122,10 @@
     if (item.title == @"Basic Circuit")
     {
         filePath = [[NSBundle mainBundle] pathForResource:@"Example1" ofType:@"dsp"];        
+    }
+    if (item.title == @"SH Circuit")
+    {
+        filePath = [[NSBundle mainBundle] pathForResource:@"SaH" ofType:@"dsp"];        
     }
     
     DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];

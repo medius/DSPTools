@@ -1,19 +1,19 @@
 //
-//  DSPIntegratorView.m
+//  DSPSampleAndHoldView.m
 //  DSPTools
 //
 //  Created by Puru Choudhary on 8/11/11.
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPIntegratorView.h"
+#import "DSPSampleAndHoldView.h"
 #import "DSPHelper.h"
 #import "DSPHeader.h"
 
 static const NSUInteger kDefaultWidth = 4;
 static const NSUInteger kDefaultHeight = 4;
 
-@implementation DSPIntegratorView
+@implementation DSPSampleAndHoldView
 
 #pragma mark - Setup and dealloc
 
