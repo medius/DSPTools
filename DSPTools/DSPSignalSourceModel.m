@@ -46,7 +46,7 @@
     if (self) {
         // Custom initialization
         _isASource = YES;
-        _frequency = 1.0;
+        _frequency = 0.2;
         _maxAmplitude = 1.0;
     }
     return self;

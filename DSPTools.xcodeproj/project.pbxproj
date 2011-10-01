@@ -92,6 +92,11 @@
 		C3F6D4B01436702F004E76C1 /* DSPSampleAndHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AC1436702F004E76C1 /* DSPSampleAndHoldModel.m */; };
 		C3F6D4B11436702F004E76C1 /* DSPSampleAndHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */; };
 		C3F6D4B314367B9B004E76C1 /* SaH.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C3F6D4B214367B9B004E76C1 /* SaH.dsp */; };
+		C3F6D4BB14368D52004E76C1 /* DSPQuantizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4B614368D52004E76C1 /* DSPQuantizer.m */; };
+		C3F6D4BC14368D52004E76C1 /* DSPQuantizerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4B814368D52004E76C1 /* DSPQuantizerModel.m */; };
+		C3F6D4BD14368D52004E76C1 /* DSPQuantizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4BA14368D52004E76C1 /* DSPQuantizerView.m */; };
+		C3F6D4C2143698F8004E76C1 /* DSPSummation.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4BF143698F8004E76C1 /* DSPSummation.m */; };
+		C3F6D4C3143698F8004E76C1 /* DSPSummationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4C1143698F8004E76C1 /* DSPSummationModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -497,6 +502,16 @@
 		C3F6D4AD1436702F004E76C1 /* DSPSampleAndHoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHoldView.h; sourceTree = "<group>"; };
 		C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSampleAndHoldView.m; sourceTree = "<group>"; };
 		C3F6D4B214367B9B004E76C1 /* SaH.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SaH.dsp; path = circuits/SaH.dsp; sourceTree = "<group>"; };
+		C3F6D4B514368D52004E76C1 /* DSPQuantizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPQuantizer.h; sourceTree = "<group>"; };
+		C3F6D4B614368D52004E76C1 /* DSPQuantizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPQuantizer.m; sourceTree = "<group>"; };
+		C3F6D4B714368D52004E76C1 /* DSPQuantizerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPQuantizerModel.h; sourceTree = "<group>"; };
+		C3F6D4B814368D52004E76C1 /* DSPQuantizerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPQuantizerModel.m; sourceTree = "<group>"; };
+		C3F6D4B914368D52004E76C1 /* DSPQuantizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPQuantizerView.h; sourceTree = "<group>"; };
+		C3F6D4BA14368D52004E76C1 /* DSPQuantizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPQuantizerView.m; sourceTree = "<group>"; };
+		C3F6D4BE143698F7004E76C1 /* DSPSummation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSummation.h; sourceTree = "<group>"; };
+		C3F6D4BF143698F8004E76C1 /* DSPSummation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSummation.m; sourceTree = "<group>"; };
+		C3F6D4C0143698F8004E76C1 /* DSPSummationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSummationModel.h; sourceTree = "<group>"; };
+		C3F6D4C1143698F8004E76C1 /* DSPSummationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSummationModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,6 +637,7 @@
 				C329B39913FF30AE003572E6 /* Wire */,
 				C321450D13F4AE0800DE738E /* Integrator */,
 				C3F6D4A814367005004E76C1 /* Sample and Hold */,
+				C3F6D4B414368D33004E76C1 /* Quantizer */,
 				C35817A413FCD47700948309 /* Summation */,
 			);
 			name = Components;
@@ -741,6 +757,10 @@
 		C35817A413FCD47700948309 /* Summation */ = {
 			isa = PBXGroup;
 			children = (
+				C3F6D4BE143698F7004E76C1 /* DSPSummation.h */,
+				C3F6D4BF143698F8004E76C1 /* DSPSummation.m */,
+				C3F6D4C0143698F8004E76C1 /* DSPSummationModel.h */,
+				C3F6D4C1143698F8004E76C1 /* DSPSummationModel.m */,
 				C35817A113FCD44100948309 /* DSPSummationView.h */,
 				C35817A213FCD45000948309 /* DSPSummationView.m */,
 			);
@@ -1041,6 +1061,19 @@
 			name = "Sample and Hold";
 			sourceTree = "<group>";
 		};
+		C3F6D4B414368D33004E76C1 /* Quantizer */ = {
+			isa = PBXGroup;
+			children = (
+				C3F6D4B514368D52004E76C1 /* DSPQuantizer.h */,
+				C3F6D4B614368D52004E76C1 /* DSPQuantizer.m */,
+				C3F6D4B714368D52004E76C1 /* DSPQuantizerModel.h */,
+				C3F6D4B814368D52004E76C1 /* DSPQuantizerModel.m */,
+				C3F6D4B914368D52004E76C1 /* DSPQuantizerView.h */,
+				C3F6D4BA14368D52004E76C1 /* DSPQuantizerView.m */,
+			);
+			name = Quantizer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1338,6 +1371,11 @@
 				C3F6D4AF1436702F004E76C1 /* DSPSampleAndHold.m in Sources */,
 				C3F6D4B01436702F004E76C1 /* DSPSampleAndHoldModel.m in Sources */,
 				C3F6D4B11436702F004E76C1 /* DSPSampleAndHoldView.m in Sources */,
+				C3F6D4BB14368D52004E76C1 /* DSPQuantizer.m in Sources */,
+				C3F6D4BC14368D52004E76C1 /* DSPQuantizerModel.m in Sources */,
+				C3F6D4BD14368D52004E76C1 /* DSPQuantizerView.m in Sources */,
+				C3F6D4C2143698F8004E76C1 /* DSPSummation.m in Sources */,
+				C3F6D4C3143698F8004E76C1 /* DSPSummationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

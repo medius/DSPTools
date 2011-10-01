@@ -1,18 +1,19 @@
 //
-//  DSPSummationView.m
+//  DSPQuantizerView.m
 //  DSPTools
 //
-//  Created by Puru Choudhary on 8/17/11.
+//  Created by Puru Choudhary on 8/11/11.
 //  Copyright 2011 Puru Choudhary. All rights reserved.
 //
 
-#import "DSPSummationView.h"
+#import "DSPQuantizerView.h"
 #import "DSPHelper.h"
+#import "DSPHeader.h"
 
 static const NSUInteger kDefaultWidth = 4;
 static const NSUInteger kDefaultHeight = 4;
 
-@implementation DSPSummationView
+@implementation DSPQuantizerView
 
 #pragma mark - Setup and dealloc
 
@@ -35,27 +36,25 @@ static const NSUInteger kDefaultHeight = 4;
 
 - (void)drawContent:(CGRect)rect
 {   
-    // Draw the circle
-    CGPoint center = CGPointMake(2*self.gridScale, 2*self.gridScale);
-    [DSPHelper drawCircleAtPoint:center withRadius:self.gridScale withLineWidth:self.lineWidth withLineColor:self.lineColor withFillColor:self.fillColor];
-
+    CGFloat margin = marginForGridScale(self.gridScale);
+    
+    // Draw the box
+    CGRect box = CGRectMake(margin, margin, (self.size.width-1)*self.gridScale, (self.size.height-1)*self.gridScale);
+    [DSPHelper drawRoundedBoxForRect:box withRadius:self.rectangleRadius withLineWidth:self.lineWidth withLineColor:self.lineColor withFillColor:self.fillColor];
+    
     // Draw the pins
     CGPoint startPoint, endPoint;
-    
-    // Draw the input pin 1
-    startPoint.x = 0; startPoint.y = 2*self.gridScale;
-    endPoint.x = self.gridScale; endPoint.y = 2*self.gridScale;
+
+    // Draw the input pin
+    startPoint.x = 0; startPoint.y = self.size.height/2*self.gridScale;
+    endPoint.x = margin; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
-    
-    // Draw the input pin 2
-    startPoint.x = 2*self.gridScale; startPoint.y = 4*self.gridScale;
-    endPoint.x = 2*self.gridScale; endPoint.y = 3*self.gridScale;
-    [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
-    
+
     // Draw the output pin
-    startPoint.x = 3*self.gridScale; startPoint.y = 2*self.gridScale;
-    endPoint.x = 4*self.gridScale; endPoint.y = 2*self.gridScale;
+    startPoint.x = self.size.width*self.gridScale - margin; startPoint.y = self.size.height/2*self.gridScale;
+    endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
+
 }
 
 #pragma mark - View information methods

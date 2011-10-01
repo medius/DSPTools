@@ -33,6 +33,22 @@
     },
     
     {
+      name = "Quantizer";
+      id = "q";
+      description = "Quantizes the input signal to specified levels";
+      className = "DSPQuantizer";
+      viewClassName = "DSPQuantizerView";
+    },
+    
+    {
+      name = "Summation";
+      id = "sum";
+      description = "Adds or subtracts input signals";
+      className = "DSPSummation";
+      viewClassName = "DSPSummationView";
+    },
+    
+    {
       name = "Wire";
       id = "w";
       description = "Connects components to allow transfer of signal";
