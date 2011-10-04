@@ -55,6 +55,10 @@ static const NSUInteger kDefaultHeight = 4;
     endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 
+    NSString *string = @"∫";
+    [string drawAtPoint:CGPointMake(self.size.width*self.gridScale/2, self.size.height*self.gridScale/2) withFont:[UIFont systemFontOfSize:20]];
+    //[string drawInRect:rect withFont:[UIFont systemFontOfSize:20] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
+
 }
 
 #pragma mark - View information methods

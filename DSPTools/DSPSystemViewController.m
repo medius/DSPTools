@@ -26,7 +26,7 @@
 #import "DSPComponents.h"
 #import "DSPNode.h"
 
-static const CGFloat kGridScale = 20;
+static const CGFloat kGridScale = 15;
 static const CGFloat kComponentListHeight = 120;
 static const CGFloat kToolBarItemWidth    = 40;
 

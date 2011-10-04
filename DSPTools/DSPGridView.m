@@ -59,7 +59,7 @@ static const CGFloat kGridPointRadius = 0.5;
             componentView.isSelected = NO;
         }
         else {
-            componentView.isSelected = YES;
+            componentView.isDraggable = YES;
         }
     }
 }
