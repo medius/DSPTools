@@ -19,8 +19,9 @@
 @property (assign) id <DSPCircuitModificationProtocol> delegate;
 
 - (DSPComponentView *)addComponentWithClassName:(NSString *)componentClassName 
-                        viewClass:(NSString *)viewClassName 
-                     forGridScale:(CGFloat)gridScale;
+                                      viewClass:(NSString *)viewClassName 
+                                         symbol:(NSString *)symbolName
+                                   forGridScale:(CGFloat)gridScale;
 - (void)deleteComponents;
 
 @end

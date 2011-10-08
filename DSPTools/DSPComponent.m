@@ -19,6 +19,7 @@
 @synthesize isScope = _isScope;
 
 @synthesize name   = _name;
+@synthesize symbol = _symbol;
 
 #pragma mark - Setup and dealloc
 

@@ -10,7 +10,7 @@
 #import "DSPHeader.h"
 #import "DSPHelper.h"
 
-static const CGFloat kDefaultWireLineWidth = 1.0;
+static const CGFloat kDefaultWireLineWidth = 2.0;
 
 @implementation DSPWireView
 

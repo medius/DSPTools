@@ -10,5 +10,5 @@
 
 @protocol DSPComponentListProtocol <NSObject>
 - (void)componentListCancelButtonPressed;
-- (void)componentSelected:(NSString *)componentClassName viewClass:(NSString *)viewClassName;
+- (void)componentSelected:(NSString *)componentClassName viewClass:(NSString *)viewClassName symbol:(NSString *)symbolName;
 @end

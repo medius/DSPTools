@@ -2,7 +2,7 @@
   components = (
     {
       name = "Integrator";
-      id = "int";
+      sym = "int";
       description = "Integrates the input signal";
       className = "DSPIntegrator";
       viewClassName = "DSPIntegratorView";
@@ -10,7 +10,7 @@
     
     {
       name = "Signal Source";
-      id = "sig";
+      sym = "sig";
       description = "Generates a sine waveform with a given frequency and amplitude";
       className = "DSPSignalSource";
       viewClassName = "DSPSignalSourceView";
@@ -18,7 +18,7 @@
     
     {
       name = "Scope";
-      id = "sco";
+      sym = "sco";
       description = "Displays the waveform of signal connected to its input";
       className = "DSPScope";
       viewClassName = "DSPScopeView";
@@ -26,7 +26,7 @@
     
     {
       name = "Sample and Hold";
-      id = "sah";
+      sym = "sah";
       description = "Samples the input signal and holds it for the specified interval";
       className = "DSPSampleAndHold";
       viewClassName = "DSPSampleAndHoldView";
@@ -34,7 +34,7 @@
     
     {
       name = "Quantizer";
-      id = "q";
+      sym = "q";
       description = "Quantizes the input signal to specified levels";
       className = "DSPQuantizer";
       viewClassName = "DSPQuantizerView";
@@ -42,7 +42,7 @@
     
     {
       name = "Summation";
-      id = "sum";
+      sym = "sum";
       description = "Adds or subtracts input signals";
       className = "DSPSummation";
       viewClassName = "DSPSummationView";
@@ -50,7 +50,7 @@
     
     {
       name = "Wire";
-      id = "w";
+      sym = "w";
       description = "Connects components to allow transfer of signal";
       className = "DSPWire";
       viewClassName = "DSPWireView";

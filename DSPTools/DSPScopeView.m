@@ -49,6 +49,9 @@ static const NSUInteger kDefaultHeight = 4;
     endPoint.x = margin; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
     
+    // Draw a sinewave
+    CGRect waveRect = CGRectMake(self.gridScale*3/4, self.gridScale*5/4, 1.5*self.gridScale, 1.5*self.gridScale);
+    [DSPHelper drawSineWaves:1 inRect:waveRect withLineWidth:self.lineWidth withLineColor:self.lineColor];
 }
 
 #pragma mark - View information methods

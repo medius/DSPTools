@@ -145,7 +145,8 @@
     NSDictionary *selectedComponent = [self.componentList objectAtIndex:indexPath.row];
     NSString *componentClassName = [selectedComponent objectForKey:@"className"];
     NSString *viewClassName = [selectedComponent objectForKey:@"viewClassName"];
-    [self.delegate componentSelected:componentClassName viewClass:viewClassName];
+    NSString *symbolName = [selectedComponent objectForKey:@"symbol"];
+    [self.delegate componentSelected:componentClassName viewClass:viewClassName symbol:symbolName];
 }
 
 

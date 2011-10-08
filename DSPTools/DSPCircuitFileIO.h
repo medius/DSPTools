@@ -26,4 +26,7 @@
 // and options
 - (void)readCircuitFile:(NSString *)filePath;
 
+// Write a circuit file
+- (void)writeCircuitFile:(NSArray *)components;
+
 @end

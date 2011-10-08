@@ -19,7 +19,7 @@
 @synthesize delegate = _delegate;
 
 #pragma mark - Public methods
-- (DSPComponentView *)addComponentWithClassName:(NSString *)componentClassName viewClass:(NSString *)viewClassName forGridScale:(CGFloat)gridScale
+- (DSPComponentView *)addComponentWithClassName:(NSString *)componentClassName viewClass:(NSString *)viewClassName symbol:(NSString *)symbolName forGridScale:(CGFloat)gridScale
 {
     DSPGridPoint anchor1;
     anchor1.x = 10;
@@ -28,7 +28,7 @@
     Class viewClass = NSClassFromString(viewClassName);
     DSPGridPoint anchor2 = [viewClass defaultSecondaryAnchorForPrimaryAnchor:anchor1];
     
-    DSPComponent *newComponent = [self.delegate addComponentWithClassName:componentClassName withAnchor1:anchor1 withAnchor2:anchor2];
+    DSPComponent *newComponent = [self.delegate addComponentWithClassName:componentClassName withSymbol:symbolName withAnchor1:anchor1 withAnchor2:anchor2];
     
 //    newComponent.view.frame = 
 //    [DSPHelper getFrameForObject:newComponent.view 
@@ -52,7 +52,8 @@
 
 - (DSPComponentView *)createWireforAnchor1:(DSPGridPoint)anchor1 andAnchor2:(DSPGridPoint)anchor2 forGridScale:(CGFloat)gridScale
 {
-    DSPWire *newWire = (DSPWire*)[self.delegate addComponentWithClassName:@"DSPWire" withAnchor1:anchor1 withAnchor2:anchor2];
+    // TODO: This should come from component info list
+    DSPWire *newWire = (DSPWire*)[self.delegate addComponentWithClassName:@"DSPWire" withSymbol:@"w" withAnchor1:anchor1 withAnchor2:anchor2];
     
 //    newWire.view.frame = 
 //    [DSPHelper getFrameForObject:newWire.view 

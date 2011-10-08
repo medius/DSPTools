@@ -10,7 +10,6 @@
 #import "DSPComponentView.h"
 
 @interface DSPIntegratorView : DSPComponentView {
-    
 }
 
 @end

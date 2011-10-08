@@ -218,7 +218,7 @@ static const CGFloat kToolBarItemWidth    = 40;
     
     // Create component setting button
     UIImage *settingsButtonImage = [UIImage imageNamed:@"gear_24.png"];
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsButtonImage style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc] initWithImage:settingsButtonImage style:UIBarButtonItemStylePlain target:self action:@selector(saveCircuit)];
     settingsButton.width = kToolBarItemWidth;
     [toolBarItems addObject:settingsButton];
     [settingsButton release];
@@ -272,6 +272,11 @@ static const CGFloat kToolBarItemWidth    = 40;
     [removedComponents release];
 }
 
+- (void)saveCircuit
+{
+    [self.fileIO writeCircuitFile:self.circuit.components];
+}
+
 - (void)waveformButtonPressed
 {
     DSPCircuitAnalyzer *circuitAnalyzer = [[DSPCircuitAnalyzer alloc] init];
@@ -304,12 +309,12 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self.modalViewController dismissModalViewControllerAnimated:YES];
 }
 
-- (void)componentSelected:(NSString *)componentClassName viewClass:(NSString *)viewClassName;
+- (void)componentSelected:(NSString *)componentClassName viewClass:(NSString *)viewClassName symbol:(NSString *)symbolName;
 {
     NSLog(@"%@", componentClassName);
 
     [self.modalViewController dismissModalViewControllerAnimated:YES];
-    DSPComponentView *componentView = [self.circuitUIManager addComponentWithClassName:componentClassName viewClass:viewClassName forGridScale:self.gridView.gridScale];
+    DSPComponentView *componentView = [self.circuitUIManager addComponentWithClassName:componentClassName viewClass:viewClassName symbol:symbolName forGridScale:self.gridView.gridScale];
     [self.gridView addSubview:componentView];
     [self.gridView updateUI];
 }

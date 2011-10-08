@@ -14,6 +14,8 @@
 #import "DSPWireCreationProtocol.h"
 
 static const CGFloat kGridPointRadius = 0.5;
+static const CGFloat kMinorLineWidth = 0.3;
+static const CGFloat kMajorLineWidth = 0.4;
 
 @implementation DSPGridView
 
@@ -169,18 +171,43 @@ static const CGFloat kGridPointRadius = 0.5;
     // Draw the main grid with lines
     CGPoint currentPoint;
     
+    int lineCount = 0;
+    CGFloat lineWidth;
+    UIColor *lineColor;
+    
     // Horizontal lines
     for (CGFloat y = startPoint.y; y <= endPoint.y; y += self.gridScale) {
         CGPoint fromPoint = CGPointMake(startPoint.x, y);
         CGPoint toPoint = CGPointMake(endPoint.x, y);
-        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
+        
+        if (lineCount%5 == 0) {
+            lineWidth = kMajorLineWidth;
+            lineColor = [UIColor blackColor];
+        }
+        else {
+            lineWidth = kMinorLineWidth;
+            lineColor = [UIColor grayColor];
+        }
+        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:lineWidth withLineColor:lineColor];
+        lineCount++;
     }
     
+    lineCount = 0;
     // Vertical lines
     for (CGFloat x = startPoint.x; x <= endPoint.x; x += self.gridScale) {
         CGPoint fromPoint = CGPointMake(x, startPoint.y);
         CGPoint toPoint = CGPointMake(x, endPoint.y);
-        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:[UIColor grayColor]];
+        
+        if (lineCount%5 == 0) {
+            lineWidth = kMajorLineWidth;
+            lineColor = [UIColor blackColor];
+        }
+        else {
+            lineWidth = kMinorLineWidth;
+            lineColor = [UIColor grayColor];
+        }
+        [DSPHelper drawLineFromPoint:fromPoint toPoint:toPoint withLineWidth:0.3 withLineColor:lineColor];
+        lineCount++;
     }
     
     // Display the wires that are being drawn by the user

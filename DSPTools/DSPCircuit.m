@@ -73,10 +73,11 @@
 
 #pragma mark - Circuit Modification Protocol
 
-- (DSPComponent *)addComponentWithClassName:(NSString *)className withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2
+- (DSPComponent *)addComponentWithClassName:(NSString *)className withSymbol:(NSString *)symbolName withAnchor1:(DSPGridPoint)anchor1 withAnchor2:(DSPGridPoint)anchor2
 {
     DSPComponent *newComponent = [[NSClassFromString(className) alloc] init];
     if (newComponent) {
+        newComponent.symbol = symbolName;
         newComponent.view.delegate = newComponent;
         newComponent.view.anchor1 = anchor1;
         newComponent.view.anchor2 = anchor2;

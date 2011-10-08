@@ -13,6 +13,10 @@
 #import "DSPGlobalSettings.h"
 #import "DSPCircuitModificationProtocol.h"
 
+// Temporary?
+#import "DSPComponents.h"
+#import "DSPComponentViews.h"
+
 @interface DSPCircuitFileIO () 
 @property (nonatomic, retain) SBJsonParser *parser;
 @property (nonatomic, retain) SBJsonWriter *writer;
@@ -62,7 +66,7 @@
         NSArray *components = [parsedFile objectForKey:@"components"];
         
         for (NSDictionary* component in components) {
-            NSString *componentID = [component objectForKey:@"id"];
+            NSString *componentID = [component objectForKey:@"sym"];
 
             // Get the first anchor of the component
             DSPGridPoint anchor1;
@@ -76,9 +80,9 @@
             
             // Match with available component IDs
             for (NSDictionary *componentInfo in [DSPGlobalSettings sharedGlobalSettings].componentsInfo ) {
-                if ([(NSString *)[componentInfo objectForKey:@"id"] isEqual:componentID]) {
+                if ([(NSString *)[componentInfo objectForKey:@"sym"] isEqual:componentID]) {
                     NSString *componentClassName = (NSString *)[componentInfo objectForKey:@"className"];
-                    [self.delegate addComponentWithClassName:componentClassName withAnchor1:anchor1 withAnchor2:anchor2];
+                    [self.delegate addComponentWithClassName:componentClassName withSymbol:componentID withAnchor1:anchor1 withAnchor2:anchor2];
                     break;
                 }
             }
@@ -86,80 +90,26 @@
     }
 }
 
+- (void)writeCircuitFile:(NSArray *)components
+{
+    NSMutableArray *writeComponents = [[NSMutableArray alloc] init];
+    for (DSPComponent *component in components) {
+        NSMutableDictionary *newComponent = [[NSMutableDictionary alloc] init];
+        [newComponent setObject:component.symbol forKey:@"sym"];
+        [newComponent setObject:[NSString stringWithFormat:@"%d",component.view.anchor1.x] forKey:@"a1x"];
+        [newComponent setObject:[NSString stringWithFormat:@"%d",component.view.anchor1.y] forKey:@"a1y"];
+        [newComponent setObject:[NSString stringWithFormat:@"%d",component.view.anchor2.x] forKey:@"a2x"];
+        [newComponent setObject:[NSString stringWithFormat:@"%d",component.view.anchor2.y] forKey:@"a2y"];
+        [writeComponents addObject:newComponent];
+        [newComponent release];
+    }
+    
+    NSMutableDictionary *circuitData = [[NSMutableDictionary alloc] init];
+    [circuitData setObject:writeComponents forKey:@"components"];
+    [writeComponents release];
+    
+    NSString *fileContents = [self.writer stringWithObject:circuitData];
+    NSLog(@"%@",fileContents);
+}
 
-//- (NSMutableDictionary *)circuitInFile:(NSString *)filePath
-//{
-//    // Circuit data
-//    NSMutableDictionary *circuit = [NSMutableDictionary dictionary];
-//    NSMutableArray *components = [[NSMutableArray alloc] init];
-//    DSPComponentViewController *componentViewController;
-//    
-//    // Get the lines in the file
-//    NSArray *lines;
-//    lines = [[[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] 
-//              stringByStandardizingPath] 
-//             componentsSeparatedByString:@"\n"];
-//    
-//    NSEnumerator *nse = [lines objectEnumerator];
-//    
-//    NSString *line;
-//    while((line = [nse nextObject])) {
-//        NSArray *fields = [line componentsSeparatedByString:@" "];
-//        
-//        // Ignore if there are fewer than five elements
-//        if ([fields count]<5) {
-//            continue;
-//        }
-//        
-//        NSLog(@"%@", line);
-//        
-//        /* Find the type of component and initialize the related view object */
-//        NSString *identifier = [fields objectAtIndex:0];
-//        
-//        // Signal source
-//        if ([identifier isEqualToString:SIGNAL_SOURCE]) {
-//            componentViewController = [[DSPSignalSourceViewController alloc] init];
-//        }
-//        // Integrator
-//        else if ([identifier isEqualToString:INTEGRATOR]) {
-//            componentViewController = [[DSPIntegratorViewController alloc] init];
-//        }
-//        // Wire
-//        else if ([identifier isEqualToString:WIRE]) {
-//            componentViewController = [[DSPWireViewController alloc] init];
-//        }
-//        else {
-//            componentViewController = nil;
-//        }
-//        
-//        // TODO: Careful, a bad circuit description will crash this
-//        
-//        // Get the first anchor of the component
-//        DSPGridPoint anchor1;
-//        anchor1.x = [[fields objectAtIndex:1] integerValue];
-//        anchor1.y = [[fields objectAtIndex:2] integerValue];
-//        if (componentViewController) {
-//            componentViewController.componentView.anchor1 = anchor1;
-//        }
-//        
-//        // Get the second anchor of the component
-//        DSPGridPoint anchor2;
-//        anchor2.x = [[fields objectAtIndex:3] integerValue];
-//        anchor2.y = [[fields objectAtIndex:4] integerValue];
-//        if (componentViewController) {
-//            componentViewController.componentView.anchor2 = anchor2;
-//        }
-//        
-//        // Add the object to the component list
-//        if (componentViewController) {
-//            [components addObject:componentViewController];
-//            [componentViewController release];
-//        }      
-//        componentViewController = nil;
-//    }
-//    
-//    [circuit setObject:components forKey:@"components"];
-//    [components release];
-//    return circuit;
-//}
 @end

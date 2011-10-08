@@ -10,8 +10,9 @@
 #import "DSPHeader.h"
 #import "DSPGlobalSettings.h"
 #import "DSPHelper.h"
+#import "DSPGlobalMacros.h"
 
-#define highlightedBackgroundColor blueColor
+#define highlightedBackgroundColor UIColorFromRGB(0xc49999)
 
 static const CGFloat kRectangleRadius = 5;
 static const CGFloat kDefaultLineWidth = 3.0;
@@ -66,11 +67,11 @@ static const CGFloat kDefaultLineWidth = 3.0;
     if (newIsSelected != _isSelected) {
         _isSelected = newIsSelected;
         if (_isSelected) {
-            self.backgroundColor = [UIColor highlightedBackgroundColor];
+            self.layer.backgroundColor = highlightedBackgroundColor.CGColor;
             [self updateUI];
         }
         else {
-            self.backgroundColor = [UIColor clearColor];
+            self.layer.backgroundColor = [UIColor clearColor].CGColor;
             [self updateUI];
         }
     }
@@ -103,6 +104,7 @@ static const CGFloat kDefaultLineWidth = 3.0;
     self.fillColor = [UIColor whiteColor];
     self.lineWidth = kDefaultLineWidth;
     self.rectangleRadius = kRectangleRadius;
+    self.layer.cornerRadius = kRectangleRadius;
     
     // Create the ability to select the component
     UITapGestureRecognizer *tapgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];

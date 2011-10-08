@@ -32,6 +32,7 @@ static const NSUInteger kDefaultHeight = 4;
     return self;
 }
 
+
 #pragma mark - Draw methods
 
 - (void)drawContent:(CGRect)rect
@@ -54,11 +55,12 @@ static const NSUInteger kDefaultHeight = 4;
     startPoint.x = self.size.width*self.gridScale - margin; startPoint.y = self.size.height/2*self.gridScale;
     endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
-
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(ctx, [self.lineColor CGColor]);
     NSString *string = @"∫";
-    [string drawAtPoint:CGPointMake(self.size.width*self.gridScale/2, self.size.height*self.gridScale/2) withFont:[UIFont systemFontOfSize:20]];
-    //[string drawInRect:rect withFont:[UIFont systemFontOfSize:20] lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentCenter];
-
+    [string drawAtPoint:CGPointMake(self.size.width*self.gridScale/2, self.size.height*self.gridScale/5) withFont:[UIFont systemFontOfSize:30]];
+    UIGraphicsPopContext();    
 }
 
 #pragma mark - View information methods

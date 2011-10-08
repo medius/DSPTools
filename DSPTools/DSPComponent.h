@@ -18,6 +18,7 @@
     BOOL               _isWire;
     BOOL               _isScope;
     NSString          *_name;
+    NSString          *_symbol;
 }
 
 @property (nonatomic, retain) DSPComponentModel *model;
@@ -25,5 +26,6 @@
 @property (nonatomic, readonly) BOOL             isWire;
 @property (nonatomic, readonly) BOOL             isScope;
 @property (nonatomic, copy) NSString            *name;
+@property (nonatomic, copy) NSString            *symbol;
 
 @end
