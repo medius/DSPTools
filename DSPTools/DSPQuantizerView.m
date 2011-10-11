@@ -55,6 +55,12 @@ static const NSUInteger kDefaultHeight = 4;
     endPoint.x = self.size.width*self.gridScale; endPoint.y = self.size.height/2*self.gridScale;
     [DSPHelper drawLineFromPoint:startPoint toPoint:endPoint withLineWidth:self.lineWidth withLineColor:self.lineColor];
 
+    // Draw the symbol
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(ctx, [self.lineColor CGColor]);
+    NSString *string = @"Q";
+    [string drawAtPoint:CGPointMake(self.size.width*self.gridScale/2, self.size.height*self.gridScale/5) withFont:[UIFont systemFontOfSize:12]];
+    UIGraphicsPopContext(); 
 }
 
 #pragma mark - View information methods
