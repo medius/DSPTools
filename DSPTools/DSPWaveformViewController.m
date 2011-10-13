@@ -43,7 +43,7 @@
 - (NSArray *)colorList
 {
     if (!_colorList) {
-        _colorList = [NSArray arrayWithObjects:[CPTColor redColor], [CPTColor greenColor], [CPTColor yellowColor], nil];
+        _colorList = [NSArray arrayWithObjects:[CPTColor redColor], [CPTColor greenColor], [CPTColor yellowColor], [CPTColor blueColor], [CPTColor brownColor], nil];
     }
     return _colorList;
 }

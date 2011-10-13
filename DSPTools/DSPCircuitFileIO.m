@@ -56,9 +56,9 @@
 
 - (void)readCircuitFile:(NSString *)filePath
 {    
-    NSString *fileContent;
-    fileContent = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] 
-              stringByStandardizingPath];
+//    NSString *fileContent;
+//    fileContent = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] 
+//              stringByStandardizingPath];
     NSData *fileData = [NSData dataWithContentsOfFile:filePath];
     
     NSError *error;

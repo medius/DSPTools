@@ -60,6 +60,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _hasMemory = YES;
         self.saturationValue = 1.0;
     }
     return self;

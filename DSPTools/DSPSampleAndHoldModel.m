@@ -54,6 +54,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        _hasMemory = YES;
         _samplePeriod = 0.1;
     }
     return self;
