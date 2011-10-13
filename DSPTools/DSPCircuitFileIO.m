@@ -59,11 +59,27 @@
     NSString *fileContent;
     fileContent = [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] 
               stringByStandardizingPath];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
     
-    NSDictionary *parsedFile = [self.parser objectWithString:fileContent error:nil];
+    NSError *error;
+    NSDictionary *parsedData;
+    if (fileData) {
+         parsedData = [self.parser objectWithData:fileData];
+    }
     
-    if (parsedFile) {
-        NSArray *components = [parsedFile objectForKey:@"components"];
+    //NSLog(@"File Content:\n%@", fileContent);
+    
+    if (error) {
+//        NSLog(@"Domain: %@", [error domain]);
+//        NSLog(@"Desc: %@", [error localizedDescription]);
+//        NSLog(@"Reason: %@",[error localizedFailureReason]);
+//        NSLog(@"Recovery options: %@", [error localizedRecoveryOptions]);
+//        NSLog(@"Recovery suggestion: %@", [error localizedRecoverySuggestion]);
+    }
+
+    
+    if (parsedData) {
+        NSArray *components = [parsedData objectForKey:@"components"];
         
         for (NSDictionary* component in components) {
             NSString *componentID = [component objectForKey:@"sym"];
@@ -80,7 +96,7 @@
             
             // Match with available component IDs
             for (NSDictionary *componentInfo in [DSPGlobalSettings sharedGlobalSettings].componentsInfo ) {
-                if ([(NSString *)[componentInfo objectForKey:@"sym"] isEqual:componentID]) {
+                if ([(NSString *)[componentInfo objectForKey:@"symbol"] isEqual:componentID]) {
                     NSString *componentClassName = (NSString *)[componentInfo objectForKey:@"className"];
                     [self.delegate addComponentWithClassName:componentClassName withSymbol:componentID withAnchor1:anchor1 withAnchor2:anchor2];
                     break;

@@ -73,12 +73,15 @@
     self.launcherView.currentPageIndex = 0;
     TTLauncherItem *basicCircuit = [[TTLauncherItem alloc] initWithTitle:@"Basic Circuit" image:imageName URL:@"tt://url" canDelete:YES];
     TTLauncherItem *sahCircuit = [[TTLauncherItem alloc] initWithTitle:@"SH Circuit" image:imageName URL:@"tt://url" canDelete:YES];
+    TTLauncherItem *sigmaDeltaCircuit = [[TTLauncherItem alloc] initWithTitle:@"Sigma Delta Circuit" image:imageName URL:@"tt://url" canDelete:YES];
     
-    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, sahCircuit, nil];
+    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, sahCircuit, sigmaDeltaCircuit, nil];
     self.launcherView.pages = [NSArray arrayWithObjects:firstPage, nil];
     
     [newSchematic release];
     [basicCircuit release];
+    [sahCircuit release];
+    [sigmaDeltaCircuit release];
     
 }
 
@@ -127,7 +130,10 @@
     {
         filePath = [[NSBundle mainBundle] pathForResource:@"SaH" ofType:@"dsp"];        
     }
-    
+    if (item.title == @"Sigma Delta Circuit")
+    {
+        filePath = [[NSBundle mainBundle] pathForResource:@"sigma-delta" ofType:@"dsp"];        
+    }
     DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];
     systemViewController.circuitFilePath = filePath;
     [self.navigationController pushViewController:systemViewController animated:YES];
