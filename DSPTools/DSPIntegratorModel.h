@@ -12,13 +12,17 @@
 @interface DSPIntegratorModel : DSPComponentModel {
     double _initialValue;
     double _saturationValue;
-    
+    double _samplePeriod;
+
 @private
     double _currentValue;
     double _previousSimulationTime;
+    double _timeSinceLastSample;
+    double _timeAtLastSample;
 }
 
 @property (nonatomic) double initialValue;
 @property (nonatomic) double saturationValue;
+@property (nonatomic) double samplePeriod;
 
 @end

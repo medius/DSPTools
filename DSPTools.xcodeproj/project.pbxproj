@@ -17,6 +17,8 @@
 		320D7DCCE32703ACAB9A45E5 /* libThree20.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320D7DCCE32703ACAB9A45E4 /* libThree20.a */; };
 		320F2C48872C2E2C4DF86205 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F2C48872C2E2C4DF86204 /* libThree20UI.a */; };
 		C3008C6A1422ABAC00C6FF9A /* DSPComponentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */; };
+		C310E1551447BE41002DCFD5 /* delta-modulator.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C310E1541447BE41002DCFD5 /* delta-modulator.dsp */; };
+		C310E1571447BE4F002DCFD5 /* sigma-delta-modulator.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C310E1561447BE4F002DCFD5 /* sigma-delta-modulator.dsp */; };
 		C3150CEE140DBA8500AB0A98 /* DSPCircuitAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */; };
 		C3150CF4140EF27900AB0A98 /* DSPSignalSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CF3140EF27900AB0A98 /* DSPSignalSource.m */; };
 		C3150CF7140EF35300AB0A98 /* DSPWire.m in Sources */ = {isa = PBXBuildFile; fileRef = C3150CF6140EF35300AB0A98 /* DSPWire.m */; };
@@ -88,7 +90,6 @@
 		C3BDAC01142AA5AE00536C08 /* DSPScopeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC00142AA5AE00536C08 /* DSPScopeModel.m */; };
 		C3BDAC04142AA5ED00536C08 /* DSPScopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC03142AA5ED00536C08 /* DSPScopeView.m */; };
 		C3BDAC07142AD51400536C08 /* DSPScope.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BDAC06142AD51300536C08 /* DSPScope.m */; };
-		C3D610BF1444EBB9005A5054 /* sigma-delta.dsp in Resources */ = {isa = PBXBuildFile; fileRef = C3D610BE1444EBB9005A5054 /* sigma-delta.dsp */; };
 		C3F6D4AF1436702F004E76C1 /* DSPSampleAndHold.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AA1436702F004E76C1 /* DSPSampleAndHold.m */; };
 		C3F6D4B01436702F004E76C1 /* DSPSampleAndHoldModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AC1436702F004E76C1 /* DSPSampleAndHoldModel.m */; };
 		C3F6D4B11436702F004E76C1 /* DSPSampleAndHoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F6D4AE1436702F004E76C1 /* DSPSampleAndHoldView.m */; };
@@ -290,6 +291,8 @@
 		320F2C48872C2E2C4DF86200 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = ../shared/three20/src/Three20UI/Three20UI.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C3008C681422AB1300C6FF9A /* DSPComponentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPComponentListTableViewController.h; sourceTree = "<group>"; };
 		C3008C691422AB5D00C6FF9A /* DSPComponentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPComponentListTableViewController.m; sourceTree = "<group>"; };
+		C310E1541447BE41002DCFD5 /* delta-modulator.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "delta-modulator.dsp"; path = "circuits/delta-modulator.dsp"; sourceTree = "<group>"; };
+		C310E1561447BE4F002DCFD5 /* sigma-delta-modulator.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sigma-delta-modulator.dsp"; path = "circuits/sigma-delta-modulator.dsp"; sourceTree = "<group>"; };
 		C3150CEC140DBA8400AB0A98 /* DSPCircuitAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPCircuitAnalyzer.h; sourceTree = "<group>"; };
 		C3150CED140DBA8400AB0A98 /* DSPCircuitAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPCircuitAnalyzer.m; sourceTree = "<group>"; };
 		C3150CEF140EE85A00AB0A98 /* DSPIntegrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPIntegrator.h; sourceTree = "<group>"; };
@@ -496,7 +499,6 @@
 		C3C8E802141A974800EBC7DA /* CPTXYTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPTXYTheme.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/CPTXYTheme.h"; sourceTree = "<group>"; };
 		C3C8E803141A974800EBC7DA /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDecimalNumberExtensions.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/NSDecimalNumberExtensions.h"; sourceTree = "<group>"; };
 		C3C8E804141A974800EBC7DA /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNumberExtensions.h; path = "../../shared/core-plot/Binaries/iOS/CorePlotHeaders/NSNumberExtensions.h"; sourceTree = "<group>"; };
-		C3D610BE1444EBB9005A5054 /* sigma-delta.dsp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "sigma-delta.dsp"; path = "circuits/sigma-delta.dsp"; sourceTree = "<group>"; };
 		C3F6D4A91436702F004E76C1 /* DSPSampleAndHold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHold.h; sourceTree = "<group>"; };
 		C3F6D4AA1436702F004E76C1 /* DSPSampleAndHold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPSampleAndHold.m; sourceTree = "<group>"; };
 		C3F6D4AB1436702F004E76C1 /* DSPSampleAndHoldModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPSampleAndHoldModel.h; sourceTree = "<group>"; };
@@ -670,7 +672,8 @@
 		C3257D93140C83D70055BFD5 /* Example Circuits */ = {
 			isa = PBXGroup;
 			children = (
-				C3D610BE1444EBB9005A5054 /* sigma-delta.dsp */,
+				C310E1561447BE4F002DCFD5 /* sigma-delta-modulator.dsp */,
+				C310E1541447BE41002DCFD5 /* delta-modulator.dsp */,
 				C3BDABE914282CB200536C08 /* Example1.dsp */,
 				C3F6D4B214367B9B004E76C1 /* SaH.dsp */,
 			);
@@ -1312,7 +1315,8 @@
 				C3BDABE8142824F700536C08 /* DSPComponents-Info.plist in Resources */,
 				C3BDABEA14282CB200536C08 /* Example1.dsp in Resources */,
 				C3F6D4B314367B9B004E76C1 /* SaH.dsp in Resources */,
-				C3D610BF1444EBB9005A5054 /* sigma-delta.dsp in Resources */,
+				C310E1551447BE41002DCFD5 /* delta-modulator.dsp in Resources */,
+				C310E1571447BE4F002DCFD5 /* sigma-delta-modulator.dsp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

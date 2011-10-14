@@ -73,14 +73,16 @@
     self.launcherView.currentPageIndex = 0;
     TTLauncherItem *basicCircuit = [[TTLauncherItem alloc] initWithTitle:@"Basic Circuit" image:imageName URL:@"tt://url" canDelete:YES];
     TTLauncherItem *sahCircuit = [[TTLauncherItem alloc] initWithTitle:@"SH Circuit" image:imageName URL:@"tt://url" canDelete:YES];
-    TTLauncherItem *sigmaDeltaCircuit = [[TTLauncherItem alloc] initWithTitle:@"Sigma Delta Circuit" image:imageName URL:@"tt://url" canDelete:YES];
+    TTLauncherItem *deltaCircuit = [[TTLauncherItem alloc] initWithTitle:@"Delta Modulator Circuit" image:imageName URL:@"tt://url" canDelete:YES];
+    TTLauncherItem *sigmaDeltaCircuit = [[TTLauncherItem alloc] initWithTitle:@"Sigma Delta Modulator Circuit" image:imageName URL:@"tt://url" canDelete:YES];
     
-    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, sahCircuit, sigmaDeltaCircuit, nil];
+    NSArray *firstPage = [NSArray arrayWithObjects:newSchematic, basicCircuit, sahCircuit, deltaCircuit, sigmaDeltaCircuit, nil];
     self.launcherView.pages = [NSArray arrayWithObjects:firstPage, nil];
     
     [newSchematic release];
     [basicCircuit release];
     [sahCircuit release];
+    [deltaCircuit release];
     [sigmaDeltaCircuit release];
     
 }
@@ -130,9 +132,13 @@
     {
         filePath = [[NSBundle mainBundle] pathForResource:@"SaH" ofType:@"dsp"];        
     }
-    if (item.title == @"Sigma Delta Circuit")
+    if (item.title == @"Delta Modulator Circuit")
     {
-        filePath = [[NSBundle mainBundle] pathForResource:@"sigma-delta" ofType:@"dsp"];        
+        filePath = [[NSBundle mainBundle] pathForResource:@"delta-modulator" ofType:@"dsp"];        
+    }
+    if (item.title == @"Sigma Delta Modulator Circuit")
+    {
+        filePath = [[NSBundle mainBundle] pathForResource:@"sigma-delta-modulator" ofType:@"dsp"];        
     }
     DSPSystemViewController *systemViewController = [[DSPSystemViewController alloc] init];
     systemViewController.circuitFilePath = filePath;

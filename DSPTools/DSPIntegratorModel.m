@@ -12,14 +12,20 @@
 @interface DSPIntegratorModel() 
 @property (nonatomic) double currentValue;
 @property (nonatomic) double previousSimulationTime;
+@property (nonatomic) double timeSinceLastSample;
+@property (nonatomic) double timeAtLastSample;
 @end
 
 @implementation DSPIntegratorModel
 
+#pragma mark - Accessors
 @synthesize initialValue           = _initialValue;
 @synthesize saturationValue        = _saturationValue;
+@synthesize samplePeriod           = _samplePeriod;
 @synthesize currentValue           = _currentValue;
 @synthesize previousSimulationTime = _previousSimulationTime;
+@synthesize timeSinceLastSample = _timeSinceLastSample;
+@synthesize timeAtLastSample = _timeAtLastSample;
 
 - (NSArray *)pins
 {
@@ -48,22 +54,27 @@
     return _pins;
 }
 
-- (void)reset
-{
-    [super reset];
-    self.currentValue = self.initialValue;
-    self.previousSimulationTime = 0;
-}
-
+#pragma mark - Setup and dealloc
 - (id)init
 {
     self = [super init];
     if (self) {
         // Custom initialization
         _hasMemory = YES;
-        self.saturationValue = 1.0;
+        _saturationValue = 1.0;
+        _samplePeriod = 0.05;
     }
     return self;
+}
+
+#pragma mark - Evaluation methods
+
+- (void)reset
+{
+    [super reset];
+    self.currentValue = self.initialValue;
+    self.previousSimulationTime = 0;
+    self.timeAtLastSample = 0;
 }
 
 - (double)inputValue
@@ -81,13 +92,26 @@
 
 - (void)evaluteAtTime:(double)simulationTime
 {
-    double deltaTime = simulationTime - self.previousSimulationTime;
+//    double deltaTime = simulationTime - self.previousSimulationTime;
+//    
+//    // Perform the integral function
+//    self.currentValue = self.currentValue + [self inputValue] * deltaTime;
+//    
+//    self.previousSimulationTime = simulationTime;
+//    [self updateOutput:self.currentValue];
     
-    // Perform the integral function
-    self.currentValue = self.currentValue + [self inputValue] * deltaTime;
+    self.timeSinceLastSample = simulationTime - self.timeAtLastSample;
     
-    self.previousSimulationTime = simulationTime;
-    [self updateOutput:self.currentValue];
+    if (self.timeSinceLastSample >= self.samplePeriod) {
+        self.timeSinceLastSample = 0;
+        self.timeAtLastSample = simulationTime;
+    }
+    
+    if (self.timeSinceLastSample == 0) {
+        // Perform the integral function
+        self.currentValue = self.currentValue + [self inputValue];
+        [self updateOutput:self.currentValue];
+    }
 }
 
 

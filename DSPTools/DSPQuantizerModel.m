@@ -56,7 +56,7 @@
     if (self) {
         // Custom initialization
         _samplePeriod = 0.1;
-        _quantizationInterval = 0.1;
+        _quantizationInterval = 1;
     }
     return self;
 }

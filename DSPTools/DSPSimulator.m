@@ -132,7 +132,7 @@
     }
     
     // Iterate through each time step
-    for (double simulationTime = 0; simulationTime<5 ; simulationTime = simulationTime + 0.05) {
+    for (double simulationTime = 0; simulationTime<5 ; simulationTime = simulationTime + 0.01) {
         // Invalidate all the current values of the nodes
         for (DSPNode *node in self.nodes) {
             node.currentValueIsValid = NO;

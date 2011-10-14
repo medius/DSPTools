@@ -55,7 +55,7 @@
     if (self) {
         // Custom initialization
         _hasMemory = YES;
-        _samplePeriod = 0.1;
+        _samplePeriod = 0.05;
     }
     return self;
 }
