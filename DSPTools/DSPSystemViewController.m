@@ -286,9 +286,8 @@ static const CGFloat kToolBarItemWidth    = 40;
     self.circuit.errors = circuitAnalyzer.errors;
     [circuitAnalyzer release];
     
-    self.simulator.components = self.circuit.components;
-    self.simulator.nodes = self.circuit.nodes;
-    [self.simulator simulate];
+    // Simulate in background
+    [self performSelectorInBackground:@selector(simulate) withObject:nil];
     
     DSPWaveformViewController *waveform = [[DSPWaveformViewController alloc] init];
     waveform.graphView.frame = self.view.bounds;
@@ -300,6 +299,15 @@ static const CGFloat kToolBarItemWidth    = 40;
     [self presentModalViewController:navigationController animated:YES];
     [waveform release];
     
+}
+
+- (void)simulate
+{
+    NSAutoreleasePool *simulationPool = [[NSAutoreleasePool alloc] init];
+    self.simulator.components = self.circuit.components;
+    self.simulator.nodes = self.circuit.nodes;
+    [self.simulator simulate];
+    [simulationPool release];
 }
 
 #pragma mark - ComponentList Protocol methods

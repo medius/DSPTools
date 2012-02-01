@@ -12,9 +12,13 @@
 @interface DSPScopeModel : DSPComponentModel {
     NSMutableArray *_simulationTimeBuffer;
     NSMutableArray *_valueBuffer;
+    NSUInteger      _bufferMaxSize;
+    BOOL            _bufferFull;
 }
 
-@property (nonatomic, readonly) NSMutableArray *simulationTimeBuffer;
-@property (nonatomic, readonly) NSMutableArray *valueBuffer;
+@property (readonly) NSMutableArray *simulationTimeBuffer;
+@property (readonly) NSMutableArray *valueBuffer;
+@property (nonatomic) NSUInteger     bufferMaxSize;
+@property (nonatomic, readonly) BOOL bufferFull;
 
 @end

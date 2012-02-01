@@ -120,16 +120,23 @@
 
 - (NSNumber *)numberForWaveformIndex:(NSUInteger)waveformIndex axis:(DSPWaveformAxis)waveformAxis recordIndex:(NSUInteger)index
 {
+    // TODO: Fix this. There are two times that scope is called. What's a better way to provide time values?
+    
     DSPScope *scope = [self.scopes lastObject];
     DSPScopeModel *scopeModel = (DSPScopeModel *)scope.model;
     
     if (waveformAxis == DSPWaveformAxisX) {
-        return [scopeModel.simulationTimeBuffer objectAtIndex:index];
+        if (scopeModel.bufferFull) {
+            return [scopeModel.simulationTimeBuffer objectAtIndex:index];
+        }
+        else {
+            return 0;
+        }
     }
     else {
         scope = [self.scopes objectAtIndex:waveformIndex];
         scopeModel = (DSPScopeModel *)scope.model;
-        if (scopeModel) {
+        if (scopeModel && scopeModel.bufferFull) {
             return [scopeModel.valueBuffer objectAtIndex:index];
         }
         else {

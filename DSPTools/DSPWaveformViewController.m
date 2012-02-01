@@ -13,6 +13,7 @@
 @interface DSPWaveformViewController()
 @property (nonatomic, retain) CPTXYGraph *graph;
 @property (readonly) NSArray             *colorList;
+@property (nonatomic, retain) NSTimer    *reloadTimer;
 @end
 
 @implementation DSPWaveformViewController
@@ -23,6 +24,7 @@
 @synthesize graph      = _graph;
 @synthesize dataSource = _dataSource;
 @synthesize delegate   = _delegate;
+@synthesize reloadTimer = _reloadTimer;
 
 - (CPTGraphHostingView *)graphView
 {
@@ -61,9 +63,11 @@
 
 - (void)dealloc
 {
+    TT_RELEASE_SAFELY(_plotList);
     TT_RELEASE_SAFELY(_graphView);
     TT_RELEASE_SAFELY(_graph);
     TT_RELEASE_SAFELY(_colorList);
+    TT_RELEASE_SAFELY(_reloadTimer);
     [super dealloc];
 }
 
@@ -195,15 +199,32 @@
 //    xInversePlot.dataSource = self;
 //    [self.graph addPlot:xInversePlot];
 //    TT_RELEASE_SAFELY(xInversePlot)
+    
+    self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(reloadGraph:) userInfo:@"timer" repeats:YES];
 }
 
+
+- (void)reloadGraph:(NSTimer *)theTimer
+{
+    NSLog(@"Reload graph called");
+    [self.graph reloadData];
+}
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ( [_reloadTimer isValid] ) {
+        [_reloadTimer invalidate];
+    }
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

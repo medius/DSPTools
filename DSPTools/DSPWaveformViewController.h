@@ -25,6 +25,7 @@
 @private
     CPTXYGraph                         *_graph;
     NSArray                            *_colorList;
+    NSTimer                            *_reloadTimer;
 }
 
 @property (nonatomic, retain) NSArray                 *plotList;

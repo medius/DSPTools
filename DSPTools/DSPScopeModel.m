@@ -31,12 +31,25 @@
     
 }
 
+@synthesize bufferMaxSize = _bufferMaxSize;
+
+- (BOOL)bufferFull
+{
+    if ([self.valueBuffer count] >= self.bufferMaxSize) {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
 #pragma mark - Setup and dealloc
 - (id)init
 {
     self = [super init];
     if (self) {
         // Custom initialization
+        _bufferMaxSize = 1000;
     }
     return self;
 }
@@ -81,11 +94,14 @@
 // Evaluate the output for a given simulation time
 - (void)evaluteAtTime:(double)simulationTime
 {
-    NSNumber *time = [NSNumber numberWithDouble:simulationTime];
-    [self.simulationTimeBuffer addObject:time];
-    
-    NSNumber *value = [NSNumber numberWithDouble:[self inputValue]];
-    [self.valueBuffer addObject:value];
+    if (!self.bufferFull) {
+        NSNumber *time = [NSNumber numberWithDouble:simulationTime];
+        [self.simulationTimeBuffer addObject:time];
+        
+        NSNumber *value = [NSNumber numberWithDouble:[self inputValue]];
+        [self.valueBuffer addObject:value];
+    }
+
 }
 
 @end
