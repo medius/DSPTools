@@ -25,7 +25,7 @@ There are a few sample circuits that are included in the project.
 * A delta modulator
 * A sigma-delta modulator
 
-However, you can build one of your own with "New Schematic". It won't
+However, you can build one of your own with "New Schematic". It won't be saved though.
 
 Quirks
 --------
